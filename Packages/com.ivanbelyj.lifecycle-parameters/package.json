@@ -1,0 +1,13 @@
+{
+  "name": "com.ivanbelyj.lifecycle-parameters",
+  "version": "0.0.0",
+  "displayName": "Lifecycle Parameters",
+  "description": "",
+  "unity": "2021.3",
+  "unityRelease": "9f1",
+  "dependencies": {},
+  "author": {
+    "name": "Ivan Belyj",
+    "email": "ivanbelyj743@gmail.com"
+  }
+}
