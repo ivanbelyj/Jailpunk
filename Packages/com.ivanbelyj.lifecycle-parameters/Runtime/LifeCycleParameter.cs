@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-///<summary>s
+///<summary>
 /// Represents a life cycle parameter. Responsible for storing data and calling
 /// events when they change
 ///</summary>
 [System.Serializable]
-public class LifeCycleParameter
+public class LifecycleParameter
 {
     private enum ValueState { Min, Intermediate, Max };
     private ValueState lastValueState;

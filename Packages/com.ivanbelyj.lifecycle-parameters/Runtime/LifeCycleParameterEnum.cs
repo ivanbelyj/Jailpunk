@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 ///<summary>
-/// Allows ids for entity life cycle parameters (their set is statically limited)
+/// Allows ids for entity lifecycle parameters (their set is statically limited)
 ///</summary>
-public enum LifeCycleParameterEnum : byte
+public enum LifecycleParameterEnum : byte
 {
     Health,
     Endurance,

@@ -7,7 +7,7 @@ using UnityEngine;
 /// Effect applied to the life cycle parameter
 ///</summary>
 [System.Serializable]
-public struct LifeCycleEffect : IEquatable<LifeCycleEffect>
+public struct LifecycleEffect : IEquatable<LifecycleEffect>
 {
     public bool isInfinite;
 
@@ -27,13 +27,13 @@ public struct LifeCycleEffect : IEquatable<LifeCycleEffect>
     /// <summary>
     /// Every effect is applied by parameter id
     /// </summary>
-    public LifeCycleParameterEnum targetParameterId;
+    public LifecycleParameterEnum targetParameterId;
 
     public double StartTime { get; set; }
 
     public override bool Equals(object obj)
     {
-        return obj is LifeCycleEffect effect && Equals(effect);
+        return obj is LifecycleEffect effect && Equals(effect);
     }
 
     public override int GetHashCode()
@@ -41,7 +41,7 @@ public struct LifeCycleEffect : IEquatable<LifeCycleEffect>
         return HashCode.Combine(isInfinite, speed, duration, targetParameterId, StartTime);
     }
 
-    public bool Equals(LifeCycleEffect other) {
+    public bool Equals(LifecycleEffect other) {
         return isInfinite == other.isInfinite
             && duration == other.duration
             && speed == other.speed

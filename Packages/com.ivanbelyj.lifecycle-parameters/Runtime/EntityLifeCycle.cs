@@ -9,56 +9,56 @@ using UnityEngine.Events;
 ///<summary>
 /// A component of the lifecycle of a living being
 ///</summary>
-public class EntityLifeCycle : NetworkBehaviour
+public class EntityLifecycle : NetworkBehaviour
 {
     #region Parameters and effects
     [Header("Parameters")]
     [SerializeField]
-    private LifeCycleParameter health;
+    private LifecycleParameter health;
     [SerializeField]
-    private LifeCycleParameter endurance;
+    private LifecycleParameter endurance;
     [SerializeField]
-    private LifeCycleParameter satiety;
+    private LifecycleParameter satiety;
     [SerializeField]
-    private LifeCycleParameter bleed;
+    private LifecycleParameter bleed;
     [SerializeField]
-    private LifeCycleParameter radiation;
+    private LifecycleParameter radiation;
 
     [Header("Constant effects")]
     [SerializeField]
-    private LifeCycleEffect regeneration;
+    private LifecycleEffect regeneration;
     [SerializeField]
-    private LifeCycleEffect enduranceRecovery;
+    private LifecycleEffect enduranceRecovery;
     [SerializeField]
-    private LifeCycleEffect hunger;
+    private LifecycleEffect hunger;
     [SerializeField]
-    private LifeCycleEffect radiationExcretion;
+    private LifecycleEffect radiationExcretion;
 
     [Header("Temporary effects")]
     [SerializeField]
-    private LifeCycleEffect runEnduranceDecrease;
+    private LifecycleEffect runEnduranceDecrease;
     [SerializeField]
-    private LifeCycleEffect bleedEffect;
+    private LifecycleEffect bleedEffect;
     [SerializeField]
-    private LifeCycleEffect radiationPoisoning;
+    private LifecycleEffect radiationPoisoning;
     #endregion
 
-    private readonly SyncHashSet<LifeCycleEffect> syncEffects =
-        new SyncHashSet<LifeCycleEffect>();
+    private readonly SyncHashSet<LifecycleEffect> syncEffects =
+        new SyncHashSet<LifecycleEffect>();
 
-    private HashSet<LifeCycleEffect> effects;
+    private HashSet<LifecycleEffect> effects;
 
     ///<summary>
     /// All uncompleted effects applied to change the parameters of the life cycle.
     /// Completed effects are removed after regular traversal 
     ///</summary>
-    public HashSet<LifeCycleEffect> Effects => effects;
+    public HashSet<LifecycleEffect> Effects => effects;
 
     ///<summary>
     /// All lifecycle parameters collected for convenient traversal.
     /// Dynamic addition / removal of parameters is not assumed
     ///</summary>
-    public IReadOnlyDictionary<LifeCycleParameterEnum, LifeCycleParameter> Parameters { get; private set; }
+    public IReadOnlyDictionary<LifecycleParameterEnum, LifecycleParameter> Parameters { get; private set; }
 
     public bool IsAlive { get; private set; }
     public event UnityAction OnDeath;
@@ -66,12 +66,12 @@ public class EntityLifeCycle : NetworkBehaviour
     private void Awake() {
         syncEffects.Callback += SyncEffects;
 
-        Parameters = new Dictionary<LifeCycleParameterEnum, LifeCycleParameter>() {
-            { LifeCycleParameterEnum.Bleeding, bleed },
-            { LifeCycleParameterEnum.Endurance, endurance },
-            { LifeCycleParameterEnum.Health, health },
-            { LifeCycleParameterEnum.Radiation, radiation },
-            { LifeCycleParameterEnum.Satiety, satiety },
+        Parameters = new Dictionary<LifecycleParameterEnum, LifecycleParameter>() {
+            { LifecycleParameterEnum.Bleeding, bleed },
+            { LifecycleParameterEnum.Endurance, endurance },
+            { LifecycleParameterEnum.Health, health },
+            { LifecycleParameterEnum.Radiation, radiation },
+            { LifecycleParameterEnum.Satiety, satiety },
         };
 
         health.OnMin += Die;
@@ -82,7 +82,7 @@ public class EntityLifeCycle : NetworkBehaviour
             Die();
         }
 
-        effects = new HashSet<LifeCycleEffect>();
+        effects = new HashSet<LifecycleEffect>();
     }
 
     public override void OnStartClient() {
@@ -97,21 +97,21 @@ public class EntityLifeCycle : NetworkBehaviour
         base.OnStartServer();
 
         // Setting and synchronizing the initial effects set in the inspector
-        var permanentEffects = new LifeCycleEffect[] { regeneration, enduranceRecovery, hunger,
+        var permanentEffects = new LifecycleEffect[] { regeneration, enduranceRecovery, hunger,
             radiationExcretion };
         for (int i = 0; i < permanentEffects.Length; i++) {
             AddEffectAndSetStartTime(permanentEffects[i]);
         }
     }
 
-    private void SyncEffects(SyncHashSet<LifeCycleEffect>.Operation op,  LifeCycleEffect item) {
+    private void SyncEffects(SyncHashSet<LifecycleEffect>.Operation op,  LifecycleEffect item) {
         switch (op) {
-            case SyncHashSet<LifeCycleEffect>.Operation.OP_ADD:
+            case SyncHashSet<LifecycleEffect>.Operation.OP_ADD:
             {
                 effects.Add(item);
                 break;
             }
-            case SyncHashSet<LifeCycleEffect>.Operation.OP_REMOVE:
+            case SyncHashSet<LifecycleEffect>.Operation.OP_REMOVE:
             {
                 effects.Remove(item);
                 break;
@@ -127,26 +127,26 @@ public class EntityLifeCycle : NetworkBehaviour
     #region Add And Remove Effects
 
     [Server]
-    private void AddLifecycleEffect(LifeCycleEffect effect) {
+    private void AddLifecycleEffect(LifecycleEffect effect) {
         syncEffects.Add(effect);
     }
 
     [Command]
-    private void CmdAddLifecycleEffect(LifeCycleEffect effect) {
+    private void CmdAddLifecycleEffect(LifecycleEffect effect) {
         AddLifecycleEffect(effect);
     }
 
     [Server]
-    private void RemoveLifecycleEffect(LifeCycleEffect effect) {
+    private void RemoveLifecycleEffect(LifecycleEffect effect) {
         syncEffects.Remove(effect);
     }
 
     [Command]
-    private void CmdRemoveLifecycleEffect(LifeCycleEffect effect) {
+    private void CmdRemoveLifecycleEffect(LifecycleEffect effect) {
         RemoveLifecycleEffect(effect);
     }
 
-    public void RemoveEffect(LifeCycleEffect effect) {
+    public void RemoveEffect(LifecycleEffect effect) {
         if (isServer) {
             RemoveLifecycleEffect(effect);
         } else {
@@ -158,7 +158,7 @@ public class EntityLifeCycle : NetworkBehaviour
     /// Adds an effect and returns the same effect, but with a set start time
     /// (which was added)
     /// </summary>
-    public LifeCycleEffect AddEffectAndSetStartTime(LifeCycleEffect effect) {
+    public LifecycleEffect AddEffectAndSetStartTime(LifecycleEffect effect) {
         effect.StartTime = NetworkTime.time;
         // Todo: not change passed effect
         if (isServer) {
@@ -175,7 +175,7 @@ public class EntityLifeCycle : NetworkBehaviour
     }
 
     private void UpdateEffects() {
-        List<LifeCycleEffect> effectsToRemove = new List<LifeCycleEffect>();
+        List<LifecycleEffect> effectsToRemove = new List<LifecycleEffect>();
         foreach (var effect in effects) {
             if (!effect.isInfinite && IsPassed(effect)) {
                 // Past temporary effects are postponed for deletion
@@ -192,17 +192,17 @@ public class EntityLifeCycle : NetworkBehaviour
         }
     }
 
-    bool IsPassed(LifeCycleEffect effect) => effect.StartTime + effect.duration <= NetworkTime.time;
+    bool IsPassed(LifecycleEffect effect) => effect.StartTime + effect.duration <= NetworkTime.time;
 
-    public void ApplyEffect(LifeCycleEffect effect) {
+    public void ApplyEffect(LifecycleEffect effect) {
         // If the effect is infinite or has not completed
         if ((effect.isInfinite || !IsPassed(effect))) {
-            LifeCycleParameter target = Parameters[effect.targetParameterId];
+            LifecycleParameter target = Parameters[effect.targetParameterId];
             target.Value += effect.speed * Time.deltaTime;
         }
     }
 
-    private LifeCycleEffect runEffect;
+    private LifecycleEffect runEffect;
 
     #region Movement
     public void Run() {

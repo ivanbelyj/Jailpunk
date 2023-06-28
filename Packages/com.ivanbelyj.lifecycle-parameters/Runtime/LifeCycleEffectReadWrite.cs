@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using Mirror;
 using UnityEngine;
 
-public static class LifeCycleEffectReadWrite
+public static class LifecycleEffectReadWrite
 {
     public static void WriteLifecycleEffect(this NetworkWriter writer,
-        LifeCycleEffect effect) {
+        LifecycleEffect effect) {
 
         writer.WriteFloat(effect.duration);
         writer.WriteBool(effect.isInfinite);
@@ -16,7 +16,7 @@ public static class LifeCycleEffectReadWrite
         writer.WriteDouble(effect.StartTime);
     }
 
-    public static LifeCycleEffect ReadLifecycleEffect(this NetworkReader reader) {
+    public static LifecycleEffect ReadLifecycleEffect(this NetworkReader reader) {
         
         float duration = reader.ReadFloat();
         bool isInfinite = reader.ReadBool();
@@ -25,10 +25,10 @@ public static class LifeCycleEffectReadWrite
         byte targetParameterIndex = reader.ReadByte();
         double startTime = reader.ReadDouble();
 
-        LifeCycleEffect effect = new LifeCycleEffect() {
+        LifecycleEffect effect = new LifecycleEffect() {
             speed = speed,
             isInfinite = isInfinite,
-            targetParameterId = (LifeCycleParameterEnum)targetParameterIndex,
+            targetParameterId = (LifecycleParameterEnum)targetParameterIndex,
             duration = duration,
             StartTime = startTime,
         };
