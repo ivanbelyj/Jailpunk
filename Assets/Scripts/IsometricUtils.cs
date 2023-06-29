@@ -11,7 +11,7 @@ public static class IsometricUtils
         return res;
     }
 
-    public static Vector3 RotateCart(Vector3 cartPos) {
+    public static Vector3 RotateCartesian(Vector3 cartPos) {
         Vector3 res = new Vector3();
         res.x = cartPos.y + cartPos.x;
         res.y = cartPos.y - cartPos.x;
@@ -23,5 +23,17 @@ public static class IsometricUtils
         res.x = (2 * isoPos.y + isoPos.x) / 2;
         res.y = (2 * isoPos.y - isoPos.x) / 2;
         return res;
+    }
+
+    public static Vector2 MazeObjectOrientationToVector2(
+        MazeObjectOrientation orient) {
+        Vector2 dir = orient switch {
+            MazeObjectOrientation.North => Vector2.up,
+            MazeObjectOrientation.East => Vector2.right,
+            MazeObjectOrientation.South => Vector2.down,
+            MazeObjectOrientation.West => Vector2.left,
+            _ => throw new System.ArgumentException("Unknown MazeObjectOrientation")
+        };
+        return CartesianToIsometric(dir);
     }
 }

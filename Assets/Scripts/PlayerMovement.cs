@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
-        movement.MovementInputValues = IsometricUtils.RotateCart(
+        movement.MovementInputValues = IsometricUtils.RotateCartesian(
             new Vector3(horizontal, vertical, 0));
     }
 
