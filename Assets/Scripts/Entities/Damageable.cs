@@ -15,6 +15,7 @@ public class Damageable : MonoBehaviour
         float force = collision.relativeVelocity.sqrMagnitude;
         if (force > damageForceThreshold) {
             float damage = (force - damageForceThreshold) * damageForceScale;
+
             Debug.Log("Damage: " + damage);
         }
     }

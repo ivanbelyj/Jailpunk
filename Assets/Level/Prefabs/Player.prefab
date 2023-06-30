@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 2205033667393255779}
   - component: {fileID: -4930455235786288868}
   - component: {fileID: -2198002554298130507}
+  - component: {fileID: -2967253483208829151}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -138,10 +139,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.0051538944, y: -0.4969139}
-      - {x: 0.4958067, y: -0.2491349}
-      - {x: 0.014240205, y: 0.007544756}
-      - {x: -0.49150074, y: -0.25381315}
+    - - {x: 0.009016596, y: -0.31922954}
+      - {x: 0.2988088, y: -0.17574355}
+      - {x: 0.010377504, y: -0.03494499}
+      - {x: -0.28291476, y: -0.1842845}
 --- !u!114 &-7537472172131196947
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,7 +204,7 @@ MonoBehaviour:
     minValue: 0
     maxValue: 1
     recoveredValue: 1
-    value: 1
+    value: 0.8
   endurance:
     parameterId: 1
     minValue: 0
@@ -214,40 +215,40 @@ MonoBehaviour:
     parameterId: 2
     minValue: 0
     maxValue: 1
-    recoveredValue: 1
+    recoveredValue: 0
     value: 1
   bleed:
     parameterId: 3
     minValue: 0
     maxValue: 1
-    recoveredValue: 1
+    recoveredValue: 0
     value: 1
   radiation:
     parameterId: 4
     minValue: 0
     maxValue: 1
-    recoveredValue: 1
+    recoveredValue: 0
     value: 1
   regeneration:
     isInfinite: 1
-    speed: 0
+    speed: 0.01
     duration: 0
     targetParameterId: 0
   enduranceRecovery:
     isInfinite: 1
-    speed: 0
+    speed: 0.05
     duration: 0
-    targetParameterId: 0
+    targetParameterId: 1
   hunger:
     isInfinite: 1
-    speed: 0
+    speed: -0.01
     duration: 0
-    targetParameterId: 0
+    targetParameterId: 2
   radiationExcretion:
     isInfinite: 1
-    speed: 0
+    speed: -0.01
     duration: 0
-    targetParameterId: 0
+    targetParameterId: 4
   runEnduranceDecrease:
     isInfinite: 0
     speed: 0
@@ -263,6 +264,19 @@ MonoBehaviour:
     speed: 0
     duration: 0
     targetParameterId: 0
+--- !u!114 &-2967253483208829151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4111959900911027618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 402b49b7fabf2984fa30a8baaaaab4c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBar: {fileID: 2611502982897103556}
 --- !u!1 &4274025936568512492
 GameObject:
   m_ObjectHideFlags: 0
@@ -404,6 +418,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a0cbcd6787811704a9ead7a9c5cc7ad1, type: 3}
+--- !u!114 &2611502982897103556 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8547832069416659946, guid: a0cbcd6787811704a9ead7a9c5cc7ad1, type: 3}
+  m_PrefabInstance: {fileID: 5954343488525031726}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b8f71697c1792345a186fc720dbbaf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &4170733290632115824 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7729153388787806046, guid: a0cbcd6787811704a9ead7a9c5cc7ad1, type: 3}

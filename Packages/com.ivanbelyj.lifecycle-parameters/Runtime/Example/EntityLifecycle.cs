@@ -9,16 +9,39 @@ public class EntityLifecycle : EntityLifecycleBase
     [Header("Parameters")]
     [SerializeField]
     private LifecycleParameter health;
+    public LifecycleParameter Health {
+        get => health;
+    }
+
     [SerializeField]
     private LifecycleParameter endurance;
+    public LifecycleParameter Endurance {
+        get => endurance;
+    }
+    
+
     [SerializeField]
     private LifecycleParameter satiety;
+    public LifecycleParameter Satiety {
+        get => satiety;
+    }
+    
+
     [SerializeField]
     private LifecycleParameter bleed;
+    public LifecycleParameter Bleed {
+        get => bleed;
+    }
+    
+
     [SerializeField]
     private LifecycleParameter radiation;
+    public LifecycleParameter Radiation {
+        get => radiation;
+    }
+    
 
-    [Header("Constant effects")]
+    [Header("Initial effects")]
     [SerializeField]
     private LifecycleEffect regeneration;
     [SerializeField]
@@ -27,6 +50,8 @@ public class EntityLifecycle : EntityLifecycleBase
     private LifecycleEffect hunger;
     [SerializeField]
     private LifecycleEffect radiationExcretion;
+
+    // Todo: decrease of maximal health when recovering
 
     [Header("Temporary effects")]
     [SerializeField]
@@ -57,20 +82,21 @@ public class EntityLifecycle : EntityLifecycleBase
     public override LifecycleParameter[] GetInitialParameters()
     {
         var initialParameters = new LifecycleParameter[] {
-            bleed,
             health,
+            endurance,
+            satiety,
+            bleed,
             radiation,
-            satiety
         };
         return initialParameters;
     }
 
     public override LifecycleEffect[] GetInitialEffects()
     {
-        var permanentEffects = new LifecycleEffect[] {
+        var initialEffects = new LifecycleEffect[] {
             regeneration, enduranceRecovery, hunger,
             radiationExcretion };
-        return permanentEffects;
+        return initialEffects;
     }
 
     private void Die() {
