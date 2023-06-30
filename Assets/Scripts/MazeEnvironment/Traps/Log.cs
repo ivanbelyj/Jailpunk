@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class Log : MazeObject
+[RequireComponent(typeof(IsometricOrientedObject))]
+public class Log : ActivatableObject
 {
     [SerializeField]
     private float rollForce = 10f;
@@ -12,9 +13,11 @@ public class Log : MazeObject
     private Area activatingArea;
 
     private Rigidbody2D rb;
+    private IsometricOrientedObject isometricOriented;
     
     private void Awake() {
         rb = GetComponent<Rigidbody2D>();
+        isometricOriented = GetComponent<IsometricOrientedObject>();
         activatingArea.OnAreaEntered += (go) => {
             if (State == ActivatableState.ReadyToActivate) {
                 Activate();
@@ -27,7 +30,8 @@ public class Log : MazeObject
         Debug.Log("Activating log");
 
         rb.AddForce(rollForce * IsometricUtils
-            .MazeObjectOrientationToVector2(orientation), ForceMode2D.Impulse);
+            .MazeObjectOrientationToVector2(isometricOriented.Orientation),
+            ForceMode2D.Impulse);
         
         // Todo: activating
         State = ActivatableState.Activating;

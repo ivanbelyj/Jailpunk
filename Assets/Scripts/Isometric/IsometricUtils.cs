@@ -26,27 +26,36 @@ public static class IsometricUtils
     }
 
     public static Vector2 MazeObjectOrientationToVector2(
-        MazeObjectOrientation orient) {
+        IsometricDirection orient) {
         Vector2 dir = MazeObjectOrientationToCartesianVector2(orient);
         return CartesianToIsometric(dir);
     }
 
     private static Vector2 MazeObjectOrientationToCartesianVector2(
-        MazeObjectOrientation orient) {
+        IsometricDirection orient) {
         Vector2 dir = orient switch {
-            MazeObjectOrientation.North => Vector2.up,
-            MazeObjectOrientation.East => Vector2.right,
-            MazeObjectOrientation.South => Vector2.down,
-            MazeObjectOrientation.West => Vector2.left,
+            IsometricDirection.North => Vector2.up,
+            IsometricDirection.East => Vector2.right,
+            IsometricDirection.South => Vector2.down,
+            IsometricDirection.West => Vector2.left,
+
+            IsometricDirection.NorthEast => Rotated(Vector2.up, -45f),
+            IsometricDirection.NorthWest => Rotated(Vector2.up, 45f),
+            IsometricDirection.SouthEast => Rotated(Vector2.down, 45f),
+            IsometricDirection.SouthWest => Rotated(Vector2.down, -45f),
+            
             _ => throw new System.ArgumentException("Unknown MazeObjectOrientation")
         };
         return dir;
     }
 
-    public static Vector2 MazeObjectOrientationToPerpendicularVector2(
-        MazeObjectOrientation orient) {
-        Vector2 dir = Quaternion.Euler(0, 0, 90f)
-            * MazeObjectOrientationToCartesianVector2(orient);
+    private static Vector2 Rotated(Vector2 vector, float angleZ) {
+        return Quaternion.Euler(0, 0, angleZ) * vector;
+    }
+
+    public static Vector2 MazeObjectOrientationToRotated90Vector2(
+        IsometricDirection orient) {
+        Vector2 dir = Rotated(MazeObjectOrientationToCartesianVector2(orient), 90f);
         return CartesianToIsometric(dir);
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // [RequireComponent(typeof(IsometricMovement))]
-public class Door : MazeObject, IRefreshable
+public class Door : ActivatableObject, IRefreshable
 {
     // private IsometricMovement movement;
     // private void Awake() {

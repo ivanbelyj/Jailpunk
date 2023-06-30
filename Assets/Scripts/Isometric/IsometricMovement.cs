@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Component controlling physical accelerated / decelerated movement
+/// in isometric directions
+/// </summary>
 [RequireComponent(typeof(Rigidbody2D))]
 public class IsometricMovement : MonoBehaviour
 {

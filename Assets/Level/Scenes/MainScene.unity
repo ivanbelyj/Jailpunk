@@ -7180,7 +7180,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1700239142870628981, guid: 4b6d7d110c5853f4a8c697964eb37086, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1700239142870628981, guid: 4b6d7d110c5853f4a8c697964eb37086, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7370,7 +7370,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1700239142870628981, guid: 4b6d7d110c5853f4a8c697964eb37086, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1700239142870628981, guid: 4b6d7d110c5853f4a8c697964eb37086, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7411,6 +7411,10 @@ PrefabInstance:
     - target: {fileID: 1700239142870628981, guid: 4b6d7d110c5853f4a8c697964eb37086, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1700239142870628985, guid: 4b6d7d110c5853f4a8c697964eb37086, type: 3}
+      propertyPath: orientation
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1700239142870628985, guid: 4b6d7d110c5853f4a8c697964eb37086, type: 3}
       propertyPath: activatingArea
