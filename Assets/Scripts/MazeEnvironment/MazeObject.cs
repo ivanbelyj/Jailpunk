@@ -28,11 +28,16 @@ public abstract class MazeObject : MonoBehaviour, IActivatable
 
     public abstract void Activate();
 
-    private void OnDrawGizmos() {
+    public virtual void OnDrawGizmos() {
         Color prevColor = Gizmos.color;
         Gizmos.color = Color.blue;
-        Gizmos.DrawRay(transform.position, IsometricUtils
-            .MazeObjectOrientationToVector2(orientation).normalized);
+        Gizmos.DrawRay(transform.position, Forward);
         Gizmos.color = prevColor;
     }
+
+    public Vector3 Forward => IsometricUtils
+        .MazeObjectOrientationToVector2(orientation).normalized;
+
+    public Vector3 Perpendicular => IsometricUtils
+        .MazeObjectOrientationToPerpendicularVector2(orientation).normalized;
 }

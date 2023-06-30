@@ -47,7 +47,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 40
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -120,8 +120,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77b263d8dfd04364ead8adb27ac518a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rollForce: 10
   orientation: 3
+  rollForce: 120
   activatingArea: {fileID: 0}
 --- !u!1 &7156478893531160134
 GameObject:

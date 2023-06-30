@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using Mirror;
 using UnityEngine;
 
+/// <summary>
+/// Class that allows Mirror to serialize LifecycleEffects
+/// and transport they by network
+/// </summary>
 public static class LifecycleEffectReadWrite
 {
     public static void WriteLifecycleEffect(this NetworkWriter writer,
@@ -12,7 +16,7 @@ public static class LifecycleEffectReadWrite
         writer.WriteBool(effect.isInfinite);
         writer.WriteFloat(effect.speed);
 
-        writer.WriteByte((byte)effect.targetParameterId);
+        writer.WriteUInt(effect.targetParameterId);
         writer.WriteDouble(effect.StartTime);
     }
 
@@ -22,13 +26,13 @@ public static class LifecycleEffectReadWrite
         bool isInfinite = reader.ReadBool();
         float speed = reader.ReadFloat();
 
-        byte targetParameterIndex = reader.ReadByte();
+        uint targetParameterId = reader.ReadUInt();
         double startTime = reader.ReadDouble();
 
         LifecycleEffect effect = new LifecycleEffect() {
             speed = speed,
             isInfinite = isInfinite,
-            targetParameterId = (LifecycleParameterEnum)targetParameterIndex,
+            targetParameterId = targetParameterId,
             duration = duration,
             StartTime = startTime,
         };

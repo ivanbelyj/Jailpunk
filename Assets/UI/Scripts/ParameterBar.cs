@@ -58,13 +58,6 @@ public class ParameterBar : MonoBehaviour
         backgroundSpriteRenderer.enabled = val;
     }
 
-    private float val = 1f;
-    private void Update() {
-        // Test
-        val -= Time.deltaTime * 0.1f;
-        SetValue(val);
-    }
-
     private void Awake() {
         fillTransform = fill.GetComponent<Transform>();
         fillSpriteRenderer = fill.GetComponent<SpriteRenderer>();

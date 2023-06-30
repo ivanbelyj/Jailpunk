@@ -9,81 +9,53 @@ using UnityEngine.Events;
 ///<summary>
 /// A component of the lifecycle of a living being
 ///</summary>
-public class EntityLifecycle : NetworkBehaviour
+public abstract class EntityLifecycleBase : NetworkBehaviour
 {
-    #region Parameters and effects
-    [Header("Parameters")]
-    [SerializeField]
-    private LifecycleParameter health;
-    [SerializeField]
-    private LifecycleParameter endurance;
-    [SerializeField]
-    private LifecycleParameter satiety;
-    [SerializeField]
-    private LifecycleParameter bleed;
-    [SerializeField]
-    private LifecycleParameter radiation;
-
-    [Header("Constant effects")]
-    [SerializeField]
-    private LifecycleEffect regeneration;
-    [SerializeField]
-    private LifecycleEffect enduranceRecovery;
-    [SerializeField]
-    private LifecycleEffect hunger;
-    [SerializeField]
-    private LifecycleEffect radiationExcretion;
-
-    [Header("Temporary effects")]
-    [SerializeField]
-    private LifecycleEffect runEnduranceDecrease;
-    [SerializeField]
-    private LifecycleEffect bleedEffect;
-    [SerializeField]
-    private LifecycleEffect radiationPoisoning;
-    #endregion
-
     private readonly SyncHashSet<LifecycleEffect> syncEffects =
         new SyncHashSet<LifecycleEffect>();
 
     private HashSet<LifecycleEffect> effects;
 
     ///<summary>
-    /// All uncompleted effects applied to change the parameters of the life cycle.
+    /// All uncompleted effects applied to change the parameters of the lifecycle.
     /// Completed effects are removed after regular traversal 
     ///</summary>
     public HashSet<LifecycleEffect> Effects => effects;
 
+    // [SerializeField]
+    // protected LifecycleParameter[] initialParameters;
+
     ///<summary>
-    /// All lifecycle parameters collected for convenient traversal.
+    /// All lifecycle parameters collected for traversal.
     /// Dynamic addition / removal of parameters is not assumed
     ///</summary>
-    public IReadOnlyDictionary<LifecycleParameterEnum, LifecycleParameter> Parameters { get; private set; }
+    protected IReadOnlyDictionary<uint, LifecycleParameter> Parameters { get; private set; }
 
-    public bool IsAlive { get; private set; }
-    public event UnityAction OnDeath;
-
-    private void Awake() {
+    public virtual void Awake() {
         syncEffects.Callback += SyncEffects;
-
-        Parameters = new Dictionary<LifecycleParameterEnum, LifecycleParameter>() {
-            { LifecycleParameterEnum.Bleeding, bleed },
-            { LifecycleParameterEnum.Endurance, endurance },
-            { LifecycleParameterEnum.Health, health },
-            { LifecycleParameterEnum.Radiation, radiation },
-            { LifecycleParameterEnum.Satiety, satiety },
-        };
-
-        health.OnMin += Die;
-
-        if (health.Value > health.MinValue) {
-            IsAlive = true;
-        } else {
-            Die();
-        }
-
         effects = new HashSet<LifecycleEffect>();
+
+        Dictionary<uint, LifecycleParameter> parametersDict
+            = new Dictionary<uint, LifecycleParameter>();
+        foreach (var parameter in GetInitialParameters()) {
+            parametersDict.Add(parameter.ParameterId, parameter);
+        }
+        Parameters = parametersDict;
     }
+
+    /// <summary>
+    /// Derived class gets parameters from user-friendly places.
+    /// Access parameters in user code via properties or fields 
+    /// is more convenient than array
+    /// </summary>
+    public abstract LifecycleParameter[] GetInitialParameters();
+
+    /// <summary>
+    /// Derived class gets initial effects from user-friendly places.
+    /// Access initial effects in user code via properties or fields 
+    /// is more convenient than array
+    /// </summary>
+    public abstract LifecycleEffect[] GetInitialEffects();
 
     public override void OnStartClient() {
         // When connecting a player on the server, there could already be effects
@@ -97,10 +69,9 @@ public class EntityLifecycle : NetworkBehaviour
         base.OnStartServer();
 
         // Setting and synchronizing the initial effects set in the inspector
-        var permanentEffects = new LifecycleEffect[] { regeneration, enduranceRecovery, hunger,
-            radiationExcretion };
-        for (int i = 0; i < permanentEffects.Length; i++) {
-            AddEffectAndSetStartTime(permanentEffects[i]);
+        var initialEffects = GetInitialEffects();
+        for (int i = 0; i < initialEffects.Length; i++) {
+            AddEffectAndSetStartTime(initialEffects[i]);
         }
     }
 
@@ -117,11 +88,6 @@ public class EntityLifecycle : NetworkBehaviour
                 break;
             }
         }
-    }
-
-    private void Die() {
-        IsAlive = false;
-        OnDeath?.Invoke();
     }
 
     #region Add And Remove Effects
@@ -201,15 +167,4 @@ public class EntityLifecycle : NetworkBehaviour
             target.Value += effect.speed * Time.deltaTime;
         }
     }
-
-    private LifecycleEffect runEffect;
-
-    #region Movement
-    public void Run() {
-        runEffect = AddEffectAndSetStartTime(runEnduranceDecrease);
-    }
-    public void StopRun() {
-        RemoveEffect(runEffect);
-    }
-    #endregion
 }

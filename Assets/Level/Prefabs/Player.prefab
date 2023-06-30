@@ -9,11 +9,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3455876476980749280}
-  - component: {fileID: -7537472172131196947}
-  - component: {fileID: 2205033667393255779}
+  - component: {fileID: 3074480863793260129}
+  - component: {fileID: 3679944304310228711}
   - component: {fileID: 6980796412369359882}
   - component: {fileID: 3786015867818164953}
+  - component: {fileID: -7537472172131196947}
+  - component: {fileID: 2205033667393255779}
   - component: {fileID: -4930455235786288868}
+  - component: {fileID: -2198002554298130507}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -38,7 +41,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-7537472172131196947
+--- !u!114 &3074480863793260129
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -47,13 +50,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 4111959900911027618}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec83720b104ce5146bc29a86004ad417, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 2.45
-  acceleration: 7
-  deceleration: 13
---- !u!114 &2205033667393255779
+  sceneId: 0
+  _assetId: 2926647279
+  serverOnly: 0
+  visible: 0
+  hasSpawned: 0
+--- !u!114 &3679944304310228711
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -62,9 +67,31 @@ MonoBehaviour:
   m_GameObject: {fileID: 4111959900911027618}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1130af4ec27b3cc4e98ae0103a968c55, type: 3}
+  m_Script: {fileID: 11500000, guid: 8ff3ba0becae47b8b9381191598957c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 1
+  syncMode: 0
+  syncInterval: 0
+  target: {fileID: 3455876476980749280}
+  clientAuthority: 0
+  syncPosition: 1
+  syncRotation: 1
+  syncScale: 0
+  interpolatePosition: 1
+  interpolateRotation: 1
+  interpolateScale: 1
+  sendIntervalMultiplier: 1
+  timelineOffset: 0
+  showGizmos: 0
+  showOverlay: 0
+  overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+  onlySyncOnChange: 1
+  onlySyncOnChangeCorrectionMultiplier: 2
+  rotationSensitivity: 0.01
+  compressRotation: 0
+  positionPrecision: 0.01
+  scalePrecision: 0.01
 --- !u!50 &6980796412369359882
 Rigidbody2D:
   serializedVersion: 4
@@ -115,6 +142,33 @@ PolygonCollider2D:
       - {x: 0.4958067, y: -0.2491349}
       - {x: 0.014240205, y: 0.007544756}
       - {x: -0.49150074, y: -0.25381315}
+--- !u!114 &-7537472172131196947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4111959900911027618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec83720b104ce5146bc29a86004ad417, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxSpeed: 2.45
+  acceleration: 7
+  deceleration: 13
+--- !u!114 &2205033667393255779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4111959900911027618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1130af4ec27b3cc4e98ae0103a968c55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &-4930455235786288868
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,6 +183,86 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageForceThreshold: 1
   damageForceScale: 5
+--- !u!114 &-2198002554298130507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4111959900911027618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41681b2afe8798440b48794ee2bdcfbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  health:
+    parameterId: 0
+    minValue: 0
+    maxValue: 1
+    recoveredValue: 1
+    value: 1
+  endurance:
+    parameterId: 1
+    minValue: 0
+    maxValue: 1
+    recoveredValue: 1
+    value: 1
+  satiety:
+    parameterId: 2
+    minValue: 0
+    maxValue: 1
+    recoveredValue: 1
+    value: 1
+  bleed:
+    parameterId: 3
+    minValue: 0
+    maxValue: 1
+    recoveredValue: 1
+    value: 1
+  radiation:
+    parameterId: 4
+    minValue: 0
+    maxValue: 1
+    recoveredValue: 1
+    value: 1
+  regeneration:
+    isInfinite: 1
+    speed: 0
+    duration: 0
+    targetParameterId: 0
+  enduranceRecovery:
+    isInfinite: 1
+    speed: 0
+    duration: 0
+    targetParameterId: 0
+  hunger:
+    isInfinite: 1
+    speed: 0
+    duration: 0
+    targetParameterId: 0
+  radiationExcretion:
+    isInfinite: 1
+    speed: 0
+    duration: 0
+    targetParameterId: 0
+  runEnduranceDecrease:
+    isInfinite: 0
+    speed: 0
+    duration: 0
+    targetParameterId: 0
+  bleedEffect:
+    isInfinite: 0
+    speed: 0
+    duration: 0
+    targetParameterId: 0
+  radiationPoisoning:
+    isInfinite: 0
+    speed: 0
+    duration: 0
+    targetParameterId: 0
 --- !u!1 &4274025936568512492
 GameObject:
   m_ObjectHideFlags: 0

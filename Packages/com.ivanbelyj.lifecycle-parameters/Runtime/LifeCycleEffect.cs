@@ -27,7 +27,7 @@ public struct LifecycleEffect : IEquatable<LifecycleEffect>
     /// <summary>
     /// Every effect is applied by parameter id
     /// </summary>
-    public LifecycleParameterEnum targetParameterId;
+    public uint targetParameterId;
 
     public double StartTime { get; set; }
 

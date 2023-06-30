@@ -27,6 +27,12 @@ public static class IsometricUtils
 
     public static Vector2 MazeObjectOrientationToVector2(
         MazeObjectOrientation orient) {
+        Vector2 dir = MazeObjectOrientationToCartesianVector2(orient);
+        return CartesianToIsometric(dir);
+    }
+
+    private static Vector2 MazeObjectOrientationToCartesianVector2(
+        MazeObjectOrientation orient) {
         Vector2 dir = orient switch {
             MazeObjectOrientation.North => Vector2.up,
             MazeObjectOrientation.East => Vector2.right,
@@ -34,6 +40,13 @@ public static class IsometricUtils
             MazeObjectOrientation.West => Vector2.left,
             _ => throw new System.ArgumentException("Unknown MazeObjectOrientation")
         };
+        return dir;
+    }
+
+    public static Vector2 MazeObjectOrientationToPerpendicularVector2(
+        MazeObjectOrientation orient) {
+        Vector2 dir = Quaternion.Euler(0, 0, 90f)
+            * MazeObjectOrientationToCartesianVector2(orient);
         return CartesianToIsometric(dir);
     }
 }

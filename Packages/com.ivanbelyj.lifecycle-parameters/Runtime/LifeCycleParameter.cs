@@ -10,6 +10,13 @@ using UnityEngine.Events;
 [System.Serializable]
 public class LifecycleParameter
 {
+    [SerializeField]
+    private uint parameterId;
+    public uint ParameterId {
+        get => parameterId;
+        private set => parameterId = value;
+    }
+
     private enum ValueState { Min, Intermediate, Max };
     private ValueState lastValueState;
     private bool isRecovered;

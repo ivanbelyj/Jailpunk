@@ -2,11 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Door : MonoBehaviour, IRefreshable
+public class Door : MazeObject, IRefreshable
 {
-    public ActivatableState State => throw new System.NotImplementedException();
-
-    public void Activate()
+    public override void Activate()
     {
         throw new System.NotImplementedException();
     }
