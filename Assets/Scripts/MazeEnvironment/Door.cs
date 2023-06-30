@@ -2,9 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(IsometricMovement))]
+// [RequireComponent(typeof(IsometricMovement))]
 public class Door : MazeObject, IRefreshable
 {
+    // private IsometricMovement movement;
+    // private void Awake() {
+    //     movement = GetComponent<IsometricMovement>();
+    // }
+
     public void Open() {
 
     }
