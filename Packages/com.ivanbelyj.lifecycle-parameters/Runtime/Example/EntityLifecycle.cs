@@ -19,7 +19,6 @@ public class EntityLifecycle : EntityLifecycleBase
         get => endurance;
     }
     
-
     [SerializeField]
     private LifecycleParameter satiety;
     public LifecycleParameter Satiety {

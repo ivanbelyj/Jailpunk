@@ -4,20 +4,24 @@ using UnityEngine;
 
 /// <summary>
 /// Component controlling physical accelerated / decelerated movement
-/// in isometric directions
+/// in grid directions
 /// </summary>
 [RequireComponent(typeof(Rigidbody2D))]
-public class IsometricMovement : MonoBehaviour
+public class GridPhysicalMovement : MonoBehaviour
 {
     [SerializeField]
-    [Tooltip("Movement speed, units per second")]
+    [Tooltip("Max movement speed, units per second")]
     private float maxSpeed = 1f;
 
     private Rigidbody2D rb;
 
-    private void Start()
-    {
+    private GridManager gridManager;
+
+    private void Awake() {
         rb = GetComponent<Rigidbody2D>();
+
+        // Todo: DI
+        gridManager = GameObject.Find("GridManager").GetComponent<GridManager>();
     }
 
     /// <summary>
@@ -44,7 +48,7 @@ public class IsometricMovement : MonoBehaviour
     private void FixedUpdate()
     {
         Vector3 destination = transform.position
-            + IsometricUtils.CartesianToIsometric(
+            + (Vector3)gridManager.CartesianToVector2(
                 Time.fixedDeltaTime * velocity);
 
         rb.MovePosition(destination);

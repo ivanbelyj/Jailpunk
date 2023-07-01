@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Living being with its lifecycle and HealthBar
+/// </summary>
 [RequireComponent(typeof(EntityLifecycle))]
 public class Entity : MonoBehaviour
 {
@@ -17,7 +20,7 @@ public class Entity : MonoBehaviour
     }
 
     private void Start() {
-        UpdateHealthBar(lifecycle.Health.Value);   
+        UpdateHealthBar(lifecycle.Health.Value);
     }
 
     private void UpdateHealthBar(float newVal) {

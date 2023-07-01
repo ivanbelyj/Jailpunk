@@ -13,7 +13,9 @@ GameObject:
   - component: {fileID: 6368145893163024403}
   - component: {fileID: 6368145893163024406}
   - component: {fileID: 6368145893163024401}
+  - component: {fileID: -1850698194911864696}
   - component: {fileID: 6368145893163024400}
+  - component: {fileID: 6788115901204822158}
   m_Layer: 6
   m_Name: Door
   m_TagString: Untagged
@@ -157,6 +159,19 @@ MonoBehaviour:
   maxSpeed: 1
   acceleration: 7
   deceleration: 10
+--- !u!114 &-1850698194911864696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6368145893163024399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e713d191be1cfb4886c58d9e68a4363, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  orientation: 2
 --- !u!114 &6368145893163024400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,4 +184,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30cf1058d31a5f24e9578b99572f8c28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  orientation: 0
+--- !u!114 &6788115901204822158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6368145893163024399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7cc081b61df554469afd3abcf93d46a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  areaPrefab: {fileID: 3361649495916108776, guid: 8dc353942288fef42b3264031c0f534d, type: 3}
+  interactableDirections: 0200000006000000

@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Damageable : MonoBehaviour
+[RequireComponent(typeof(IDamageable))]
+public class DamageOnHit : MonoBehaviour
 {
     [SerializeField]
     private float damageForceThreshold = 1f;
@@ -10,13 +11,17 @@ public class Damageable : MonoBehaviour
     [SerializeField]
     private float damageForceScale = 5f;
 
+    private IDamageable damageable;
+
+    private void Awake() {
+        damageable = GetComponent<IDamageable>();
+    }
+
     private void OnCollisionEnter2D(Collision2D collision) {
-        Debug.Log("Collision with damageable");
         float force = collision.relativeVelocity.sqrMagnitude;
         if (force > damageForceThreshold) {
             float damage = (force - damageForceThreshold) * damageForceScale;
-
-            Debug.Log("Damage: " + damage);
+            // Todo: apply damage, [0, 1]
         }
     }
 }

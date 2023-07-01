@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-[RequireComponent(typeof(IsometricOrientedObject))]
+[RequireComponent(typeof(GridOriented))]
 public class Log : ActivatableObject
 {
     [SerializeField]
@@ -13,11 +13,11 @@ public class Log : ActivatableObject
     private Area activatingArea;
 
     private Rigidbody2D rb;
-    private IsometricOrientedObject isometricOriented;
+    private GridOriented gridOriented;
     
     private void Awake() {
         rb = GetComponent<Rigidbody2D>();
-        isometricOriented = GetComponent<IsometricOrientedObject>();
+        gridOriented = GetComponent<GridOriented>();
         activatingArea.OnAreaEntered += (go) => {
             if (State == ActivatableState.ReadyToActivate) {
                 Activate();
@@ -27,13 +27,7 @@ public class Log : ActivatableObject
 
     public override void Activate()
     {
-        Debug.Log("Activating log");
-
-        rb.AddForce(rollForce * IsometricUtils
-            .MazeObjectOrientationToVector2(isometricOriented.Orientation),
-            ForceMode2D.Impulse);
-        
-        // Todo: activating
+        rb.AddForce(rollForce * gridOriented.Forward, ForceMode2D.Impulse);
         State = ActivatableState.Activating;
     }
 

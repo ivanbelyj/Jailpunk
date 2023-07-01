@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Possible object orientations in the game
+/// Possible object orientations in the grid
 /// </summary>
-public enum IsometricDirection
+public enum GridDirection
 {
     East,
     NorthEast,

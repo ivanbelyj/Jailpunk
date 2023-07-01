@@ -5,18 +5,18 @@ using Mirror;
 using Cinemachine;
 
 /// <summary>
-/// Attaches CinemachineVirtualCamera with defined tag
+/// Attaches CinemachineVirtualCamera with defined name
 /// to GameObject on local machine
 /// </summary>
 public class AttachCameraOnStart : NetworkBehaviour
 {
     [SerializeField]
-    private string cameraTag = "PlayerVirtualCamera";
+    private string cameraName = "PlayerVirtualCamera";
     public override void OnStartLocalPlayer()
     {
         base.OnStartLocalPlayer();
         CinemachineVirtualCamera playerVirtualCamera = GameObject
-            .FindWithTag(cameraTag).GetComponent<CinemachineVirtualCamera>();
+            .Find(cameraName).GetComponent<CinemachineVirtualCamera>();
 
         playerVirtualCamera.Follow = transform;
     }
