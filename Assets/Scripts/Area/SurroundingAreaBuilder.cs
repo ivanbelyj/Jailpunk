@@ -13,6 +13,9 @@ public class SurroundingAreaBuilder : MonoBehaviour
     [Tooltip("Directions where area tiles will be instantiated. "
         + "Multiple identical directions have no side effects")]
     private GridDirection[] areaDirections;
+    public GridDirection[] AreaDirections {
+        get => areaDirections;
+    }
 
     [SerializeField]
     private bool createCenterArea = true;
@@ -41,6 +44,11 @@ public class SurroundingAreaBuilder : MonoBehaviour
     private void Start() {
         if (buildOnStart)
             CreateSurroundingArea();
+    }
+
+    public void SetAreaDirectionsAndCreate(GridDirection[] newDirs) {
+        areaDirections = newDirs;
+        CreateSurroundingArea();
     }
 
     public void CreateSurroundingArea() {

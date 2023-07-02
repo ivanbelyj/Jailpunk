@@ -13,6 +13,9 @@ GameObject:
   - component: {fileID: 1700239142870628980}
   - component: {fileID: 1700239142870628985}
   - component: {fileID: -1917624314057961275}
+  - component: {fileID: 5740496039481549924}
+  - component: {fileID: -2460501740774348137}
+  - component: {fileID: -2106955379828824587}
   m_Layer: 6
   m_Name: Log
   m_TagString: Untagged
@@ -122,7 +125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rollForce: 120
-  activatingArea: {fileID: 0}
+  activatingArea: {fileID: 5740496039481549924}
 --- !u!114 &-1917624314057961275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,6 +139,47 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   orientation: 0
+--- !u!114 &5740496039481549924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1700239142870628986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19883c073715c6a4499589aec27875f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialAreaTiles: []
+--- !u!114 &-2460501740774348137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1700239142870628986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0226eb8675117be4d9740fd223ce84c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  areaTilePrefab: {fileID: 3361649495916108776, guid: 8dc353942288fef42b3264031c0f534d, type: 3}
+--- !u!114 &-2106955379828824587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1700239142870628986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7cc081b61df554469afd3abcf93d46a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  areaDirections: 
+  createCenterArea: 1
+  buildOnStart: 1
 --- !u!1 &7156478893531160134
 GameObject:
   m_ObjectHideFlags: 0

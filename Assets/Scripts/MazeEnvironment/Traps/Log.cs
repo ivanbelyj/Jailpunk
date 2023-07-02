@@ -10,7 +10,7 @@ public class Log : ActivatableObject
     private float rollForce = 10f;
 
     [SerializeField]
-    private AreaTile activatingArea;
+    private Area activatingArea;
 
     private Rigidbody2D rb;
     private GridOriented gridOriented;
@@ -18,7 +18,7 @@ public class Log : ActivatableObject
     private void Awake() {
         rb = GetComponent<Rigidbody2D>();
         gridOriented = GetComponent<GridOriented>();
-        activatingArea.AreaTileEntered += (go) => {
+        activatingArea.AreaEntered += (go) => {
             if (State == ActivatableState.ReadyToActivate) {
                 Activate();
             }
