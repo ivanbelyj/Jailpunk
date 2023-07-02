@@ -3156,7 +3156,7 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
---- !u!1 &573719057
+--- !u!1 &675056819
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3164,43 +3164,72 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 573719059}
-  - component: {fileID: 573719058}
+  - component: {fileID: 675056823}
+  - component: {fileID: 675056822}
+  - component: {fileID: 675056821}
+  - component: {fileID: 675056820}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &573719058
+--- !u!114 &675056820
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 573719057}
+  m_GameObject: {fileID: 675056819}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f7cc081b61df554469afd3abcf93d46a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  areaPrefab: {fileID: 0}
-  interactableDirections: 
---- !u!4 &573719059
+  areaDirections: 0000000001000000020000000300000004000000050000000600000007000000
+  createCenterArea: 1
+  buildOnStart: 1
+--- !u!114 &675056821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 675056819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0226eb8675117be4d9740fd223ce84c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  areaTilePrefab: {fileID: 1201717096}
+--- !u!114 &675056822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 675056819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19883c073715c6a4499589aec27875f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialAreaTiles: []
+--- !u!4 &675056823
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 573719057}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.55, y: 0.66, z: -0.17449065}
+  m_GameObject: {fileID: 675056819}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.6, y: 1.92, z: -0.021238646}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &675476733
 GameObject:
@@ -3245,7 +3274,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &942883192
 PrefabInstance:
@@ -3260,7 +3289,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3361649495916108776, guid: 8dc353942288fef42b3264031c0f534d, type: 3}
       propertyPath: m_Name
-      value: Area
+      value: TileArea
       objectReference: {fileID: 0}
     - target: {fileID: 4525727775654920577, guid: 8dc353942288fef42b3264031c0f534d, type: 3}
       propertyPath: m_RootOrder
@@ -7425,7 +7454,7 @@ CompositeCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1959312268}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0

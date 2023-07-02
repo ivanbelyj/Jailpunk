@@ -16,7 +16,7 @@ public class GridManager : MonoBehaviour
     /// <summary>
     /// Returns the position of the center of the nearest cell
     /// </summary>
-    public Vector3 ToCellCenter(Vector3 pos) {
+    public Vector3 GetCellCenterWorld(Vector3 pos) {
         return GetCellCenterWorld(WorldToCell(pos));
     }
 

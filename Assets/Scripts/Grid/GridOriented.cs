@@ -29,7 +29,7 @@ public class GridOriented : MonoBehaviour
     public virtual void OnDrawGizmos() {
         Color prevColor = Gizmos.color;
         Gizmos.color = Color.blue;
-        Gizmos.DrawRay(GridManager.ToCellCenter(transform.position), Forward);
+        Gizmos.DrawRay(GridManager.GetCellCenterWorld(transform.position), Forward);
         Gizmos.color = prevColor;
     }
 
