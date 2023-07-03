@@ -15,9 +15,8 @@ GameObject:
   - component: {fileID: 6368145893163024401}
   - component: {fileID: -1850698194911864696}
   - component: {fileID: 6368145893163024400}
-  - component: {fileID: 7195330266083989195}
-  - component: {fileID: 6533763434950411451}
-  - component: {fileID: 6788115901204822158}
+  - component: {fileID: -4037933401642735286}
+  - component: {fileID: 3671104164617038309}
   m_Layer: 6
   m_Name: Door
   m_TagString: Untagged
@@ -60,7 +59,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 39bc36fac71f9784b9023a774e3f82b9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -186,7 +185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30cf1058d31a5f24e9578b99572f8c28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7195330266083989195
+--- !u!114 &-4037933401642735286
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -195,11 +194,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 6368145893163024399}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19883c073715c6a4499589aec27875f9, type: 3}
+  m_Script: {fileID: 11500000, guid: 720bfe18d5ddbb44096fb14ac2770e3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialAreaTiles: []
---- !u!114 &6533763434950411451
+  maxFlashAmount: 0.3
+  flashSpeed: 2
+--- !u!114 &3671104164617038309
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -208,22 +208,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 6368145893163024399}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0226eb8675117be4d9740fd223ce84c4, type: 3}
+  m_Script: {fileID: 11500000, guid: 423140d5a5a1e044d970e6a848d2caa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  areaTilePrefab: {fileID: 3361649495916108776, guid: 8dc353942288fef42b3264031c0f534d, type: 3}
---- !u!114 &6788115901204822158
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6368145893163024399}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7cc081b61df554469afd3abcf93d46a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  areaDirections: 0200000006000000
-  createCenterArea: 1
-  buildOnStart: 1

@@ -27,6 +27,10 @@ public class GridManager : MonoBehaviour
         return CartesianToIsometric(cart);
     }
 
+    public Vector2 Vector2ToCartesian(Vector2 cart) {
+        return IsometricToCartesian(cart);
+    }
+
     public Vector2 GridDirectionToVector2(
         GridDirection orient) {
         Vector2 dir = GridDirectionToCartesianVector2(orient);

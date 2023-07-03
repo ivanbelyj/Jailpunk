@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// AreaTile is an element that constitute Area
+/// AreaTile is an element that constitute Area. This is usually a GameObject
+/// with a polygon collider in the shape of a tile, but the shape can be different
 /// </summary>
 public class AreaTile : MonoBehaviour
 {
