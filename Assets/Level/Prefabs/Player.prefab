@@ -20,7 +20,8 @@ GameObject:
   - component: {fileID: -2198002554298130507}
   - component: {fileID: -2967253483208829151}
   - component: {fileID: 2046793674066567607}
-  - component: {fileID: -5800665848441899456}
+  - component: {fileID: 1371108634742831869}
+  - component: {fileID: 3480024372806962856}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -172,19 +173,7 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents:
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2205033667393255779}
-        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
-        m_MethodName: OnMove
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: 016072e1-baf3-4ad4-8cd9-ea3008396223
     m_ActionName: Player/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
   - m_PersistentCalls:
@@ -267,6 +256,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1130af4ec27b3cc4e98ae0103a968c55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mouseSelectionLayerMask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!114 &-4930455235786288868
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -390,7 +382,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   cameraName: PlayerVirtualCamera
---- !u!114 &-5800665848441899456
+--- !u!114 &1371108634742831869
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -399,13 +391,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 4111959900911027618}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52c1a4bb0248c5c4d84bdac3c5c27f23, type: 3}
+  m_Script: {fileID: 11500000, guid: 943bb41fc23fd964881d9e445f472fd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncDirection: 0
-  syncMode: 0
-  syncInterval: 0
-  interactionRadius: 1
+  radius: 1
+--- !u!114 &3480024372806962856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4111959900911027618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f40f320b922a47f468e99ddcdcdce56f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4274025936568512492
 GameObject:
   m_ObjectHideFlags: 0

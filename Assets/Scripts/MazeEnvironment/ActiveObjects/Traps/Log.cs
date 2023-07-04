@@ -19,7 +19,7 @@ public class Log : ActivatableObject
         rb = GetComponent<Rigidbody2D>();
         gridOriented = GetComponent<GridOriented>();
         activatingArea.AreaEntered += (go) => {
-            if (State == ActivatableState.ReadyToActivate) {
+            if (State == ActivationState.ReadyToActivate) {
                 Activate();
             }
         };
@@ -28,13 +28,13 @@ public class Log : ActivatableObject
     public override void Activate()
     {
         rb.AddForce(rollForce * gridOriented.Forward, ForceMode2D.Impulse);
-        State = ActivatableState.Activating;
+        State = ActivationState.Activating;
     }
 
     private void Update() {
-        if (State == ActivatableState.Activating) {
+        if (State == ActivationState.Activating) {
             if (rb.velocity.sqrMagnitude < Mathf.Epsilon) {
-                State = ActivatableState.Activated;
+                State = ActivationState.UnableToActivate;
             }
         }
     }

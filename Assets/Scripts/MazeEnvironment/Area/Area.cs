@@ -49,12 +49,6 @@ public class Area : MonoBehaviour
             areaTile.AreaTileEntered += OnAreaTileEntered;
             areaTile.AreaTileExited += OnAreaTileExited;
         }
-        AreaEntered += (go) => {
-            Debug.Log(go.name + " enters the area");
-        };
-        AreaExited += (go) => {
-            Debug.Log(go.name + " leaves the area");
-        };
     }
 
     private void OnAreaTileEntered(GameObject go) {
