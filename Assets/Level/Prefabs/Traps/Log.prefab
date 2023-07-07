@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5740496039481549924}
   - component: {fileID: -2460501740774348137}
   - component: {fileID: -2106955379828824587}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Log
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,6 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77b263d8dfd04364ead8adb27ac518a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  state: 0
   rollForce: 120
   activatingArea: {fileID: 5740496039481549924}
 --- !u!114 &-1917624314057961275
@@ -190,7 +191,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8017507024355813005}
   - component: {fileID: 1678180353580859486}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}

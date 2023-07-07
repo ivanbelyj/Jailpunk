@@ -28,5 +28,11 @@ public abstract class ActivatableObject : MonoBehaviour, IActivatable
     public event Action<IActivatable, ActivationState, ActivationState>
         ActivationStateChanged;
 
-    public abstract void Activate();
+    public virtual void ActivateIfAllowed() {
+        if (State == ActivationState.ReadyToActivate) {
+            Activate();
+        }
+    }
+
+    protected abstract void Activate();
 }

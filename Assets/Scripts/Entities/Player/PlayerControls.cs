@@ -56,7 +56,7 @@ public class PlayerControls : MonoBehaviour
         GameObject interactable = hit.collider?.transform.parent.gameObject;
         if (interactable != null
             && interactor.IsAvailableToInteract(interactable)) {
-            interactable.GetComponent<IInteractable>().Activate();
+            interactable.GetComponent<IInteractable>().ActivateIfAllowed();
         }
     }
 

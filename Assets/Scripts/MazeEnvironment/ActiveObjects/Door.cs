@@ -2,18 +2,40 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Door : InteractableObject
+public class Door : InteractableObject, IRenewable
 {
+    private bool isOpened;
+
+    public bool IsInRenewedState => isOpened;
+
     public void Open() {
+        if (isOpened)
+            return;
+
         Debug.Log("Door is opened");
+        State = ActivationState.ReadyToActivate;  // Door can be closed
+        isOpened = true;
     }
 
     public void Close() {
-
+        if (!isOpened)
+            return;
+        
+        Debug.Log("Door is closed");
+        State = ActivationState.ReadyToActivate;
+        isOpened = false;
     }
 
-    public override void Activate()
+    protected override void Activate()
     {
-        Open();   
+        if (isOpened)
+            Close();
+        else
+            Open();
+    }
+
+    public void Renew()
+    {
+        Close();
     }
 }

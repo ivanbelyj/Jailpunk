@@ -11,5 +11,9 @@ public interface IActivatable
     ActivationState State { get; }
     event Action<IActivatable, ActivationState, ActivationState>
         ActivationStateChanged;
-    void Activate();
+
+    /// <summary>
+    /// Activates object if current state allows the activation
+    /// <summary>
+    void ActivateIfAllowed();
 }
