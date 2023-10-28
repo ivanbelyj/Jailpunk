@@ -13,7 +13,8 @@ public class PlayerControls : MonoBehaviour
     private LayerMask mouseSelectionLayerMask;
 
     private PlayerInput playerInput;
-    private GridPhysicalMovement movement;
+    // private GridPhysicalMovement movement;
+    private CharacterControls characterControls;
     private Interactor interactor;
     private AttachCameraOnStartLocalPlayer attachCamera;
     private Camera playerCamera;
@@ -30,7 +31,8 @@ public class PlayerControls : MonoBehaviour
 
     private void Awake() {
         playerInput = GetComponent<PlayerInput>();
-        movement = GetComponent<GridPhysicalMovement>();
+        // movement = GetComponent<GridPhysicalMovement>();
+        characterControls = GetComponent<CharacterControls>();
         interactor = GetComponent<Interactor>();
         attachCamera = GetComponent<AttachCameraOnStartLocalPlayer>();
         playerCamera = Camera.main;
@@ -38,7 +40,7 @@ public class PlayerControls : MonoBehaviour
 
     private void Update() {
         Vector2 moveInput = playerInput.actions["Move"].ReadValue<Vector2>();
-        Move(moveInput);
+        characterControls.Move(moveInput);
 
         Mouse mouse = Mouse.current;
         if (mouse.leftButton.wasPressedThisFrame)
@@ -60,17 +62,10 @@ public class PlayerControls : MonoBehaviour
         }
     }
 
-    private void Move(Vector2 moveInput) {
-        movement.MovementInputValues = GridUtils.RotateCartesian(
-            new Vector3(moveInput.x, moveInput.y, 0));
-    }
+    // private void Move(Vector2 moveInput) {
+    //     movement.MovementInputValues = GridUtils.RotateCartesian(
+    //         new Vector3(moveInput.x, moveInput.y, 0));
+    // }
 
-    private void OnDrawGizmos() {
-        Color prevColor = Gizmos.color;
-        if (movement != null && movement.MovementInputValues != null) {
-            Gizmos.color = Color.blue;
-            Gizmos.DrawRay(transform.position, movement.MovementInputValues);
-        }
-        Gizmos.color = prevColor;
-    }
+    
 }

@@ -22,7 +22,9 @@ public class Log : ActivatableObject
         rb = GetComponent<Rigidbody2D>();
         gridOriented = GetComponent<GridOriented>();
         activatingArea.AreaEntered += (go) => {
-            if (State == ActivationState.ReadyToActivate) {
+            // Temporary solution
+            if (go.GetComponent<PlayerControls>() != null &&
+                State == ActivationState.ReadyToActivate) {
                 Activate();
             }
         };

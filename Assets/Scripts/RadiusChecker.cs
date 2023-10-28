@@ -59,7 +59,7 @@ public class RadiusChecker : MonoBehaviour
             .Where(collider => {
                 // Check is object in radius
                 Vector2 objectPos = collider.transform.position;
-                bool isDistanceLess = IsDistanceInGridLessThanInteractionRadius(
+                bool isDistanceLess = IsDistanceInGridLessThanRadius(
                     checkerPos, objectPos);
                 
                 if (drawGizmos) {
@@ -103,7 +103,7 @@ public class RadiusChecker : MonoBehaviour
             NewInRadius?.Invoke(newInRadius);
     }
 
-    private bool IsDistanceInGridLessThanInteractionRadius(Vector2 v1, Vector2 v2) {
+    private bool IsDistanceInGridLessThanRadius(Vector2 v1, Vector2 v2) {
         Vector2 v1InGrid = GridManager.Vector2ToCartesian(v1);
         Vector2 v2InGrid = GridManager.Vector2ToCartesian(v2);
         return Vector2.Distance(v1InGrid, v2InGrid) < radius;
