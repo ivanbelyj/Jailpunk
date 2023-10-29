@@ -1,18 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.U2D.Animation;
 
+/// <summary>
+/// Controls of character movement
+/// </summary>
+[RequireComponent(typeof(GridPhysicalMovement))]
+[RequireComponent(typeof(SpriteSwapAnimator))]
 public class CharacterControls : MonoBehaviour
 {
     private GridPhysicalMovement movement;
-    [SerializeField]
-    private Animator animator;
+    private SpriteSwapAnimator animator;
 
     private void Awake() {
         movement = GetComponent<GridPhysicalMovement>();
-
-        // Initial character animation orientation
-        SetAnimatorParams(Vector2.up);
+        animator = GetComponent<SpriteSwapAnimator>();
     }
 
     private Vector2 lastMoveInput;
@@ -37,27 +40,16 @@ public class CharacterControls : MonoBehaviour
             sameMoveInputTime += Time.deltaTime;
         }
 
-        if (sameMoveInputTime >= changeAnimationDirectionDuration
-            && !Mathf.Approximately(moveInput.sqrMagnitude, 0f))
+        if (sameMoveInputTime >= changeAnimationDirectionDuration)
+            // && !Mathf.Approximately(moveInput.sqrMagnitude, 0f))
         {
-            SetAnimatorParams(moveInput);
+            animator.SetMoveInput(moveInput);
         }
 
         movement.MovementInputValues = GridUtils.RotateCartesian(
             new Vector3(moveInput.x, moveInput.y, 0));
     }
 
-    private void SetAnimatorParams(Vector2 moveInput) {
-        float Normalize(float val) {
-            if (Mathf.Abs(val) < 0.1f)
-                return 0f;
-            else return val < 0 ? -1f : 1f;
-        }
-
-        // Set the animator parameters when the changeDuration has elapsed
-        animator.SetFloat("PosX", Normalize(moveInput.x));
-        animator.SetFloat("PosY", Normalize(moveInput.y));
-    }
 
     private void OnDrawGizmos() {
         Color prevColor = Gizmos.color;

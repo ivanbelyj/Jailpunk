@@ -14,6 +14,7 @@ public class RadiusChecker : MonoBehaviour
     private float radius = 1f;
     public float Radius {
         get => radius;
+        set => radius = value;
     }
 
     /// <summary>
@@ -52,6 +53,7 @@ public class RadiusChecker : MonoBehaviour
 
     private void CheckObjectsInRadius(bool drawGizmos = false) {
         Vector2 checkerPos = transform.position;
+        // Todo: Physics2D.OverlapCircleNonAlloc ?
         Collider2D[] overlappedByCircle = Physics2D.OverlapCircleAll(
             checkerPos,
             radius);

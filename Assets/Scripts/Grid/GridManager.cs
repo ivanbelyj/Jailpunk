@@ -104,4 +104,26 @@ public class GridManager : MonoBehaviour
             _ => throw new System.ArgumentException(unknownDirectionMessage)
         };
     }
+
+    // public static GridDirection Vector2IntToGridDirection(Vector2Int dir) {
+    //     var north = new Vector2Int(0, 1);
+    //     var east = new Vector2Int(1, 0);
+    //     var south = new Vector2Int(0, -1);
+    //     var west = new Vector2Int(-1, 0);
+    //     if (dir == north) {
+    //         return GridDirection.North;
+    //     } else if (dir == east) {
+    //         return GridDirection.East;
+    //     } else if (dir == south) {
+    //         return GridDirection.South;
+    //     } else if (dir == west) {
+    //         return GridDirection.West;
+    //     } else if (dir == north + east) {
+    //         return GridDirection.NorthEast;
+    //     }
+
+    //     // GridDirection.NorthWest => north + west,
+    //     // GridDirection.SouthEast => south + east,
+    //     // GridDirection.SouthWest => south + west,
+    // }
 }

@@ -6,23 +6,23 @@ public static class GridUtils
 {
     private const string unknownDirectionMessage = "Unknown IsometricDirection";
 
-    private static Vector2 GridDirectionToCartesianVector2(
-        GridDirection orient) {
-        Vector2 dir = orient switch {
-            GridDirection.North => Vector2.up,
-            GridDirection.East => Vector2.right,
-            GridDirection.South => Vector2.down,
-            GridDirection.West => Vector2.left,
+    // private static Vector2 GridDirectionToCartesianVector2(
+    //     GridDirection orient) {
+    //     Vector2 dir = orient switch {
+    //         GridDirection.North => Vector2.up,
+    //         GridDirection.East => Vector2.right,
+    //         GridDirection.South => Vector2.down,
+    //         GridDirection.West => Vector2.left,
 
-            GridDirection.NorthEast => Rotated(Vector2.up, -45f),
-            GridDirection.NorthWest => Rotated(Vector2.up, 45f),
-            GridDirection.SouthEast => Rotated(Vector2.down, 45f),
-            GridDirection.SouthWest => Rotated(Vector2.down, -45f),
+    //         GridDirection.NorthEast => Rotated(Vector2.up, -45f),
+    //         GridDirection.NorthWest => Rotated(Vector2.up, 45f),
+    //         GridDirection.SouthEast => Rotated(Vector2.down, 45f),
+    //         GridDirection.SouthWest => Rotated(Vector2.down, -45f),
             
-            _ => throw new System.ArgumentException(unknownDirectionMessage)
-        };
-        return dir;
-    }
+    //         _ => throw new System.ArgumentException(unknownDirectionMessage)
+    //     };
+    //     return dir;
+    // }
 
     public static Vector3 RotateCartesian(Vector3 cartPos) {
         Vector3 res = new Vector3();
