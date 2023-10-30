@@ -42,7 +42,7 @@ public class RenewalFeature : MazeFeature
     }
     
     public void StartRenewal() {
-        Debug.Log("Start renewal");
+        // Debug.Log("Start renewal");
         if (config.HasFlag(RenewalConfig.RefreshObjects))
             RefreshObjects();
         if (config.HasFlag(RenewalConfig.PassOut))

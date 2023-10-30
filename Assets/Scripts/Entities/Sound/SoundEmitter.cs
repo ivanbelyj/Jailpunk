@@ -3,12 +3,19 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-[RequireComponent(typeof(RadiusChecker))]
+// [RequireComponent(typeof(RadiusChecker))]
 public class SoundEmitter : MonoBehaviour
 {
     private static Dictionary<string, float> attenuationsByObstacleTypes;
 
-    public float defaultSoundIntensity = 10f;
+    private float soundIntensity = 10f;
+    public float SoundIntensity {
+        get => soundIntensity;
+        set {
+            soundIntensity = value;
+            SetRadiusByIntensity();
+        }
+    }
 
     [SerializeField]
     [Tooltip("Ajusts inverse square law of sound attenuation")]
@@ -17,14 +24,20 @@ public class SoundEmitter : MonoBehaviour
     // [SerializeField]
     // private GameObject emitterGO;
     private Dictionary<int, SoundReceiver> receiversByIds;
+    [SerializeField]
     private RadiusChecker radiusChecker;
+    public RadiusChecker RadiusChecker => radiusChecker;
+
+    private void SetRadiusByIntensity() {
+        radiusChecker.Radius = Mathf.Sqrt(soundIntensity / soundAttenuation);
+    }
 
     private void Awake() {
         receiversByIds = new Dictionary<int, SoundReceiver>();
         // if (emitterGO == null)
         //     emitterGO = gameObject;
-        radiusChecker = GetComponent<RadiusChecker>();
-        radiusChecker.Radius = 100; // Todo: set correct minimal radius
+        // radiusChecker = GetComponent<RadiusChecker>();
+        SetRadiusByIntensity();
         radiusChecker.NewInRadius += OnRadiusEnter;
         radiusChecker.OutOfRadius += OnRadiusExit;
     }
@@ -47,25 +60,40 @@ public class SoundEmitter : MonoBehaviour
         }
     }
 
-    public void Emit(SoundData soundData, float? soundIntensity = null) {
-        if (soundIntensity == null) {
-            soundIntensity = defaultSoundIntensity;
-        }
+    public void Emit(SoundData soundData) {
+        Vector3 emitterPos = transform.position;
+        GetReceiversAndIntensities().ForEach(x
+            => {
+                var receiver = x.Item1;
+                var intensity = x.Item2;
+                if (intensity >= receiver.soundThreshold)
+                    receiver.Receive(intensity, emitterPos, soundData);
+            });
+    }
 
+    /// <summary>
+    /// Gets all receivers that can receive sound from current
+    /// emitter configuration.
+    /// Ignores individual receiver's sound threshold
+    /// </summary>
+    /// <returns></returns>
+    public List<(SoundReceiver, float)> GetReceiversAndIntensities() {
+        var res = new List<(SoundReceiver, float)>();
         Vector3 emitterPos = transform.position;
 
         foreach (SoundReceiver sr in receiversByIds.Values) {
             Vector3 receiverPos = sr.transform.position;
             float distance = Vector3.Distance(receiverPos, emitterPos);
-            float intensity = soundIntensity.Value;
+            float intensity = soundIntensity;
 
             // Inverse square law
             intensity -= soundAttenuation * distance * distance;
             intensity -= GetWallAttenuation(emitterPos, receiverPos);
-            if (intensity < sr.soundThreshold || intensity <= 0f) 
+            if (intensity <= 0f) 
                 continue;
-            sr.Receive(intensity, emitterPos, soundData);
+            res.Add((sr, intensity));
         }
+        return res;
     }
 
     private float GetWallAttenuation(Vector3 emitterPos, Vector3 receiverPos) {

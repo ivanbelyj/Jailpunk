@@ -4,13 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-[RequireComponent(typeof(RadiusChecker))]
+// [RequireComponent(typeof(RadiusChecker))]
 public class Interactor : MonoBehaviour
 {
+    [SerializeField]
     private RadiusChecker radiusChecker;
     // private HashSet<IInteractable> interactablesInRadius = new HashSet<IInteractable>();
     private void Awake() {
-        radiusChecker = GetComponent<RadiusChecker>();
+        // radiusChecker = GetComponent<RadiusChecker>();
         radiusChecker.NewInRadius += OnNewInRadius;
         radiusChecker.OutOfRadius += OnOutOfRadius;
     }

@@ -21,6 +21,7 @@ public class RadiusChecker : MonoBehaviour
     /// The last objects in radius
     /// </summary>
     private HashSet<GameObject> lastInRadius = new HashSet<GameObject>();
+    public HashSet<GameObject> LastInRadius => lastInRadius;
 
     // Works in OnDrawGizmos
     private GridManager gridManager;

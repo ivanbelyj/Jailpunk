@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CommunicationPanel : MonoBehaviour
 {
@@ -9,31 +12,29 @@ public class CommunicationPanel : MonoBehaviour
 
     [SerializeField]
     private Transform choiceItemsParent;
+    private Speaker speaker;
+    private Person subject;
 
     private List<ChoiceItem> choiceItems;
 
-    private void Start() {
+    [SerializeField]
+    private TMP_Dropdown recipientsDropdown;
+
+    public void SetSubject(Person subject, Speaker speaker) {
+        this.subject = subject;
+        this.speaker = speaker;
+        SetTestChoice();
+    }
+
+    private void SetTestChoice() {
         // For test
         var commands = new [] {
-            new SpeechCommand() {
-                SpeechSoundData = new SpeechSoundData() {
-                    Message = "Sheaneim Seileish!"
-                },
-                SpeechVolume = SpeechVolume.Normal
-            },
-            new SpeechCommand() {
-                SpeechSoundData = new SpeechSoundData() {
-                    Message = "Seimiar eum ki lai!"
-                },
-                SpeechVolume = SpeechVolume.Normal
-            },
-            new SpeechCommand() {
-                SpeechSoundData = new SpeechSoundData() {
-                    Message = "Kias"
-                },
-                SpeechVolume = SpeechVolume.Normal
-            }
-        };
+            "Sheaneim Seileish!",
+            "Seimiar eum ki lai!",
+            "Kias"
+        }.Select(str => new SpeechCommand(speaker, new SpeechSoundData() {
+            Message = str
+        }));
         SetChoices(commands);
     }
 
@@ -51,5 +52,19 @@ public class CommunicationPanel : MonoBehaviour
 
             choiceItems.Add(newChoiceItem);
         };
+    }
+
+    public void SetAvailableRecipients(IEnumerable<ISubject> recipients) {
+        recipientsDropdown.ClearOptions();
+        var options = new List<TMP_Dropdown.OptionData>() {
+            new TMP_Dropdown.OptionData() {
+                text = "Everybody"
+            }
+        };
+        options.AddRange(recipients
+            .Select(recipient => new TMP_Dropdown.OptionData() {
+                text = $"{subject.GetKnownSubjectName(recipient.GetSubjectId())}"
+            }));
+        recipientsDropdown.AddOptions(options);
     }
 }

@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Mirror;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -22,9 +24,13 @@ public class MessagesPanel : MonoBehaviour
     [SerializeField]
     private ScrollRect scrollRect;
 
+    
+
     public void AddSoundReceiver(SoundReceiver soundReceiver) {
         soundReceiver.SoundReceived += OnSoundReceived;
     }
+
+    
 
     private void OnSoundReceived(object sender, SoundReceiver.SoundReceivedEventArgs args) {
         // var newMessageItem = Instantiate(messageItemPrefab).GetComponent<MessageItem>();
