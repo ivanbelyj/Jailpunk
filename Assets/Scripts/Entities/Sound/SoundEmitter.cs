@@ -6,7 +6,8 @@ using UnityEngine;
 // [RequireComponent(typeof(RadiusChecker))]
 public class SoundEmitter : MonoBehaviour
 {
-    private static Dictionary<string, float> attenuationsByObstacleTypes;
+    private static Dictionary<string, float> attenuationsByObstacleTypes =
+        new Dictionary<string, float>();
 
     private float soundIntensity = 10f;
     public float SoundIntensity {
@@ -43,21 +44,27 @@ public class SoundEmitter : MonoBehaviour
     }
 
     private void OnRadiusEnter(List<GameObject> gameObjects) {
+        int receiversCounter = 0;
         foreach (var go in gameObjects) {
             SoundReceiver receiver = go.GetComponent<SoundReceiver>();
             if (receiver != null) {
+                receiversCounter++;
                 // Debug.Log("new receiver " + go.GetInstanceID());
                 receiversByIds.Add(go.GetInstanceID(), receiver);
             }
         }
+        Debug.Log("Radius enter! " + receiversCounter + " new receivers");
     }
     private void OnRadiusExit(List<GameObject> gameObjects) {
+        int receiversCounter = 0;
         foreach (var go in gameObjects) {
             if (go.GetComponent<SoundReceiver>() != null) {
+                receiversCounter++;
                 // Debug.Log("remove receiver " + go.GetInstanceID());
                 receiversByIds.Remove(go.GetInstanceID());
             }
         }
+        Debug.Log("Radius exit! " + receiversCounter + " exited receivers");
     }
 
     public void Emit(SoundData soundData) {
@@ -79,11 +86,11 @@ public class SoundEmitter : MonoBehaviour
     /// <returns></returns>
     public List<(SoundReceiver, float)> GetReceiversAndIntensities() {
         var res = new List<(SoundReceiver, float)>();
-        Vector3 emitterPos = transform.position;
+        Vector2 emitterPos = transform.position;
 
         foreach (SoundReceiver sr in receiversByIds.Values) {
-            Vector3 receiverPos = sr.transform.position;
-            float distance = Vector3.Distance(receiverPos, emitterPos);
+            Vector2 receiverPos = sr.transform.position;
+            float distance = Vector2.Distance(receiverPos, emitterPos);
             float intensity = soundIntensity;
 
             // Inverse square law
@@ -96,11 +103,11 @@ public class SoundEmitter : MonoBehaviour
         return res;
     }
 
-    private float GetWallAttenuation(Vector3 emitterPos, Vector3 receiverPos) {
+    private float GetWallAttenuation(Vector2 emitterPos, Vector2 receiverPos) {
         float attenuation = 0f;
-        Vector3 dir = (receiverPos - emitterPos).normalized;
+        Vector2 dir = (receiverPos - emitterPos).normalized;
         float distance = dir.magnitude;
-        RaycastHit[] hits = Physics.RaycastAll(new Ray(emitterPos, dir), distance);
+        RaycastHit2D[] hits = Physics2D.RaycastAll(emitterPos, dir, distance);
         for (int i = 0; i < hits.Length; i++) {
             string tag = hits[i].collider.gameObject.tag;
             if (attenuationsByObstacleTypes.ContainsKey(tag)) {

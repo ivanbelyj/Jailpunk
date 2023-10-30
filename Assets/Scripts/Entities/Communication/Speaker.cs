@@ -13,24 +13,37 @@ public class Speaker : MonoBehaviour
     public SoundEmitter SoundEmitter => soundEmitter;
 
     public float voiceVolumeMultiplier = 1f;
-    public SpeechVolume defaultSpeechVolume = SpeechVolume.Normal;
+    // public SpeechVolume defaultSpeechVolume = SpeechVolume.Normal;
+    // private SpeechVolume speechVolume;
+
+    [SerializeField]
+    private SpeechVolume initialSpeechVolume = SpeechVolume.Normal;
+    public void SetSpeechVolume(SpeechVolume speechVolume) {
+        soundEmitter.SoundIntensity = GetSoundIntensity(speechVolume);
+    }
 
     private void Awake() {
         soundEmitter = GetComponent<SoundEmitter>();
-        soundEmitter.SoundIntensity
-            = GetSoundIntensity(SpeechVolume.Normal);
+        SetSpeechVolume(initialSpeechVolume);
     }
 
     public void Speak(SpeechSoundData speechSoundData,
         SpeechVolume? volume = null) {
-        soundEmitter.SoundIntensity = GetSoundIntensity(volume);
+        bool shouldRestorePrevSoundIntensity = false;
+        float prevSoundIntensity = soundEmitter.SoundIntensity;
+        if (volume != null) {
+            shouldRestorePrevSoundIntensity = true;
+            soundEmitter.SoundIntensity = GetSoundIntensity(volume.Value);
+        }
+        
         soundEmitter.Emit(speechSoundData);
+
+        if (shouldRestorePrevSoundIntensity) {
+            soundEmitter.SoundIntensity = prevSoundIntensity;
+        }
     }
 
-    public float GetSoundIntensity(SpeechVolume? speechVolume = null) {
-        if (speechVolume == null)
-            speechVolume = defaultSpeechVolume;
-
+    public float GetSoundIntensity(SpeechVolume speechVolume) {
         return speechVolume switch {
             SpeechVolume.Whisper => 5f,
             SpeechVolume.Normal => 100f,

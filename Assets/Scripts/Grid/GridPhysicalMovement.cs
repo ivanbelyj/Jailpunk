@@ -20,7 +20,6 @@ public class GridPhysicalMovement : MonoBehaviour
     private void Awake() {
         rb = GetComponent<Rigidbody2D>();
 
-        // Todo: DI
         gridManager = GameObject.Find("GridManager").GetComponent<GridManager>();
     }
 

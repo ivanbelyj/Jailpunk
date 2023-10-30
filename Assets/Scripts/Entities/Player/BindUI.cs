@@ -10,9 +10,12 @@ public class BindUI : MonoBehaviour
 {
     private void Start() {
         var communicationUIManager = FindObjectOfType<CommunicationUIManager>();
+        var playersPerson = GetComponent<Person>();
+
         communicationUIManager.MessagesPanel
             .AddSoundReceiver(GetComponent<SoundReceiver>());
+        communicationUIManager.MessagesPanel.SetSubjectPerson(playersPerson);
         communicationUIManager.CommunicationPanel
-            .SetSubject(GetComponent<Person>(), GetComponent<Speaker>());
+            .SetSubjectPerson(playersPerson, GetComponent<Speaker>());
     }
 }

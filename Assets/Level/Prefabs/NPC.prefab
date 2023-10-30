@@ -25,6 +25,10 @@ GameObject:
   - component: {fileID: 2712251554888665631}
   - component: {fileID: 946964867965016294}
   - component: {fileID: 6522508145408058629}
+  - component: {fileID: 6016991905152676393}
+  - component: {fileID: 3870382742252743224}
+  - component: {fileID: 3727824396502660803}
+  - component: {fileID: 3262477069693885734}
   m_Layer: 0
   m_Name: NPC
   m_TagString: Untagged
@@ -89,6 +93,7 @@ MonoBehaviour:
   interpolatePosition: 1
   interpolateRotation: 1
   interpolateScale: 1
+  coordinateSpace: 0
   sendIntervalMultiplier: 1
   timelineOffset: 0
   showGizmos: 0
@@ -421,6 +426,59 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   soundThreshold: 0
+--- !u!114 &6016991905152676393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4111959900911027618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 943bb41fc23fd964881d9e445f472fd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 0
+--- !u!114 &3870382742252743224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4111959900911027618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d86216fdba382664bb754fc975900ec3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundAttenuation: 1
+  radiusChecker: {fileID: 6016991905152676393}
+--- !u!114 &3727824396502660803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4111959900911027618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a95ac0f1e50b34b40ad0f26f9ef77748, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  voiceVolumeMultiplier: 1
+  defaultSpeechVolume: 1
+--- !u!114 &3262477069693885734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4111959900911027618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d1e4054c9dfcdc4dbe979fb0166a3e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4274025936568512492
 GameObject:
   m_ObjectHideFlags: 0

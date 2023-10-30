@@ -98,6 +98,7 @@ MonoBehaviour:
   interpolatePosition: 1
   interpolateRotation: 1
   interpolateScale: 1
+  coordinateSpace: 0
   sendIntervalMultiplier: 1
   timelineOffset: 0
   showGizmos: 0
@@ -593,7 +594,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   voiceVolumeMultiplier: 1
-  defaultSpeechVolume: 0
+  defaultSpeechVolume: 1
 --- !u!114 &2334798827921252007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -633,7 +634,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  personName: 
+  personName: Player
 --- !u!1001 &5954343488525031726
 PrefabInstance:
   m_ObjectHideFlags: 0

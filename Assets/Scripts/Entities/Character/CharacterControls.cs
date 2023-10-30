@@ -13,12 +13,16 @@ public class CharacterControls : MonoBehaviour
     private GridPhysicalMovement movement;
     private SpriteSwapAnimator animator;
 
+    private GridManager gridManager;
+
     private void Awake() {
         movement = GetComponent<GridPhysicalMovement>();
         animator = GetComponent<SpriteSwapAnimator>();
+        gridManager = GameObject.Find("GridManager").GetComponent<GridManager>();
     }
 
     private Vector2 lastMoveInput;
+    private Vector2 currentOrientationMoveInput;
     private float sameMoveInputTime;
     [SerializeField]
     [Tooltip("Used to track the elapsed time " +
@@ -26,13 +30,21 @@ public class CharacterControls : MonoBehaviour
         " when to reset the animator parameters.")]
     private float changeAnimationDirectionDuration = 0.1f;
 
+    // Todo: initial orientation
+    public Vector2 Orientation =>
+        gridManager.CartesianToVector2(
+            GridUtils.RotateCartesian(currentOrientationMoveInput)
+        ).normalized;
+
     public void Move(Vector2 moveInput)
     {
+        
         if (moveInput != lastMoveInput)
         {
             // Reset the timer if the moveInput has changed
             sameMoveInputTime = 0;
             lastMoveInput = moveInput;
+            
         }
         else
         {
@@ -43,6 +55,8 @@ public class CharacterControls : MonoBehaviour
         if (sameMoveInputTime >= changeAnimationDirectionDuration)
             // && !Mathf.Approximately(moveInput.sqrMagnitude, 0f))
         {
+            if (!Mathf.Approximately(moveInput.sqrMagnitude, 0))
+                currentOrientationMoveInput = moveInput;
             animator.SetMoveInput(moveInput);
         }
 

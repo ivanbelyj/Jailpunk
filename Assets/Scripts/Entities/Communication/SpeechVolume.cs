@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum SpeechVolume
 {
-    Whisper,
-    Normal,
-    Shout
+    Whisper = 0,
+    Normal = 1,
+    Shout = 2
 }

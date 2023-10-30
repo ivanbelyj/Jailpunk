@@ -12,41 +12,48 @@ using UnityEngine.UIElements;
 /// </summary>
 public class MessagesPanel : MonoBehaviour
 {
-    // [SerializeField]
-    // private GameObject messageItemPrefab;
     [SerializeField]
     private VerticalLayoutGroup messageItemsParent;
 
-    // Todo: normal adding messages
+    // Todo: normal adding message items
     [SerializeField]
     private GameObject textPrefab;
 
     [SerializeField]
     private ScrollRect scrollRect;
 
-    
+    private Person subjectPerson;
+
+    public void SetSubjectPerson(Person person) {
+        subjectPerson = person;
+    }
 
     public void AddSoundReceiver(SoundReceiver soundReceiver) {
         soundReceiver.SoundReceived += OnSoundReceived;
-    }
+    }    
 
-    
+    private void OnSoundReceived(object sender,
+        SoundReceiver.SoundReceivedEventArgs args) {
+        // Todo: normal message items, not only text
 
-    private void OnSoundReceived(object sender, SoundReceiver.SoundReceivedEventArgs args) {
-        // var newMessageItem = Instantiate(messageItemPrefab).GetComponent<MessageItem>();
-        // newMessageItem.transform.SetParent(messageItemsParent);
-
-        // Todo: normal setting of text
-        // newMessageItem.Set(args.SoundData.ToDisplayText());
-
-        string messageText = args.SoundData.ToDisplayText();
-        // text.text = messageText;
-        var go = Instantiate(textPrefab);
-        go.GetComponent<TextMeshProUGUI>().text = messageText;
-        go.transform.SetParent(messageItemsParent.transform);
+        string messageText = "";
+        if (args.SoundData is SpeechSoundData speech) {
+            messageText += subjectPerson.GetKnownCharacterName(speech.SpeakerId)
+                + ": ";
+        }
+        
+        messageText += args.SoundData.ToDisplayText();
+        AddMessage(messageText);
+        
 
         // Todo: move into another place?
         ScrollToBottom();
+    }
+
+    private void AddMessage(string messageText) {
+        var go = Instantiate(textPrefab);
+        go.GetComponent<TextMeshProUGUI>().text = messageText;
+        go.transform.SetParent(messageItemsParent.transform);
     }
 
     private void ScrollToBottom() {

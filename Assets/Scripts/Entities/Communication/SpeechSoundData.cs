@@ -10,20 +10,19 @@ public class SpeechSoundData : SoundData
     /// <summary>
     /// In real life, the recipient is not always determined by speech,
     /// but let's assume that the character addressed
-    /// the speech to a certain recipient via some other ways
+    /// the speech to a certain recipient via some other ways.
+    /// 0 - recipient is not defined
     /// </summary>
-    public ulong RecipientId { get; set; }
+    public CharacterId RecipientId { get; set; }
 
-    // Todo: 
+    /// <summary>
+    /// 0 - speaker's identity is not defined
+    /// </summary>
+    public CharacterId SpeakerId { get; set; }
+
     public override string ToDisplayText()
     {
-        // Todo: get speaker's name if it's known
-        string name = RecipientId == 0 ? null : NetworkIdentity
-            .GetSceneIdentity(RecipientId)?.gameObject.name;
-        string res = $"{Message}";
-        if (name != null)
-            res = name + ": " + res;
-        return res;
+        return $"{Message}";
     }
     // There also can be different speech signs
     // gender, legibility, etc.

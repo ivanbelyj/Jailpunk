@@ -10,7 +10,7 @@ public static class NameUtils
         "Shiho",
         "Neksho",
         "Neho",
-        "Siho",
+        "Shiho",
         "Thago",
         "Negho",
         "Harakoro",
@@ -37,5 +37,7 @@ public static class NameUtils
         => arr[Random.Range(0, arr.Length)];
 
     public static string GetRandomName() =>
-        GetRandomItem(firstNames) + " " + GetRandomItem(lastNames);
+        "Test " + Random.Range(100, 999);
+        // GetRandomItem(firstNames) + " " + GetRandomItem(lastNames);
+        // Too aesthetic names for characters with a test appearance :D
 }

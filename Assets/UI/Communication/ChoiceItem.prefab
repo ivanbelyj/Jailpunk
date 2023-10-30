@@ -149,5 +149,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textMeshPro: {fileID: 1870069519579149431}
-  hoveredColor: {r: 0.67, g: 0.67, b: 0.67, a: 1}
-  transitionDuration: 0.1
+  hoveredColor: {r: 0.745283, g: 0.745283, b: 0.745283, a: 1}
+  transitionDuration: 0.15
