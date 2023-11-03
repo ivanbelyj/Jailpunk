@@ -31,6 +31,13 @@ public class CommunicationPanel : MonoBehaviour
 
     private ChoicesProvider choicesProvider;
 
+    public void MakeChoiceByNumber(int number) {
+        if (number - 1 < 0 || number - 1 >= choiceItems.Count) {
+            return;
+        }
+        choiceItems[number - 1].MakeChoice();
+    }
+
     public void SetSubjectPerson(Person subject, Speaker speaker) {
         this.subject = subject;
         this.speaker = speaker;

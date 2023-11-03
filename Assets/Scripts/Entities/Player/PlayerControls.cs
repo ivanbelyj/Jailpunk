@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
@@ -19,6 +20,9 @@ public class PlayerControls : MonoBehaviour
     private AttachCameraOnStartLocalPlayer attachCamera;
     private Camera playerCamera;
 
+    private CommunicationUIManager communicationUIManager;
+
+
     // private GridManager gridManager;
     // private GridManager GridManager {
     //     get {
@@ -29,6 +33,21 @@ public class PlayerControls : MonoBehaviour
     //     }
     // }
 
+    public void OnToggleCommunicationUI(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed) {
+            communicationUIManager.ToggleUI();
+        }
+    }
+
+    public void OnSelectNumber(InputAction.CallbackContext context) {
+        if (context.phase == InputActionPhase.Performed) {
+            int.TryParse(context.control.name, out int num);
+            communicationUIManager.CommunicationPanel.MakeChoiceByNumber(num);
+        }
+        
+    }
+
     private void Awake() {
         playerInput = GetComponent<PlayerInput>();
         // movement = GetComponent<GridPhysicalMovement>();
@@ -36,6 +55,7 @@ public class PlayerControls : MonoBehaviour
         interactor = GetComponent<Interactor>();
         attachCamera = GetComponent<AttachCameraOnStartLocalPlayer>();
         playerCamera = Camera.main;
+        communicationUIManager = FindObjectOfType<CommunicationUIManager>();
     }
 
     private void Update() {
@@ -48,6 +68,11 @@ public class PlayerControls : MonoBehaviour
            Vector3 mousePosition = mouse.position.ReadValue();
            TryToInteract(mousePosition);
         }
+
+        // int choiceNumber = playerInput.actions["Choice"].ReadValue<int>();
+        // if (choiceNumber > 0) {
+        //     Debug.Log("choice number: " + choiceNumber);
+        // }
     }
 
     private void TryToInteract(Vector3 mousePosition) {

@@ -148,7 +148,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.56, y: 2.56}
+    oldSize: {x: 2, y: 2}
     newSize: {x: 2.56, y: 2.56}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -156,10 +156,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.014677711, y: -0.43192628}
-      - {x: 0.22978997, y: -0.2956953}
-      - {x: -0.02258712, y: -0.20576318}
-      - {x: -0.268837, y: -0.3481056}
+    - - {x: -0.028524831, y: -0.40672484}
+      - {x: 0.26219186, y: -0.30649593}
+      - {x: -0.033387758, y: -0.19496253}
+      - {x: -0.33727813, y: -0.30211616}
 --- !u!114 &8814517507764113715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -237,6 +237,38 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 61d2f65d-e3e8-4425-9a1a-ffbf6b5515e1
     m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2205033667393255779}
+        m_TargetAssemblyTypeName: PlayerControls, Assembly-CSharp
+        m_MethodName: OnToggleCommunicationUI
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 42d92b7c-0e77-4b9f-bef9-481f256d8df2
+    m_ActionName: Player/SwitchCommunicationUI[/Keyboard/tab]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2205033667393255779}
+        m_TargetAssemblyTypeName: PlayerControls, Assembly-CSharp
+        m_MethodName: OnSelectNumber
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: c8dc3135-14bb-468d-831c-b416cecce30a
+    m_ActionName: Player/Choice[/Keyboard/1,/Keyboard/2,/Keyboard/3]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -594,7 +626,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   voiceVolumeMultiplier: 1
-  defaultSpeechVolume: 1
+  initialSpeechVolume: 1
 --- !u!114 &2334798827921252007
 MonoBehaviour:
   m_ObjectHideFlags: 0

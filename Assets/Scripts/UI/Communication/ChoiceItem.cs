@@ -40,8 +40,12 @@ public class ChoiceItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         textMeshPro.CrossFadeColor(color, transitionDuration, true, true);
     }
 
+    public void MakeChoice() {
+        command.Execute();
+    }
+
     public void OnPointerClick(PointerEventData eventData)
     {
-        command.Execute();
+        MakeChoice();
     }
 }

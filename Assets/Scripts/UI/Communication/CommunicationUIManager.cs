@@ -12,5 +12,8 @@ public class CommunicationUIManager : MonoBehaviour
     private CommunicationPanel communicationPanel;
     public CommunicationPanel CommunicationPanel => communicationPanel;
 
+    public void ToggleUI() {
+        Debug.Log("Toggle communication UI");
+    }
     
 }

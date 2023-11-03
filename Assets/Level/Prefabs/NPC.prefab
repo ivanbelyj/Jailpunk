@@ -466,7 +466,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   voiceVolumeMultiplier: 1
-  defaultSpeechVolume: 1
+  initialSpeechVolume: 1
 --- !u!114 &3262477069693885734
 MonoBehaviour:
   m_ObjectHideFlags: 0

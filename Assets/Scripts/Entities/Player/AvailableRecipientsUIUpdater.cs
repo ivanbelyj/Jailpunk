@@ -43,6 +43,9 @@ public class AvailableRecipientsUIUpdater : MonoBehaviour
     }
 
     private void OnDrawGizmos() {
+        if (characterControls == null || soundEmitter == null)
+            return;
+            
         Color prevCol = Gizmos.color;
         Gizmos.color = Color.magenta;
         Gizmos.DrawLine(transform.position,

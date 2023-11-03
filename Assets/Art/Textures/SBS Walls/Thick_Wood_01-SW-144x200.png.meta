@@ -1,0 +1,747 @@
+fileFormatVersion: 2
+guid: 2833c5b5a0ec987429b3176d29326fda
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 255
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Thick_Wood_01-SW-144x200_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 600
+        width: 144
+        height: 200
+      alignment: 8
+      pivot: {x: 1, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -72, y: -92}
+        - {x: -56, y: -100}
+        - {x: 72, y: -37}
+        - {x: 57, y: -29}
+      tessellationDetail: 0
+      bones: []
+      spriteID: f73b3880467bb18458358a15412269df
+      internalID: -34890558
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thick_Wood_01-SW-144x200_1
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 600
+        width: 144
+        height: 200
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -56, y: -29}
+        - {x: -72, y: -36}
+        - {x: 56, y: -100}
+        - {x: 72, y: -93}
+      tessellationDetail: 0
+      bones: []
+      spriteID: d20ccbbea078d7f44bdc1141720f951a
+      internalID: -2002192368
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thick_Wood_01-SW-144x200_2
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 600
+        width: 144
+        height: 200
+      alignment: 8
+      pivot: {x: 1, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -72, y: -92}
+        - {x: -56, y: -100}
+        - {x: 72, y: -37}
+        - {x: 57, y: -29}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 876ec912c92d69c4f82528d120806407
+      internalID: 1821106045
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thick_Wood_01-SW-144x200_3
+      rect:
+        serializedVersion: 2
+        x: 432
+        y: 600
+        width: 144
+        height: 200
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -56, y: -29}
+        - {x: -72, y: -36}
+        - {x: 56, y: -100}
+        - {x: 72, y: -93}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41c0c7b21c2f1e94a945b9acd8450d66
+      internalID: -358357166
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thick_Wood_01-SW-144x200_4
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 600
+        width: 144
+        height: 200
+      alignment: 8
+      pivot: {x: 1, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -72, y: -92}
+        - {x: -56, y: -100}
+        - {x: 72, y: -37}
+        - {x: 57, y: -29}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ddbf23a87c62c14bbaf5e1da75f4def
+      internalID: -1713452283
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thick_Wood_01-SW-144x200_5
+      rect:
+        serializedVersion: 2
+        x: 720
+        y: 600
+        width: 144
+        height: 200
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -56, y: -29}
+        - {x: -72, y: -36}
+        - {x: 56, y: -100}
+        - {x: 72, y: -93}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 88bb60cd89641144dac3abb30503129a
+      internalID: -1412697943
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thick_Wood_01-SW-144x200_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 400
+        width: 144
+        height: 200
+      alignment: 8
+      pivot: {x: 1, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -72, y: -92}
+        - {x: -56, y: -100}
+        - {x: 72, y: -37}
+        - {x: 57, y: -29}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09a12df4fdb710c40a09346d8116665b
+      internalID: 2025569695
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thick_Wood_01-SW-144x200_7
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 400
+        width: 144
+        height: 200
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -56, y: -29}
+        - {x: -72, y: -36}
+        - {x: 56, y: -100}
+        - {x: 72, y: -93}
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc101d8d0534bcb43a9d3476a68c7492
+      internalID: -199530214
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thick_Wood_01-SW-144x200_8
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 400
+        width: 144
+        height: 200
+      alignment: 8
+      pivot: {x: 1, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -72, y: -92}
+        - {x: -56, y: -100}
+        - {x: 72, y: -37}
+        - {x: 57, y: -29}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 75c525ccd811d764a93c37ea280cfd0a
+      internalID: -979450458
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thick_Wood_01-SW-144x200_9
+      rect:
+        serializedVersion: 2
+        x: 432
+        y: 400
+        width: 144
+        height: 200
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -56, y: -29}
+        - {x: -72, y: -36}
+        - {x: 56, y: -100}
+        - {x: 72, y: -93}
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3c21bfdf1e364f41903adfa735c58d1
+      internalID: 1953691646
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thick_Wood_01-SW-144x200_10
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 400
+        width: 144
+        height: 200
+      alignment: 8
+      pivot: {x: 1, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -72, y: -92}
+        - {x: -56, y: -100}
+        - {x: 72, y: -37}
+        - {x: 57, y: -29}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7781d96342677344e9f6216b398a4b5f
+      internalID: -1198245174
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thick_Wood_01-SW-144x200_11
+      rect:
+        serializedVersion: 2
+        x: 720
+        y: 400
+        width: 144
+        height: 200
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -56, y: -29}
+        - {x: -72, y: -36}
+        - {x: 56, y: -100}
+        - {x: 72, y: -93}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 61bc502304ad41946bdf5d1d27fb47a0
+      internalID: 440957378
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thick_Wood_01-SW-144x200_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 200
+        width: 144
+        height: 200
+      alignment: 8
+      pivot: {x: 1, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -72, y: -92}
+        - {x: -56, y: -100}
+        - {x: 72, y: -37}
+        - {x: 57, y: -29}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3174fd45b167c3843864f943fe3361e0
+      internalID: -853010020
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thick_Wood_01-SW-144x200_13
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 200
+        width: 144
+        height: 200
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -56, y: -29}
+        - {x: -72, y: -36}
+        - {x: 56, y: -100}
+        - {x: 72, y: -93}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 14164c33a94525d4eace10d8121b64cd
+      internalID: 1016638240
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thick_Wood_01-SW-144x200_14
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 200
+        width: 144
+        height: 200
+      alignment: 8
+      pivot: {x: 1, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -72, y: -92}
+        - {x: -56, y: -100}
+        - {x: 72, y: -37}
+        - {x: 57, y: -29}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7289ae2726d2ead4d91da1fee695e8ea
+      internalID: -651631850
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thick_Wood_01-SW-144x200_15
+      rect:
+        serializedVersion: 2
+        x: 432
+        y: 200
+        width: 144
+        height: 200
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -56, y: -29}
+        - {x: -72, y: -36}
+        - {x: 56, y: -100}
+        - {x: 72, y: -93}
+      tessellationDetail: 0
+      bones: []
+      spriteID: b28a5756bbb72d74ab1a33fe05050aa0
+      internalID: -718934026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thick_Wood_01-SW-144x200_16
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 200
+        width: 144
+        height: 200
+      alignment: 8
+      pivot: {x: 1, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -72, y: -92}
+        - {x: -56, y: -100}
+        - {x: 72, y: -37}
+        - {x: 57, y: -29}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3250aaebcfabab744af9af98bf7e10e0
+      internalID: 280230372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thick_Wood_01-SW-144x200_17
+      rect:
+        serializedVersion: 2
+        x: 720
+        y: 200
+        width: 144
+        height: 200
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -56, y: -29}
+        - {x: -72, y: -36}
+        - {x: 56, y: -100}
+        - {x: 72, y: -93}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 514721c4af55d2246ab93da188fb669b
+      internalID: 658000317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thick_Wood_01-SW-144x200_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 144
+        height: 200
+      alignment: 8
+      pivot: {x: 1, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -72, y: -92}
+        - {x: -56, y: -100}
+        - {x: 72, y: -37}
+        - {x: 57, y: -29}
+      tessellationDetail: 0
+      bones: []
+      spriteID: f2428b715604362478b6a535585fece0
+      internalID: 1810609328
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thick_Wood_01-SW-144x200_19
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 0
+        width: 144
+        height: 200
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -56, y: -29}
+        - {x: -72, y: -36}
+        - {x: 56, y: -100}
+        - {x: 72, y: -93}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 319a426fe887a3048890cef37bc9b78b
+      internalID: -1121195522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thick_Wood_01-SW-144x200_20
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 0
+        width: 144
+        height: 200
+      alignment: 8
+      pivot: {x: 1, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -72, y: -92}
+        - {x: -56, y: -100}
+        - {x: 72, y: -37}
+        - {x: 57, y: -29}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 617a8d1c3ad333a4e92197863eeb0cab
+      internalID: 961905336
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thick_Wood_01-SW-144x200_21
+      rect:
+        serializedVersion: 2
+        x: 432
+        y: 0
+        width: 144
+        height: 200
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -56, y: -29}
+        - {x: -72, y: -36}
+        - {x: 56, y: -100}
+        - {x: 72, y: -93}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 931200e979e6e9948b42ae7dfa84a040
+      internalID: -1362093595
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thick_Wood_01-SW-144x200_22
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 0
+        width: 144
+        height: 200
+      alignment: 8
+      pivot: {x: 1, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -72, y: -92}
+        - {x: -56, y: -100}
+        - {x: 72, y: -37}
+        - {x: 57, y: -29}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8672cf689a0932f47af908eeb271393f
+      internalID: 1763818217
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thick_Wood_01-SW-144x200_23
+      rect:
+        serializedVersion: 2
+        x: 720
+        y: 0
+        width: 144
+        height: 200
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -56, y: -29}
+        - {x: -72, y: -36}
+        - {x: 56, y: -100}
+        - {x: 72, y: -93}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 688f045626ad68c40b40e7168f212b1d
+      internalID: 861773668
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Thick_Wood_01-SW-144x200_4: -1713452283
+      Thick_Wood_01-SW-144x200_10: -1198245174
+      Thick_Wood_01-SW-144x200_3: -358357166
+      Thick_Wood_01-SW-144x200_16: 280230372
+      Thick_Wood_01-SW-144x200_21: -1362093595
+      Thick_Wood_01-SW-144x200_15: -718934026
+      Thick_Wood_01-SW-144x200_13: 1016638240
+      Thick_Wood_01-SW-144x200_20: 961905336
+      Thick_Wood_01-SW-144x200_1: -2002192368
+      Thick_Wood_01-SW-144x200_22: 1763818217
+      Thick_Wood_01-SW-144x200_9: 1953691646
+      Thick_Wood_01-SW-144x200_11: 440957378
+      Thick_Wood_01-SW-144x200_17: 658000317
+      Thick_Wood_01-SW-144x200_8: -979450458
+      Thick_Wood_01-SW-144x200_0: -34890558
+      Thick_Wood_01-SW-144x200_2: 1821106045
+      Thick_Wood_01-SW-144x200_5: -1412697943
+      Thick_Wood_01-SW-144x200_6: 2025569695
+      Thick_Wood_01-SW-144x200_23: 861773668
+      Thick_Wood_01-SW-144x200_14: -651631850
+      Thick_Wood_01-SW-144x200_12: -853010020
+      Thick_Wood_01-SW-144x200_7: -199530214
+      Thick_Wood_01-SW-144x200_19: -1121195522
+      Thick_Wood_01-SW-144x200_18: 1810609328
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

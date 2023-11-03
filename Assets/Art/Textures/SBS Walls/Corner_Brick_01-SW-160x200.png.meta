@@ -1,0 +1,435 @@
+fileFormatVersion: 2
+guid: edb57d4297d9d524bb037e9c42e89a87
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 255
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Corner_Brick_01-SW-160x200_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 200
+        width: 160
+        height: 200
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 0, y: -51}
+        - {x: -16, y: -60}
+        - {x: 0, y: -69}
+        - {x: 16, y: -60}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 521784a55f9a29843b099308fb6ad957
+      internalID: 925236212
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Corner_Brick_01-SW-160x200_1
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 200
+        width: 160
+        height: 200
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 0, y: -51}
+        - {x: -16, y: -60}
+        - {x: 0, y: -69}
+        - {x: 16, y: -60}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 582d00fffd395634389179222f6a6ed8
+      internalID: -621870669
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Corner_Brick_01-SW-160x200_2
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 200
+        width: 160
+        height: 200
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 0, y: -51}
+        - {x: -16, y: -60}
+        - {x: 0, y: -69}
+        - {x: 16, y: -60}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 32cc0d2f81320e84ba4c785e19bd81dc
+      internalID: -1284858103
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Corner_Brick_01-SW-160x200_3
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 200
+        width: 160
+        height: 200
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 0, y: -51}
+        - {x: -16, y: -60}
+        - {x: 0, y: -69}
+        - {x: 16, y: -60}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a1df5b302278a4448a87b2647b38343
+      internalID: 1705852075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Corner_Brick_01-SW-160x200_4
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 200
+        width: 160
+        height: 200
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 0, y: -51}
+        - {x: -16, y: -60}
+        - {x: 0, y: -69}
+        - {x: 16, y: -60}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 32a225ab74f370f43b0a6238afbe24cc
+      internalID: -1954472083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Corner_Brick_01-SW-160x200_5
+      rect:
+        serializedVersion: 2
+        x: 800
+        y: 200
+        width: 160
+        height: 200
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 0, y: -51}
+        - {x: -16, y: -60}
+        - {x: 0, y: -69}
+        - {x: 16, y: -60}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 192eea18d8ef0e541bcee0ec59d7df07
+      internalID: 467040312
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Corner_Brick_01-SW-160x200_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 160
+        height: 200
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 0, y: -51}
+        - {x: -16, y: -60}
+        - {x: 0, y: -69}
+        - {x: 16, y: -60}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 155484742f22d094f9e763f2edd61d06
+      internalID: 1146256466
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Corner_Brick_01-SW-160x200_7
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 160
+        height: 200
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 0, y: -51}
+        - {x: -16, y: -60}
+        - {x: 0, y: -69}
+        - {x: 16, y: -60}
+      tessellationDetail: 0
+      bones: []
+      spriteID: f601daa756730f84d8c77130eac9f08d
+      internalID: -404356343
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Corner_Brick_01-SW-160x200_8
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 0
+        width: 160
+        height: 200
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 0, y: -51}
+        - {x: -16, y: -60}
+        - {x: 0, y: -69}
+        - {x: 16, y: -60}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8222d74044195404abb1984d54a9ed5f
+      internalID: -1434017429
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Corner_Brick_01-SW-160x200_9
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 0
+        width: 160
+        height: 200
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 0, y: -51}
+        - {x: -16, y: -60}
+        - {x: 0, y: -69}
+        - {x: 16, y: -60}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0380382544d55e84bad18a229c7fe037
+      internalID: -2063082870
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Corner_Brick_01-SW-160x200_10
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 0
+        width: 160
+        height: 200
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 0, y: -51}
+        - {x: -16, y: -60}
+        - {x: 0, y: -69}
+        - {x: 16, y: -60}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a95d5a42f1b3014a9d6dcc333a95f85
+      internalID: -1345819514
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Corner_Brick_01-SW-160x200_11
+      rect:
+        serializedVersion: 2
+        x: 800
+        y: 0
+        width: 160
+        height: 200
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 0, y: -51}
+        - {x: -16, y: -60}
+        - {x: 0, y: -69}
+        - {x: 16, y: -60}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e6e37cc7fefab84f8d9baa1d698e231
+      internalID: 230032478
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Corner_Brick_01-SW-160x200_10: -1345819514
+      Corner_Brick_01-SW-160x200_3: 1705852075
+      Corner_Brick_01-SW-160x200_1: -621870669
+      Corner_Brick_01-SW-160x200_7: -404356343
+      Corner_Brick_01-SW-160x200_5: 467040312
+      Corner_Brick_01-SW-160x200_6: 1146256466
+      Corner_Brick_01-SW-160x200_4: -1954472083
+      Corner_Brick_01-SW-160x200_8: -1434017429
+      Corner_Brick_01-SW-160x200_11: 230032478
+      Corner_Brick_01-SW-160x200_0: 925236212
+      Corner_Brick_01-SW-160x200_2: -1284858103
+      Corner_Brick_01-SW-160x200_9: -2063082870
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
