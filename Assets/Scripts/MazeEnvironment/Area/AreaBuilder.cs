@@ -39,6 +39,7 @@ public class AreaBuilder : MonoBehaviour
         // Map AreaTiles to cell positions
         var areaTiles = cellPositions.Select((Vector3Int cellPos) => {
             Vector3 posInWorld = GridManager.GetCellCenterWorld(cellPos);
+            // Debug.Log("cell pos: " + cellPos + ". create area tile on " + posInWorld);
             GameObject areaTile = Instantiate(areaTilePrefab, posInWorld,
                 Quaternion.identity);
             areaTile.transform.SetParent(transform);

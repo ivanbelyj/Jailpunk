@@ -47,7 +47,7 @@ public class GridPhysicalMovement : MonoBehaviour
     private void FixedUpdate()
     {
         Vector3 destination = transform.position
-            + (Vector3)gridManager.CartesianToVector2(
+            + (Vector3)gridManager.CartesianToGridVector(
                 Time.fixedDeltaTime * velocity);
 
         rb.MovePosition(destination);

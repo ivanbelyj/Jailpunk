@@ -32,8 +32,8 @@ public class CharacterControls : MonoBehaviour
 
     // Todo: initial orientation
     public Vector2 Orientation =>
-        gridManager.CartesianToVector2(
-            GridUtils.RotateCartesian(currentOrientationMoveInput)
+        gridManager.CartesianToGridVector(
+            GridDirectionUtils.RotateCartesian(currentOrientationMoveInput)
         ).normalized;
 
     public void Move(Vector2 moveInput)
@@ -60,7 +60,7 @@ public class CharacterControls : MonoBehaviour
             animator.SetMoveInput(moveInput);
         }
 
-        movement.MovementInputValues = GridUtils.RotateCartesian(
+        movement.MovementInputValues = GridDirectionUtils.RotateCartesian(
             new Vector3(moveInput.x, moveInput.y, 0));
     }
 

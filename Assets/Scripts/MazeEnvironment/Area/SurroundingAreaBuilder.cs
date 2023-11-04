@@ -52,24 +52,27 @@ public class SurroundingAreaBuilder : MonoBehaviour
     }
 
     public void CreateSurroundingArea() {
-        List<Vector3Int> interactionCells = GetSurroundingCellPositions();
+        List<Vector3Int> surroundingCells = GetSurroundingCellPositions();
         if (createCenterArea) {
             Vector3Int centerCell = GridManager.WorldToCell(transform.position);
-            interactionCells.Add(centerCell);
+            surroundingCells.Add(centerCell);
         }
-        areaBuilder.BuildAndSetAreaTiles(interactionCells);
+        areaBuilder.BuildAndSetAreaTiles(surroundingCells);
     }
 
     private void OnDrawGizmos() {
-        var interactionCellsPos = GetSurroundingCellPositions();
-        if (interactionCellsPos == null)
+        var surroundingCellsPos = GetSurroundingCellPositions();
+        if (surroundingCellsPos == null)
             return;
 
         Color prevColor = Gizmos.color;
         Gizmos.color = Color.green;
-        foreach (Vector3Int cellPos in interactionCellsPos) {
-            Gizmos.DrawLine(GridManager.GetCellCenterWorld(transform.position),
+        Vector3 centerCellPos = GridManager.GetCellCenterWorld(transform.position);
+        foreach (Vector3Int cellPos in surroundingCellsPos) {
+            Gizmos.DrawLine(centerCellPos,
                 GridManager.GetCellCenterWorld(cellPos));
+            // Gizmos.DrawLine(GridManager.CellToWorld(centerCellPos),
+            //     GridManager.CellToWorld(cellPos));
         }
         Gizmos.color = prevColor;
     }
@@ -84,8 +87,10 @@ public class SurroundingAreaBuilder : MonoBehaviour
             if (addedDirections.Contains(dir))
                 continue;
             
-            Vector3Int surroundingCell = GridManager.WorldToCell(transform.position)
-                + (Vector3Int)GridUtils.GridDirectionToVector2Int(dir);
+            Vector3Int surroundingCell =
+                GridManager.WorldToCell(transform.position)
+                + (Vector3Int)GridDirectionUtils
+                    .GridDirectionToVector2Int(dir);
             // Vector3 cellWorldPos = gridManager.GetCellCenterWorld(
             //     (Vector3Int)neighborCell);
             res.Add(surroundingCell);

@@ -34,8 +34,8 @@ public class GridOriented : MonoBehaviour
     }
 
     public Vector3 Forward => GridManager
-        .GridDirectionToVector2(orientation).normalized;
+        .GridDirectionToGridVector(orientation).normalized;
 
-    public Vector3 Rotated90 => GridManager
-        .GridDirectionToRotated90Vector2(orientation).normalized;
+    public Vector3 Rotated90 => gridManager
+        .GridDirectionToRotated90GridVector(orientation).normalized;
 }

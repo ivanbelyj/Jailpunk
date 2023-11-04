@@ -44,6 +44,10 @@ public class RadiusChecker : MonoBehaviour
     /// </summary>
     public event Action<List<GameObject>> OutOfRadius;
 
+    [Header("Debug")]
+    [SerializeField]
+    private bool drawGizmos = false;
+
     private void Update() {
         CheckObjectsInRadius(false);
     }
@@ -107,12 +111,14 @@ public class RadiusChecker : MonoBehaviour
     }
 
     private bool IsDistanceInGridLessThanRadius(Vector2 v1, Vector2 v2) {
-        Vector2 v1InGrid = GridManager.Vector2ToCartesian(v1);
-        Vector2 v2InGrid = GridManager.Vector2ToCartesian(v2);
+        Vector2 v1InGrid = GridManager.GridVectorToCartesian(v1);
+        Vector2 v2InGrid = GridManager.GridVectorToCartesian(v2);
         return Vector2.Distance(v1InGrid, v2InGrid) < radius;
     }
 
     private void OnDrawGizmos() {
+        if (!drawGizmos)
+            return;
         CheckObjectsInRadius(true);
     }
 }

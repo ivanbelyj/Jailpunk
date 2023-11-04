@@ -12,8 +12,33 @@ public class CommunicationUIManager : MonoBehaviour
     private CommunicationPanel communicationPanel;
     public CommunicationPanel CommunicationPanel => communicationPanel;
 
-    public void ToggleUI() {
-        Debug.Log("Toggle communication UI");
+    // [SerializeField]
+    // private RectTransform panel;
+    // [SerializeField]
+    // private float animationSpeed = 1.0f;
+    // private bool isVisible = true;
+
+    public void ToggleUI()
+    {
+        Debug.Log("Toggle UI");
+        // Todo: hide all but messages
+        // isVisible = !isVisible;
+        // StartCoroutine(AnimatePanel());
     }
-    
+
+    // private IEnumerator AnimatePanel()
+    // {
+    //     float startX = panel.anchoredPosition.x;
+    //     float targetX = isVisible ? 0 : panel.sizeDelta.x;
+
+    //     float startTime = Time.time;
+    //     while (Time.time - startTime <= 1.0f / animationSpeed)
+    //     {
+    //         float t = (Time.time - startTime) * animationSpeed;
+    //         panel.anchoredPosition = new Vector2(Mathf.Lerp(startX, targetX, t), 0);
+    //         yield return null;
+    //     }
+
+    //     panel.anchoredPosition = new Vector2(targetX, 0);
+    // }
 }

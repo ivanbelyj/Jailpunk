@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(GridOriented))]
+[RequireComponent(typeof(SurroundingAreaBuilder))]
 public class Log : ActivatableObject
 {
     [SerializeField]
@@ -16,13 +17,22 @@ public class Log : ActivatableObject
     private new Collider2D collider2D;
     private Rigidbody2D rb;
     private GridOriented gridOriented;
+    private SurroundingAreaBuilder surroundingAreaBuilder;
     
     private void Awake() {
         collider2D = GetComponent<Collider2D>();
         rb = GetComponent<Rigidbody2D>();
         gridOriented = GetComponent<GridOriented>();
+        surroundingAreaBuilder = GetComponent<SurroundingAreaBuilder>();
+    }
+
+    private void Start() {
+        surroundingAreaBuilder
+            .SetAreaDirectionsAndCreate(new [] { gridOriented.Orientation });
+
         activatingArea.AreaEntered += (go) => {
             // Temporary solution
+            // Todo
             if (go.GetComponent<PlayerControls>() != null &&
                 State == ActivationState.ReadyToActivate) {
                 Activate();
