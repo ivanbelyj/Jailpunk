@@ -3,6 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class MazeData : MonoBehaviour
+/// <summary>
+/// Data of the maze used for generation and transferred between
+/// generation stages
+/// </summary>
+public class MazeData
 {
+    public int[,] Walls { get; set; }
+    // Todo:
+    // public MazeScheme Scheme { get; set; }
 }

@@ -217,6 +217,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2144129006}
   - component: {fileID: 2144129005}
+  - component: {fileID: 2144129009}
+  - component: {fileID: 2144129008}
+  - component: {fileID: 2144129007}
   m_Layer: 0
   m_Name: MazeGenerator
   m_TagString: Untagged
@@ -237,8 +240,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   generationData:
+    useRandomSeed: 1
     seed: 123
+    mazeSize: {x: 170, y: 100}
+    minSectorSize: 16
+    maxSectorSize: 46
+  generationStages:
+  - {fileID: 2144129009}
+  - {fileID: 2144129008}
+  - {fileID: 2144129007}
   showDebugMessages: 1
+  generateMazeOnAwake: 1
 --- !u!4 &2144129006
 Transform:
   m_ObjectHideFlags: 0
@@ -254,3 +266,51 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2144129007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2144129004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eab699bffba6d104e971c9aa4c126b04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  includeInGeneration: 1
+  guiSkin: {fileID: 11400000, guid: 78f22dce08e95364f91783819f627dac, type: 2}
+--- !u!114 &2144129008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2144129004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24e08c30a9ea0e042b8f7ec8984f7292, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  includeInGeneration: 1
+--- !u!114 &2144129009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2144129004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 271435ba3eb48434b9b19231ded991e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  includeInGeneration: 1
+  options:
+    splitLeafProbability: 0.75
+    minSplitRatio: 1.25
+    maxRoomInnerOffset: 10
+    maxRoomOuterOffset: 3
+    rootLeafSize: {x: 0, y: 0}
+    minLeafSize: 0
+    maxLeafSize: 0

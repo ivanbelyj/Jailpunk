@@ -29,7 +29,7 @@ public class GenerationStage : MonoBehaviour, IGenerationStage
         this.generationData = generationData;
     }
     
-    public virtual MazeData ProcessMaze(MazeData mazeData) {
-        return mazeData;
+    public virtual GenerationContext ProcessMaze(GenerationContext context) {
+        return context;
     }
 }

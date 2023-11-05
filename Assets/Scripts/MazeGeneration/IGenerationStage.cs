@@ -5,7 +5,7 @@ using UnityEngine;
 public interface IGenerationStage
 {
     void Initialize(GenerationData generationData);
-    MazeData ProcessMaze(MazeData mazeData);
+    GenerationContext ProcessMaze(GenerationContext mazeData);
     string StageName { get; }
     bool IncludeInGeneration { get; }
 }
