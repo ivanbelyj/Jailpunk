@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Represents original design of the maze
+/// Represents the design of the maze
 /// </summary>
-public class MazeScheme : MonoBehaviour
+public class MazeScheme
 {
     private SchemeTile[,] Map { get; set; }
 
@@ -22,4 +22,6 @@ public class MazeScheme : MonoBehaviour
     }
 
     public SchemeTile GetTileByPos(int x, int y) => Map[y, x];
+
+    public Vector2Int MapSize => new Vector2Int(Map.GetLength(1), Map.GetLength(0));
 }

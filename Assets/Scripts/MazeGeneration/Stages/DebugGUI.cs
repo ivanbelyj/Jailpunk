@@ -7,10 +7,10 @@ public class DebugGUI : GenerationStage
 {
     [SerializeField]
     private GUISkin guiSkin;
-    private int[,] walls;
+    private MazeScheme scheme;
     public override GenerationContext ProcessMaze(GenerationContext mazeData)
     {
-        walls = mazeData.MazeData.Walls;
+        scheme = mazeData.MazeData.Scheme;
         return mazeData;
     }
 
@@ -20,38 +20,29 @@ public class DebugGUI : GenerationStage
         {
             FindObjectOfType<MazeGenerator>().CreateMaze();
         }
-        if (walls == null)
+        if (scheme == null)
         {
             return;
         }
 
-        int[,] maze = walls;
-        int rowMax = maze.GetUpperBound(0);
-        int colMax = maze.GetUpperBound(1);
-
         StringBuilder msg = new StringBuilder();
 
-        for (int row = 0; row <= rowMax; row++)
+        for (int y = 0; y < scheme.MapSize.y; y++)
         {
-            for (int col = 0; col <= colMax; col++)
+            for (int x = 0; x < scheme.MapSize.x; x++)  
             {
-                if (maze[row, col] == 0)
-                {
-                    msg.Append("..");
-                }
-                else
-                {
-                    msg.Append("==");
-                }
+                SchemeTile tile = scheme.GetTileByPos(x, y);
+                msg.Append(tile.TileType switch {
+                    TileType.NoSpace => "  ",
+                    TileType.Floor => "..",
+                    TileType.LoadBearingWall => "==",
+                    TileType.Wall => "--",
+                    _ => "??"
+                });
             }
             msg.Append("\n");
         }
-
-        // GUIStyle style = new GUIStyle() {
-        //     fontSize = fontSize,
-        //     // font = Resources.Load<Font>("AnonymousPro-Regular.ttf")
-        // };
-        // style.normal.textColor = Color.white;
+        
         GUI.skin = guiSkin;
         GUI.Label(new Rect(20, 20, 1920, 1080), msg.ToString());
     }

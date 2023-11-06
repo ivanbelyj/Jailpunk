@@ -37,7 +37,7 @@ public class BSPGenerator
                     if (l.width > options.maxLeafSize
                         || l.height > options.maxLeafSize
                         || Random.value <= options.splitLeafProbability) {
-                        if (l.CreateChildrenLeaves())
+                        if (l.GenerateChildrenLeaves())
                         {
                             leavesToSplit.Add(l.leftChild);
                             leavesToSplit.Add(l.rightChild);
@@ -48,7 +48,7 @@ public class BSPGenerator
             }
         // }
 
-        root.CreateRooms();
+        root.GenerateRoomsAndCorridors();
         return leavesToSplit;
     }
 }

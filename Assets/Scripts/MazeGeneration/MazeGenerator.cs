@@ -9,8 +9,8 @@ public class MazeGenerator : MonoBehaviour
 {
     [SerializeField]
     private GenerationData generationData;
-    [SerializeField]
-    private List<GenerationStage> generationStages;
+    // [SerializeField]
+    private List<IGenerationStage> generationStages;
 
     [Header("Debug")]
     [SerializeField]
@@ -27,10 +27,11 @@ public class MazeGenerator : MonoBehaviour
     }
 
     private void InitGenerationStages() {
-        // generationStages = new List<IGenerationStage>() {
-        //     GetComponent<StructureGeneration>(),
-        //     GetComponent<DebugGUI>()
-        // };
+        generationStages = new List<IGenerationStage>() {
+            GetComponent<BSPGeneration>(),
+            GetComponent<StructureToSchemeStage>(),
+            GetComponent<DebugGUI>()
+        };
         foreach (var stage in generationStages) {
             stage.Initialize(generationData);
         }
@@ -43,11 +44,7 @@ public class MazeGenerator : MonoBehaviour
         float totalStartTime = GetMsSinceStartup();
 
         MazeData initialMazeData = new MazeData() {
-            Walls = new int[,] {
-                {1, 1, 1},
-                {1, 0, 1},
-                {1, 1, 1}
-            }
+            Scheme = new MazeScheme(generationData.MazeSize)
         };
         GenerationContext lastProcessed = new GenerationContext() {
             MazeData = initialMazeData,

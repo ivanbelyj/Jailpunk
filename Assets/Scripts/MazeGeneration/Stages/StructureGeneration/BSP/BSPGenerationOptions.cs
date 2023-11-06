@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Parameters used by BSP generator
+/// </summary>
 [System.Serializable]
 public class BSPGenerationOptions
 {

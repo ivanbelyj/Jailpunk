@@ -4,12 +4,12 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 
 /// <summary>
-/// Data of the maze used for generation and transferred between
-/// generation stages
+/// Data representing the maze complex.
+/// It can be used in maze building on the scene.
+/// This structure should not contain intermediate 
+/// generation-specific data
 /// </summary>
 public class MazeData
 {
-    public int[,] Walls { get; set; }
-    // Todo:
-    // public MazeScheme Scheme { get; set; }
+    public MazeScheme Scheme { get; set; }
 }

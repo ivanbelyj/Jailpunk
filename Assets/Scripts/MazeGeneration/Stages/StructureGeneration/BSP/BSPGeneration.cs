@@ -1,16 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
+/// <summary>
+/// Base maze structure generation stage using BSP
+/// </summary>
 public class BSPGeneration : GenerationStage
 {
-    // [SerializeField]
-    // [Tooltip("Controls frequency of splitting leaves that are met size requirements")]
-    // private float splitLeafProbability = 0.75f;
-
-    // [SerializeField]
-    // [Tooltip("Used to determine whether the leaf will split horizontally or vertically")]
-    // private float minSplitRatio = 1.25f;
     [SerializeField]
     [Tooltip("Options used for BSP maze structure generation. "
         + "Some options will be overriden in the generation")]
@@ -24,14 +21,23 @@ public class BSPGeneration : GenerationStage
         options.minLeafSize = generationData.MinSectorSize;
         options.maxLeafSize = generationData.MaxSectorSize;
 
-        genContext.BSPLeaves = generator.GenerateBSPLeaves(
-            options
-            // generationData.MazeSize,
-            // generationData.MinSectorSize,
-            // generationData.MaxSectorSize,
-            // splitLeafProbability,
-            // minSplitRatio
-        );
+        var bspLeaves = generator.GenerateBSPLeaves(options);
+
+        genContext.Sectors = bspLeaves
+            .Select(leaf => leaf.room)
+            .Where(room => room != null)
+            .ToList();
+
+        var corridorsAll = new List<CorridorSpace>();
+        foreach (BSPLeaf leaf in bspLeaves) {
+            if (leaf.corridors != null) {
+                foreach (CorridorSpace corridor in leaf.corridors) {
+                    corridorsAll.Add(corridor);
+                }
+            }
+        };
+        genContext.Corridors = corridorsAll;
+
         return genContext;
     }
 }
