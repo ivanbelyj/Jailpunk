@@ -12,12 +12,12 @@ public class BSPLeaf
 
     public BSPLeaf leftChild;
     public BSPLeaf rightChild;
-    public RectSpace room;
+    public RectArea room;
 
     /// <summary>
     /// Corridors connecting some rooms from left and right children
     /// </summary>
-    public List<CorridorSpace> corridors;
+    // public List<CorridorSpace> corridors;
 
     private BSPGenerationOptions options;
 
@@ -31,7 +31,6 @@ public class BSPLeaf
 
        this.options = options;
    }
-
 
     /// <summary>
     /// Splits the leaf into the two children
@@ -59,41 +58,48 @@ public class BSPLeaf
         int splitPoint = Random.Range(options.minLeafSize,
             splitSize - options.minLeafSize + 1);
 
+        // size + 1 because the new leaves should use
+        // the same wall in the future
         if (isVerticalSplit)
         {
             int rightChildWidth = width - splitPoint;
 
-            leftChild = new BSPLeaf(x, y, splitPoint, height, options);
-            rightChild = new BSPLeaf(x + splitPoint, y, rightChildWidth, height, options);
+            leftChild = new BSPLeaf(x, y, splitPoint + 1, height, options);
+            rightChild = new BSPLeaf(x + splitPoint, y, rightChildWidth,
+                height, options);
         }
         else
         {
             int rightChildHeight = height - splitPoint;
 
-            leftChild = new BSPLeaf(x, y, width, splitPoint, options);
-            rightChild = new BSPLeaf(x, y + splitPoint, width, rightChildHeight, options);
+            leftChild = new BSPLeaf(x, y, width, splitPoint + 1, options);
+            rightChild = new BSPLeaf(x, y + splitPoint, width,
+                rightChildHeight, options);
         }
         return true; // The split is completed
     }
 
     /// <summary>
     /// Generates all the rooms for this Leaf and all its children
+    /// and sets rooms connectivity into a graph is it's passed
     /// </summary>
-    public void GenerateRoomsAndCorridors()
+    public void GenerateRoomsAndCorridors(Graph<RectArea> roomsConnectivity = null)
     {
         var corridorsGenerator = new CorridorsGenerator();
         // If the leaf was split
         if (leftChild != null || rightChild != null)
         {
-            leftChild?.GenerateRoomsAndCorridors();
-            rightChild?.GenerateRoomsAndCorridors();
+            leftChild?.GenerateRoomsAndCorridors(roomsConnectivity);
+            rightChild?.GenerateRoomsAndCorridors(roomsConnectivity);
 
-            if (leftChild != null && rightChild != null) {
+            if (roomsConnectivity != null && leftChild != null
+                && rightChild != null) {
                 var leftRoom = leftChild.GetSomeRoom();
                 var rightRoom = rightChild.GetSomeRoom();
                 if (leftRoom != null && rightRoom != null) {
-                    corridors =
-                        corridorsGenerator.CreateCorridors(leftRoom, rightRoom);
+                    roomsConnectivity.AddLink(leftRoom, rightRoom);
+                    // corridors =
+                    //     corridorsGenerator.CreateCorridors(leftRoom, rightRoom);
                 }
             }
         }
@@ -104,40 +110,67 @@ public class BSPLeaf
         }
     }
 
-    private int GetRoomOffset(int leafSize) {
-        int min = leafSize - options.maxRoomInnerOffset;
-        if (min < 3)
-            min = 3;
-        int max = leafSize - options.maxRoomOuterOffset;
-        if (max < min)
-            max = min;
-        return Random.Range(min, max + 1);
+    private int GenerateRoomSize(int leafSize) {
+        int minSize = leafSize - options.maxRoomOffset;
+        if (minSize < 3)
+            minSize = 3;
+        int maxSize = leafSize - options.minRoomOffset * 2;
+        if (maxSize < minSize)
+            maxSize = minSize;
+        int roomSize = Random.Range(minSize, maxSize + 1);
+        
+        int offset = leafSize - roomSize;
+        // Offset should not be 1 to avoid double walls
+        if (offset == 1) {
+            roomSize = leafSize - 2;
+        }
+
+        return roomSize;
     }
 
-    private RectSpace CreateRandomRoom() {
-        int roomWidth = GetRoomOffset(width);
-        int roomHeight = GetRoomOffset(height);
-        Vector2Int roomSize = new Vector2Int(roomWidth, roomHeight);
-        // The room is in the leaf, but it's not right next to the side of the leaf
-        // (else the rooms will merge)
+    private RectArea CreateRandomRoom() {
+        int roomWidth = GenerateRoomSize(width);
+        int roomHeight = GenerateRoomSize(height);
+        // Vector2Int roomSize = new Vector2Int(roomWidth, roomHeight);
+
+        int GenerateRoomPos(int leafSize, int roomSize) {
+            // int res = Random.Range(options.minRoomOffset / 2,
+            //     leafSize - roomSize);
+            
+            int res = options.minRoomOffset / 2;
+            // if (options.maxRoomOffset > options.minRoomOffset) {
+            //     res += Random.Range(0, (options.maxRoomOffset
+            //         - options.minRoomOffset) / 2);
+            // }
+            // To avoid double walls
+            // if (res == 1)
+            //     res = 3;
+                // res = Random.value < 0.5f || roomSize == leafSize ? 0 : 2;
+            return res;
+        }
+
         Vector2Int roomPos = new Vector2Int(
-            Random.Range(0, width - roomSize.x),
-            Random.Range(0, height - roomSize.y));
-        return new RectSpace(new RectInt(x + roomPos.x, y + roomPos.y,
-            roomSize.x, roomSize.y));
+            // Random.Range(0, width - roomSize.x),
+            // Random.Range(0, height - roomSize.y)
+            GenerateRoomPos(width, roomWidth),
+            GenerateRoomPos(height, roomHeight)
+            );
+        
+        return new RectArea(new RectInt(x + roomPos.x, y + roomPos.y,
+            roomWidth, roomHeight));
     }
 
     /// <summary>
     /// Gets some room from the leaf or from its children
     /// </summary>
-    public RectSpace GetSomeRoom()
+    public RectArea GetSomeRoom()
     {
         if (room != null)
             return room;
         else
         {
-            RectSpace leftRoom = null;
-            RectSpace rightRoom = null;
+            RectArea leftRoom = null;
+            RectArea rightRoom = null;
             if (leftChild != null)
             {
                 leftRoom = leftChild.GetSomeRoom();

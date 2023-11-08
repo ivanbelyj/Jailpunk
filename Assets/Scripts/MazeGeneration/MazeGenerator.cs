@@ -12,9 +12,8 @@ public class MazeGenerator : MonoBehaviour
     // [SerializeField]
     private List<IGenerationStage> generationStages;
 
-    [Header("Debug")]
     [SerializeField]
-    private bool showDebugMessages = false;
+    private bool showLogMessages = false;
 
     [SerializeField]
     private bool generateMazeOnAwake = true;
@@ -29,7 +28,13 @@ public class MazeGenerator : MonoBehaviour
     private void InitGenerationStages() {
         generationStages = new List<IGenerationStage>() {
             GetComponent<BSPGeneration>(),
+            GetComponent<CorridorsStructureGeneration>(),
+
+            GetComponent<TestStructureStage>(),
+
             GetComponent<StructureToSchemeStage>(),
+            GetComponent<CorridorsToScheme>(),
+            
             GetComponent<DebugGUI>()
         };
         foreach (var stage in generationStages) {
@@ -52,8 +57,14 @@ public class MazeGenerator : MonoBehaviour
             //     new System.Random()
             //     : new System.Random(generationData.Seed)
         };
-        if (!generationData.UseRandomSeed)
-            Random.InitState(generationData.Seed);
+
+        int seedToInitState = generationData.UseRandomSeed ?
+            new System.Random().Next() :
+            generationData.Seed;
+        Random.InitState(seedToInitState);
+        if (showLogMessages)
+            Debug.Log("Maze generation seed: " + seedToInitState);
+            
         foreach (var stage in generationStages) {
             if (stage.IncludeInGeneration) {
                 lastProcessed = stage.ProcessMaze(lastProcessed);
@@ -61,7 +72,7 @@ public class MazeGenerator : MonoBehaviour
         }
 
         float elapsedMs = GetMsSinceStartup() - totalStartTime;
-        if (showDebugMessages)  
+        if (showLogMessages)  
             Debug.Log($"Maze generation completed. Elapsed: {elapsedMs} ms");
         return lastProcessed;
     }

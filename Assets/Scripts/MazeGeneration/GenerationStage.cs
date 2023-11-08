@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GenerationStage : MonoBehaviour, IGenerationStage
+public abstract class GenerationStage : MonoBehaviour, IGenerationStage
 {
     [SerializeField]
     private bool includeInGeneration = true;
@@ -29,7 +29,5 @@ public class GenerationStage : MonoBehaviour, IGenerationStage
         this.generationData = generationData;
     }
     
-    public virtual GenerationContext ProcessMaze(GenerationContext context) {
-        return context;
-    }
+    public abstract GenerationContext ProcessMaze(GenerationContext context);
 }

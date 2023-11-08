@@ -21,22 +21,24 @@ public class BSPGeneration : GenerationStage
         options.minLeafSize = generationData.MinSectorSize;
         options.maxLeafSize = generationData.MaxSectorSize;
 
-        var bspLeaves = generator.GenerateBSPLeaves(options);
+        var (bspLeaves, connectivity) = generator.GenerateBSPLeaves(options);
 
         genContext.Sectors = bspLeaves
             .Select(leaf => leaf.room)
             .Where(room => room != null)
             .ToList();
 
-        var corridorsAll = new List<CorridorSpace>();
-        foreach (BSPLeaf leaf in bspLeaves) {
-            if (leaf.corridors != null) {
-                foreach (CorridorSpace corridor in leaf.corridors) {
-                    corridorsAll.Add(corridor);
-                }
-            }
-        };
-        genContext.Corridors = corridorsAll;
+        genContext.RawCorridorsConnectivity = connectivity;
+
+        // var corridorsAll = new List<CorridorSpace>();
+        // foreach (BSPLeaf leaf in bspLeaves) {
+        //     if (leaf.corridors != null) {
+        //         foreach (CorridorSpace corridor in leaf.corridors) {
+        //             corridorsAll.Add(corridor);
+        //         }
+        //     }
+        // };
+        // genContext.Corridors = corridorsAll;
 
         return genContext;
     }

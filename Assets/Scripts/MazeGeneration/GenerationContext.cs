@@ -12,13 +12,19 @@ public class GenerationContext
     /// Initial generated sectors rectangles used on early
     /// generation stages
     /// </summary>
-    public List<RectSpace> Sectors { get; set; }
+    public List<RectArea> Sectors { get; set; }
+
+    /// <summary>
+    /// Initial data used to generate corridors between sectors
+    /// on early generation stages
+    /// </summary>
+    public Graph<RectArea> RawCorridorsConnectivity { get; set; }
 
     /// <summary>
     /// Initial generated root maze corridors used on early
     /// generation stages
     /// </summary>
-    public List<CorridorSpace> Corridors { get; set; }
+    public List<CorridorArea> Corridors { get; set; }
 
     public MazeData MazeData { get; set; }
     public Random Random { get; set; }

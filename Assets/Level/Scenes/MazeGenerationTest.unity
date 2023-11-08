@@ -218,7 +218,10 @@ GameObject:
   - component: {fileID: 2144129006}
   - component: {fileID: 2144129005}
   - component: {fileID: 2144129009}
+  - component: {fileID: 2144129010}
+  - component: {fileID: 2144129011}
   - component: {fileID: 2144129008}
+  - component: {fileID: 2144129012}
   - component: {fileID: 2144129007}
   m_Layer: 0
   m_Name: MazeGenerator
@@ -241,11 +244,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   generationData:
     useRandomSeed: 1
-    seed: 123
+    seed: 1430000310
     mazeSize: {x: 170, y: 80}
-    minSectorSize: 16
-    maxSectorSize: 46
-  showDebugMessages: 1
+    minSectorSize: 32
+    maxSectorSize: 40
+  showLogMessages: 1
   generateMazeOnAwake: 1
 --- !u!4 &2144129006
 Transform:
@@ -305,8 +308,97 @@ MonoBehaviour:
   options:
     splitLeafProbability: 0.75
     minSplitRatio: 1.25
-    maxRoomInnerOffset: 3
-    maxRoomOuterOffset: 0
+    maxRoomOffset: 16
+    minRoomOffset: 0
     rootLeafSize: {x: 0, y: 0}
     minLeafSize: 0
     maxLeafSize: 0
+--- !u!114 &2144129010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2144129004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9172d776884e164daa717bac9cfe394, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  includeInGeneration: 1
+  corridorsBreadth: 4
+--- !u!114 &2144129011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2144129004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4d528028019d664a85c712e2976e596, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  includeInGeneration: 0
+  testRooms:
+  - rectSpace1:
+      rect:
+        x: 60
+        y: 20
+        width: 10
+        height: 10
+    rectSpace2:
+      rect:
+        x: 70
+        y: 0
+        width: 10
+        height: 10
+  - rectSpace1:
+      rect:
+        x: 20
+        y: 20
+        width: 10
+        height: 10
+    rectSpace2:
+      rect:
+        x: 0
+        y: 0
+        width: 10
+        height: 10
+  - rectSpace1:
+      rect:
+        x: 30
+        y: 40
+        width: 10
+        height: 10
+    rectSpace2:
+      rect:
+        x: 0
+        y: 70
+        width: 10
+        height: 10
+  - rectSpace1:
+      rect:
+        x: 50
+        y: 40
+        width: 10
+        height: 10
+    rectSpace2:
+      rect:
+        x: 70
+        y: 70
+        width: 10
+        height: 10
+--- !u!114 &2144129012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2144129004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f8fd35340349ac4a86e84dd7c687df0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  includeInGeneration: 1

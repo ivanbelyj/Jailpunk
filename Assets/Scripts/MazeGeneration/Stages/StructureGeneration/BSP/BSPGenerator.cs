@@ -7,7 +7,10 @@ using UnityEngine;
 /// </summary>
 public class BSPGenerator
 {
-    public List<BSPLeaf> GenerateBSPLeaves(
+    /// <summary>
+    /// Generates random BSP leaves and their connectivity
+    /// </summary>
+    public (List<BSPLeaf>, Graph<RectArea>) GenerateBSPLeaves(
         BSPGenerationOptions options
         // Vector2Int rootLeafSize,
         // int minLeafSize,
@@ -48,7 +51,8 @@ public class BSPGenerator
             }
         // }
 
-        root.GenerateRoomsAndCorridors();
-        return leavesToSplit;
+        var connectivity = new Graph<RectArea>();
+        root.GenerateRoomsAndCorridors(connectivity);
+        return (leavesToSplit, connectivity);
     }
 }

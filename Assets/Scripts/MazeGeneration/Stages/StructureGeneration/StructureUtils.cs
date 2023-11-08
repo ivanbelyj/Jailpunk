@@ -3,9 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StructureUtils : MonoBehaviour
+public static class StructureUtils
 {
-    private static void TraverseRect(RectInt rect, Action<int, int, bool> callback) {
+    /// <summary>
+    /// Traversing a Rect is not the same as the traversing ITraverseable:
+    /// TraverseRect provides data about a border, but not necessarily a wall.
+    /// For example, borders can be determined from CorridorAreaPart,
+    /// but walls - only from CorridorArea (because of the corner passages)
+    /// </summary>
+    public delegate void RectTraversalDelegate(int x, int y, bool isBorder);
+    
+    public static void TraverseRect(RectInt rect,
+        RectTraversalDelegate callback) {
         int roomRightLimit = rect.x + rect.width - 1;
         int roomBottomLimit = rect.y + rect.height - 1;
         for (int y = rect.y; y <= roomBottomLimit; y++) {
@@ -18,7 +27,7 @@ public class StructureUtils : MonoBehaviour
         }
     }
 
-    public static void ApplyNewSector(MazeScheme scheme, RectSpace room,
+    public static void ApplyNewSector(MazeScheme scheme, RectArea room,
         int sectorId) {
         RectInt rect = room.Rect;
         SchemeSector sector = new SchemeSector() {
@@ -32,13 +41,21 @@ public class StructureUtils : MonoBehaviour
         });
     }
 
-    public static void ApplyCorridor(MazeScheme scheme, CorridorSpace corridor) {
-        RectInt rect = corridor.Rect;
-        TraverseRect(rect, (x, y, isBorder) => {
-            SchemeTile tile = scheme.GetTileByPos(x, y);
-            if (tile.TileType == TileType.NoSpace) {
-                tile.TileType = TileType.LoadBearingWall;
-            }
-        });
-    }
+    // public static void ApplyCorridor(MazeScheme scheme, CorridorArea corridor) {
+    //     foreach (var part in corridor.Parts) {
+    //         RectInt rect = part.RectWithPositiveSize;
+    //         TraverseRect(rect, (x, y, isBorder) => {
+    //             if (x < 0 || y < 0 ||
+    //                 x >= scheme.MapSize.x || y >= scheme.MapSize.y) {
+    //                 Debug.LogError("Incorrect corridor rect. " +
+    //                     "Map size exceeded");
+    //                 return;
+    //             }
+    //             SchemeTile tile = scheme.GetTileByPos(x, y);
+    //             if (tile.TileType == TileType.NoSpace) {
+    //                 tile.TileType = TileType.LoadBearingWall;
+    //             }
+    //         });
+    //     }
+    // }
 }

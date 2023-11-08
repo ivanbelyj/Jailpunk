@@ -18,12 +18,14 @@ public class StructureToSchemeStage : GenerationStage
         var scheme = context.MazeData.Scheme;
         
         for (int i = 0; i < context.Sectors.Count; i++) {
-            RectSpace sectorRoom = context.Sectors[i];
+            RectArea sectorRoom = context.Sectors[i];
             StructureUtils.ApplyNewSector(scheme, sectorRoom, i + 1);
         }
-        foreach (CorridorSpace corridor in context.Corridors) {
-            StructureUtils.ApplyCorridor(scheme, corridor);
-        }
+        // if (context.Corridors != null) {
+        //     foreach (CorridorArea corridor in context.Corridors) {
+        //         StructureUtils.ApplyCorridor(scheme, corridor);
+        //     }
+        // }
         
         return context;
     }

@@ -16,8 +16,8 @@ public class BSPGenerationOptions
     public float minSplitRatio = 1.25f;
     // public float MinSplitRatio => minSplitRatio;
 
-    public int maxRoomInnerOffset = 0;
-    public int maxRoomOuterOffset = 0;
+    public int maxRoomOffset = 0;
+    public int minRoomOffset = 0;
 
     [Header("Set dynamically")]
     public Vector2Int rootLeafSize;
