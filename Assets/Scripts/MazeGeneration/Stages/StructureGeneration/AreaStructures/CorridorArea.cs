@@ -68,11 +68,36 @@ public class CorridorArea : ITraverseable
     {
         for (int i = 0; i < Parts.Count; i++) {
             var part = Parts[i];
+            var nextPart = (i + 1) < Parts.Count ? Parts[i + 1] : null;
+            var prevPart = (i - 1) >= 0 ? Parts[i - 1] : null;
             StructureUtils.TraverseRect(part.Rect, (x, y, isBorder) => {
                 bool isWall = GeometryUtils.IsOnRectBorder(part.Rect, x, y);
-                // if (part.IsOnStraightPassage(x, y))
-                //     isWall = false;
-                // Todo:
+                
+                // The task is to determine the free passage
+                // between corridor parts
+                //     ==....==
+                //     ==....==
+                // ======....==
+                // ....==....==  <--
+                // ============
+                // 
+                //     ^
+                //     |
+                if (
+                    
+                    // There can be the end passage of the
+                    // previous corridor
+                    prevPart != null && prevPart.IsOnStraightPassage(x, y)
+                    // part.IsOnStraightPassage(x, y)
+
+                    // Dead-ends always end with walls
+                    // && nextPart != null  // (else it's a dead-end)
+                    // && nextPart.IsOnStraightPassage(x, y)
+                    // && GeometryUtils.IsOnRect(nextPart.Rect, x, y)
+                    ) {
+                    isWall = false;
+                }
+                    
                 callback(x, y, isWall); 
             });
         }

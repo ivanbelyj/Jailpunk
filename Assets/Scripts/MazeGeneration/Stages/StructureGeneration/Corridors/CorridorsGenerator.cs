@@ -2,155 +2,115 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using Unity.VisualScripting;
+
+using Side = RectArea.Side;
 
 public class CorridorsGenerator
 {
+    public (Vector2Int, Vector2Int)? GetTwoConnectablePoints(RectArea room1,
+        RectArea room2, int corridorBreadth) {
+
+        int xDiff = room1.Rect.x - room2.Rect.x;
+        int yDiff = room1.Rect.y - room2.Rect.y;
+
+        var (leftRoom, rightRoom) = xDiff < 0 ?
+            (room1, room2) : (room2, room1);
+        var (topRoom, bottomRoom) = yDiff < 0 ?
+            (room1, room2) : (room2, room1);
+
+        Debug.Log($"Trying to connect rooms. left room: {leftRoom}; right room: {rightRoom}");
+        
+        Vector2Int point1;
+        Vector2Int point2; 
+
+        // If can get create a straight corridor from left to right
+        int leftYMin = leftRoom.Rect.yMin;
+        int leftYMax = leftRoom.Rect.yMax - 1;
+        int rightYMin = rightRoom.Rect.yMin;
+        int rightYMax = rightRoom.Rect.yMax - 1;
+        if (GeometryUtils.IntersectWithBreadth(
+            leftYMin, leftYMax,
+            rightYMin, rightYMax,
+            corridorBreadth)) {
+            
+            (int offset1, int offset2) = GeometryUtils.GetIntersectionSegment(
+                leftYMin, leftYMax, rightYMin, rightYMax);
+            point1 = leftRoom.GetSideRandomPoint(
+                offset1,
+                Side.Right,
+                offset2);
+            point2 = point1;
+            point2.x = rightRoom.Rect.xMin;
+
+            Debug.Log($"Straight left-right corridor from {point1} to {point2}");
+            return (point1, point2);
+        }
+
+        // If can create a straight corridor from top to bottom
+        int topXMin = topRoom.Rect.xMin;
+        int topXMax = topRoom.Rect.xMax;
+        int bottomXMin = bottomRoom.Rect.xMin;
+        int bottomXMax = bottomRoom.Rect.xMax;
+        if (GeometryUtils.IntersectWithBreadth(
+            topXMin, topXMax,
+            bottomXMin, bottomXMax,
+            corridorBreadth)) {
+            (int offset1, int offset2) = GeometryUtils.GetIntersectionSegment(
+                topXMin, topXMax, bottomXMin, bottomXMax);
+            point1 = topRoom.GetSideRandomPoint(
+                offset1,
+                Side.Right,
+                offset2);
+            point2 = point1;
+            point2.y = bottomRoom.Rect.yMin;
+
+            Debug.Log($"Straight top-bottom corridor from {point1} to {point2}");
+            return (point1, point2);
+        }
+
+        // Not straight corridors (with two parts)
+        
+        if (leftRoom.Rect.xMax - 1 + corridorBreadth < rightRoom.Rect.xMin) {
+            // Connectable variant 1
+            point1 = leftRoom.GetSideRandomPoint(corridorBreadth, Side.Right);
+            point2 = rightRoom.GetSideRandomPoint(corridorBreadth,
+                leftYMin < rightYMin ? Side.Top : Side.Bottom);
+        } else {
+            return null;
+        }
+
+        Debug.Log($"Corridor from {point1} to {point2}");
+        return (point1, point2);
+    }
+    
     /// <summary>
-    /// Creates corridors connecting two rooms
+    /// Creates corridors connecting two rooms.
+    /// Returns corridor areas and two points used for corridors generation
     /// </summary>
-    public  List<CorridorArea> CreateCorridors(RectArea room1, RectArea room2,
+    public (List<CorridorArea>, (Vector2Int, Vector2Int))?
+        CreateCorridors(RectArea room1, RectArea room2,
         int corridorBreadth = 3) {
         List<CorridorArea> corridors = new List<CorridorArea>();
 
-        Vector2Int point1 = room1.GetInnerRandomPoint(corridorBreadth);
-        Vector2Int point2 = room2.GetInnerRandomPoint(corridorBreadth);
+        var connPoints = GetTwoConnectablePoints(room1, room2, corridorBreadth);
+        if (connPoints == null)
+            return null;
 
-        // int xDiff = point2.x - point1.x;
-        // int yDiff = point2.y - point1.y;
-        int xDiff = point2.x - point1.x;  // 30
-        int yDiff = point2.y - point1.y;  // -25
-        // var boundingRect = GeometryUtils.GetBoundingRect(
-        //     new [] { room1, room2}
-        //     .Select(rectSpace => rectSpace.Rect)
-        //     .ToArray());
+        Vector2Int point1 = connPoints.Value.Item1;
+        Vector2Int point2 = connPoints.Value.Item2;
+
+        int xDiff = point2.x - point1.x;
+        int yDiff = point2.y - point1.y;
         
-
-        // Debug.Log($"room1 rect: {room1.Rect}; room2 rect: {room2.Rect}");
-        // Debug.Log($"point in room 1: {point1}; point in room 2: {point2}");
-        // Debug.Log("xDiff: " + xDiff + "; yDiff: " + yDiff);
-
-        // void AddNewCorridor(int x, int y, int length, bool isVert) {
-        //     corridors.Add(new CorridorSpace(new Vector2Int(x, y),
-        //         length, corridorBreadth, isVert));
-        // }
         void AddNewCorridor(int x, int y, int xLength, int yLength) {
             var newCorridor = new CorridorArea(new Vector2Int(x, y),
                 xLength, yLength, corridorBreadth);
-            // Debug.Log("created new corridor. " + newCorridor);
             corridors.Add(newCorridor);
         }
 
         AddNewCorridor(point1.x, point1.y, xDiff, yDiff);
-
-        // // 2|1
-        // if (xDiff < 0) {
-            
-        //     if (yDiff < 0) {
-        //         // 2|.
-        //         // .|1
-        //         if (Random.value < 0.5f) {
-        //             // t .
-        //             // | .
-        //             // f-.
-
-        //             // AddNewCorridor(point2.x, point1.y, xDiff, false);
-        //             // AddNewCorridor(point2.x, point2.y, yDiff, true);
-
-        //             // corridors.Add(new RectInt(point2.x, point1.y, Mathf.Abs(xDiff), 1));
-        //             // corridors.Add(new RectInt(point2.x, point2.y, 1, Mathf.Abs(yDiff)));
-
-        //         } else {
-        //             // AddNewCorridor(point2.x, point2.y, xDiff, false);
-        //             // AddNewCorridor(point2.x, point2.y, yDiff, true);
-
-        //             // corridors.Add(new RectInt(point2.x, point2.y, Mathf.Abs(xDiff), 1));
-        //             // corridors.Add(new RectInt(point1.x, point2.y, 1, Mathf.Abs(yDiff)));
-        //         }
-        //     } else if (yDiff > 0) {
-        //         // .|1
-        //         // 2|.
-        //         if (Random.value < 0.5f) {
-        //             // AddNewCorridor(point2.x, point1.y, xDiff, false);
-        //             // AddNewCorridor(point2.x, point1.y, yDiff, true);
-
-        //             // corridors.Add(new RectInt(point2.x, point1.y, Mathf.Abs(xDiff), 1));
-        //             // corridors.Add(new RectInt(point2.x, point1.y, 1, Mathf.Abs(yDiff)));
-        //         } else {
-        //             // AddNewCorridor(point2.x, point2.y, xDiff, false);
-        //             // AddNewCorridor(point1.x, point1.y, yDiff, true);
-
-        //             // corridors.Add(new RectInt(point2.x, point2.y, Mathf.Abs(xDiff), 1));
-        //             // corridors.Add(new RectInt(point1.x, point1.y, 1, Mathf.Abs(yDiff)));
-        //         }
-        //     } else  // if (h == 0)
-        //     {
-        //         // 2|1
-        //         // .|.
-        //         // AddNewCorridor(point2.x, point2.y, xDiff, false);
-
-        //         // corridors.Add(new RectInt(point2.x, point2.y, Mathf.Abs(xDiff), 1));
-        //     }
-        // } else if (xDiff > 0) {
-        //     // 1|2
-
-        //     if (yDiff < 0) {
-        //         // .|2
-        //         // 1|.
-        //         if (Random.value < 0.5f) {
-        //             // AddNewCorridor(point1.x, point2.y, xDiff, false);
-        //             // AddNewCorridor(point1.x, point2.y, yDiff, true);
-
-
-        //             // corridors.Add(new RectInt(point1.x, point2.y, Mathf.Abs(xDiff), 1));
-        //             // corridors.Add(new RectInt(point1.x, point2.y, 1, Mathf.Abs(yDiff)));
-        //         } else {
-        //             // AddNewCorridor(point1.x, point1.y, xDiff, false);
-        //             // AddNewCorridor(point2.x, point2.y, yDiff, true);
-
-        //             // corridors.Add(new RectInt(point1.x, point1.y, Mathf.Abs(xDiff), 1));
-        //             // corridors.Add(new RectInt(point2.x, point2.y, 1, Mathf.Abs(yDiff)));
-        //         }
-        //     } else if (yDiff > 0) {
-        //         // 1|.
-        //         // .|2
-        //         if (Random.value < 0.5f) {
-        //             // AddNewCorridor(point1.x, point1.y, xDiff, false);
-        //             // AddNewCorridor(point2.x, point1.y, yDiff, true);
-
-        //             // corridors.Add(new RectInt(point1.x, point1.y, Mathf.Abs(xDiff), 1));
-        //             // corridors.Add(new RectInt(point2.x, point1.y, 1, Mathf.Abs(yDiff)));
-        //         } else {
-        //             // AddNewCorridor(point1.x, point2.y, xDiff, false);
-        //             // AddNewCorridor(point1.x, point1.y, yDiff, true);
-
-        //             // corridors.Add(new RectInt(point1.x, point2.y, Mathf.Abs(xDiff), 1));
-        //             // corridors.Add(new RectInt(point1.x, point1.y, 1, Mathf.Abs(yDiff)));
-        //         }
-        //     } else  // if (h == 0)
-        //     {
-        //         // 1|2
-        //         // .|.
-        //         // AddNewCorridor(point1.x, point1.y, xDiff, false);
-
-        //         // corridors.Add(new RectInt(point1.x, point1.y, Mathf.Abs(xDiff), 1));
-        //     }
-        // } else  // if (w == 0)
-        // {
-        //     if (yDiff < 0) {
-        //         // 2|.
-        //         // 1|.
-        //         // AddNewCorridor(point2.x, point2.y, yDiff, true);
-
-        //         // corridors.Add(new RectInt(point2.x, point2.y, 1, Mathf.Abs(yDiff)));
-        //     } else if (yDiff > 0) {
-        //         // 1|.
-        //         // 2|.
-        //         // AddNewCorridor(point1.x, point1.y, yDiff, true);
-
-        //         // corridors.Add(new RectInt(point1.x, point1.y, 1, Mathf.Abs(yDiff)));
-        //     }
-        // }
         
-        return corridors;
+        return (corridors, (point1, point2));
     }
 }

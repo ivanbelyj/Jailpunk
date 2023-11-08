@@ -244,10 +244,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   generationData:
     useRandomSeed: 1
-    seed: 1430000310
-    mazeSize: {x: 170, y: 80}
-    minSectorSize: 32
-    maxSectorSize: 40
+    seed: 151541991
+    mazeSize: {x: 190, y: 100}
+    minSectorSize: 24
+    maxSectorSize: 80
   showLogMessages: 1
   generateMazeOnAwake: 1
 --- !u!4 &2144129006
@@ -308,7 +308,7 @@ MonoBehaviour:
   options:
     splitLeafProbability: 0.75
     minSplitRatio: 1.25
-    maxRoomOffset: 16
+    maxRoomOffset: 35
     minRoomOffset: 0
     rootLeafSize: {x: 0, y: 0}
     minLeafSize: 0
@@ -343,7 +343,7 @@ MonoBehaviour:
   testRooms:
   - rectSpace1:
       rect:
-        x: 60
+        x: 50
         y: 20
         width: 10
         height: 10

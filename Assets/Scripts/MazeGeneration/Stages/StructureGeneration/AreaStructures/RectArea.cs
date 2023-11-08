@@ -10,6 +10,13 @@ using UnityEngine;
 [System.Serializable]
 public class RectArea : IRectArea, ITraverseable
 {
+    public enum Side {
+        Left,
+        Right,
+        Top,
+        Bottom
+    }
+
     [SerializeField]
     private RectInt rect;
     public RectInt Rect {
@@ -30,6 +37,72 @@ public class RectArea : IRectArea, ITraverseable
         return point;
     }
 
+    public Vector2Int GetSideRandomPoint(int offsetFromFirstCorner,
+        Side side, int? offsetFromSecondCorner = null) {
+        if (offsetFromSecondCorner == null) {
+            offsetFromSecondCorner = offsetFromFirstCorner;
+        }
+
+        bool isOnVertSide;
+        bool isFirstBorder;
+        switch (side) {
+            case Side.Left:
+                isOnVertSide = true;
+                isFirstBorder = true;
+                break;
+            case Side.Right:
+                isOnVertSide = true;
+                isFirstBorder = false;
+                break;
+            case Side.Top:
+                isOnVertSide = false;
+                isFirstBorder = true;
+                break;
+            case Side.Bottom:
+                isOnVertSide = false;
+                isFirstBorder = false;
+                break;
+            default:
+                throw new System.ArgumentException("Unknown RectArea Side");
+        }
+
+        return GetSideRandomPoint(offsetFromFirstCorner, offsetFromSecondCorner,
+            isOnVertSide, isFirstBorder);
+    }
+
+    /// <summary>
+    /// Some point placed on the RectArea border with the defined offset
+    /// from the corner
+    /// </summary>
+    public Vector2Int GetSideRandomPoint(int offsetFromFirstCorner,
+        int? offsetFromSecondCorner = null,
+        bool? isOnVertSide = null, bool? isFirstBorder = null) {
+        int x, y;
+        if (offsetFromSecondCorner == null) {
+            offsetFromSecondCorner = offsetFromFirstCorner;
+        }
+
+        int RandomValBySide(int posMin, int posMax) {
+            return Random.Range(posMin + offsetFromFirstCorner,
+                posMax - 1 - offsetFromSecondCorner.Value);
+        }
+
+        bool isVert = isOnVertSide == null ?
+            Random.value < 0.5f : isOnVertSide.Value;
+        bool isFirst = isFirstBorder == null ?
+            Random.value < 0.5f : isFirstBorder.Value;
+        
+        if (isVert) {
+            y = RandomValBySide(Rect.y, Rect.yMax);
+            x = isFirst ? Rect.xMin : Rect.xMax - 1;
+        } else {
+            x = RandomValBySide(Rect.x, Rect.xMax);
+            y = isFirst ? Rect.yMin : Rect.yMax - 1;
+        }
+
+        return new Vector2Int(x, y);
+    }
+
     public void Traverse(ITraverseable.TraversalDelegate callback) {
         int roomRightLimit = rect.x + rect.width - 1;
         int roomBottomLimit = rect.y + rect.height - 1;
@@ -41,5 +114,10 @@ public class RectArea : IRectArea, ITraverseable
                 callback(x, y, isWall);
             }
         }
+    }
+
+    public override string ToString()
+    {
+        return Rect.ToString();
     }
 }

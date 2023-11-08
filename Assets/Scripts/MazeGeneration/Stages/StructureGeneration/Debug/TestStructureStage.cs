@@ -22,9 +22,22 @@ public class TestStructureStage : GenerationStage
         var corridors = new List<CorridorArea>();
 
         foreach (var pair in testRooms) {
-            corridors.AddRange(generator
+            var corridorsGenRes = generator
                 .CreateCorridors(pair.rectSpace1, pair.rectSpace2,
-                    GetComponent<CorridorsStructureGeneration>().corridorsBreadth));
+                    GetComponent<CorridorsStructureGeneration>()
+                        .corridorsBreadth);
+            if (corridorsGenRes == null) {
+                Debug.LogWarning("Cannot connect test rooms");
+                continue;
+            }
+            corridors.AddRange(corridorsGenRes.Value.Item1);
+
+            void AddMark(Vector2Int pos, Color col) {
+                context.MazeData.Scheme.AddDebugMark(pos, col);
+            }
+            
+            AddMark(corridorsGenRes.Value.Item2.Item1, Color.green);
+            AddMark(corridorsGenRes.Value.Item2.Item2, Color.red);
         }
         context.Corridors = corridors;
 

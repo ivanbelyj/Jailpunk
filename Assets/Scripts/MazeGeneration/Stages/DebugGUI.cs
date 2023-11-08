@@ -14,36 +14,28 @@ public class DebugGUI : GenerationStage
         return mazeData;
     }
 
+    // For debug
+    private static MazeGenerator mazeGenerator;
+    private static MazeGenerator MazeGenerator {
+        get {
+            if (mazeGenerator == null)
+                mazeGenerator = FindObjectOfType<MazeGenerator>();
+            return mazeGenerator;
+        }
+    }
+
     private void OnGUI()
     {
-        if (GUI.Button(new Rect(25, 25, 100, 30), "Regenerate")) 
+        if (GUI.Button(new Rect(25, 25, 200, 60), "Regenerate")) 
         {
-            FindObjectOfType<MazeGenerator>().CreateMaze();
+            MazeGenerator.CreateMaze();
         }
         if (scheme == null)
         {
             return;
         }
 
-        StringBuilder msg = new StringBuilder();
-
-        for (int y = 0; y < scheme.MapSize.y; y++)
-        {
-            for (int x = 0; x < scheme.MapSize.x; x++)  
-            {
-                SchemeTile tile = scheme.GetTileByPos(x, y);
-                msg.Append(tile.TileType switch {
-                    TileType.NoSpace => "  ",
-                    TileType.Floor => "..",
-                    TileType.LoadBearingWall => "==",
-                    TileType.Wall => "--",
-                    _ => "??"
-                });
-            }
-            msg.Append("\n");
-        }
-        
         GUI.skin = guiSkin;
-        GUI.Label(new Rect(20, 20, 1920, 1080), msg.ToString());
+        GUI.Label(new Rect(20, 20, 1920, 1080), scheme.ToString());
     }
 }

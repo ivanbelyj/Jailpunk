@@ -14,9 +14,19 @@ public class CorridorsStructureGeneration : GenerationStage
         var corridors = new List<CorridorArea>();
         foreach (var (node1, node2) in context.RawCorridorsConnectivity
             .ConnectedPairsUnique()) {
-            corridors.AddRange(generator
+            var corridorsGenRes = generator
                 .CreateCorridors(node1.Value, node2.Value,
-                    corridorsBreadth));
+                    corridorsBreadth);
+            if (corridorsGenRes == null)
+                continue;
+            corridors.AddRange(corridorsGenRes.Value.Item1);
+
+            void AddMark(Vector2Int pos, Color col) {
+                context.MazeData.Scheme.AddDebugMark(pos, col);
+            }
+            
+            AddMark(corridorsGenRes.Value.Item2.Item1, Color.red);
+            AddMark(corridorsGenRes.Value.Item2.Item2, Color.green);
         }
 
         context.Corridors = corridors;

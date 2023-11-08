@@ -10,8 +10,10 @@ public class CorridorsToScheme : GenerationStage
         foreach (CorridorArea corridor in context.Corridors) {
             corridor.Traverse((x, y, isWall) => {
                 SchemeTile tile = scheme.GetTileByPos(x, y);
-                tile.TileType = isWall ? TileType.LoadBearingWall
+                if (tile.TileType == TileType.NoSpace) {
+                    tile.TileType = isWall ? TileType.LoadBearingWall
                     : TileType.Floor;
+                }
             });
         }
         return context;

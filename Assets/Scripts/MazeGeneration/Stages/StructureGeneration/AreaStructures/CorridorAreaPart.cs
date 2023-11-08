@@ -47,8 +47,8 @@ public class CorridorAreaPart : IRectArea
         get {
             Vector2Int point = IsVertical ?
                 new Vector2Int(Pos.x,
-                    Pos.y + Length) :
-                new Vector2Int(Pos.x + Length,
+                    Pos.y + Length - 1) :
+                new Vector2Int(Pos.x + Length - 1,
                     Pos.y);
             return point;
         }
@@ -79,7 +79,6 @@ public class CorridorAreaPart : IRectArea
         get {
             Vector2Int adjustedPos = Pos;
 
-            // Todo: abs + 1?
             int posOffset = Length < 0 ? -Mathf.Abs(Length) : 0;
             if (IsVertical) {
                 adjustedPos.y += posOffset;
@@ -113,16 +112,17 @@ public class CorridorAreaPart : IRectArea
     /// <summary>
     /// End point of the corridor part adjusted to the positive rect
     /// </summary>
-    // public Vector2Int EndPointAdjusted {
-    //     get {
-    //         var adjustedPos = PosAdjusted;
-    //         return IsVertical ?
-    //             new Vector2Int(adjustedPos.x,
-    //                 adjustedPos.y + Length) :
-    //             new Vector2Int(adjustedPos.x + Length,
-    //                 adjustedPos.y);
-    //     }
-    // }
+    public Vector2Int EndPosAdjusted {
+        get {
+            var adjustedPos = PosAdjusted;
+            int lengthSign = (int)Mathf.Sign(Length);
+            return IsVertical ?
+                new Vector2Int(adjustedPos.x,
+                    adjustedPos.y + Length - lengthSign) :
+                new Vector2Int(adjustedPos.x + Length - lengthSign,
+                    adjustedPos.y);
+        }
+    }
     public override string ToString()
     {
         return $"{RectWithPositiveSize}";
@@ -130,17 +130,18 @@ public class CorridorAreaPart : IRectArea
 
     public bool IsOnStraightPassage(int x, int y) {
         bool isOnPassageLine = IsVertical ?
-            y == Pos.y || y == EndPos.y :
-            x == Pos.x || x == EndPos.x;
+            y == PosAdjusted.y || y == EndPosAdjusted.y:
+            x == PosAdjusted.x || x == EndPosAdjusted.x;
 
         bool IsOnAxe(int val, int axeCrossInterval) {
             return val > axeCrossInterval &&
-                val < axeCrossInterval + Breadth;
+                val < axeCrossInterval + Breadth - 1;
         }
 
         bool isOnPassageAxe = IsVertical ?
-            IsOnAxe(x, Pos.x) :
-            IsOnAxe(y, Pos.y);
+            IsOnAxe(x, PosAdjusted.x) :
+            IsOnAxe(y, PosAdjusted.y);
         return isOnPassageLine && isOnPassageAxe;
     }
+
 }
