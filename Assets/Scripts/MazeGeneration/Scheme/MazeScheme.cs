@@ -36,9 +36,11 @@ public class MazeScheme
         if (color == null)
             color = Color.red;
         if (!ColorsByMarkedPositions.ContainsKey(pos)) {
+            Debug.LogWarning("There is already some debug mark on pos " + pos);
             ColorsByMarkedPositions.Add(pos, color.Value);
         }
     }
+
     public override string ToString()
     {
         StringBuilder strBuilder = new StringBuilder();
@@ -56,8 +58,9 @@ public class MazeScheme
                 }
                 if (colorCode != null)
                     strBuilder.Append($"<b><color=#{colorCode}>");
+                // █ █ █
                 strBuilder.Append(tile.TileType switch {
-                    TileType.NoSpace => "  ",
+                    TileType.NoSpace => colorCode != null ? ".." : "  ",
                     TileType.Floor => "..",
                     TileType.LoadBearingWall => "==",
                     TileType.Wall => "--",

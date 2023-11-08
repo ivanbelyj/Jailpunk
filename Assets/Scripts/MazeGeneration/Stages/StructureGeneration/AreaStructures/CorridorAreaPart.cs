@@ -47,7 +47,7 @@ public class CorridorAreaPart : IRectArea
         get {
             Vector2Int point = IsVertical ?
                 new Vector2Int(Pos.x,
-                    Pos.y + Length - 1) :
+                    Pos.y + Length) :
                 new Vector2Int(Pos.x + Length - 1,
                     Pos.y);
             return point;
@@ -79,12 +79,14 @@ public class CorridorAreaPart : IRectArea
         get {
             Vector2Int adjustedPos = Pos;
 
-            int posOffset = Length < 0 ? -Mathf.Abs(Length) : 0;
-            if (IsVertical) {
-                adjustedPos.y += posOffset;
-            } else {
-                adjustedPos.x += posOffset;
+            if (Length < 0) {
+                if (IsVertical) {
+                    adjustedPos.y += Length;
+                } else {
+                    adjustedPos.x += Length;
+                }
             }
+            
             return adjustedPos;
         }
     }

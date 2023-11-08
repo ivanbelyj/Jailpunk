@@ -8,25 +8,23 @@ public class CorridorsStructureGeneration : GenerationStage
 {
     [SerializeField]
     public int corridorsBreadth = 3;
+
+    [Header("Debug")]
+    [SerializeField]
+    private bool isDebug = false;
     public override GenerationContext ProcessMaze(GenerationContext context)
     {
-        var generator = new CorridorsGenerator();
+        var generator = new CorridorsGenerator(isDebug);
         var corridors = new List<CorridorArea>();
         foreach (var (node1, node2) in context.RawCorridorsConnectivity
             .ConnectedPairsUnique()) {
-            var corridorsGenRes = generator
+            var generatedCorridors = generator
                 .CreateCorridors(node1.Value, node2.Value,
                     corridorsBreadth);
-            if (corridorsGenRes == null)
+            if (generatedCorridors == null)
                 continue;
-            corridors.AddRange(corridorsGenRes.Value.Item1);
-
-            void AddMark(Vector2Int pos, Color col) {
-                context.MazeData.Scheme.AddDebugMark(pos, col);
-            }
-            
-            AddMark(corridorsGenRes.Value.Item2.Item1, Color.red);
-            AddMark(corridorsGenRes.Value.Item2.Item2, Color.green);
+            corridors.AddRange(generatedCorridors);
+        
         }
 
         context.Corridors = corridors;

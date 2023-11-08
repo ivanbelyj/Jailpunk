@@ -6,20 +6,24 @@ using UnityEngine;
 
 public class CorridorArea : ITraverseable
 {
+    private bool isDebug;
     public List<CorridorAreaPart> Parts { get; set; }
     public int Breadth { get; set; }
 
-    public CorridorArea(int breadth) {
+    public CorridorArea(int breadth, bool isDebug = false) {
         Breadth = breadth;
         Parts = new List<CorridorAreaPart>();
+        this.isDebug = isDebug;
     }
 
     public CorridorArea(Vector2Int pos,
-        int length, int breadth, bool isVertical) : this(breadth) {
+        int length, int breadth, bool isVertical, bool isDebug = false)
+            : this(breadth, isDebug) {
         Parts.Add(new CorridorAreaPart(pos, length, breadth, isVertical));
     }
     public CorridorArea(Vector2Int pos,
-        int xLength, int yLength, int breadth) : this(breadth) {
+        int xLength, int yLength, int breadth, bool isDebug = false)
+            : this(breadth, isDebug) {
         // AddNewCorridor(point2.x, point1.y, xDiff, false);
         // AddNewCorridor(point2.x, point2.y, yDiff, true);
 
@@ -42,15 +46,28 @@ public class CorridorArea : ITraverseable
 
     public void AddNewPart(Vector2Int pos, int length, bool isVert) {
         Parts.Add(new CorridorAreaPart(pos, length, Breadth, isVert));
+        if (isDebug)
+            Debug.Log($"Added new corridor part: {Parts[^1]}");
     }
 
     public void AddNewPartFromPrevious(int length, bool isVert) {
         if (Parts == null || Parts.Count == 0)
             throw new InvalidOperationException();
-        var newPartPos = Parts[Parts.Count - 1].EndPos;
-        if (isVert && length < 0) {
-            newPartPos.y += Breadth;
+
+        var newPartPos = Parts[^1].EndPos;
+        if (isVert) {
+            if (length < 0) {
+                newPartPos.y += Breadth;
+                length += -Breadth;
+            } else {
+                length += 1;
+            }
         }
+        if (isDebug) {
+            MazeGenerator.AddDebugMarkToScheme(newPartPos, Color.magenta);
+        }
+            
+
         AddNewPart(newPartPos, length, isVert);
     }
 
@@ -70,7 +87,8 @@ public class CorridorArea : ITraverseable
             var part = Parts[i];
             var nextPart = (i + 1) < Parts.Count ? Parts[i + 1] : null;
             var prevPart = (i - 1) >= 0 ? Parts[i - 1] : null;
-            StructureUtils.TraverseRect(part.Rect, (x, y, isBorder) => {
+            StructureUtils.TraverseRect(part.RectWithPositiveSize,
+                (x, y, isBorder) => {
                 bool isWall = GeometryUtils.IsOnRectBorder(part.Rect, x, y);
                 
                 // The task is to determine the free passage
@@ -88,12 +106,6 @@ public class CorridorArea : ITraverseable
                     // There can be the end passage of the
                     // previous corridor
                     prevPart != null && prevPart.IsOnStraightPassage(x, y)
-                    // part.IsOnStraightPassage(x, y)
-
-                    // Dead-ends always end with walls
-                    // && nextPart != null  // (else it's a dead-end)
-                    // && nextPart.IsOnStraightPassage(x, y)
-                    // && GeometryUtils.IsOnRect(nextPart.Rect, x, y)
                     ) {
                     isWall = false;
                 }

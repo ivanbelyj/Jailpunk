@@ -8,6 +8,11 @@ using Side = RectArea.Side;
 
 public class CorridorsGenerator
 {
+    private bool isDebug;
+    public CorridorsGenerator(bool isDebug = false) {
+        this.isDebug = isDebug;
+    }
+
     public (Vector2Int, Vector2Int)? GetTwoConnectablePoints(RectArea room1,
         RectArea room2, int corridorBreadth) {
 
@@ -19,7 +24,8 @@ public class CorridorsGenerator
         var (topRoom, bottomRoom) = yDiff < 0 ?
             (room1, room2) : (room2, room1);
 
-        Debug.Log($"Trying to connect rooms. left room: {leftRoom}; right room: {rightRoom}");
+        if (isDebug)
+            Debug.Log($"Trying to connect rooms. left room: {leftRoom}; right room: {rightRoom}");
         
         Vector2Int point1;
         Vector2Int point2; 
@@ -43,7 +49,8 @@ public class CorridorsGenerator
             point2 = point1;
             point2.x = rightRoom.Rect.xMin;
 
-            Debug.Log($"Straight left-right corridor from {point1} to {point2}");
+            if (isDebug)
+                Debug.Log($"Straight left-right corridor from {point1} to {point2}");
             return (point1, point2);
         }
 
@@ -65,7 +72,8 @@ public class CorridorsGenerator
             point2 = point1;
             point2.y = bottomRoom.Rect.yMin;
 
-            Debug.Log($"Straight top-bottom corridor from {point1} to {point2}");
+            if (isDebug)
+                Debug.Log($"Straight top-bottom corridor from {point1} to {point2}");
             return (point1, point2);
         }
 
@@ -80,7 +88,8 @@ public class CorridorsGenerator
             return null;
         }
 
-        Debug.Log($"Corridor from {point1} to {point2}");
+        if (isDebug)
+            Debug.Log($"Corridor from {point1} to {point2}");
         return (point1, point2);
     }
     
@@ -88,7 +97,7 @@ public class CorridorsGenerator
     /// Creates corridors connecting two rooms.
     /// Returns corridor areas and two points used for corridors generation
     /// </summary>
-    public (List<CorridorArea>, (Vector2Int, Vector2Int))?
+    public List<CorridorArea>
         CreateCorridors(RectArea room1, RectArea room2,
         int corridorBreadth = 3) {
         List<CorridorArea> corridors = new List<CorridorArea>();
@@ -100,17 +109,23 @@ public class CorridorsGenerator
         Vector2Int point1 = connPoints.Value.Item1;
         Vector2Int point2 = connPoints.Value.Item2;
 
+        if (isDebug) {
+            MazeGenerator.AddDebugMarkToScheme(point1, Color.green);
+            MazeGenerator.AddDebugMarkToScheme(point2, Color.red);
+        }
+
+
         int xDiff = point2.x - point1.x;
         int yDiff = point2.y - point1.y;
         
         void AddNewCorridor(int x, int y, int xLength, int yLength) {
             var newCorridor = new CorridorArea(new Vector2Int(x, y),
-                xLength, yLength, corridorBreadth);
+                xLength, yLength, corridorBreadth, isDebug);
             corridors.Add(newCorridor);
         }
 
         AddNewCorridor(point1.x, point1.y, xDiff, yDiff);
         
-        return (corridors, (point1, point2));
+        return corridors;
     }
 }

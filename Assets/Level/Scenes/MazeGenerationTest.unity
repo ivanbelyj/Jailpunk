@@ -327,6 +327,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   includeInGeneration: 1
   corridorsBreadth: 4
+  isDebug: 1
 --- !u!114 &2144129011
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -341,7 +342,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   includeInGeneration: 0
   testRooms:
-  - rectSpace1:
+  - useInGeneration: 1
+    rectSpace1:
       rect:
         x: 50
         y: 20
@@ -353,7 +355,8 @@ MonoBehaviour:
         y: 0
         width: 10
         height: 10
-  - rectSpace1:
+  - useInGeneration: 1
+    rectSpace1:
       rect:
         x: 20
         y: 20
@@ -365,7 +368,8 @@ MonoBehaviour:
         y: 0
         width: 10
         height: 10
-  - rectSpace1:
+  - useInGeneration: 1
+    rectSpace1:
       rect:
         x: 30
         y: 40
@@ -377,7 +381,8 @@ MonoBehaviour:
         y: 70
         width: 10
         height: 10
-  - rectSpace1:
+  - useInGeneration: 1
+    rectSpace1:
       rect:
         x: 50
         y: 40
@@ -402,3 +407,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   includeInGeneration: 1
+  applyOverScheme: 0

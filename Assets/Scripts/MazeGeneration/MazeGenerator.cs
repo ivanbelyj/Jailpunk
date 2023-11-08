@@ -48,8 +48,10 @@ public class MazeGenerator : MonoBehaviour
     public GenerationContext CreateMaze() {
         float totalStartTime = GetMsSinceStartup();
 
+        // For adding debug marks only!
+        mazeSchemeSingleton = new MazeScheme(generationData.MazeSize);
         MazeData initialMazeData = new MazeData() {
-            Scheme = new MazeScheme(generationData.MazeSize)
+            Scheme = mazeSchemeSingleton
         };
         GenerationContext lastProcessed = new GenerationContext() {
             MazeData = initialMazeData,
@@ -79,5 +81,19 @@ public class MazeGenerator : MonoBehaviour
 
     private float GetMsSinceStartup() {
         return Time.realtimeSinceStartup * 1000;
+    }
+
+    /// <summary>
+    /// Singleton for debug marking only
+    /// </summary>
+    private static MazeScheme mazeSchemeSingleton;
+
+    public static void AddDebugMarkToScheme(
+        Vector2Int pos, Color? color = null) {
+        if (mazeSchemeSingleton == null) {
+            Debug.LogWarning("There is no maze scheme to add a debug mark");
+            return;
+        }
+        mazeSchemeSingleton.AddDebugMark(pos, color);
     }
 }

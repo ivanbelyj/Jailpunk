@@ -15,13 +15,10 @@ public static class StructureUtils
     
     public static void TraverseRect(RectInt rect,
         RectTraversalDelegate callback) {
-        int roomRightLimit = rect.x + rect.width - 1;
-        int roomBottomLimit = rect.y + rect.height - 1;
-        for (int y = rect.y; y <= roomBottomLimit; y++) {
-            for (int x = rect.x; x <= roomRightLimit; x++) {
-                bool isBorder = y == rect.y || y == roomBottomLimit;
-                if (!isBorder)
-                    isBorder = x == rect.x || x == roomRightLimit;
+        for (int y = rect.y; y <= rect.yMax - 1; y++) {
+            for (int x = rect.x; x <= rect.xMax - 1; x++) {
+                bool isBorder = y == rect.y || y == rect.yMax - 1
+                    || x == rect.x || x == rect.xMax - 1;
                 callback(x, y, isBorder);
             }
         }
