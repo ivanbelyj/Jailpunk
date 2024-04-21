@@ -308,7 +308,7 @@ MonoBehaviour:
   options:
     splitLeafProbability: 0.75
     minSplitRatio: 1.25
-    maxRoomOffset: 35
+    maxRoomOffset: 2
     minRoomOffset: 0
     rootLeafSize: {x: 0, y: 0}
     minLeafSize: 0
@@ -325,7 +325,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9172d776884e164daa717bac9cfe394, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  includeInGeneration: 1
+  includeInGeneration: 0
   corridorsBreadth: 4
   isDebug: 1
 --- !u!114 &2144129011
@@ -406,5 +406,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f8fd35340349ac4a86e84dd7c687df0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  includeInGeneration: 1
+  includeInGeneration: 0
   applyOverScheme: 0

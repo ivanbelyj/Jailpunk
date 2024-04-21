@@ -20,11 +20,11 @@ public class FlashEffect : MonoBehaviour
 		+ "the transition time is 1 second")]
 	private float flashSpeed = 2;
 
-    private void Awake() {
-        renderer = GetComponent<Renderer>();
-    }
-    
-    private IEnumerator ChangeFlash(float from, float to, float speed) {
+	private void Awake() {
+		renderer = GetComponent<Renderer>();
+	}
+
+	private IEnumerator ChangeFlash(float from, float to, float speed) {
 		if (flashing)
 			yield break;
 		flashing = true;
@@ -42,14 +42,14 @@ public class FlashEffect : MonoBehaviour
 	/// Applies flash effect
 	/// </summary>
 	public void Flash(Color color) {
-        renderer.material.SetColor("_FlashColor", color);
-        StartCoroutine(ChangeFlash(0f, maxFlashAmount, flashSpeed));
-    }
+		renderer.material.SetColor("_FlashColor", color);
+		StartCoroutine(ChangeFlash(0f, maxFlashAmount, flashSpeed));
+	}
 
 	/// <summary>
 	/// Clears flash effect
 	/// </summary>
-    public void FadeOut() {
-        StartCoroutine(ChangeFlash(maxFlashAmount, 0f, flashSpeed));
-    }
+	public void FadeOut() {
+		StartCoroutine(ChangeFlash(maxFlashAmount, 0f, flashSpeed));
+	}
 }
