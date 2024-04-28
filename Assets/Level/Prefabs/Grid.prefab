@@ -18742,8 +18742,8 @@ GameObject:
   - component: {fileID: 7519285218279896716}
   - component: {fileID: 7519285218279896753}
   - component: {fileID: 7519285218279896719}
-  - component: {fileID: 7519285218279896718}
   - component: {fileID: 7519285218279896752}
+  - component: {fileID: 1144685238619764671}
   m_Layer: 0
   m_Name: TestSpeaker
   m_TagString: Untagged
@@ -18794,20 +18794,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soundAttenuation: 1
   radiusChecker: {fileID: 7519285218279896753}
---- !u!114 &7519285218279896718
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7519285218279896715}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a95ac0f1e50b34b40ad0f26f9ef77748, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  voiceVolumeMultiplier: 1
-  initialSpeechVolume: 1
 --- !u!114 &7519285218279896752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18821,6 +18807,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   period: 0.5
+--- !u!114 &1144685238619764671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7519285218279896715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49b8219053269e247bd75d7e2ba44004, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7519285218314701729
 GameObject:
   m_ObjectHideFlags: 0
