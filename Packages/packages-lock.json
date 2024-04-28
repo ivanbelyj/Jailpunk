@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "com.ivanbelyj.lifecycle-parameters": {
-      "version": "file:com.ivanbelyj.lifecycle-parameters",
+      "version": "file:ivanbelyj.lifecycle-parameters",
       "depth": 0,
       "source": "embedded",
       "dependencies": {}
@@ -251,6 +251,18 @@
     },
     "ivanbelyj.causal-model-unity": {
       "version": "file:ivanbelyj.causal-model-unity",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
+    "ivanbelyj.personality": {
+      "version": "file:ivanbelyj.personality",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
+    "ivanbelyj.sound-perception": {
+      "version": "file:ivanbelyj.sound-perception",
       "depth": 0,
       "source": "embedded",
       "dependencies": {}

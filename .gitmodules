@@ -1,3 +1,12 @@
 [submodule "Packages/ivanbelyj.causal-model-unity"]
 	path = Packages/ivanbelyj.causal-model-unity
 	url = git@github.com:ivanbelyj/CausalModelUnity.git
+[submodule "Packages/ivanbelyj.personality"]
+	path = Packages/ivanbelyj.personality
+	url = https://github.com/ivanbelyj/Personality
+[submodule "Packages/ivanbelyj.sound-perception"]
+	path = Packages/ivanbelyj.sound-perception
+	url = git@github.com:ivanbelyj/SoundPerception.git
+[submodule "Packages/ivanbelyj.lifecycle-parameters"]
+	path = Packages/ivanbelyj.lifecycle-parameters
+	url = https://github.com/ivanbelyj/LifecycleParameters
