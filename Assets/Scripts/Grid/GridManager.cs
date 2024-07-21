@@ -12,10 +12,12 @@ public class GridManager : MonoBehaviour
         return grid.WorldToCell(pos);  //  + new Vector3(-0.25f, -0.25f)
     }
     public Vector3 GetCellCenterWorld(Vector3Int cellPos)
-        //  It's not working correctly with Isometric Z as Y
-        // The hardcode float corrects the strange offset of this type of grid
-        => grid.GetCellCenterWorld(cellPos) + new Vector3(0, -0.12f);
-        // => grid.CellToWorld(cellPos) + new Vector3(0, 0.25f);
+        => grid.GetCellCenterWorld(cellPos);
+        // Isometric: 
+        // //  It's not working correctly with Isometric Z as Y
+        // // The hardcode float corrects the strange offset of this type of grid
+        // => grid.GetCellCenterWorld(cellPos) + new Vector3(0, -0.12f);
+        // // => grid.CellToWorld(cellPos) + new Vector3(0, 0.25f);
 
     // public Vector3 CellToWorld(Vector3Int cellPos)
     //     => grid.CellToWorld(cellPos);
@@ -27,21 +29,25 @@ public class GridManager : MonoBehaviour
         return GetCellCenterWorld(WorldToCell(pos));
     }
 
-    // For use in other projects (including non-isometric ones)
+    // For use in other projects (isometric or not) in the future
     // there can be used universal formulas that are not tied to isometry
-    #region Isometric specific code
+    // or cartesian. Now convertions are hardcoded
+    #region Grid vector convertions
     public Vector2 CartesianToGridVector(Vector2 cart) {
-        return IsometricUtils.CartesianToIsometric(cart);
+        // return IsometricUtils.CartesianToIsometric(cart);
+        return cart;
     }
 
     public Vector2 GridVectorToCartesian(Vector2 cart) {
-        return IsometricUtils.IsometricToCartesian(cart);
+        // return IsometricUtils.IsometricToCartesian(cart);
+        return cart;
     }
 
     public Vector2 GridDirectionToGridVector(
         GridDirection orient) {
         Vector2 dir = GridDirectionUtils.GridDirectionToCartesianVector2(orient);
-        return IsometricUtils.CartesianToIsometric(dir);
+        // return IsometricUtils.CartesianToIsometric(dir);
+        return dir;
     }
     #endregion
 

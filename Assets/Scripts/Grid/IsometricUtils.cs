@@ -17,6 +17,4 @@ public static class IsometricUtils
         res.y = (2 * isoPos.y - isoPos.x) / 2;
         return res;
     }
-
-    
 }

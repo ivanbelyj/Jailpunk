@@ -60,8 +60,10 @@ public class CharacterControls : MonoBehaviour
             animator.SetMoveInput(moveInput);
         }
 
-        movement.MovementInputValues = GridDirectionUtils.RotateCartesian(
-            new Vector3(moveInput.x, moveInput.y, 0));
+        movement.MovementInputValues = moveInput;
+        // Isometric:
+        // GridDirectionUtils.RotateCartesian(
+        //     new Vector3(moveInput.x, moveInput.y, 0));
     }
 
 
