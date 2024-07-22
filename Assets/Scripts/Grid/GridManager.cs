@@ -19,8 +19,8 @@ public class GridManager : MonoBehaviour
         // => grid.GetCellCenterWorld(cellPos) + new Vector3(0, -0.12f);
         // // => grid.CellToWorld(cellPos) + new Vector3(0, 0.25f);
 
-    // public Vector3 CellToWorld(Vector3Int cellPos)
-    //     => grid.CellToWorld(cellPos);
+    public Vector3 CellToWorld(Vector3Int cellPos)
+        => grid.CellToWorld(cellPos);
 
     /// <summary>
     /// Returns the position of the center of the nearest cell

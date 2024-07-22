@@ -147,7 +147,7 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0}
     oldSize: {x: 2, y: 2}
     newSize: {x: 2.56, y: 2.56}
     adaptiveTilingThreshold: 0.5
@@ -156,10 +156,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.056798294, y: -1.0606287}
-      - {x: 0.3415832, y: -0.86322445}
-      - {x: -0.07451397, y: -0.6663728}
-      - {x: -0.50009096, y: -0.875031}
+    - - {x: -0.00391756, y: -0.058424503}
+      - {x: 0.38012236, y: 0.15095066}
+      - {x: -0.0032851547, y: 0.36949942}
+      - {x: -0.39891255, y: 0.18378857}
 --- !u!114 &8814517507764113715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -691,7 +691,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7729153388787806046, guid: a0cbcd6787811704a9ead7a9c5cc7ad1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.05
+      value: 2.05
       objectReference: {fileID: 0}
     - target: {fileID: 7729153388787806046, guid: a0cbcd6787811704a9ead7a9c5cc7ad1, type: 3}
       propertyPath: m_LocalPosition.z

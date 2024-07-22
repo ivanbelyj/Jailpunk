@@ -10,3 +10,9 @@
 [submodule "Packages/ivanbelyj.lifecycle-parameters"]
 	path = Packages/ivanbelyj.lifecycle-parameters
 	url = https://github.com/ivanbelyj/LifecycleParameters
+[submodule "Packages/com.zor.simple-blackboard"]
+	path = Packages/com.zor.simple-blackboard
+	url = https://github.com/ivanbelyj/SimpleBlackboard.git
+[submodule "Packages/com.zor.utility-ai"]
+	path = Packages/com.zor.utility-ai
+	url = https://github.com/ivanbelyj/UtilityAI.git

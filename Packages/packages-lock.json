@@ -249,6 +249,20 @@
       },
       "url": "https://packages.unity.com"
     },
+    "com.zor.simple-blackboard": {
+      "version": "file:com.zor.simple-blackboard",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
+    "com.zor.utility-ai": {
+      "version": "file:com.zor.utility-ai",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {
+        "com.zor.simple-blackboard": "https://github.com/ZorPastaman/Simple-Blackboard.git"
+      }
+    },
     "ivanbelyj.causal-model-unity": {
       "version": "file:ivanbelyj.causal-model-unity",
       "depth": 0,
