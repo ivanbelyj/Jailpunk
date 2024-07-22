@@ -881,11 +881,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 151947492814781307, guid: 8d216b88117043a4abed9e42b44407e7, type: 3}
       propertyPath: maxSpeed
-      value: 1.5
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 151947492814781307, guid: 8d216b88117043a4abed9e42b44407e7, type: 3}
       propertyPath: maxAcceleration
-      value: 200
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 151947492814781307, guid: 8d216b88117043a4abed9e42b44407e7, type: 3}
       propertyPath: maxAngularAcceleration
@@ -959,9 +959,9 @@ GameObject:
   - component: {fileID: 757391798}
   - component: {fileID: 757391797}
   - component: {fileID: 757391796}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Walls
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

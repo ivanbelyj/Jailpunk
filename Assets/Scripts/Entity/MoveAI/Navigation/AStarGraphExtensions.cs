@@ -2,25 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// From https://github.com/PacktPublishing/Unity-5.x-Game-AI-Programming-Cookbook/blob/master/UAIPC/Assets/Scripts/Ch02Navigation/Graph.cs
+// Based on https://github.com/PacktPublishing/Unity-5.x-Game-AI-Programming-Cookbook/blob/master/UAIPC/Assets/Scripts/Ch02Navigation/Graph.cs
 public static class AStarExtensions
 {
     public static List<Vertex> GetPathAstar(
         this Graph graph,
-        GameObject srcObj,
-        GameObject dstObj,
+        Vector3 srcPos,
+        Vector3 dstPos,
+        float pathWidth = 0.5f,
         PathCostHeuristic h = null)
     {
-        if (srcObj == null || dstObj == null)
-            return new List<Vertex>();
-
         h ??= PathCostHeuristicUtils.EuclideanEstimate;
 
-        Vertex src = graph.GetNearestVertex(srcObj.transform.position);
-        Vertex dst = graph.GetNearestVertex(dstObj.transform.position);
+        Vertex src = graph.GetNearestVertex(srcPos);
+        Vertex dst = graph.GetNearestVertex(dstPos);
 
         Debug.Log(
-            $"Objects: {srcObj.transform.position} and {dstObj.transform.position}; "
+            $"Objects: {srcPos} and {dstPos}; "
             + $" Vertices: {src.gameObject.transform.position}"
             + $" and {dst.gameObject.transform.position}");
 
@@ -48,7 +46,10 @@ public static class AStarExtensions
             int nodeId = node.Vertex.Id;
             if (ReferenceEquals(node.Vertex, dst))
             {                 
-                return graph.BuildPath(src.Id, node.Vertex.Id, ref previous);
+                return GraphUtils.SmoothPath(
+                    graph.BuildPath(src.Id, node.Vertex.Id, ref previous),
+                    pathWidth
+                );
             }
             edges = graph.GetEdges(node.Vertex);
             foreach (Edge e in edges)

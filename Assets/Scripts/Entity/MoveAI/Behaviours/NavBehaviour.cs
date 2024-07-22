@@ -3,29 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class AISeek : AIBehaviour
+public class NavBehaviour : MoveBehaviour
 {
-    private Player player;
     private NavManager navManager;
-
+    public Vector3 CurrentDest { get; set; }
+    
     public override void Awake() {
         base.Awake();
         navManager = FindObjectOfType<NavManager>();
     }
 
-    public override void Update() {
-        if (player == null) {
-            Debug.Log("Finding player...");
-            player = FindObjectOfType<Player>();
-        }
-        if (player != null)
-            base.Update();
-    }
-
     public override AISteering GetSteering()
     {
-        Debug.Log($"AStar between: {gameObject.transform.position} and {player.transform.position}");
-        List<Vertex> path = navManager.Graph.GetPathAstar(gameObject, player.gameObject);
+        Debug.Log($"AStar between: {gameObject.transform.position} and {CurrentDest}");
+        List<Vertex> path = GetCurrentPath();
         Debug.Log("Path: " + string.Join(", ", path.Select(x => x.transform.position).ToList()));
         if (path.Count > 1)
             Target = path[path.Count - 2].gameObject;
@@ -43,10 +34,17 @@ public class AISeek : AIBehaviour
         if (navManager == null)
             return;
 
-        List<Vertex> path = navManager.Graph.GetPathAstar(gameObject, player.gameObject);
+        List<Vertex> path = GetCurrentPath();
+
         if (path.Count > 0)
             DrawPath(path);
         else Debug.Log("Path is empty!");
+    }
+
+    private List<Vertex> GetCurrentPath() {
+        return navManager.Graph.GetPathAstar(
+            gameObject.transform.position,
+            CurrentDest);
     }
 
     private void DrawPath(List<Vertex> path)

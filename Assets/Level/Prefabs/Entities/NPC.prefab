@@ -32,7 +32,7 @@ GameObject:
   - component: {fileID: -6823731042586252813}
   - component: {fileID: 4008369242689712889}
   - component: {fileID: 151947492814781307}
-  - component: {fileID: 3932453222345731830}
+  - component: {fileID: 57447692996529609}
   m_Layer: 0
   m_Name: NPC
   m_TagString: Untagged
@@ -525,9 +525,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxAcceleration: 10
   maxSpeed: 2
-  maxRotationSpeed: 10
-  maxAngularAcceleration: 10
---- !u!114 &3932453222345731830
+--- !u!114 &57447692996529609
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -536,7 +534,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4111959900911027618}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1998230963bc6504cba9c2c9579ecff8, type: 3}
+  m_Script: {fileID: 11500000, guid: 0cf956551d00e9f49be50ef4a8f53a7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
@@ -557,7 +555,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7729153388787806046, guid: a0cbcd6787811704a9ead7a9c5cc7ad1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.05
       objectReference: {fileID: 0}
     - target: {fileID: 7729153388787806046, guid: a0cbcd6787811704a9ead7a9c5cc7ad1, type: 3}
       propertyPath: m_LocalPosition.y

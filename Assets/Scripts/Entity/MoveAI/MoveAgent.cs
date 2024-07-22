@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class MovementAgent : MonoBehaviour
+public class MoveAgent : MonoBehaviour
 {
     [SerializeField]
     private float maxAcceleration;
