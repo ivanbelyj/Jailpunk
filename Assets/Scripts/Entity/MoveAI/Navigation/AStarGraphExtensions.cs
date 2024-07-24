@@ -17,10 +17,10 @@ public static class AStarExtensions
         Vertex src = graph.GetNearestVertex(srcPos);
         Vertex dst = graph.GetNearestVertex(dstPos);
 
-        Debug.Log(
-            $"Objects: {srcPos} and {dstPos}; "
-            + $" Vertices: {src.gameObject.transform.position}"
-            + $" and {dst.gameObject.transform.position}");
+        // Debug.Log(
+        //     $"Objects: {srcPos} and {dstPos}; "
+        //     + $" Vertices: {src.gameObject.transform.position}"
+        //     + $" and {dst.gameObject.transform.position}");
 
         GPWiki.BinaryHeap<Edge> frontier = new GPWiki.BinaryHeap<Edge>();
         

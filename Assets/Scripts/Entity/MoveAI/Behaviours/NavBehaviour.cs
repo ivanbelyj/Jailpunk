@@ -15,11 +15,11 @@ public class NavBehaviour : MoveBehaviour
 
     public override AISteering GetSteering()
     {
-        Debug.Log($"AStar between: {gameObject.transform.position} and {CurrentDest}");
+        // Debug.Log($"AStar between: {gameObject.transform.position} and {CurrentDest}");
         List<Vertex> path = GetCurrentPath();
-        Debug.Log("Path: " + string.Join(", ", path.Select(x => x.transform.position).ToList()));
+        // Debug.Log("Path: " + string.Join(", ", path.Select(x => x.transform.position).ToList()));
         if (path.Count > 1)
-            Target = path[path.Count - 2].gameObject;
+            Target = path[1].gameObject;
         else
             Target = gameObject;
 
@@ -38,7 +38,7 @@ public class NavBehaviour : MoveBehaviour
 
         if (path.Count > 0)
             DrawPath(path);
-        else Debug.Log("Path is empty!");
+        // else Debug.Log("Path is empty!");
     }
 
     private List<Vertex> GetCurrentPath() {

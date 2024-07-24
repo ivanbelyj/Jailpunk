@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Codice.Client.Common;
 using UnityEngine;
+using Zor.SimpleBlackboard.Components;
 
 public class PlayerSeekBehaviour : NavBehaviour
 {
