@@ -550,7 +550,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!114 &5893189822971011345
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -683,6 +683,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38ea350c8aa036c40ae30757dc76e9e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  darknessColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!114 &-3505494692243241985
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -708,6 +709,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad0f4f62fbf18e647a4524b53ead1c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isStatic: 0
   fullyVisibleRadius: 3
   radius: 6
 --- !u!1001 &5954343488525031726

@@ -6,19 +6,8 @@ using UnityEngine.Tilemaps;
 public static class SpriteUtils
 {
     public const int PixelsPerUnit = 64;
-    private static Tile emptyTile;
 
-    /// <summary>
-    /// Common empty tile scriptable object
-    /// </summary>
-    public static Tile EmptyTile => emptyTile;
-
-    static SpriteUtils() {
-        emptyTile = ScriptableObject.CreateInstance<Tile>();
-        emptyTile.sprite = GenerateWhiteSprite();
-    }
-
-    public static Texture2D GenerateWhiteTexture(int width, int height)
+    public static Texture2D GenerateTexture(int width, int height, Color color)
     {
         Texture2D whiteTexture = new Texture2D(width, height);
 
@@ -26,7 +15,7 @@ public static class SpriteUtils
         {
             for (int j = 0; j < height; j++)
             {
-                whiteTexture.SetPixel(i, j, Color.white);
+                whiteTexture.SetPixel(i, j, color);
             }
         }
         whiteTexture.Apply();
@@ -34,8 +23,8 @@ public static class SpriteUtils
         return whiteTexture;
     }
 
-    private static Sprite GenerateWhiteSprite() {
-        var whiteTexture = GenerateWhiteTexture(PixelsPerUnit, PixelsPerUnit);
+    public static Sprite GenerateSprite(Color color) {
+        var whiteTexture = GenerateTexture(PixelsPerUnit, PixelsPerUnit, color);
         var sprite = Sprite.Create(
             whiteTexture,
             new Rect(0, 0, whiteTexture.width, whiteTexture.height),

@@ -16,3 +16,6 @@
 [submodule "Packages/com.zor.utility-ai"]
 	path = Packages/com.zor.utility-ai
 	url = https://github.com/ivanbelyj/UtilityAI.git
+[submodule "Assets/ThirdParty/RTree"]
+	path = Assets/ThirdParty/RTree
+	url = git@github.com:deadlyfingers/RTree.git

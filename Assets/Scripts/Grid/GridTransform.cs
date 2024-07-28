@@ -45,6 +45,4 @@ public class GridTransform : MonoBehaviour
 
     public Vector3 Rotated90 => gridManager
         .GridDirectionToRotated90GridVector(orientation).normalized;
-
-    
 }

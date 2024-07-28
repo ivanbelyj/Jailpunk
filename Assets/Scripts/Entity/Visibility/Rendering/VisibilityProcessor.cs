@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using RTree;
 using UnityEngine;
 
 public class VisibilityProcessor : MonoBehaviour
@@ -21,17 +22,11 @@ public class VisibilityProcessor : MonoBehaviour
             return gridManager;
         }
     }
-    private GridLightSource[] lightSources;
+    private LightSourceProvider lightSourceProvider = new();
 
     public VisibilityMap VisibilityMap { get; private set; }
 
-    public void UpdateLightSources() {
-        lightSources = FindObjectsOfType<GridLightSource>();
-    }
-
     public void UpdateVisibility() {
-        UpdateLightSources(); // TODO: more efficient support of changing sources
-
         UpdateVisibilityMap();
 
         VisibilityMap.TraverseVisibilityMap((row, col, x, y) => {
@@ -50,6 +45,10 @@ public class VisibilityProcessor : MonoBehaviour
         VisibilityMap.TraverseVisibilityMap((row, col, x, y) => {
             VisibilityMap[row, col] = map2[row, col];
         });
+    }
+
+    private void Awake() {
+        lightSourceProvider.Initialize();
     }
 
     private bool HasNeighborGreaterThanZero(int row, int col, bool checkDiagonals)
@@ -79,10 +78,6 @@ public class VisibilityProcessor : MonoBehaviour
         }
 
         return false;
-    }
-
-    private void Start() {
-        UpdateLightSources();
     }
 
     private void UpdateVisibilityMap() {
@@ -187,17 +182,15 @@ public class VisibilityProcessor : MonoBehaviour
         Vector3Int cellPos,
         Vector3 cellPosInWorld,
         bool ignoreAccessibility) {
-        // Todo: use RTree
-        var query = lightSources
-            .Where(source =>
-                source.Bounds.Overlaps(new RectInt(cellPos.x, cellPos.y, 1, 1)));
+        var sourcesAtPos = lightSourceProvider.GetLightSourcesAtCell(cellPos);
+
         if (!ignoreAccessibility) {
-            query = query.Where(source => IsPathClear(
+            sourcesAtPos = sourcesAtPos.Where(source => IsPathClear(
                 source.transform.position,
                 cellPosInWorld,
                 cellPos));
         }
-        return query;
+        return sourcesAtPos;
     }
 
     private bool IsPathClear(

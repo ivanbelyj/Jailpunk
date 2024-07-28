@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using TMPro;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -10,6 +9,10 @@ public class DarknessRenderer : MonoBehaviour
 {
     private Tilemap tilemap;
     private VisibilityProcessor visibilityProcessor;
+
+    [SerializeField]
+    private Color darknessColor = Color.black;
+    private Tile tileDarkness;
 
     private const string DarknessTilemapTag = "DarknessOverlay";
 
@@ -26,6 +29,16 @@ public class DarknessRenderer : MonoBehaviour
         }
 
         visibilityProcessor = GetComponent<VisibilityProcessor>();
+
+        tileDarkness = CreateEmptyTile(darknessColor);
+    }
+
+    private static Tile CreateEmptyTile(Color color) {
+        var emptyTile = ScriptableObject.CreateInstance<Tile>();
+        emptyTile.sprite = SpriteUtils.GenerateSprite(color);
+        emptyTile.color = Color.white;
+        emptyTile.flags = TileFlags.None;
+        return emptyTile;
     }
 
     private void Update() {
@@ -36,8 +49,6 @@ public class DarknessRenderer : MonoBehaviour
 
             EnsureTileExists(pos);
 
-            // float visibility = visibilityProcessor.VisibilityMap[row, col];
-            // SetDarknessForTile(pos, 1f - visibility);
             float targetVisibility = 1f - visibilityProcessor.VisibilityMap[row, col];
             UpdateTileAlphaSmoothly(pos, targetVisibility);
         });
@@ -46,33 +57,24 @@ public class DarknessRenderer : MonoBehaviour
     private void EnsureTileExists(Vector3Int pos) {
         if (!tilemap.HasTile(pos))
         {
-            tilemap.SetTile(pos, SpriteUtils.EmptyTile);
+            tilemap.SetTile(pos, tileDarkness);
         }
     }
 
     /// <param name="darkness">In [0f, 1f]</param>
     private void SetDarknessForTile(Vector3Int pos, float darkness) {
-        tilemap.SetTileFlags(pos, TileFlags.None);
-        tilemap.SetColor(pos, new Color(0f, 0f, 0f, darkness));
+        // tilemap.SetTileFlags(pos, TileFlags.None);
+        
+        var color = new Color(1f, 1f, 1f, darkness);
+        tilemap.SetColor(pos, color);
     }
-    private void UpdateTileAlphaSmoothly(Vector3Int pos, float targetAlpha) {
 
+    // For some reason, not working with black on 1 -> 0
+    private void UpdateTileAlphaSmoothly(Vector3Int pos, float targetAlpha) {
         float currentAlpha = tilemap.GetColor(pos).a;
         
-        // 0 -> 1 - correctly
-        // 0 + (1 - 0) * t = допустим 0.1
-        // 0.1 + (1 - 0.1) * t
-
-        // 1 -> 0 - wrong
-        // 1 + (0 - 1) * t = допустим 0.1
-        // 0.9 + (0 - 0.9) * t
-
-
-        // a + (b - a) * Clamp01(t);
-        float newAlpha = Mathf.Lerp(
-            currentAlpha,
-            targetAlpha,
-            Time.deltaTime * 5f);
+        float newAlpha =
+            currentAlpha + (targetAlpha - currentAlpha) * Time.deltaTime * 5f;
 
         SetDarknessForTile(pos, newAlpha);
     }
