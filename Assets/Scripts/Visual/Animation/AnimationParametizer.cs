@@ -46,11 +46,11 @@ public class AnimationParametizer
     /// </summary>
     private int AdjustToSupportedAngle(int angle) {
         return angle switch {
-            > 0 and < 90 => 90,
-            > 90 and < 180 => 90,
-            > 180 and < 270 => 270,
-            > 270 and < 360 => 270,
-            >= 0 and < 360 => angle,
+            >= 0 and < 45 => 0,
+            >= 45 and <= 135 => 90,
+            > 135 and < 225 => 180,
+            >= 225 and <= 315 => 270,
+            > 315 and < 360 => 0,
             _ => throw new ArgumentOutOfRangeException(
                 nameof(angle),
                 "Angle must be in 0 (inclusive), 360 (exclusive)")

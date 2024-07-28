@@ -16,8 +16,6 @@ public class NavBehaviour : MoveBehaviour
         base.Awake();
         navManager = FindObjectOfType<NavManager>();
         collider2D = GetComponent<Collider2D>();
-        
-        Debug.Log("Character diameter: " + ColliderDiameter);
     }
 
     public override AISteering GetSteering()
@@ -27,7 +25,7 @@ public class NavBehaviour : MoveBehaviour
         AISteering steering = new AISteering();
         steering.Linear = Target.transform.position - transform.position;
         steering.Linear.Normalize();
-        steering.Linear *= agent.MaxAcceleration;
+        // steering.Linear *= agent.MaxAcceleration;
         return steering;
     }
 

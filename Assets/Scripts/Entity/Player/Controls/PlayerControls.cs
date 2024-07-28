@@ -15,7 +15,7 @@ public class PlayerControls : MonoBehaviour
 
     private PlayerInput playerInput;
     // private GridPhysicalMovement movement;
-    private MoveControls characterControls;
+    private MoveControls moveControls;
     private Interactor interactor;
     private AttachCameraOnStartLocalPlayer attachCamera;
     private Camera playerCamera;
@@ -51,7 +51,7 @@ public class PlayerControls : MonoBehaviour
     private void Awake() {
         playerInput = GetComponent<PlayerInput>();
         // movement = GetComponent<GridPhysicalMovement>();
-        characterControls = GetComponent<MoveControls>();
+        moveControls = GetComponent<MoveControls>();
         interactor = GetComponent<Interactor>();
         attachCamera = GetComponent<AttachCameraOnStartLocalPlayer>();
         playerCamera = Camera.main;
@@ -60,7 +60,7 @@ public class PlayerControls : MonoBehaviour
 
     private void Update() {
         Vector2 moveInput = playerInput.actions["Move"].ReadValue<Vector2>();
-        characterControls.Move(moveInput);
+        moveControls.Move(moveInput);
 
         Mouse mouse = Mouse.current;
         if (mouse.leftButton.wasPressedThisFrame)
@@ -91,6 +91,4 @@ public class PlayerControls : MonoBehaviour
     //     movement.MovementInputValues = GridUtils.RotateCartesian(
     //         new Vector3(moveInput.x, moveInput.y, 0));
     // }
-
-    
 }

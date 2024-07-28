@@ -12,8 +12,8 @@ public class CharacterAgent : MonoBehaviour
     private void Awake() {
         blackboard = GetComponent<SimpleBlackboardContainer>();
         blackboard.blackboard.SetStructValue<float>(new("testValue"), 10f);
-        Debug.Log("Contains struct value: "
-            + blackboard.blackboard.ContainsStructValue<float>(new("testValue")));
+        // Debug.Log("Contains struct value: "
+        //     + blackboard.blackboard.ContainsStructValue<float>(new("testValue")));
     }
 
 

@@ -4,11 +4,11 @@ using UnityEngine;
 using UnityEngine.U2D.Animation;
 
 /// <summary>
-/// Controls of character movement
+/// Controls movement of an entity
 /// </summary>
 [RequireComponent(typeof(GridPhysicalMovement))]
 [RequireComponent(typeof(SpriteSwapAnimator))]
-public class MoveControls : MonoBehaviour
+public class MoveControls : MonoBehaviour, IMoveControls
 {
     private GridPhysicalMovement movement;
     private SpriteSwapAnimator animator;
@@ -30,6 +30,9 @@ public class MoveControls : MonoBehaviour
         " when to reset the animator parameters.")]
     private float changeAnimationDirectionDuration = 0.1f;
 
+    [SerializeField]
+    private bool writeDebugMessages = false;
+
     // Todo: initial orientation
     public Vector2 Orientation =>
         gridManager.CartesianToGridVector(
@@ -40,13 +43,15 @@ public class MoveControls : MonoBehaviour
 
     public void Move(Vector2 moveInput)
     {
-        
+        if (writeDebugMessages) {
+            Debug.Log("move controls input: " + moveInput);
+        }
+
         if (moveInput != lastMoveInput)
         {
             // Reset the timer if the moveInput has changed
             sameMoveInputTime = 0;
             lastMoveInput = moveInput;
-            
         }
         else
         {
@@ -67,7 +72,6 @@ public class MoveControls : MonoBehaviour
         // GridDirectionUtils.RotateCartesian(
         //     new Vector3(moveInput.x, moveInput.y, 0));
     }
-
 
     private void OnDrawGizmos() {
         Color prevColor = Gizmos.color;
