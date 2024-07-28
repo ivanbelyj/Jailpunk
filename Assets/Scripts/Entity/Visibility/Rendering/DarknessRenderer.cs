@@ -49,8 +49,8 @@ public class DarknessRenderer : MonoBehaviour
 
             EnsureTileExists(pos);
 
-            float targetVisibility = 1f - visibilityProcessor.VisibilityMap[row, col];
-            UpdateTileAlphaSmoothly(pos, targetVisibility);
+            float targetDarkness = 1f - visibilityProcessor.VisibilityMap[row, col];
+            UpdateTileAlphaSmoothly(pos, targetDarkness);
         });
     }
 
@@ -69,12 +69,18 @@ public class DarknessRenderer : MonoBehaviour
         tilemap.SetColor(pos, color);
     }
 
-    // For some reason, not working with black on 1 -> 0
+    
     private void UpdateTileAlphaSmoothly(Vector3Int pos, float targetAlpha) {
         float currentAlpha = tilemap.GetColor(pos).a;
         
-        float newAlpha =
-            currentAlpha + (targetAlpha - currentAlpha) * Time.deltaTime * 5f;
+        float t = Time.deltaTime * 7f;
+
+        // Very strange fix for darker colors (case 1 -> 0), it just works
+        if (targetAlpha < currentAlpha) {
+            t *= (darknessColor.r + darknessColor.g + darknessColor.b) / 3f;
+            t *= 2f / currentAlpha;
+        }
+        float newAlpha = currentAlpha + (targetAlpha - currentAlpha) * t;
 
         SetDarknessForTile(pos, newAlpha);
     }

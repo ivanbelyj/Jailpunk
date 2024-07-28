@@ -683,7 +683,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38ea350c8aa036c40ae30757dc76e9e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  darknessColor: {r: 0, g: 0, b: 0, a: 1}
+  darknessColor: {r: 0.09433961, g: 0.09433961, b: 0.09433961, a: 1}
 --- !u!114 &-3505494692243241985
 MonoBehaviour:
   m_ObjectHideFlags: 0
