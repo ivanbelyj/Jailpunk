@@ -3,31 +3,52 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+[RequireComponent(typeof(Collider2D))]
 public class NavBehaviour : MoveBehaviour
 {
-    private NavManager navManager;
     public Vector3 CurrentDest { get; set; }
+    private NavManager navManager;
+    new private Collider2D collider2D;
+
+    private float ColliderDiameter => collider2D.bounds.extents.magnitude * 2;
     
     public override void Awake() {
         base.Awake();
         navManager = FindObjectOfType<NavManager>();
+        collider2D = GetComponent<Collider2D>();
+        
+        Debug.Log("Character diameter: " + ColliderDiameter);
     }
 
     public override AISteering GetSteering()
     {
-        // Debug.Log($"AStar between: {gameObject.transform.position} and {CurrentDest}");
-        List<Vertex> path = GetCurrentPath();
-        // Debug.Log("Path: " + string.Join(", ", path.Select(x => x.transform.position).ToList()));
-        if (path.Count > 1)
-            Target = path[1].gameObject;
-        else
-            Target = gameObject;
+        Target = GetTargetGameObject();      
 
         AISteering steering = new AISteering();
         steering.Linear = Target.transform.position - transform.position;
         steering.Linear.Normalize();
         steering.Linear *= agent.MaxAcceleration;
         return steering;
+    }
+
+    private GameObject GetTargetGameObject() {
+        // Debug.Log($"AStar between: {gameObject.transform.position} and {CurrentDest}");
+        List<Vertex> path = GetCurrentPath();
+        // Debug.Log("Path: " + string.Join(", ", path.Select(x => x.transform.position).ToList()));
+
+        if (path.Count <= 1)
+            return gameObject;
+
+        if (PathUtils.IsPathClear(
+            gameObject.transform.position,
+            path[1].transform.position,
+            ColliderDiameter)) {
+            return path[1].gameObject;
+        } else {
+            // If we cannot go to the next point, we should go to the center
+            // of our origin
+            return path[0].gameObject;
+        }
     }
 
     private void OnDrawGizmos() {
@@ -42,9 +63,11 @@ public class NavBehaviour : MoveBehaviour
     }
 
     private List<Vertex> GetCurrentPath() {
-        return navManager.Graph.GetPathAstar(
-            gameObject.transform.position,
-            CurrentDest);
+        return GraphUtils.SmoothPath(
+            navManager.Graph.GetPathAstar(
+                gameObject.transform.position,
+                CurrentDest),
+            ColliderDiameter);
     }
 
     private void DrawPath(List<Vertex> path)

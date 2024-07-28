@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Wall
+  - DarknessOverlay
+  - GenerateShadowCasters
   layers:
   - Default
   - TransparentFX
@@ -47,4 +49,7 @@ TagManager:
     locked: 0
   - name: Indicators
     uniqueID: 514221351
+    locked: 0
+  - name: DarknessOverlay
+    uniqueID: 2228753807
     locked: 0

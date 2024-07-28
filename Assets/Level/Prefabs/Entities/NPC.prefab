@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3074480863793260129}
   - component: {fileID: 3679944304310228711}
   - component: {fileID: 6980796412369359882}
-  - component: {fileID: 3786015867818164953}
+  - component: {fileID: 5176439044172799880}
   - component: {fileID: -7537472172131196947}
   - component: {fileID: 4843753489869209501}
   - component: {fileID: -4930455235786288868}
@@ -132,8 +132,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!60 &3786015867818164953
-PolygonCollider2D:
+--- !u!58 &5176439044172799880
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -146,21 +146,8 @@ PolygonCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0}
-    oldSize: {x: 2, y: 2}
-    newSize: {x: 2.56, y: 2.56}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: -0.00391756, y: -0.058424503}
-      - {x: 0.38012236, y: 0.15095066}
-      - {x: -0.0032851547, y: 0.36949942}
-      - {x: -0.39891255, y: 0.18378857}
+  serializedVersion: 2
+  m_Radius: 0.15
 --- !u!114 &-7537472172131196947
 MonoBehaviour:
   m_ObjectHideFlags: 0

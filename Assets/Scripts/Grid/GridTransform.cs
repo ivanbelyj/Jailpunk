@@ -4,15 +4,22 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Component of GameObject that has an orientation in the grid
+/// Component for objects positioned and oriented in a grid
 /// </summary>
-public class GridOriented : MonoBehaviour
+public class GridTransform : MonoBehaviour
 {
     [SerializeField]
     protected GridDirection orientation;
     public GridDirection Orientation {
         get => orientation;
         set => orientation = value;
+    }
+
+    /// <summary>
+    /// Position in grid
+    /// </summary>
+    public Vector3Int PositionInGrid {
+        get => GridManager.WorldToCell(transform.position);
     }
 
     // Works in OnDrawGizmos
@@ -38,4 +45,6 @@ public class GridOriented : MonoBehaviour
 
     public Vector3 Rotated90 => gridManager
         .GridDirectionToRotated90GridVector(orientation).normalized;
+
+    
 }

@@ -15,7 +15,7 @@ public class PlayerControls : MonoBehaviour
 
     private PlayerInput playerInput;
     // private GridPhysicalMovement movement;
-    private CharacterControls characterControls;
+    private MoveControls characterControls;
     private Interactor interactor;
     private AttachCameraOnStartLocalPlayer attachCamera;
     private Camera playerCamera;
@@ -51,7 +51,7 @@ public class PlayerControls : MonoBehaviour
     private void Awake() {
         playerInput = GetComponent<PlayerInput>();
         // movement = GetComponent<GridPhysicalMovement>();
-        characterControls = GetComponent<CharacterControls>();
+        characterControls = GetComponent<MoveControls>();
         interactor = GetComponent<Interactor>();
         attachCamera = GetComponent<AttachCameraOnStartLocalPlayer>();
         playerCamera = Camera.main;

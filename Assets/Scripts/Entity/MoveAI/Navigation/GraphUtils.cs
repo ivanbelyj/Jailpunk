@@ -19,7 +19,7 @@ public static class GraphUtils
                 Vector2 origin = path[i].transform.position;
                 Vector2 destination = path[j].transform.position;
 
-                if (!IsPathClear(origin, destination, pathWidth))
+                if (!PathUtils.IsPathClear(origin, destination, pathWidth))
                     break;
             }
             i = j - 1;
@@ -27,24 +27,5 @@ public static class GraphUtils
         }
 
         return newPath;
-    }
-
-    private static bool IsPathClear(Vector2 origin, Vector2 destination, float pathWidth)
-    {
-        Vector2 direction = destination - origin;
-        float distance = direction.magnitude;
-        direction.Normalize();
-
-        RaycastHit2D[] hits = Physics2D.CircleCastAll(
-            origin,
-            pathWidth / 2,
-            direction,
-            distance, 1 << LayerMask.NameToLayer("Obstacle"));
-        foreach (RaycastHit2D hit in hits) {
-            if (hit.collider != null)
-                return false;
-        }
-
-        return true;
     }
 }

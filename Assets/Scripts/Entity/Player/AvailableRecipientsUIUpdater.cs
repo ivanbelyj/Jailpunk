@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(Character))]
-[RequireComponent(typeof(CharacterControls))]
+[RequireComponent(typeof(MoveControls))]
 [RequireComponent(typeof(SoundEmitter))]
 public class AvailableRecipientsUIUpdater : MonoBehaviour
 {
@@ -13,12 +13,12 @@ public class AvailableRecipientsUIUpdater : MonoBehaviour
 
     private CommunicationUIManager communicationUIManager;
     private CharacterId subjectId;
-    private CharacterControls characterControls;
+    private MoveControls characterControls;
 
     private void Start() {
         subjectId = GetComponent<Character>().GetCharacterId();
         Debug.Log("SubjectId is " + subjectId);
-        characterControls = GetComponent<CharacterControls>();
+        characterControls = GetComponent<MoveControls>();
 
         communicationUIManager = FindObjectOfType<CommunicationUIManager>();
         soundEmitter = GetComponent<SoundEmitter>();
@@ -40,18 +40,18 @@ public class AvailableRecipientsUIUpdater : MonoBehaviour
             .SetAvailableRecipientIds(recipients.ToList());
     }
 
-    private void OnDrawGizmos() {
-        if (characterControls == null || soundEmitter == null)
-            return;
+    // private void OnDrawGizmos() {
+    //     if (characterControls == null || soundEmitter == null)
+    //         return;
             
-        Color prevCol = Gizmos.color;
-        Gizmos.color = Color.magenta;
-        Gizmos.DrawLine(transform.position,
-            (Vector2)transform.position
-                + characterControls.Orientation
-                * soundEmitter.RadiusChecker.Radius);
-        Gizmos.color = prevCol;
-    }
+    //     Color prevCol = Gizmos.color;
+    //     Gizmos.color = Color.magenta;
+    //     Gizmos.DrawLine(transform.position,
+    //         (Vector2)transform.position
+    //             + characterControls.Orientation
+    //             * soundEmitter.RadiusChecker.Radius);
+    //     Gizmos.color = prevCol;
+    // }
 
     // private void Update() {
     //     var hits = Physics2D.RaycastAll(transform.position,

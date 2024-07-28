@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 // Based on https://github.com/PacktPublishing/Unity-5.x-Game-AI-Programming-Cookbook/blob/master/UAIPC/Assets/Scripts/Ch02Navigation/Graph.cs
@@ -46,10 +47,7 @@ public static class AStarExtensions
             int nodeId = node.Vertex.Id;
             if (ReferenceEquals(node.Vertex, dst))
             {                 
-                return GraphUtils.SmoothPath(
-                    graph.BuildPath(src.Id, node.Vertex.Id, ref previous),
-                    pathWidth
-                );
+                return graph.BuildPath(src.Id, node.Vertex.Id, ref previous);
             }
             edges = graph.GetEdges(node.Vertex);
             foreach (Edge e in edges)
@@ -79,13 +77,13 @@ public static class AStarExtensions
         int dstId,
         ref int[] prevList)
     {
-        List<Vertex> path = new List<Vertex>();
+        LinkedList<Vertex> path = new LinkedList<Vertex>();
         int prev = dstId;
         do
         {
-            path.Add(graph.GetVertex(prev));
+            path.AddFirst(graph.GetVertex(prev));
             prev = prevList[prev];
         } while (prev != srcId);
-        return path;
+        return path.ToList();
     }
 }

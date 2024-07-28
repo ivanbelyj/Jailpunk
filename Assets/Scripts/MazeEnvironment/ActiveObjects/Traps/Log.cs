@@ -4,7 +4,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
 [RequireComponent(typeof(Rigidbody2D))]
-[RequireComponent(typeof(GridOriented))]
+[RequireComponent(typeof(GridTransform))]
 [RequireComponent(typeof(SurroundingAreaBuilder))]
 public class Log : ActivatableObject
 {
@@ -16,13 +16,13 @@ public class Log : ActivatableObject
 
     private new Collider2D collider2D;
     private Rigidbody2D rb;
-    private GridOriented gridOriented;
+    private GridTransform gridOriented;
     private SurroundingAreaBuilder surroundingAreaBuilder;
     
     private void Awake() {
         collider2D = GetComponent<Collider2D>();
         rb = GetComponent<Rigidbody2D>();
-        gridOriented = GetComponent<GridOriented>();
+        gridOriented = GetComponent<GridTransform>();
         surroundingAreaBuilder = GetComponent<SurroundingAreaBuilder>();
     }
 

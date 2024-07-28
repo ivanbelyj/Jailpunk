@@ -20,7 +20,8 @@ public class AttachCameraOnStartLocalPlayer : NetworkBehaviour
     {
         base.OnStartLocalPlayer();
         CinemachineVirtualCamera playerVirtualCamera = GameObject
-            .Find(cameraName).GetComponent<CinemachineVirtualCamera>();
+            .Find(cameraName)
+            .GetComponent<CinemachineVirtualCamera>();
 
         playerVirtualCamera.Follow = transform;
 

@@ -8,7 +8,7 @@ using UnityEngine.U2D.Animation;
 /// </summary>
 [RequireComponent(typeof(GridPhysicalMovement))]
 [RequireComponent(typeof(SpriteSwapAnimator))]
-public class CharacterControls : MonoBehaviour
+public class MoveControls : MonoBehaviour
 {
     private GridPhysicalMovement movement;
     private SpriteSwapAnimator animator;
@@ -33,7 +33,9 @@ public class CharacterControls : MonoBehaviour
     // Todo: initial orientation
     public Vector2 Orientation =>
         gridManager.CartesianToGridVector(
-            GridDirectionUtils.RotateCartesian(currentOrientationMoveInput)
+            currentOrientationMoveInput
+            // Isometric: 
+            // GridDirectionUtils.RotateCartesian(currentOrientationMoveInput)
         ).normalized;
 
     public void Move(Vector2 moveInput)

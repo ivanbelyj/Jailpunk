@@ -8,6 +8,12 @@ public class GridManager : MonoBehaviour
     [SerializeField]
     private Grid grid;
 
+    private ObstacleHelper obstacleHelper;
+
+    private void Awake() {
+        obstacleHelper = new(grid);
+    }
+
     public Vector3Int WorldToCell(Vector3 pos) {
         return grid.WorldToCell(pos);  //  + new Vector3(-0.25f, -0.25f)
     }
@@ -55,5 +61,10 @@ public class GridManager : MonoBehaviour
         GridDirection orient) {
         Vector2 dir = GridDirectionUtils.Rotated(GridDirectionUtils.GridDirectionToCartesianVector2(orient), 90f);
         return CartesianToGridVector(dir);
+    }
+
+    public bool IsObstacle(Vector3Int cellPosition)
+    {
+        return obstacleHelper.IsObstacle(cellPosition);
     }
 }
