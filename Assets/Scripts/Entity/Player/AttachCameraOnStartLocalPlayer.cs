@@ -14,17 +14,30 @@ public class AttachCameraOnStartLocalPlayer : NetworkBehaviour
     [SerializeField]
     private string cameraName = "PlayerVirtualCamera";
 
+    [SerializeField]
+    private Vector3 cameraOffset;
+
     public event Action<CinemachineVirtualCamera> CameraAttached;
 
     public override void OnStartLocalPlayer()
     {
         base.OnStartLocalPlayer();
-        CinemachineVirtualCamera playerVirtualCamera = GameObject
+        CinemachineVirtualCamera playerVirtualCamera = GetCamera();
+
+        playerVirtualCamera.Follow = InstantiateChildToFollow();
+
+        CameraAttached?.Invoke(playerVirtualCamera);
+    }
+
+    private CinemachineVirtualCamera GetCamera() => 
+        GameObject
             .Find(cameraName)
             .GetComponent<CinemachineVirtualCamera>();
 
-        playerVirtualCamera.Follow = transform;
-
-        CameraAttached?.Invoke(playerVirtualCamera);
+    private Transform InstantiateChildToFollow() {
+        GameObject childObject = new GameObject("CameraFollow");
+        childObject.transform.SetParent(transform, false);
+        childObject.transform.localPosition = cameraOffset;
+        return childObject.transform;
     }
 }

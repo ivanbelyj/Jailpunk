@@ -15,6 +15,4 @@ public class CharacterAgent : MonoBehaviour
         // Debug.Log("Contains struct value: "
         //     + blackboard.blackboard.ContainsStructValue<float>(new("testValue")));
     }
-
-
 }

@@ -7,19 +7,14 @@ using UnityEngine.U2D.Animation;
 /// Controls movement of an entity
 /// </summary>
 [RequireComponent(typeof(GridPhysicalMovement))]
-[RequireComponent(typeof(SpriteSwapAnimator))]
 public class MoveControls : MonoBehaviour, IMoveControls
 {
     private GridPhysicalMovement movement;
+
+    [SerializeField]
     private SpriteSwapAnimator animator;
 
     private GridManager gridManager;
-
-    private void Awake() {
-        movement = GetComponent<GridPhysicalMovement>();
-        animator = GetComponent<SpriteSwapAnimator>();
-        gridManager = GameObject.Find("GridManager").GetComponent<GridManager>();
-    }
 
     private Vector2 lastMoveInput;
     private Vector2 currentOrientationMoveInput;
@@ -29,9 +24,6 @@ public class MoveControls : MonoBehaviour, IMoveControls
         "since the last change in the moveInput value. It is used to determine " +
         " when to reset the animator parameters.")]
     private float changeAnimationDirectionDuration = 0.1f;
-
-    [SerializeField]
-    private bool writeDebugMessages = false;
 
     // Todo: initial orientation
     public Vector2 Orientation =>
@@ -43,9 +35,6 @@ public class MoveControls : MonoBehaviour, IMoveControls
 
     public void Move(Vector2 moveInput)
     {
-        if (writeDebugMessages) {
-            Debug.Log("move controls input: " + moveInput);
-        }
 
         if (moveInput != lastMoveInput)
         {
@@ -71,6 +60,11 @@ public class MoveControls : MonoBehaviour, IMoveControls
         // Isometric:
         // GridDirectionUtils.RotateCartesian(
         //     new Vector3(moveInput.x, moveInput.y, 0));
+    }
+
+    private void Awake() {
+        movement = GetComponent<GridPhysicalMovement>();
+        gridManager = GameObject.Find("GridManager").GetComponent<GridManager>();
     }
 
     private void OnDrawGizmos() {
