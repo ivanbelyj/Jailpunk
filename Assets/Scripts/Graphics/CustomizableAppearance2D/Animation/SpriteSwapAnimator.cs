@@ -20,6 +20,17 @@ public class SpriteSwapAnimator : MonoBehaviour
         animationParametizer = new AnimationParametizer(appearance.Schema);
     }
 
+    private void Start() {
+        SetInitialAnimation();
+    }
+
+    private void SetInitialAnimation() {
+        frameUpdater.SetCurrentAnimation(new() {
+            Angle = 180,
+            State = AnimationConstants.StateIdle,
+        });
+    }
+
     public void SetMoveInput(Vector2 moveInput) {
         if (writeDebugMessages) {
             Debug.Log(moveInput);

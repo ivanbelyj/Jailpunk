@@ -154,6 +154,9 @@ GameObject:
   - component: {fileID: 6980796412369359882}
   - component: {fileID: 5176439044172799880}
   - component: {fileID: -4930455235786288868}
+  - component: {fileID: 5274667343655115734}
+  - component: {fileID: 7798834249086489132}
+  - component: {fileID: 1291841777441423805}
   - component: {fileID: -2198002554298130507}
   - component: {fileID: -2967253483208829151}
   - component: {fileID: 1371108634742831869}
@@ -293,7 +296,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageForceThreshold: 1
   damageForceScale: 5
---- !u!114 &-2198002554298130507
+--- !u!114 &5274667343655115734
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -302,62 +305,89 @@ MonoBehaviour:
   m_GameObject: {fileID: 4111959900911027618}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41681b2afe8798440b48794ee2bdcfbf, type: 3}
+  m_Script: {fileID: 11500000, guid: d05a6bf6987f6684185287bbf30196e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+--- !u!114 &7798834249086489132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4111959900911027618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c62b6c6b0e32b50438b0839d05c0682e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+--- !u!114 &1291841777441423805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4111959900911027618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8558e9ec7c45dc438c14de0b88ee1aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   health:
     parameterId: 0
     minValue: 0
     maxValue: 1
     recoveredValue: 1
-    value: 0.8
+    initialValue: 0.1
   endurance:
     parameterId: 1
     minValue: 0
     maxValue: 1
     recoveredValue: 1
-    value: 1
+    initialValue: 1
   satiety:
     parameterId: 2
     minValue: 0
     maxValue: 1
     recoveredValue: 0
-    value: 1
+    initialValue: 1
   bleed:
     parameterId: 3
     minValue: 0
     maxValue: 1
     recoveredValue: 0
-    value: 1
+    initialValue: 1
   radiation:
     parameterId: 4
     minValue: 0
     maxValue: 1
     recoveredValue: 0
-    value: 1
+    initialValue: 1
   regeneration:
     isInfinite: 1
-    speed: 0.01
+    speed: 0.02
     duration: 0
     targetParameterId: 0
   enduranceRecovery:
     isInfinite: 1
-    speed: 0.05
+    speed: 0
     duration: 0
-    targetParameterId: 1
+    targetParameterId: 0
   hunger:
     isInfinite: 1
-    speed: -0.01
+    speed: 0
     duration: 0
-    targetParameterId: 2
+    targetParameterId: 0
   radiationExcretion:
     isInfinite: 1
-    speed: -0.01
+    speed: 0
     duration: 0
-    targetParameterId: 4
+    targetParameterId: 0
   runEnduranceDecrease:
     isInfinite: 0
     speed: 0
@@ -373,6 +403,21 @@ MonoBehaviour:
     speed: 0
     duration: 0
     targetParameterId: 0
+--- !u!114 &-2198002554298130507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4111959900911027618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41681b2afe8798440b48794ee2bdcfbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
 --- !u!114 &-2967253483208829151
 MonoBehaviour:
   m_ObjectHideFlags: 0

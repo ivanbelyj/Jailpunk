@@ -15,6 +15,14 @@ PrefabInstance:
       propertyPath: personName
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 1291841777441423805, guid: 8d216b88117043a4abed9e42b44407e7, type: 3}
+      propertyPath: regeneration.speed
+      value: -0.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 1291841777441423805, guid: 8d216b88117043a4abed9e42b44407e7, type: 3}
+      propertyPath: health.initialValue
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 3074480863793260129, guid: 8d216b88117043a4abed9e42b44407e7, type: 3}
       propertyPath: _assetId
       value: 810516343

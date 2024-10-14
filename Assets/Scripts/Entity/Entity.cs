@@ -5,25 +5,27 @@ using UnityEngine;
 /// <summary>
 /// Living being with its lifecycle and HealthBar
 /// </summary>
-[RequireComponent(typeof(EntityLifecycle))]
+[RequireComponent(typeof(DestroyableLifecycle))]
 public class Entity : MonoBehaviour
 {
     [SerializeField]
     private ParameterBar healthBar;
-    private EntityLifecycle lifecycle;
+    private DestroyableLifecycle lifecycle;
 
     private void Awake() {
-        lifecycle = GetComponent<EntityLifecycle>();
-        lifecycle.Health.OnValueChanged += (oldVal, newVal) => {
-            UpdateHealthBar(newVal);
-        };
+        lifecycle = GetComponent<DestroyableLifecycle>();
+        lifecycle.OnEntityDestroyed += OnDeath;
     }
 
-    private void Start() {
-        UpdateHealthBar(lifecycle.Health.Value);
+    private void Update() {
+        UpdateHealthBar();
     }
 
-    private void UpdateHealthBar(float newVal) {
-        healthBar.SetValue(newVal);
+    private void OnDeath() {
+        Debug.Log("Character died.");
+    }
+
+    private void UpdateHealthBar() {
+        healthBar.SetValue(lifecycle.GetParameterValue(LifecycleParameterIds.Strength));
     }
 }
