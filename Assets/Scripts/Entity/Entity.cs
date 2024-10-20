@@ -14,7 +14,7 @@ public class Entity : MonoBehaviour
 
     private void Awake() {
         lifecycle = GetComponent<DestroyableLifecycle>();
-        lifecycle.OnEntityDestroyed += OnDeath;
+        lifecycle.EntityDestroyed += OnDeath;
     }
 
     private void Update() {

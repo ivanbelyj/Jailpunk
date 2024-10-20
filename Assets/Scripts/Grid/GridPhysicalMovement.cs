@@ -6,20 +6,18 @@ using UnityEngine;
 /// Component controlling physical accelerated / decelerated movement
 /// in grid directions
 /// </summary>
-[RequireComponent(typeof(Rigidbody2D))]
 public class GridPhysicalMovement : MonoBehaviour
 {
     [SerializeField]
     [Tooltip("Max movement speed, units per second")]
     private float maxSpeed = 1f;
 
-    private Rigidbody2D rb;
+    [SerializeField]
+    private Rigidbody2D rigidBody;
 
     private GridManager gridManager;
 
     private void Awake() {
-        rb = GetComponent<Rigidbody2D>();
-
         gridManager = GameObject.Find("GridManager").GetComponent<GridManager>();
     }
 
@@ -50,7 +48,7 @@ public class GridPhysicalMovement : MonoBehaviour
             + (Vector3)gridManager.CartesianToGridVector(
                 Time.fixedDeltaTime * velocity);
 
-        rb.MovePosition(destination);
+        rigidBody.MovePosition(destination);
     }
 
     private void LateUpdate() {

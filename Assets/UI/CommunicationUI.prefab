@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6088030864039381254}
   - component: {fileID: 6088030864039381255}
   - component: {fileID: 6088030864039381253}
+  - component: {fileID: 6695697002817979495}
   m_Layer: 5
   m_Name: MessagesPanel
   m_TagString: Untagged
@@ -93,6 +94,18 @@ MonoBehaviour:
   messageItemsParent: {fileID: 7995435819719100270}
   textPrefab: {fileID: 7937604923223281144, guid: 9369170f0ef7fc4468e33a9fb43df6f1, type: 3}
   scrollRect: {fileID: 6412935572009738370}
+--- !u!225 &6695697002817979495
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6088030864039381257}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &6088030864692261447
 GameObject:
   m_ObjectHideFlags: 0
@@ -146,6 +159,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   messagesPanel: {fileID: 6088030864039381253}
   communicationPanel: {fileID: 6088030864702700846}
+  transitionDuration: 0.34
+  canvasGroupsToHide:
+  - {fileID: 6695697002817979495}
+  - {fileID: 8643474655474392321}
 --- !u!1 &6088030864702700818
 GameObject:
   m_ObjectHideFlags: 0
@@ -158,6 +175,7 @@ GameObject:
   - component: {fileID: 6088030864702700847}
   - component: {fileID: 6088030864702700816}
   - component: {fileID: 6088030864702700846}
+  - component: {fileID: 8643474655474392321}
   m_Layer: 5
   m_Name: CommunicationPanel
   m_TagString: Untagged
@@ -241,6 +259,18 @@ MonoBehaviour:
   choiceItemPrefab: {fileID: 6616059372427937817, guid: 52ec3dbc22062204b914bf98606fa426, type: 3}
   choiceItemsParent: {fileID: 2831273502818721069}
   recipientDropdown: {fileID: 3801436794917182203}
+--- !u!225 &8643474655474392321
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6088030864702700818}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1001 &6088030863611248096
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -251,6 +281,10 @@ PrefabInstance:
     - target: {fileID: 2263507674467355588, guid: 432a97d6014b00a4f81436f5892208b4, type: 3}
       propertyPath: m_Name
       value: SpeechVolumeDropdown
+      objectReference: {fileID: 0}
+    - target: {fileID: 2721017337546464075, guid: 432a97d6014b00a4f81436f5892208b4, type: 3}
+      propertyPath: m_Size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3647593353406899696, guid: 432a97d6014b00a4f81436f5892208b4, type: 3}
       propertyPath: m_Pivot.x
@@ -449,6 +483,10 @@ PrefabInstance:
     - target: {fileID: 2412122635679557007, guid: 432a97d6014b00a4f81436f5892208b4, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -21
+      objectReference: {fileID: 0}
+    - target: {fileID: 2721017337546464075, guid: 432a97d6014b00a4f81436f5892208b4, type: 3}
+      propertyPath: m_Size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3647593353406899696, guid: 432a97d6014b00a4f81436f5892208b4, type: 3}
       propertyPath: m_Pivot.x
@@ -929,6 +967,23 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8879443797054369768, guid: c872ba776640aaf4a81ea80d51763053, type: 3}
   m_PrefabInstance: {fileID: 6088030864835339004}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &4101730806905914200 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7823106316414001572, guid: c872ba776640aaf4a81ea80d51763053, type: 3}
+  m_PrefabInstance: {fileID: 6088030864835339004}
+  m_PrefabAsset: {fileID: 0}
+--- !u!225 &3994330095825488508
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4101730806905914200}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 1
 --- !u!1 &5421746502215804470 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2252061940083180746, guid: c872ba776640aaf4a81ea80d51763053, type: 3}
@@ -1130,6 +1185,23 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8879443797054369768, guid: c872ba776640aaf4a81ea80d51763053, type: 3}
   m_PrefabInstance: {fileID: 6088030865007429982}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &4101730807068584186 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7823106316414001572, guid: c872ba776640aaf4a81ea80d51763053, type: 3}
+  m_PrefabInstance: {fileID: 6088030865007429982}
+  m_PrefabAsset: {fileID: 0}
+--- !u!225 &1358073637479793844
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4101730807068584186}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 1
 --- !u!1 &5421746502583455124 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2252061940083180746, guid: c872ba776640aaf4a81ea80d51763053, type: 3}

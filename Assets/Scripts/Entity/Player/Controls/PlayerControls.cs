@@ -17,7 +17,7 @@ public class PlayerControls : MonoBehaviour
     // private GridPhysicalMovement movement;
     private MoveControls moveControls;
     private Interactor interactor;
-    private AttachCameraOnStartLocalPlayer attachCamera;
+    private PlayerCameraManager attachCamera;
     private Camera playerCamera;
 
     private CommunicationUIManager communicationUIManager;
@@ -53,7 +53,7 @@ public class PlayerControls : MonoBehaviour
         // movement = GetComponent<GridPhysicalMovement>();
         moveControls = GetComponent<MoveControls>();
         interactor = GetComponent<Interactor>();
-        attachCamera = GetComponent<AttachCameraOnStartLocalPlayer>();
+        attachCamera = GetComponent<PlayerCameraManager>();
         playerCamera = Camera.main;
         communicationUIManager = FindObjectOfType<CommunicationUIManager>();
     }

@@ -5,11 +5,7 @@ using Mirror;
 using Cinemachine;
 using System;
 
-/// <summary>
-/// Attaches CinemachineVirtualCamera with defined name
-/// to GameObject on local machine
-/// </summary>
-public class AttachCameraOnStartLocalPlayer : NetworkBehaviour
+public class PlayerCameraManager : NetworkBehaviour
 {
     [SerializeField]
     private string cameraName = "PlayerVirtualCamera";
@@ -17,16 +13,18 @@ public class AttachCameraOnStartLocalPlayer : NetworkBehaviour
     [SerializeField]
     private Vector3 cameraOffset;
 
+    public CinemachineVirtualCamera PlayerVirtualCamera { get; private set; }
+
     public event Action<CinemachineVirtualCamera> CameraAttached;
 
     public override void OnStartLocalPlayer()
     {
         base.OnStartLocalPlayer();
-        CinemachineVirtualCamera playerVirtualCamera = GetCamera();
+        PlayerVirtualCamera = GetCamera();
+        PlayerVirtualCamera.Follow = InstantiateChildToFollow();
+        PlayerVirtualCamera.GetComponent<CameraZoomer>().ResetZoomOut();
 
-        playerVirtualCamera.Follow = InstantiateChildToFollow();
-
-        CameraAttached?.Invoke(playerVirtualCamera);
+        CameraAttached?.Invoke(PlayerVirtualCamera);
     }
 
     private CinemachineVirtualCamera GetCamera() => 

@@ -24,8 +24,6 @@ public class ParameterBar : MonoBehaviour
     [SerializeField]
     private Color maxColor;
 
-    private bool isHidden = false;
-
     /// <summary>
     /// Sets parameter value and updates UI
     /// </summary>
@@ -35,11 +33,7 @@ public class ParameterBar : MonoBehaviour
     public void SetValue(float value) {
         value = Mathf.Clamp01(value);
 
-        if (value == 1f && !isHidden) {
-            ToggleChildren(false);
-        } else if (value < 1f && isHidden) {
-            ToggleChildren(true);
-        }
+        SetVisible(value < 1f);
 
         Vector3 newPosition = fillTransform.localPosition;
         newPosition.x = initialLocalPosX - (initialScaleX - (initialScaleX * value)) / 2;
@@ -52,8 +46,7 @@ public class ParameterBar : MonoBehaviour
             fillSpriteRenderer.color = Color.Lerp(minColor, maxColor, value);
     }
 
-    private void ToggleChildren(bool val) {
-        isHidden = val;
+    private void SetVisible(bool val) {
         fillSpriteRenderer.enabled = val;
         backgroundSpriteRenderer.enabled = val;
     }

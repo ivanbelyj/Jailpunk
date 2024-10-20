@@ -8,6 +8,9 @@ public class AppearanceRenderer
     private readonly AppearanceElementRenderer[] elements;
     private readonly Dictionary<string, AppearanceElementRenderer> elementsByName;
 
+    [SerializeField]
+    private bool showWarnings = false;
+
     public AppearanceRenderer(AppearanceElementRenderer[] elements)
     {
         this.elements = elements;
@@ -29,8 +32,10 @@ public class AppearanceRenderer
 
     public void SetElement(string elementName, AppearanceElementData data) {
         if (!elementsByName.TryGetValue(elementName, out var element)) {
-            Debug.LogWarning(
-                $"Cannot set appearance element '{elementName}'. Not found.");
+            if (showWarnings) {
+                Debug.LogWarning(
+                    $"Cannot set appearance element '{elementName}'. Not found.");
+            }
             return;
         }
         

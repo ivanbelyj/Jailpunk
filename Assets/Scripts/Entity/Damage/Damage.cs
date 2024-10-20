@@ -6,5 +6,9 @@ using UnityEngine;
 [Serializable]
 public struct Damage
 {
-    public int force;
+    /// <summary>
+    /// Force (usually in hit points)
+    /// </summary>
+    public float force;
+    public DamageType damageType;
 }

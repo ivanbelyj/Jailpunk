@@ -84,6 +84,8 @@ public class GridLightSource : MonoBehaviour, ISpatialData
     //     GridLightManager.RemoveLightSource(this);
     // }
 
+    // Now though light source was actually deleted, for some reason
+    // the whole logic doesn't work as expected
     // private void OnDestroy()
     // {
     //     GridLightManager.RemoveLightSource(this);

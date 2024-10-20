@@ -31,8 +31,10 @@ public class LightSourceProvider
             })
             .ToList();
 
-        res
-            .AddRange(dynamicLightSources
+        res.AddRange(dynamicLightSources
+            // Quick fix for destroyed light sources
+            // Todo: fix it better
+            .Where(x => x != null)
             .Where(source =>
                 source.Bounds.Overlaps(new RectInt(cellPos.x, cellPos.y, 1, 1))));
 
