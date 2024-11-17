@@ -84,10 +84,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d7d2e8911a97a340ac0c9293069d6d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zoomSpeed: 1
-  minOrthographicSize: 2.7
-  maxOrthographicSize: 8
-  lerpSpeed: 0.1
+  scrollZoomSpeed: 2
+  minScrollOrthographicSize: 1
+  maxScrollOrthographicSize: 10
+  defaultOrthographicSize: 5
+  scrollLerpSpeed: 0.1
   virtualCamera: {fileID: 7889121345724333590}
 --- !u!1 &7889121346618826767
 GameObject:

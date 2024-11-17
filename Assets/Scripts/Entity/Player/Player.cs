@@ -9,13 +9,20 @@ public class Player : NetworkBehaviour
     [SerializeField]
     private DestroyableLifecycle destroyableLifecycle;
 
-    private DynamicVolumeManager volumeManager;
+    [SerializeField]
+    [Tooltip("Child gameObject with components specific to local player only")]
+    private GameObject localPlayer;
 
     public override void OnStartLocalPlayer()
     {
         base.OnStartLocalPlayer();
         destroyableLifecycle.EntityDestroyed += OnDeath;
-        volumeManager = FindObjectOfType<DynamicVolumeManager>();
+    }
+
+    private void Start() {
+        if (!isLocalPlayer) {
+            Destroy(localPlayer);
+        }
     }
 
     private void OnDeath() {

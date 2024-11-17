@@ -1,7 +1,8 @@
+using Mirror;
 using UnityEngine;
 
 [RequireComponent(typeof(MoveAgent))]
-public class MoveBehaviour : MonoBehaviour
+public class MoveBehaviour : NetworkBehaviour
 {
     [SerializeField]
     private GameObject target;
@@ -11,11 +12,15 @@ public class MoveBehaviour : MonoBehaviour
     public virtual void Awake() {
         agent = GetComponent<MoveAgent>();
     }
-    public virtual void Update() {
-        agent.SetSteering(GetSteering());
+
+    protected virtual void Update() {
+        if (isServer) {
+            agent.SetSteering(GetSteering());
+        }
     }
 
-    public virtual AISteering GetSteering() {
+    [Server]
+    protected virtual AISteering GetSteering() {
         return new AISteering();
     }
 }

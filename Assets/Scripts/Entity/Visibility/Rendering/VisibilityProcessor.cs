@@ -47,7 +47,7 @@ public class VisibilityProcessor : MonoBehaviour
         });
     }
 
-    private void Awake() {
+    private void Start() {
         lightSourceProvider.Initialize();
     }
 

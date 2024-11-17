@@ -17,16 +17,25 @@ public class SortingOrderHelper
     }
 
     public int GetSortingOrder(int angle) {
-        bool isInTopQuarter = IsInArc(angle, AngleTopLeft, AngleTopRight);
-        bool isInBottomQuarter = IsInArc(angle, AngleBottomRight, AngleBottomLeft);
+        // Temporary fix )
+        return angle switch {
+            0 => elementSchema.orderWhenVerticalAngle
+                * (elementSchema.ignoreInvertForTopAngle ? 1 : -1),
+            180 => elementSchema.orderWhenVerticalAngle,
+            _ => elementSchema.orderWhenHorizontalAngle
+        };
 
-        bool shouldInvert = isInTopQuarter;
+        // Todo: possibly has a bug
+        // bool isInTopQuarter = IsInArc(angle, AngleTopLeft, AngleTopRight);
+        // bool isInBottomQuarter = IsInArc(angle, AngleBottomRight, AngleBottomLeft);
 
-        int sortingOrder = isInTopQuarter || isInBottomQuarter
-            ? elementSchema.orderWhenVerticalAngle
-            : elementSchema.orderWhenHorizontalAngle;
+        // bool shouldInvert = isInTopQuarter;
+
+        // int sortingOrder = isInTopQuarter || isInBottomQuarter
+        //     ? elementSchema.orderWhenVerticalAngle
+        //     : elementSchema.orderWhenHorizontalAngle;
         
-        return shouldInvert ? -sortingOrder : sortingOrder;
+        // return shouldInvert ? -sortingOrder : sortingOrder;
     }
 
     private static int To360(int angle)

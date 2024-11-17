@@ -10,10 +10,7 @@ public class SpriteSwapAnimator : MonoBehaviour
 
     private FrameUpdater frameUpdater;
     private AnimationParametizer animationParametizer;
-
-    [SerializeField]
-    private bool writeDebugMessages = false;
-
+    
     private void Awake() {
         appearance = GetComponent<IAppearance>();
         frameUpdater = new FrameUpdater(appearance);
@@ -31,11 +28,7 @@ public class SpriteSwapAnimator : MonoBehaviour
         });
     }
 
-    public void SetMoveInput(Vector2 moveInput) {
-        if (writeDebugMessages) {
-            Debug.Log(moveInput);
-        }
-            
+    public void SetMoveInput(Vector2 moveInput) {   
         frameUpdater.SetCurrentAnimation(
             animationParametizer.GetParameters(moveInput, frameUpdater.CurrentFrame));
     }

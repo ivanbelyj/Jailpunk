@@ -17,27 +17,11 @@ MonoBehaviour:
     stateSchemas:
     - state: walk
       framesCount: 8
-      secondsPerFrame: 0.2
+      secondsPerFrame: 0.18
     - state: idle
       framesCount: 8
       secondsPerFrame: 0.3
     origins:
-    - name: test
-      ignoreState: 1
-      ignoreAngle: 1
-      items:
-      - state: 
-        angle: 0
-        baseOffset: {x: 0, y: 0}
-        offsetsPerFrame:
-        - {x: 5, y: 5}
-        - {x: 10, y: 10}
-        - {x: 15, y: 15}
-        - {x: 20, y: 20}
-        - {x: 15, y: 15}
-        - {x: 10, y: 10}
-        - {x: 5, y: 5}
-        - {x: 0, y: 0}
     - name: head
       ignoreState: 0
       ignoreAngle: 0
@@ -66,19 +50,129 @@ MonoBehaviour:
         - {x: 0, y: -1}
         - {x: 0, y: -2}
         - {x: 0, y: -1}
+      - state: walk
+        angle: 0
+        baseOffset: {x: 0, y: 0}
+        offsetsPerFrame:
+        - {x: 0, y: 0}
+        - {x: 0, y: -1}
+        - {x: 0, y: -2}
+        - {x: 0, y: -1}
+        - {x: 0, y: 0}
+        - {x: 0, y: -1}
+        - {x: 1, y: -2}
+        - {x: 0, y: -1}
+      - state: idle
+        angle: 0
+        baseOffset: {x: 0, y: -1}
+        offsetsPerFrame:
+        - {x: 0, y: 1}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+      - state: idle
+        angle: 180
+        baseOffset: {x: 0, y: 0}
+        offsetsPerFrame:
+        - {x: 0, y: 1}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 1}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+      - state: idle
+        angle: 90
+        baseOffset: {x: 0, y: 0}
+        offsetsPerFrame:
+        - {x: 0, y: 0}
+        - {x: 0, y: -1}
+        - {x: 0, y: -1}
+        - {x: 0, y: -1}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 1, y: -1}
+        - {x: 1, y: -1}
     - name: torso
       ignoreState: 0
       ignoreAngle: 0
       items:
       - state: idle
+        angle: 180
+        baseOffset: {x: 0, y: 0}
+        offsetsPerFrame:
+        - {x: 0, y: 1}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 1}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+      - state: idle
         angle: 90
         baseOffset: {x: 0, y: 0}
-        offsetsPerFrame: []
+        offsetsPerFrame:
+        - {x: 0, y: 0}
+        - {x: 0, y: -1}
+        - {x: 0, y: -1}
+        - {x: 0, y: -1}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 1, y: -1}
+        - {x: 1, y: -1}
+      - state: idle
+        angle: 0
+        baseOffset: {x: 0, y: 0}
+        offsetsPerFrame:
+        - {x: 0, y: 0}
+        - {x: 0, y: -1}
+        - {x: 0, y: -1}
+        - {x: 0, y: -1}
+        - {x: 0, y: -1}
+        - {x: 0, y: -1}
+        - {x: 0, y: -1}
+        - {x: 0, y: -1}
+    - name: hands
+      ignoreState: 0
+      ignoreAngle: 0
+      items:
+      - state: idle
+        angle: 0
+        baseOffset: {x: 0, y: 0}
+        offsetsPerFrame:
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: -1}
+        - {x: 0, y: -1}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+      - state: idle
+        angle: 180
+        baseOffset: {x: 0, y: 0}
+        offsetsPerFrame:
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: -1}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
   stopFrameSets:
   - name: legs-walk
     stopFrames: 000000000100000003000000040000000500000007000000
   - name: hands-walk
     stopFrames: 0000000001000000030000000400000007000000
+  - name: tail-walk
+    stopFrames: 000000000300000005000000
   elements:
   - name: torso
     ignoreState: 0
@@ -86,6 +180,7 @@ MonoBehaviour:
     useOrigin: 1
     originName: torso
     orderWhenVerticalAngle: 0
+    ignoreInvertForTopAngle: 0
     orderWhenHorizontalAngle: 0
     useStopFrames: 0
     stopFramesSet: 
@@ -95,6 +190,7 @@ MonoBehaviour:
     useOrigin: 1
     originName: head
     orderWhenVerticalAngle: 0
+    ignoreInvertForTopAngle: 0
     orderWhenHorizontalAngle: 0
     useStopFrames: 0
     stopFramesSet: 
@@ -104,6 +200,7 @@ MonoBehaviour:
     useOrigin: 1
     originName: head
     orderWhenVerticalAngle: 0
+    ignoreInvertForTopAngle: 0
     orderWhenHorizontalAngle: 0
     useStopFrames: 0
     stopFramesSet: 
@@ -113,6 +210,7 @@ MonoBehaviour:
     useOrigin: 1
     originName: head
     orderWhenVerticalAngle: 0
+    ignoreInvertForTopAngle: 0
     orderWhenHorizontalAngle: 0
     useStopFrames: 0
     stopFramesSet: 
@@ -122,60 +220,57 @@ MonoBehaviour:
     useOrigin: 1
     originName: torso
     orderWhenVerticalAngle: 0
+    ignoreInvertForTopAngle: 0
     orderWhenHorizontalAngle: 0
     useStopFrames: 0
     stopFramesSet: 
-  - name: test
-    ignoreState: 1
-    ignoreAngle: 1
-    useOrigin: 1
-    originName: test
-    orderWhenVerticalAngle: 0
-    orderWhenHorizontalAngle: 0
-    useStopFrames: 0
-    stopFramesSet: 
-  - name: leg_left
+  - name: lower-wear_left
     ignoreState: 0
     ignoreAngle: 0
     useOrigin: 0
     originName: 
     orderWhenVerticalAngle: -1
+    ignoreInvertForTopAngle: 1
     orderWhenHorizontalAngle: -3
     useStopFrames: 1
     stopFramesSet: legs-walk
   - name: tail
     ignoreState: 0
     ignoreAngle: 0
-    useOrigin: 0
-    originName: 
+    useOrigin: 1
+    originName: torso
     orderWhenVerticalAngle: -2
+    ignoreInvertForTopAngle: 0
     orderWhenHorizontalAngle: -2
     useStopFrames: 0
-    stopFramesSet: 
-  - name: leg_right
+    stopFramesSet: tail-walk
+  - name: lower-wear_right
     ignoreState: 0
     ignoreAngle: 0
     useOrigin: 0
     originName: 
     orderWhenVerticalAngle: -1
+    ignoreInvertForTopAngle: 1
     orderWhenHorizontalAngle: -1
     useStopFrames: 1
     stopFramesSet: legs-walk
   - name: hand_right
     ignoreState: 0
     ignoreAngle: 0
-    useOrigin: 0
-    originName: 
+    useOrigin: 1
+    originName: hands
     orderWhenVerticalAngle: -1
+    ignoreInvertForTopAngle: 0
     orderWhenHorizontalAngle: 2
     useStopFrames: 1
     stopFramesSet: hands-walk
   - name: hand_left
     ignoreState: 0
     ignoreAngle: 0
-    useOrigin: 0
-    originName: 
+    useOrigin: 1
+    originName: hands
     orderWhenVerticalAngle: -1
+    ignoreInvertForTopAngle: 0
     orderWhenHorizontalAngle: -1
     useStopFrames: 1
     stopFramesSet: hands-walk

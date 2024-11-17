@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.U2D.Animation;
 
@@ -50,6 +51,10 @@ public class CustomizableAppearance : MonoBehaviour, IAppearance
 
     public void SetElement(string name, AppearanceElementData data) {
         appearanceRenderer.SetElement(name, data);
+    }
+
+    public GameObject[] GetElements() {
+        return appearanceElements.Select(x => x.RendererGameObject).ToArray();
     }
 
     // public bool IsOrientationSupported(

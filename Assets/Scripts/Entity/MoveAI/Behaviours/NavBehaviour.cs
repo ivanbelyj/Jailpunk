@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Mirror;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
@@ -18,9 +19,10 @@ public class NavBehaviour : MoveBehaviour
         collider2D = GetComponent<Collider2D>();
     }
 
-    public override AISteering GetSteering()
+    [Server]
+    protected override AISteering GetSteering()
     {
-        Target = GetTargetGameObject();      
+        Target = GetTargetGameObject();
 
         AISteering steering = new AISteering();
         steering.Linear = Target.transform.position - transform.position;

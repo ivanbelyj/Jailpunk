@@ -90,7 +90,7 @@ public class SurroundingAreaBuilder : MonoBehaviour
             Vector3Int surroundingCell =
                 GridManager.WorldToCell(transform.position)
                 + (Vector3Int)GridDirectionUtils
-                    .GridDirectionToVector2Int(dir);
+                    .GridDirectionToVectorInt(dir);
             // Vector3 cellWorldPos = gridManager.GetCellCenterWorld(
             //     (Vector3Int)neighborCell);
             res.Add(surroundingCell);

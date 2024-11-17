@@ -2,23 +2,25 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Mirror;
 using UnityEngine;
 
 [RequireComponent(typeof(Character))]
 [RequireComponent(typeof(MoveControls))]
 [RequireComponent(typeof(SoundEmitter))]
-public class AvailableRecipientsUIUpdater : MonoBehaviour
+public class AvailableRecipientsUIUpdater : NetworkBehaviour
 {
     private SoundEmitter soundEmitter;
 
     private CommunicationUIManager communicationUIManager;
     private CharacterId subjectId;
-    private MoveControls characterControls;
 
-    private void Start() {
+    public override void OnStartLocalPlayer()
+    {
+        base.OnStartLocalPlayer();
+        
         subjectId = GetComponent<Character>().GetCharacterId();
         Debug.Log("SubjectId is " + subjectId);
-        characterControls = GetComponent<MoveControls>();
 
         communicationUIManager = FindObjectOfType<CommunicationUIManager>();
         soundEmitter = GetComponent<SoundEmitter>();

@@ -1,32 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
+using Mirror;
 using UnityEngine;
-using UnityEngine.U2D.Animation;
 
 /// <summary>
-/// Controls movement of an entity
+/// GridPhysicalMovement decorator. Controls movement of an entity
 /// </summary>
 [RequireComponent(typeof(GridPhysicalMovement))]
 public class MoveControls : MonoBehaviour, IMoveControls
 {
-    private GridPhysicalMovement movement;
-
     [SerializeField]
     private SpriteSwapAnimator animator;
 
+    [SerializeField]
+    [Tooltip(
+        "Used to track the elapsed time " +
+        "since the last change in the moveInput value. It is used to determine " +
+        "when to reset the animator parameters.")]
+    private float changeAnimationDirectionDuration = 0.1f;
+
+    private GridPhysicalMovement movement;
     private GridManager gridManager;
 
     private Vector2 lastMoveInput;
     private Vector2 currentOrientationMoveInput;
     private float sameMoveInputTime;
-    [SerializeField]
-    [Tooltip("Used to track the elapsed time " +
-        "since the last change in the moveInput value. It is used to determine " +
-        " when to reset the animator parameters.")]
-    private float changeAnimationDirectionDuration = 0.1f;
 
     // Todo: initial orientation
-    public Vector2 Orientation =>
+    private Vector2 Orientation =>
         gridManager.CartesianToGridVector(
             currentOrientationMoveInput
             // Isometric: 
@@ -35,7 +36,6 @@ public class MoveControls : MonoBehaviour, IMoveControls
 
     public void Move(Vector2 moveInput)
     {
-
         if (moveInput != lastMoveInput)
         {
             // Reset the timer if the moveInput has changed
@@ -56,7 +56,7 @@ public class MoveControls : MonoBehaviour, IMoveControls
             animator.SetMoveInput(moveInput);
         }
 
-        movement.MovementInputValues = moveInput;
+        movement.SetMovementInputValues(moveInput);
         // Isometric:
         // GridDirectionUtils.RotateCartesian(
         //     new Vector3(moveInput.x, moveInput.y, 0));

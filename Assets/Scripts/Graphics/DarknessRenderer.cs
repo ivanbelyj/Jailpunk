@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Mirror;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
 [RequireComponent(typeof(VisibilityProcessor))]
-public class DarknessRenderer : MonoBehaviour
+public class DarknessRenderer : NetworkBehaviour
 {
     private Tilemap tilemap;
     private VisibilityProcessor visibilityProcessor;
@@ -16,8 +17,10 @@ public class DarknessRenderer : MonoBehaviour
 
     private const string DarknessTilemapTag = "DarknessOverlay";
 
-    private void Awake()
+    public override void OnStartLocalPlayer()
     {
+        base.OnStartLocalPlayer();
+        
         tilemap = GameObject
             .FindWithTag(DarknessTilemapTag)
             .GetComponent<Tilemap>();
@@ -42,6 +45,10 @@ public class DarknessRenderer : MonoBehaviour
     }
 
     private void Update() {
+        if (!isLocalPlayer) {
+            return;
+        }
+
         visibilityProcessor.UpdateVisibility();
 
         visibilityProcessor.VisibilityMap.TraverseVisibilityMap((row, col, x, y) => {

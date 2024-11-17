@@ -1,19 +1,25 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Mirror;
 using UnityEngine;
 
 /// <summary>
 /// Component for objects positioned and oriented in a grid
 /// </summary>
-public class GridTransform : MonoBehaviour
+public class GridTransform : NetworkBehaviour
 {
     [SerializeField]
-    protected GridDirection orientation;
+    private GridDirection initialOrientation;
+
+    [SyncVar]
+    private GridDirection orientation;
     public GridDirection Orientation {
         get => orientation;
-        set => orientation = value;
     }
+
+    [SerializeField]
+    private double setOrientationDelay = 0.1f;
 
     /// <summary>
     /// Position in grid
@@ -22,16 +28,50 @@ public class GridTransform : MonoBehaviour
         get => GridManager.WorldToCell(transform.position);
     }
 
-    // Works in OnDrawGizmos
     private GridManager gridManager;
     private GridManager GridManager {
         get {
+            const string GridManagerName = "GridManager";
             if (gridManager == null) {
                 gridManager = GameObject
-                    .Find("GridManager")
+                    .Find(GridManagerName)
                     ?.GetComponent<GridManager>();
+                if (gridManager == null) {
+                    Debug.LogError(
+                    $"{nameof(GridManager)} was not found (name: {GridManagerName})");
+                }
             }
             return gridManager;
+        }
+    }
+
+    public override void OnStartServer()
+    {
+        base.OnStartServer();
+        SetOrientation(initialOrientation, false);
+    }
+
+    public void SetOrientation(GridDirection orientation, bool useDelay) {
+        if (isServer) {
+            SetOrientationCore(orientation, useDelay);
+        } else {
+            CmdSetOrientation(orientation, useDelay);
+        }
+    }
+
+    [Command]
+    private void CmdSetOrientation(GridDirection orientation, bool useDelay) {
+        SetOrientationCore(orientation, useDelay);
+    }
+
+    private double orientationSetTime;
+
+    private void SetOrientationCore(GridDirection orientation, bool useDelay) {
+        if (orientation == this.orientation) {
+            orientationSetTime = NetworkTime.time;
+        }
+        if (!useDelay || NetworkTime.time - orientationSetTime > setOrientationDelay) {
+            this.orientation = orientation;
         }
     }
 

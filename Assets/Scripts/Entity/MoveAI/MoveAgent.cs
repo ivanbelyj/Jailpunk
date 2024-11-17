@@ -1,8 +1,9 @@
+using Mirror;
 using UnityEngine;
 
 // [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(IMoveControls))]
-public class MoveAgent : MonoBehaviour
+public class MoveAgent : NetworkBehaviour
 {
     // [SerializeField]
     // private float maxAcceleration;
@@ -22,7 +23,10 @@ public class MoveAgent : MonoBehaviour
 
     protected IMoveControls moveControls;
 
-    protected AISteering steering = new AISteering();
+    [SyncVar]
+    private AISteering steering = new AISteering();
+    
+    [Server]
     public void SetSteering(AISteering steering) {
         this.steering = steering;
     }

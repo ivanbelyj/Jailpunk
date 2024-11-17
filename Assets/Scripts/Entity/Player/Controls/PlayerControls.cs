@@ -5,19 +5,28 @@ using Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(PlayerInput))]
-[RequireComponent(typeof(GridPhysicalMovement))]
-[RequireComponent(typeof(Interactor))]
 public class PlayerControls : MonoBehaviour
 {
     [SerializeField]
     private LayerMask mouseSelectionLayerMask;
 
-    private PlayerInput playerInput;
-    // private GridPhysicalMovement movement;
-    private MoveControls moveControls;
+    [SerializeField]
+    private CloseCombat closeCombat;
+
+    [SerializeField]
+    private GridPhysicalMovement movement;
+
+    [SerializeField]
     private Interactor interactor;
-    private PlayerCameraManager attachCamera;
+
+    [SerializeField]
+    private PlayerInput playerInput;
+    
+    [SerializeField]
+    private MoveControls moveControls;
+
+    private ConsoleManager consoleManager;
+
     private Camera playerCamera;
 
     private CommunicationUIManager communicationUIManager;
@@ -45,17 +54,25 @@ public class PlayerControls : MonoBehaviour
             int.TryParse(context.control.name, out int num);
             communicationUIManager.CommunicationPanel.MakeChoiceByNumber(num);
         }
-        
+    }
+
+    public void OnAttack(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed) {
+            closeCombat.Attack();
+        }
+    }
+
+    public void OnToggleConsole(InputAction.CallbackContext context) {
+        if (context.phase == InputActionPhase.Performed) {
+            consoleManager.ToggleConsole();
+        }
     }
 
     private void Awake() {
-        playerInput = GetComponent<PlayerInput>();
-        // movement = GetComponent<GridPhysicalMovement>();
-        moveControls = GetComponent<MoveControls>();
-        interactor = GetComponent<Interactor>();
-        attachCamera = GetComponent<PlayerCameraManager>();
         playerCamera = Camera.main;
         communicationUIManager = FindObjectOfType<CommunicationUIManager>();
+        consoleManager = FindObjectOfType<ConsoleManager>();
     }
 
     private void Update() {

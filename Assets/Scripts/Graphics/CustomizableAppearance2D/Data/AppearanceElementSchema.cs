@@ -29,6 +29,9 @@ public class AppearanceElementSchema
         "betwen [135; 225], applied and inverted for [-45; 45] (all inclusive)")]
     public int orderWhenVerticalAngle;
 
+    [Tooltip("Ignore invert sorting order for [-45; 45]")]
+    public bool ignoreInvertForTopAngle;
+
     [Tooltip("Elements with higher values are displayed above elements " +
         "with lower values. Applied to element for angles " +
         "betwen (45; 135), applied and inverted for (225; 315) (all exclusive)")]

@@ -1,6 +1,17 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+[Serializable]
+public class FlashEffectData {
+	[Range(0f, 1f)]
+	public float maxFlashAmount = 0.3f;
+
+	public float flashSpeed = 2f;
+	public Color flashColor;
+	public Color tint;
+}
 
 /// <summary>
 /// Script that controls Sprites/DefaultColorFlash custom shader
@@ -9,25 +20,63 @@ using UnityEngine;
 public class FlashEffect : MonoBehaviour
 {
 	private new Renderer renderer;
-	private bool flashing;
+	private bool isFlashing;
 
-	[SerializeField]
-	[Range(0f, 1f)]
-	private float maxFlashAmount = 0.3f;
-
-	[SerializeField]
-	[Tooltip("The bigger value the bigger speed. When the value equals to 1, "
-		+ "the transition time is 1 second")]
-	private float flashSpeed = 2;
+	private FlashEffectData lastEffectData;
 
 	private void Awake() {
 		renderer = GetComponent<Renderer>();
 	}
 
+	/// <summary>
+	/// Applies flash effect
+	/// </summary>
+	public void Flash(FlashEffectData effectData) {
+		lastEffectData = effectData;
+		
+		SetEffect(effectData);
+		StartCoroutine(ChangeFlash(0f, effectData.maxFlashAmount, effectData.flashSpeed));
+	}
+
+	/// <summary>
+	/// Clears flash effect
+	/// </summary>
+	public void FadeOutLastEffect() {
+		if (lastEffectData == null) {
+			Debug.LogWarning(
+				"Cannot fade out the last effect: there is no " +
+				"previous effect applied");
+			return;
+		}
+		StartCoroutine(
+			ChangeFlash(
+				lastEffectData.maxFlashAmount,
+				0f,
+				lastEffectData.flashSpeed));
+	}
+
+	/// <summary>
+    /// Applies flash effect and then fades out
+    /// </summary>
+    public void FlashAndFade(FlashEffectData effectData) {
+        SetEffect(effectData);
+        StartCoroutine(FlashAndFadeCoroutine(effectData));
+    }
+
+    private IEnumerator FlashAndFadeCoroutine(FlashEffectData effectData) {
+        yield return ChangeFlash(0f, effectData.maxFlashAmount, effectData.flashSpeed);
+        yield return ChangeFlash(effectData.maxFlashAmount, 0f, effectData.flashSpeed);
+    }
+
+	private void SetEffect(FlashEffectData effectData) {
+		renderer.material.SetColor("_FlashColor", effectData.flashColor);
+		renderer.material.SetColor("_Tint", effectData.tint);
+	}
+
 	private IEnumerator ChangeFlash(float from, float to, float speed) {
-		if (flashing)
+		if (isFlashing)
 			yield break;
-		flashing = true;
+		isFlashing = true;
 		float t = from;
 		while (from > to ? (t > to) : (t < to)) {
 			t += (from > to ? -1 : 1) * Time.deltaTime * speed;
@@ -35,21 +84,6 @@ public class FlashEffect : MonoBehaviour
 			yield return new WaitForEndOfFrame();
 		}
 	
-		flashing = false;
-	}
-
-	/// <summary>
-	/// Applies flash effect
-	/// </summary>
-	public void Flash(Color color) {
-		renderer.material.SetColor("_FlashColor", color);
-		StartCoroutine(ChangeFlash(0f, maxFlashAmount, flashSpeed));
-	}
-
-	/// <summary>
-	/// Clears flash effect
-	/// </summary>
-	public void FadeOut() {
-		StartCoroutine(ChangeFlash(maxFlashAmount, 0f, flashSpeed));
+		isFlashing = false;
 	}
 }

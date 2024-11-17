@@ -49,6 +49,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "ToggleConsole",
+                    "type": "Button",
+                    "id": "8455f795-7691-4a72-a247-d60814af32d0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -274,6 +283,17 @@
                 },
                 {
                     "name": "",
+                    "id": "9fa75adb-b82b-43eb-9268-01f2429ec83b",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "e293673d-2d66-4f3d-8070-c89bf44ffa52",
                     "path": "<Keyboard>/tab",
                     "interactions": "",
@@ -390,6 +410,17 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "SelectNumber",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5fd26046-a4b4-45b8-9a30-b842bfa92092",
+                    "path": "<Keyboard>/backquote",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "ToggleConsole",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

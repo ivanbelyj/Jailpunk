@@ -51,7 +51,7 @@ public class GridManager : MonoBehaviour
 
     public Vector2 GridDirectionToGridVector(
         GridDirection orient) {
-        Vector2 dir = GridDirectionUtils.GridDirectionToCartesianVector2(orient);
+        Vector2 dir = GridDirectionUtils.GridDirectionToCartesianVector(orient);
         // return IsometricUtils.CartesianToIsometric(dir);
         return dir;
     }
@@ -59,7 +59,7 @@ public class GridManager : MonoBehaviour
 
     public Vector2 GridDirectionToRotated90GridVector(
         GridDirection orient) {
-        Vector2 dir = GridDirectionUtils.Rotated(GridDirectionUtils.GridDirectionToCartesianVector2(orient), 90f);
+        Vector2 dir = GridDirectionUtils.Rotated(GridDirectionUtils.GridDirectionToCartesianVector(orient), 90f);
         return CartesianToGridVector(dir);
     }
 

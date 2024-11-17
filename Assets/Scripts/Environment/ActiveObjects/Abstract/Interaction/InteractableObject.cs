@@ -9,6 +9,12 @@ public abstract class InteractableObject : ActivatableObject, IInteractable
     private FlashEffect flashEffect;
 
     [SerializeField]
+    private FlashEffectData defaultEffectData;
+
+    [SerializeField]
+    private FlashEffectData unableToActivateEffectData;
+
+    [SerializeField]
     private bool isObvious = true;
     public bool IsObvious {
         get => isObvious;
@@ -23,8 +29,6 @@ public abstract class InteractableObject : ActivatableObject, IInteractable
 
     public event Action<IInteractable, bool, bool> ObviousnessChanged;
 
-    private ActivationState lastStateVisualEffect;
-
     private void Awake() {
         flashEffect = GetComponent<FlashEffect>();
     }
@@ -33,11 +37,11 @@ public abstract class InteractableObject : ActivatableObject, IInteractable
     {
         if (IsObvious && State == ActivationState.ReadyToActivate
             || State == ActivationState.UnableToActivate) {
-            Color colorToSet = (State switch {
-                ActivationState.UnableToActivate => Color.red,
-                _ => Color.white
-            });
-            Highlight(colorToSet);
+            var effectData = State switch {
+                ActivationState.UnableToActivate => unableToActivateEffectData,
+                _ => defaultEffectData
+            };
+            Highlight(effectData);
         }
     }
 
@@ -46,11 +50,11 @@ public abstract class InteractableObject : ActivatableObject, IInteractable
         ClearHighlight();
     }
 
-    private void Highlight(Color color) {
-        flashEffect.Flash(color);
+    private void Highlight(FlashEffectData effectData) {
+        flashEffect.Flash(effectData);
     }
 
     private void ClearHighlight() {
-        flashEffect.FadeOut();
+        flashEffect.FadeOutLastEffect();
     }
 }

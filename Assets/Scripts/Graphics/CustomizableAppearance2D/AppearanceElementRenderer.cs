@@ -27,6 +27,8 @@ public class AppearanceElementRenderer
 
     public string Name => appearanceElementSchema.name;
 
+    public GameObject RendererGameObject => spriteRenderer.gameObject;
+
     public AppearanceElementRenderer(
         AppearanceSchema appearanceSchema,
         AppearanceElementSchema appearanceElementSchema,
@@ -221,14 +223,34 @@ public class AppearanceElementRenderer
         var origin = appearanceSchema.animationSchema
             .GetOriginByName(appearanceElementSchema.originName);
             
-        var offset = origin
-            .GetItem(appearanceRenderData.State, appearanceRenderData.Angle)
-            ?.GetOffset(appearanceRenderData.Frame)
-            ?? Vector2Int.zero;
-            
+        var offset = GetOriginItemOffset(origin, appearanceRenderData);
+        
         if (appearanceRenderData.FlipX) {
             offset.x *= -1;
         }
         return offset;
+    }
+
+    private Vector2Int GetOriginItemOffset(
+        AnimatedOrigin origin,
+        AppearanceRenderData appearanceRenderData) {
+        var originItem = origin
+            .GetItem(appearanceRenderData.State, appearanceRenderData.Angle);
+        
+        // TODO: Handle or fix that LastWalkFrame was not set initially
+        if (originItem != null
+            && originItem.state == StateIdle
+            && appearanceRenderData.LastWalkFrame == null) {
+            // Debug.LogWarning(
+            //     $"{nameof(appearanceRenderData.LastWalkFrame)} was not set, " +
+            //     $"but it's required for idle animation");
+            return Vector2Int.zero;
+        }
+        return originItem
+            ?.GetOffset(
+                originItem.state == StateIdle
+                ? appearanceRenderData.LastWalkFrame.Value
+                : appearanceRenderData.Frame)
+            ?? Vector2Int.zero;
     }
 }

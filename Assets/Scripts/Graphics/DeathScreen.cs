@@ -6,7 +6,6 @@ public class DeathScreen : MonoBehaviour
 {
     private DynamicVolumeManager volumeManager;
 
-    [SerializeField]
     private CanvasGroup deathPanel;
 
     [SerializeField]

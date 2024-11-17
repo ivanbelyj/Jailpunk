@@ -140,6 +140,37 @@ MonoBehaviour:
     upperWearColor: {r: 1, g: 1, b: 1, a: 1}
     lowerWear: 0
     lowerWearColor: {r: 1, g: 1, b: 1, a: 1}
+--- !u!1 &1838219163224776509
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5677627048713099340}
+  m_Layer: 0
+  m_Name: CloseCombatAnchor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5677627048713099340
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1838219163224776509}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.35, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3455876476980749280}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4111959900911027618
 GameObject:
   m_ObjectHideFlags: 0
@@ -152,6 +183,7 @@ GameObject:
   - component: {fileID: 3074480863793260129}
   - component: {fileID: 3679944304310228711}
   - component: {fileID: 5405823042972560538}
+  - component: {fileID: 4867669079417168793}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -175,6 +207,7 @@ Transform:
   - {fileID: 2731591751488026218}
   - {fileID: 3520033298137775973}
   - {fileID: 2966117957600029905}
+  - {fileID: 5677627048713099340}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -251,6 +284,23 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &4867669079417168793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4111959900911027618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e713d191be1cfb4886c58d9e68a4363, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  initialOrientation: 2
+  setOrientationDelay: 0.1
 --- !u!1 &6957089056159968399
 GameObject:
   m_ObjectHideFlags: 0
@@ -282,6 +332,54 @@ Transform:
   m_Father: {fileID: 3455876476980749280}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7045539639334807968
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8053070117841331863}
+  - component: {fileID: 3348991191996307490}
+  m_Layer: 0
+  m_Name: Damageable
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8053070117841331863
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7045539639334807968}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2966117957600029905}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!70 &3348991191996307490
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7045539639334807968}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 1}
+  m_Size: {x: 0.7, y: 2}
+  m_Direction: 0
 --- !u!1 &8339425911264471527
 GameObject:
   m_ObjectHideFlags: 0
@@ -308,6 +406,7 @@ GameObject:
   - component: {fileID: 709033925964419928}
   - component: {fileID: 6825882513394758742}
   - component: {fileID: 2877206251791987169}
+  - component: {fileID: 4958183235161023286}
   m_Layer: 0
   m_Name: DestroyOnDeath
   m_TagString: Untagged
@@ -326,7 +425,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 8053070117841331863}
   m_Father: {fileID: 3455876476980749280}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -403,70 +503,55 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health:
-    parameterId: 0
-    minValue: 0
-    maxValue: 1
-    recoveredValue: 1
-    initialValue: 0.1
-  endurance:
     parameterId: 1
     minValue: 0
     maxValue: 1
     recoveredValue: 1
     initialValue: 1
-  satiety:
+  endurance:
     parameterId: 2
     minValue: 0
     maxValue: 1
-    recoveredValue: 0
+    recoveredValue: 1
     initialValue: 1
-  bleed:
+  satiety:
     parameterId: 3
     minValue: 0
     maxValue: 1
     recoveredValue: 0
     initialValue: 1
-  radiation:
+  bleed:
     parameterId: 4
     minValue: 0
     maxValue: 1
     recoveredValue: 0
-    initialValue: 1
+    initialValue: 0
+  radiation:
+    parameterId: 5
+    minValue: 0
+    maxValue: 1
+    recoveredValue: 0
+    initialValue: 0
   regeneration:
     isInfinite: 1
     speed: 0.02
     duration: 0
-    targetParameterId: 0
+    targetParameterId: 1
   enduranceRecovery:
     isInfinite: 1
-    speed: 0
+    speed: 0.01
     duration: 0
-    targetParameterId: 0
+    targetParameterId: 2
   hunger:
     isInfinite: 1
-    speed: 0
+    speed: -0.001
     duration: 0
-    targetParameterId: 0
+    targetParameterId: 3
   radiationExcretion:
     isInfinite: 1
-    speed: 0
+    speed: -0.001
     duration: 0
-    targetParameterId: 0
-  runEnduranceDecrease:
-    isInfinite: 0
-    speed: 0
-    duration: 0
-    targetParameterId: 0
-  bleedEffect:
-    isInfinite: 0
-    speed: 0
-    duration: 0
-    targetParameterId: 0
-  radiationPoisoning:
-    isInfinite: 0
-    speed: 0
-    duration: 0
-    targetParameterId: 0
+    targetParameterId: 5
 --- !u!114 &8407204226749368950
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -494,8 +579,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3be4da0cc026fb24298f8563ddba95f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   maxHealthHP: 20
   destroyOnDeath: {fileID: 8339425911264471527}
+  damageFlashEffectData:
+    maxFlashAmount: 0.4
+    flashSpeed: 2
+    flashColor: {r: 0.5, g: 0, b: 0, a: 1}
+    tint: {r: 1, g: 0.5, b: 0.5, a: 1}
+  customizableAppearance: {fileID: 6098182415615003064}
 --- !u!114 &1838282370193345492
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -623,6 +717,7 @@ MonoBehaviour:
   rigidBody: {fileID: 5405823042972560538}
   acceleration: 7
   deceleration: 9
+  showLogMessages: 0
 --- !u!114 &2877206251791987169
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -637,6 +732,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 1323589337011737349}
   changeAnimationDirectionDuration: 0
+--- !u!114 &4958183235161023286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8339425911264471527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4cbb332a71ea534dadd3ef5ce7d1903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackDistance: 1
+  attackMinCooldown: 0.3
+  attackFullCooldown: 1.2
+  minPunchForce: 0.3
+  maxPunchForce: 2
+  anchor: {fileID: 5677627048713099340}
 --- !u!1001 &5954343488525031726
 PrefabInstance:
   m_ObjectHideFlags: 0
