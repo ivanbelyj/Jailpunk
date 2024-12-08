@@ -272,12 +272,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteLibraryAsset: {fileID: 7108339969198208228, guid: 692ed91d59f51d241baf933d95c128c1, type: 3}
-  appearanceSchema:
-    animationNameBases:
-    - walk
-    animationSchema:
-      secondsPerFrame: 0.2
-      framesCount: 8
+  appearanceSchema: {fileID: 0}
+  setElementsActiveInitially: 0
+  initialAppearanceData:
+    elements: []
 --- !u!114 &2056213691
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -290,7 +288,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40cd8be273359714d90b0db9c18fb316, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  appearancePartPrefab: {fileID: 4458530114734323632, guid: f5d474add2c67534aabaaa80b6b5f48d, type: 3}
+  appearanceElementPrefab: {fileID: 0}
+  spriteMaskPrefab: {fileID: 0}
+  spriteMaskRoot: {fileID: 0}
 --- !u!4 &2056213692
 Transform:
   m_ObjectHideFlags: 0

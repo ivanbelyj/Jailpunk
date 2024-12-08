@@ -9,4 +9,5 @@ public class SchemeTile
     /// </summary>
     public int? SectorId { get; set; }
     public TileType TileType { get; set; }
+    public uint TileId { get; set; }
 }

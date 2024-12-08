@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Mirror;
 using UnityEngine;
 
 /// <summary>
@@ -8,25 +9,82 @@ using UnityEngine;
 public class MazeGenerator : MonoBehaviour
 {
     [SerializeField]
-    private GenerationData generationData;
-    // [SerializeField]
-    private List<IGenerationStage> generationStages;
+    private GenerationSettings generationSettings;
+
+    [Tooltip("If true then generation stages must be defined. Otherwise attached components will be used")]
+    [SerializeField]
+    private bool useCustomGenerationStages;
+
+    [SerializeField]
+    private List<GenerationStage> generationStages;
 
     [SerializeField]
     private bool showLogMessages = false;
+    
+    /// <summary>
+    /// Static for debug marking
+    /// </summary>
+    private static MazeScheme mazeScheme;
 
-    [SerializeField]
-    private bool generateMazeOnAwake = true;
+    private string lastGeneratedRootGameObjectName;
+    private GenerationRequest lastGenerationRequest;
 
-    public void Awake() {
-        InitGenerationStages();
+    /// <summary>
+    /// Generates and instantiates the maze
+    /// </summary>
+    public GenerationContext CreateMaze(
+        GenerationRequest request,
+        string rootGameObjectName = "MazeGrid") {
+        float totalStartTime = GetMsSinceStartup();
 
-        if (generateMazeOnAwake)
-            CreateMaze();
+        lastGenerationRequest = request;
+        lastGeneratedRootGameObjectName = rootGameObjectName;
+
+        var context = CreateInitialGenerationContext(rootGameObjectName, request);
+        InitSeed(request.Parameters);
+        context = RunGenerationStages(context);
+
+        float elapsedMs = GetMsSinceStartup() - totalStartTime;
+        if (showLogMessages)   {
+            Debug.Log($"Maze generation completed. Elapsed: {elapsedMs} ms");
+        }
+
+        return context;
     }
 
-    private void InitGenerationStages() {
-        generationStages = new List<IGenerationStage>() {
+    public void Regenerate(string rootGameObjectName) {
+        if (lastGenerationRequest == null) {
+            Debug.LogError($"Cannot regenerate: no previous generation request defined");
+            return;
+        }
+        Destroy(GameObject.Find(lastGeneratedRootGameObjectName));
+        CreateMaze(lastGenerationRequest, rootGameObjectName ?? lastGeneratedRootGameObjectName);
+    }
+
+    #region Debug
+    public static void AddDebugMarkToScheme(Vector2Int pos, Color? color = null) {
+        if (mazeScheme == null) {
+            Debug.LogWarning("There is no maze scheme to add a debug mark");
+            return;
+        }
+        mazeScheme.AddDebugMark(pos, color);
+    }
+
+    public static void AddDebugSectorColor(int sectorId, Color color) {
+        if (mazeScheme == null) {
+            Debug.LogWarning("There is no maze scheme to add a debug sector color");
+            return;
+        }
+        mazeScheme.AddDebugSectorColor(sectorId, color);
+    }
+    #endregion
+
+    private void Awake() {
+        SetGenerationStages();
+    }
+
+    private List<GenerationStage> GetDefaultAttachedGenerationStages() {
+        return new List<GenerationStage>() {
             GetComponent<BSPGeneration>(),
             GetComponent<CorridorsStructureGeneration>(),
 
@@ -34,66 +92,65 @@ public class MazeGenerator : MonoBehaviour
 
             GetComponent<StructureToSchemeStage>(),
             GetComponent<CorridorsToScheme>(),
+
+            GetComponent<ConnectivityProcessing>(),
+
+            GetComponent<RequestedSectorsAllocation>(),
+            GetComponent<SectorPlanning>(),
+
+            GetComponent<MazeBuilding>(),
             
             GetComponent<DebugGUI>()
         };
-        foreach (var stage in generationStages) {
-            stage.Initialize(generationData);
+    }
+
+    private void SetGenerationStages() {
+        if (!useCustomGenerationStages) {
+            generationStages = GetDefaultAttachedGenerationStages();
         }
     }
 
-    /// <summary>
-    /// Generates and instantiates the maze
-    /// </summary>
-    public GenerationContext CreateMaze() {
-        float totalStartTime = GetMsSinceStartup();
-
-        // For adding debug marks only!
-        mazeSchemeSingleton = new MazeScheme(generationData.MazeSize);
-        MazeData initialMazeData = new MazeData() {
-            Scheme = mazeSchemeSingleton
+    private GenerationContext CreateInitialGenerationContext(
+        string rootGameObjectName,
+        GenerationRequest generationRequest)
+    {
+        mazeScheme = new(generationRequest.Parameters.MazeSize);
+        var initialMazeData = new MazeData() {
+            Scheme = mazeScheme
         };
-        GenerationContext lastProcessed = new GenerationContext() {
+
+        return new GenerationContext() {
+            RootGameObjectName = rootGameObjectName,
             MazeData = initialMazeData,
+            Settings = generationSettings,
+            Request = generationRequest
             // Random = generationData.UseRandomSeed ?
             //     new System.Random()
             //     : new System.Random(generationData.Seed)
         };
+    }
 
-        int seedToInitState = generationData.UseRandomSeed ?
+    private void InitSeed(GenerationParameters parameters) {
+        int seedToInitState = parameters.UseRandomSeed ?
             new System.Random().Next() :
-            generationData.Seed;
+            parameters.Seed;
+        
         Random.InitState(seedToInitState);
-        if (showLogMessages)
+        if (showLogMessages) {
             Debug.Log("Maze generation seed: " + seedToInitState);
-            
+        }
+    }
+
+    private GenerationContext RunGenerationStages(GenerationContext context) {
         foreach (var stage in generationStages) {
             if (stage.IncludeInGeneration) {
-                lastProcessed = stage.ProcessMaze(lastProcessed);
+                context = stage.ProcessMaze(context);
             }
         }
-
-        float elapsedMs = GetMsSinceStartup() - totalStartTime;
-        if (showLogMessages)  
-            Debug.Log($"Maze generation completed. Elapsed: {elapsedMs} ms");
-        return lastProcessed;
+        return context;
     }
 
     private float GetMsSinceStartup() {
-        return Time.realtimeSinceStartup * 1000;
-    }
-
-    /// <summary>
-    /// Singleton for debug marking only
-    /// </summary>
-    private static MazeScheme mazeSchemeSingleton;
-
-    public static void AddDebugMarkToScheme(
-        Vector2Int pos, Color? color = null) {
-        if (mazeSchemeSingleton == null) {
-            Debug.LogWarning("There is no maze scheme to add a debug mark");
-            return;
-        }
-        mazeSchemeSingleton.AddDebugMark(pos, color);
+        return Time.realtimeSinceStartup * 100;
     }
 }

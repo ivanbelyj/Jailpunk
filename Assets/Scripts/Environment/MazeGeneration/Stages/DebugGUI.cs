@@ -8,6 +8,8 @@ public class DebugGUI : GenerationStage
     [SerializeField]
     private GUISkin guiSkin;
     private MazeScheme scheme;
+    private int generationNumber = 0;
+    
     public override GenerationContext ProcessMaze(GenerationContext mazeData)
     {
         scheme = mazeData.MazeData.Scheme;
@@ -28,7 +30,7 @@ public class DebugGUI : GenerationStage
     {
         if (GUI.Button(new Rect(25, 25, 200, 60), "Regenerate")) 
         {
-            MazeGenerator.CreateMaze();
+            Regenerate();
         }
         if (scheme == null)
         {
@@ -37,5 +39,9 @@ public class DebugGUI : GenerationStage
 
         GUI.skin = guiSkin;
         GUI.Label(new Rect(20, 20, 1920, 1080), scheme.ToString());
+    }
+
+    private void Regenerate() {
+        MazeGenerator.Regenerate($"MazeGrid{++generationNumber}");
     }
 }

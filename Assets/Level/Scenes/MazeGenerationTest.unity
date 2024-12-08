@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 1922095982}
   - component: {fileID: 1922095981}
   - component: {fileID: 1922095980}
+  - component: {fileID: 1922095983}
   m_Layer: 0
   m_Name: MainCamera
   m_TagString: MainCamera
@@ -207,6 +208,39 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1922095983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1922095979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
 --- !u!1 &2144129004
 GameObject:
   m_ObjectHideFlags: 0
@@ -216,12 +250,18 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2144129006}
+  - component: {fileID: 2144129014}
+  - component: {fileID: 2144129019}
   - component: {fileID: 2144129005}
   - component: {fileID: 2144129009}
   - component: {fileID: 2144129010}
   - component: {fileID: 2144129011}
   - component: {fileID: 2144129008}
   - component: {fileID: 2144129012}
+  - component: {fileID: 2144129016}
+  - component: {fileID: 2144129017}
+  - component: {fileID: 2144129018}
+  - component: {fileID: 2144129013}
   - component: {fileID: 2144129007}
   m_Layer: 0
   m_Name: MazeGenerator
@@ -242,14 +282,56 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 934cdf1ec8ce2f34cb86343fd9b55ca6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  generationData:
-    useRandomSeed: 1
-    seed: 151541991
-    mazeSize: {x: 190, y: 100}
-    minSectorSize: 24
-    maxSectorSize: 80
+  generationSettings:
+    structureBSPOptions:
+      splitLeafProbability: 0.75
+      splitMinimalLeaves: 0
+      minSplitRatio: 1.25
+      maxRoomOffset: 0
+      minRoomOffset: 0
+      leafAreasOffset: -1
+      useMaxSplitRatio: 0
+      maxSplitRatio: 1.5
+      minLeafSize: 0
+      maxLeafSize: 0
+    sectorBSPOptions:
+      splitLeafProbability: 0.75
+      splitMinimalLeaves: 1
+      minSplitRatio: 1.25
+      maxRoomOffset: 0
+      minRoomOffset: 0
+      leafAreasOffset: 2
+      useMaxSplitRatio: 1
+      maxSplitRatio: 2
+      minLeafSize: 16
+      maxLeafSize: 38
+    maxSubsectorRatio: 1.5
+    subsectorMinSize: 28
+    subsectorBSPOptions:
+      splitLeafProbability: 0.75
+      splitMinimalLeaves: 1
+      minSplitRatio: 1.25
+      maxRoomOffset: 0
+      minRoomOffset: 0
+      leafAreasOffset: 1
+      useMaxSplitRatio: 1
+      maxSplitRatio: 2
+      minLeafSize: 16
+      maxLeafSize: 32
+    roomBlockBSPOptions:
+      splitLeafProbability: 0.5
+      splitMinimalLeaves: 0
+      minSplitRatio: 1.25
+      maxRoomOffset: 0
+      minRoomOffset: 0
+      leafAreasOffset: -1
+      useMaxSplitRatio: 0
+      maxSplitRatio: 1.5
+      minLeafSize: 9
+      maxLeafSize: 30
+  useCustomGenerationStages: 0
+  generationStages: []
   showLogMessages: 1
-  generateMazeOnAwake: 1
 --- !u!4 &2144129006
 Transform:
   m_ObjectHideFlags: 0
@@ -305,14 +387,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   includeInGeneration: 1
-  options:
-    splitLeafProbability: 0.75
-    minSplitRatio: 1.25
-    maxRoomOffset: 2
-    minRoomOffset: 0
-    rootLeafSize: {x: 0, y: 0}
-    minLeafSize: 0
-    maxLeafSize: 0
 --- !u!114 &2144129010
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -325,9 +399,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9172d776884e164daa717bac9cfe394, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  includeInGeneration: 0
+  includeInGeneration: 1
   corridorsBreadth: 4
-  isDebug: 1
+  isDebug: 0
 --- !u!114 &2144129011
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -406,5 +480,117 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f8fd35340349ac4a86e84dd7c687df0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  includeInGeneration: 0
+  includeInGeneration: 1
   applyOverScheme: 0
+--- !u!114 &2144129013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2144129004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7add235fd3dfe124ba14a3c8f83028e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  includeInGeneration: 1
+  gridPrefab: {fileID: 453053874863650869, guid: df5883b613cad5a428882cdb9f2862a9, type: 3}
+  floorPrefab: {fileID: 2007586910254942683, guid: b736de0070c32324d948f6283ac0e3c4, type: 3}
+  wallsPrefab: {fileID: 6158578392386169373, guid: 4dfc18a3e7341cb4195aec8c15baa018, type: 3}
+  tileProvider: {fileID: 2144129014}
+--- !u!114 &2144129014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2144129004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7079975fda95554d88f2f9af1b42d34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  floorTileSprite: {fileID: 424646613, guid: caa095dc2c75ef94c8b9fc143beb567c, type: 3}
+  wallTileSprite: {fileID: -358937217, guid: caa095dc2c75ef94c8b9fc143beb567c, type: 3}
+--- !u!114 &2144129016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2144129004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df8b8179808b7794cbebebbf076d4185, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  includeInGeneration: 1
+  showLogMessages: 0
+  addDebugSectorBoundaryMarks: 1
+--- !u!114 &2144129017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2144129004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1441912c14cc92040922540bf452843f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  includeInGeneration: 1
+--- !u!114 &2144129018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2144129004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8e3294430b8ef24c874463bd11edc1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  includeInGeneration: 1
+--- !u!114 &2144129019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2144129004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5217c8d8fdc5304fa6d5b28d9104672, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  generateOnStart: 1
+  generationRequest:
+    parameters:
+      seed: 0
+      useRandomSeed: 0
+      mazeSize: {x: 185, y: 115}
+      minSectorSize: 32
+      maxSectorSize: 86
+    requestedSectors:
+    - sectorGroupId: 1
+      useIndividualAccessibility: 1
+      individualAccessibility: 3
+      necessity: 2
+    - sectorGroupId: 2
+      useIndividualAccessibility: 1
+      individualAccessibility: 3
+      necessity: 2
+    - sectorGroupId: 3
+      useIndividualAccessibility: 0
+      individualAccessibility: 2
+      necessity: 2
+    sectorGroups:
+    - id: 1
+      alienatedGroupIds: 0200000003000000
+    - id: 2
+      alienatedGroupIds: 0100000003000000
+    - id: 3
+      alienatedGroupIds: 0100000002000000
