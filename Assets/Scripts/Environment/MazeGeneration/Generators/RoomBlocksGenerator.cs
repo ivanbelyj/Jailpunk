@@ -1,32 +1,18 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-// [System.Serializable]
-// public class RoomBlocksPlanningOptions
-// {
-//     [Tooltip("Minimum room size including tiles for walls")]
-//     [Min(3)]
-//     public int minRoomBlockSize = 12;
-
-//     [Tooltip(
-//         "Maximum room size including tiles for walls. It will not be taken " +
-//         "into account if it exceeds the size of the generated sector")]
-//     [Min(3)]
-//     public int maxRoomBlockSize = 56;
-
-//     public int corridorWidth = 2;
-// }
-
 public class RoomBlocksGenerator
 {
     private readonly GenerationSettings settings;
+    private readonly IdGenerator idGenerator;
 
-    public RoomBlocksGenerator(GenerationSettings settings)
+    public RoomBlocksGenerator(
+        GenerationSettings settings,
+        IdGenerator idGenerator)
     {
         this.settings = settings;
+        this.idGenerator = idGenerator;
     }
 
     public void GenerateAndApply(
@@ -94,28 +80,65 @@ public class RoomBlocksGenerator
             && Mathf.RoundToInt(Mathf.Sqrt(bspLeaf.rectArea.Rect.width * bspLeaf.rectArea.Rect.height))
                 >= settings.subsectorMinSize;
 
-    private List<BSPNode> ApplyPlanning(MazeScheme scheme, BSPGenerationOptions options) {
+    private List<BSPNode> ApplyPlanning(
+        MazeScheme scheme,
+        BSPGenerationOptions options)
+    {
         var bspGenerator = new BSPGenerator();
         var (nodes, graph) = bspGenerator.GenerateBSPNodes(options);
-        ApplyNodeWalls(scheme, nodes);
+        ApplyNodesAsSchemeAreas(scheme, nodes);
         return nodes;
     }
 
-    private void ApplyNodeWalls(
+    private void ApplyNodesAsSchemeAreas(
         MazeScheme scheme,
         List<BSPNode> nodes)
     {
         foreach (var node in nodes) {
             if (node.rectArea != null) {
-                ApplyRectWalls(scheme, node.rectArea);
+                ApplyNewSchemeArea(
+                    scheme,
+                    node.rectArea.Rect,
+                    SchemeAreaType.Room,
+                    addWallsOnBorder: true);
+            }
+            if (node.intermediateArea != null) {
+                ApplyNewSchemeArea(
+                    scheme,
+                    node.intermediateArea.Rect,
+                    SchemeAreaType.Room,
+                    addWallsOnBorder: false);
             }
         }
     }
 
-    private void ApplyRectWalls(MazeScheme scheme, RectArea rect) {
-        StructureUtils.TraverseRect(rect.Rect, (x, y, isBorder) => {
+    private void ApplyNewSchemeArea(
+        MazeScheme scheme,
+        RectInt rect,
+        SchemeAreaType type,
+        bool addWallsOnBorder)
+    {
+        var newArea = new SchemeArea() {
+            Id = idGenerator.NewAreaId(),
+            Type = type
+        };
+        scheme.Areas.Add(newArea);
+        ApplyAsSchemeArea(scheme, rect, newArea.Id, addWallsOnBorder);
+    }
+
+    private void ApplyAsSchemeArea(
+        MazeScheme scheme,
+        RectInt rect,
+        int areaId,
+        bool addWallsOnBorder)
+    {
+        StructureUtils.TraverseRect(rect, (x, y, isBorder) => {
             SchemeTile tile = scheme.GetTileByPos(x, y);
-            if (isBorder && tile.TileType != TileType.LoadBearingWall) {
+            tile.AreaId = areaId;
+            if (addWallsOnBorder
+                && isBorder
+                && tile.TileType != TileType.LoadBearingWall)
+            {
                 tile.TileType = TileType.Wall;
             }
         });

@@ -18,7 +18,7 @@ public class GenerationContext
     public GenerationSettings Settings { get; set; }
     public GenerationRequest Request { get; set; }
 
-    public SectorIdGenerator SectorIdGenerator { get; set; } = new();
+    public IdGenerator IdGenerator { get; set; } = new();
     #endregion
     
     #region Structure
@@ -42,12 +42,12 @@ public class GenerationContext
     /// <summary>
     /// Sector ids that could be connected
     /// </summary>
-    public Graph<int> PossibleConnectivity { get; set; }
+    public Graph<int> SectorPossibleConnectivity { get; set; }
 
     public List<AreasBoundary> SectorBoundaries { get; set; } = new List<AreasBoundary>();
 
     /// <summary>
     /// Actually generated sectors info, including <see cref="RequestedSectors"/>
     /// </summary>
-    public List<SectorInfo> GeneratedSectors { get; set; }
+    public List<GeneratedSectorInfo> GeneratedSectors { get; set; }
 }

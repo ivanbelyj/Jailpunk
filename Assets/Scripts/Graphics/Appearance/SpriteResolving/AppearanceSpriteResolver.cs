@@ -1,0 +1,136 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+using UnityEngine.U2D.Animation;
+
+public enum AppearanceLibraryItemArrangementType {
+    OneObjectWithName,
+    ObjectNameInCategory
+}
+
+[Serializable]
+public class AppearanceLibraryItem {
+    public AppearanceLibraryItemArrangementType arrangementType;
+    public string objectName;
+    public SpriteLibraryAsset spriteLibraryAsset;
+}
+
+// <LibraryName>[_<LibraryVariant>] <object-name>[_<state>][_<angle>] -> Sprite
+public class AppearanceSpriteResolver : MonoBehaviour
+{
+    [SerializeField]
+    private List<AppearanceLibraryItem> appearanceLibraryItems;
+
+    // Static to log every not existing category only once
+    // regardless of the count of element renderers
+    private static readonly HashSet<string> loggedWarningCategories = new();
+
+    private Dictionary<string, SpriteLibraryDecorator> spriteLibrariesByObjectName;
+
+    private List<SpriteLibraryAsset> spriteLibrariesWithObjectNameInCategory;
+
+    private void Awake() {
+        SetInitiallySegregatedSpriteLibraryCollections();
+    }
+
+    public Sprite Resolve(AppearanceSpriteData data) {
+        var spriteLibraryDecorator = GetSpriteLibrary(data);
+        if (spriteLibraryDecorator == null) {
+            return null;
+        }
+
+        var categoryAndLabel = TryGetCurrentCategoryAndLabel(
+            spriteLibraryDecorator,
+            data);
+        if (categoryAndLabel == null) {
+            // Debug.LogWarning($"Current category and label not found: {data.GetCategoryName()}");
+            return null;
+        }
+
+        return spriteLibraryDecorator.GetSprite(
+            categoryAndLabel.Value.category,
+            categoryAndLabel.Value.label);
+    }
+
+    private void SetInitiallySegregatedSpriteLibraryCollections() {
+        spriteLibrariesByObjectName = appearanceLibraryItems
+            .Where(x => x.arrangementType == AppearanceLibraryItemArrangementType.OneObjectWithName)
+            .ToDictionary(
+                x => x.objectName,
+                x => new SpriteLibraryDecorator(x.spriteLibraryAsset));
+
+        spriteLibrariesWithObjectNameInCategory = appearanceLibraryItems
+            .Where(x => x.arrangementType == AppearanceLibraryItemArrangementType.ObjectNameInCategory)
+            .Select(x => x.spriteLibraryAsset)
+            .ToList();
+    }
+
+    private SpriteLibraryDecorator GetSpriteLibrary(AppearanceSpriteData data) {
+        SpriteLibraryDecorator spriteLibrary;
+        if (!spriteLibrariesByObjectName.TryGetValue(
+            data.ObjectName,
+            out spriteLibrary))
+        {
+            return GetAndCacheSpriteLibraryWithObjectNameInCategory(data);
+        }
+        return spriteLibrary;
+    }
+
+    private SpriteLibraryDecorator GetAndCacheSpriteLibraryWithObjectNameInCategory(
+        AppearanceSpriteData data)
+    {
+        var spriteLibraryAsset = FindSpriteLibraryWithObject(data.ObjectName);
+        if (spriteLibraryAsset == null) {
+            return null;
+        }
+        var spriteLibrary = new SpriteLibraryDecorator(spriteLibraryAsset);
+        spriteLibrariesByObjectName.Add(data.ObjectName, spriteLibrary);
+
+        return spriteLibrary;
+    }
+
+    private SpriteLibraryAsset FindSpriteLibraryWithObject(string objectName) {
+        return spriteLibrariesWithObjectNameInCategory
+            .FirstOrDefault(x => 
+                x.GetCategoryNames().Any(x => x.StartsWith(objectName)));
+    }
+
+    private (string category, string label)? TryGetCurrentCategoryAndLabel(
+        SpriteLibraryDecorator spriteLibraryDecorator,
+        AppearanceSpriteData data)
+    {
+        var frame = data.Frame ?? 0;
+
+        if (frame < 0) {
+            return null;
+        }
+
+        string categoryName = data.GetCategoryName();
+
+        string category = spriteLibraryDecorator.GetCategoryOrNull(categoryName);
+
+        if (category == null) {
+            // if (!loggedWarningCategories.Contains(categoryName)) {
+            //     Debug.LogWarning($"Cannot render appearance element: "
+            //         + $"category {categoryName} doesn't exist");
+            //     loggedWarningCategories.Add(categoryName);
+            // }
+
+            return null;
+        }
+        
+        string[] labels = spriteLibraryDecorator.GetLabels(category);
+
+        if (labels.Length == 0) {
+            throw new InvalidOperationException(
+                "Category " + category + " doesn't contain any labels");
+        }
+
+        return (category, GetLabel(frame, labels));
+    }
+
+    private string GetLabel(int frame, string[] labels) {
+        return labels[frame % labels.Length];
+    }
+}

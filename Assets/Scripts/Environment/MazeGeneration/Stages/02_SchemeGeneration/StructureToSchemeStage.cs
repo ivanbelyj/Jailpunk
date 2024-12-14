@@ -23,14 +23,14 @@ public class StructureToSchemeStage : GenerationStage
         return context;
     }
 
-    private List<SectorInfo> CreateAndApplySectors(GenerationContext context) {
-        var generatedSectors = new List<SectorInfo>();
+    private List<GeneratedSectorInfo> CreateAndApplySectors(GenerationContext context) {
+        var generatedSectors = new List<GeneratedSectorInfo>();
         var scheme = context.MazeData.Scheme;
         
         for (int i = 0; i < context.SectorRects.Count; i++) {
             RectArea sectorRect = context.SectorRects[i];
-            var sectorInfo = new SectorInfo() {
-                Id = context.SectorIdGenerator.NewSectorId(),
+            var sectorInfo = new GeneratedSectorInfo() {
+                Id = context.IdGenerator.NewSectorId(),
                 RectArea = sectorRect
             };
             generatedSectors.Add(sectorInfo);

@@ -30,25 +30,25 @@ public class CharacterBodyData
                     }),
                 CreateBodyPart(
                     head switch {
-                        _ => "eye_left"
+                        _ => "eye-left"
                     },
                     useSeparateEyeColors ? leftEyeColor : eyesColor),
                 CreateBodyPart(
                     head switch {
-                        _ => "eye_right"
+                        _ => "eye-right"
                     },
                     useSeparateEyeColors ? rightEyeColor : eyesColor),
                 CreateBodyPart(
                     head switch {
-                        _ => "hand_left"
+                        _ => "hand-left"
                     }),
                 CreateBodyPart(
                     head switch {
-                        _ => "hand_right"
+                        _ => "hand-right"
                     }),
                 // Todo: remove Color.white when normal paws will be drawn
-                CreateBodyPart("leg_left", Color.white),
-                CreateBodyPart("leg_right", Color.white),
+                CreateBodyPart("leg-left", Color.white),
+                CreateBodyPart("leg-right", Color.white),
                 new() {
                     elementName = tail switch {
                         _ => "tail"

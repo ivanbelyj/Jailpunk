@@ -12,7 +12,7 @@ public class CorridorsToScheme : GenerationStage
         int mapXMax = scheme.MapSize.x - 1;
         int mapYMax = scheme.MapSize.y - 1;
         foreach (CorridorArea corridor in context.Corridors) {
-            var corridorSectorId = context.SectorIdGenerator.NewSectorId();
+            var corridorSectorId = context.IdGenerator.NewSectorId();
             corridor.Traverse((x, y, isWall) => {
                 if (x < 0 || y < 0 || x > mapXMax || y > mapYMax) {
                     // Debug.LogWarning("Corridor outside of the map");

@@ -248,11 +248,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3455876476980749280, guid: 8d216b88117043a4abed9e42b44407e7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3455876476980749280, guid: 8d216b88117043a4abed9e42b44407e7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 11
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3455876476980749280, guid: 8d216b88117043a4abed9e42b44407e7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -292,47 +292,47 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3971978632405301942, guid: 8d216b88117043a4abed9e42b44407e7, type: 3}
       propertyPath: outfitData.shirtColor.b
-      value: 0.45911944
-      objectReference: {fileID: 0}
-    - target: {fileID: 3971978632405301942, guid: 8d216b88117043a4abed9e42b44407e7, type: 3}
-      propertyPath: outfitData.shirtColor.g
-      value: 0.4697315
-      objectReference: {fileID: 0}
-    - target: {fileID: 3971978632405301942, guid: 8d216b88117043a4abed9e42b44407e7, type: 3}
-      propertyPath: outfitData.shirtColor.r
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3971978632405301942, guid: 8d216b88117043a4abed9e42b44407e7, type: 3}
-      propertyPath: initialBodyData.furColor.b
-      value: 0.5943396
+      propertyPath: outfitData.shirtColor.g
+      value: 0.8525943
       objectReference: {fileID: 0}
     - target: {fileID: 3971978632405301942, guid: 8d216b88117043a4abed9e42b44407e7, type: 3}
-      propertyPath: initialBodyData.furColor.g
-      value: 0.5943396
-      objectReference: {fileID: 0}
-    - target: {fileID: 3971978632405301942, guid: 8d216b88117043a4abed9e42b44407e7, type: 3}
-      propertyPath: initialBodyData.furColor.r
-      value: 0.5943396
-      objectReference: {fileID: 0}
-    - target: {fileID: 3971978632405301942, guid: 8d216b88117043a4abed9e42b44407e7, type: 3}
-      propertyPath: initialBodyData.eyesColor.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3971978632405301942, guid: 8d216b88117043a4abed9e42b44407e7, type: 3}
-      propertyPath: initialBodyData.eyesColor.g
-      value: 0.8018868
-      objectReference: {fileID: 0}
-    - target: {fileID: 3971978632405301942, guid: 8d216b88117043a4abed9e42b44407e7, type: 3}
-      propertyPath: initialBodyData.eyesColor.r
-      value: 0.0047517046
-      objectReference: {fileID: 0}
-    - target: {fileID: 3971978632405301942, guid: 8d216b88117043a4abed9e42b44407e7, type: 3}
-      propertyPath: outfitData.lowerWearColor.b
+      propertyPath: outfitData.shirtColor.r
       value: 0.68553454
       objectReference: {fileID: 0}
     - target: {fileID: 3971978632405301942, guid: 8d216b88117043a4abed9e42b44407e7, type: 3}
+      propertyPath: initialBodyData.furColor.b
+      value: 0.990566
+      objectReference: {fileID: 0}
+    - target: {fileID: 3971978632405301942, guid: 8d216b88117043a4abed9e42b44407e7, type: 3}
+      propertyPath: initialBodyData.furColor.g
+      value: 0.990566
+      objectReference: {fileID: 0}
+    - target: {fileID: 3971978632405301942, guid: 8d216b88117043a4abed9e42b44407e7, type: 3}
+      propertyPath: initialBodyData.furColor.r
+      value: 0.990566
+      objectReference: {fileID: 0}
+    - target: {fileID: 3971978632405301942, guid: 8d216b88117043a4abed9e42b44407e7, type: 3}
+      propertyPath: initialBodyData.eyesColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3971978632405301942, guid: 8d216b88117043a4abed9e42b44407e7, type: 3}
+      propertyPath: initialBodyData.eyesColor.g
+      value: 0.6115969
+      objectReference: {fileID: 0}
+    - target: {fileID: 3971978632405301942, guid: 8d216b88117043a4abed9e42b44407e7, type: 3}
+      propertyPath: initialBodyData.eyesColor.r
+      value: 0.33647794
+      objectReference: {fileID: 0}
+    - target: {fileID: 3971978632405301942, guid: 8d216b88117043a4abed9e42b44407e7, type: 3}
+      propertyPath: outfitData.lowerWearColor.b
+      value: 0.7327044
+      objectReference: {fileID: 0}
+    - target: {fileID: 3971978632405301942, guid: 8d216b88117043a4abed9e42b44407e7, type: 3}
       propertyPath: outfitData.lowerWearColor.g
-      value: 0.96261495
+      value: 0.8459921
       objectReference: {fileID: 0}
     - target: {fileID: 3971978632405301942, guid: 8d216b88117043a4abed9e42b44407e7, type: 3}
       propertyPath: outfitData.lowerWearColor.r

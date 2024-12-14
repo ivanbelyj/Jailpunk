@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface ISectorPlanningStrategy
 {
-    void PlanSector(SectorInfo sector, GenerationContext context);
+    void PlanSector(GeneratedSectorInfo sector, GenerationContext context);
 }

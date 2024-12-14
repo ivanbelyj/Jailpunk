@@ -8,6 +8,7 @@ public class SchemeTile
     /// Every tile belongs to the certain sector.
     /// </summary>
     public int? SectorId { get; set; }
-    public TileType TileType { get; set; }
+    public TileType? TileType { get; set; }
     public uint TileId { get; set; }
+    public int? AreaId { get; set; }
 }

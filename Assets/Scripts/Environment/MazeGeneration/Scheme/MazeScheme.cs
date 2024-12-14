@@ -9,6 +9,7 @@ using UnityEngine;
 public class MazeScheme
 {
     private SchemeTile[,] Map { get; set; }
+    public List<SchemeArea> Areas { get; set; } = new();
 
     /// <summary>
     /// Maze scheme positions marked for debug
@@ -109,18 +110,18 @@ public class MazeScheme
     }
 
     // Todo: more convenient way of control
-    private const bool DisplaySectorIds = false;
+    private const bool DisplayAreaIds = false;
 
     private string TileToString(SchemeTile tile, string colorCode) {
         return tile.TileType switch {
             TileType.NoSpace => colorCode != null ? ".." : "  ",
-            TileType.Floor => DisplaySectorIds ? ToSectorString(tile) : "..",
-            TileType.LoadBearingWall => DisplaySectorIds ? ToSectorString(tile) : "==",
-            TileType.Wall => DisplaySectorIds ? ToSectorString(tile) : "--",
+            TileType.Floor => DisplayAreaIds ? ToAreaString(tile) : "..",
+            TileType.LoadBearingWall => DisplayAreaIds ? ToAreaString(tile) : "##",
+            TileType.Wall => DisplayAreaIds ? ToAreaString(tile) : "--",
             _ => "??"
         };
     }
     
-    private string ToSectorString(SchemeTile tile) 
-       => tile.SectorId == null ? "??" : $"{tile.SectorId.Value:D2}".Substring(0, 2);
+    private string ToAreaString(SchemeTile tile) 
+       => tile.AreaId == null ? "??" : $"{tile.AreaId.Value:D2}".Substring(0, 2);
 }

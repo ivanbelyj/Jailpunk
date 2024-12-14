@@ -8,7 +8,7 @@ public class GenerationRequest {
     private GenerationParameters parameters;
 
     [SerializeField]
-    private List<RequestedSectorInfo> requestedSectors;
+    private List<SectorInfo> requestedSectors;
 
     [SerializeField]
     private List<SectorGroup> sectorGroups;
@@ -18,7 +18,7 @@ public class GenerationRequest {
     /// <summary>
     /// Sectors defined by high-level logic, such as plot necessity
     /// </summary>
-    public List<RequestedSectorInfo> RequestedSectors => requestedSectors;
+    public List<SectorInfo> RequestedSectors => requestedSectors;
 
     public List<SectorGroup> SectorGroups => sectorGroups;
 }

@@ -261,6 +261,7 @@ GameObject:
   - component: {fileID: 2144129016}
   - component: {fileID: 2144129017}
   - component: {fileID: 2144129018}
+  - component: {fileID: 2144129020}
   - component: {fileID: 2144129013}
   - component: {fileID: 2144129007}
   m_Layer: 0
@@ -305,30 +306,30 @@ MonoBehaviour:
       maxSplitRatio: 2
       minLeafSize: 16
       maxLeafSize: 38
-    maxSubsectorRatio: 1.5
-    subsectorMinSize: 28
+    maxSubsectorRatio: 3
+    subsectorMinSize: 12
     subsectorBSPOptions:
       splitLeafProbability: 0.75
-      splitMinimalLeaves: 1
+      splitMinimalLeaves: 0
       minSplitRatio: 1.25
       maxRoomOffset: 0
       minRoomOffset: 0
       leafAreasOffset: 1
       useMaxSplitRatio: 1
       maxSplitRatio: 2
-      minLeafSize: 16
+      minLeafSize: 14
       maxLeafSize: 32
     roomBlockBSPOptions:
-      splitLeafProbability: 0.5
-      splitMinimalLeaves: 0
+      splitLeafProbability: 0.2
+      splitMinimalLeaves: 1
       minSplitRatio: 1.25
       maxRoomOffset: 0
       minRoomOffset: 0
       leafAreasOffset: -1
       useMaxSplitRatio: 0
       maxSplitRatio: 1.5
-      minLeafSize: 9
-      maxLeafSize: 30
+      minLeafSize: 7
+      maxLeafSize: 16
   useCustomGenerationStages: 0
   generationStages: []
   showLogMessages: 1
@@ -527,7 +528,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   includeInGeneration: 1
   showLogMessages: 0
-  addDebugSectorBoundaryMarks: 1
+  addDebugSectorBoundaryMarks: 0
 --- !u!114 &2144129017
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -572,8 +573,8 @@ MonoBehaviour:
       seed: 0
       useRandomSeed: 0
       mazeSize: {x: 185, y: 115}
-      minSectorSize: 32
-      maxSectorSize: 86
+      minSectorSize: 24
+      maxSectorSize: 64
     requestedSectors:
     - sectorGroupId: 1
       useIndividualAccessibility: 1
@@ -594,3 +595,18 @@ MonoBehaviour:
       alienatedGroupIds: 0100000003000000
     - id: 3
       alienatedGroupIds: 0100000002000000
+--- !u!114 &2144129020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2144129004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11b79a3a20a250b4fa3531af89d894b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  includeInGeneration: 0
+  showLogMessages: 0
+  addDebugSectorBoundaryMarks: 0

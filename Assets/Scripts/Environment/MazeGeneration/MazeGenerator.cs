@@ -93,10 +93,11 @@ public class MazeGenerator : MonoBehaviour
             GetComponent<StructureToSchemeStage>(),
             GetComponent<CorridorsToScheme>(),
 
-            GetComponent<ConnectivityProcessing>(),
+            GetComponent<SectorsConnectivityProcessing>(),
 
             GetComponent<RequestedSectorsAllocation>(),
             GetComponent<SectorPlanning>(),
+            GetComponent<PassagesPlanning>(),
 
             GetComponent<MazeBuilding>(),
             

@@ -28,13 +28,13 @@ public class CharacterOutfitData
                     upperWear != UpperWear.None),
                 CreateBodyPart(
                     lowerWear switch {
-                        _ => "lower-wear_left"
+                        _ => "lower-wear-left"
                     },
                     lowerWearColor,
                     lowerWear != LowerWear.None),
                 CreateBodyPart(
                     lowerWear switch {
-                        _ => "lower-wear_right"
+                        _ => "lower-wear-right"
                     },
                     lowerWearColor,
                     lowerWear != LowerWear.None),

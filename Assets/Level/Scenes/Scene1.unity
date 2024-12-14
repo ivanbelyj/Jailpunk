@@ -595,7 +595,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9145629118034579286, guid: 6887d6d314778bb42b2c968e70b455b6, type: 3}
       propertyPath: _assetId
-      value: 2024943819
+      value: 3689962239
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6887d6d314778bb42b2c968e70b455b6, type: 3}
@@ -682,6 +682,54 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &492496642
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 492496644}
+  - component: {fileID: 492496643}
+  m_Layer: 0
+  m_Name: AppearanceSpriteResolver
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &492496643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 492496642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed108f0cda4d5c04dafdbff6091aa1af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  appearanceLibraryItems:
+  - arrangementType: 1
+    objectName: 
+    spriteLibraryAsset: {fileID: 7108339969198208228, guid: 692ed91d59f51d241baf933d95c128c1, type: 3}
+--- !u!4 &492496644
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 492496642}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.6634524, y: 1.2607994, z: -0.37769133}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &553413287
 PrefabInstance:
@@ -23966,3 +24014,372 @@ PrefabInstance:
       objectReference: {fileID: 1579769694}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ebce814199d91f947a31d45f6085f139, type: 3}
+--- !u!114 &404096938623677152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 404096938623677178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7079975fda95554d88f2f9af1b42d34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  floorTileSprite: {fileID: 424646613, guid: caa095dc2c75ef94c8b9fc143beb567c, type: 3}
+  wallTileSprite: {fileID: -358937217, guid: caa095dc2c75ef94c8b9fc143beb567c, type: 3}
+--- !u!114 &404096938623677154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 404096938623677178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f8fd35340349ac4a86e84dd7c687df0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  includeInGeneration: 1
+  applyOverScheme: 0
+--- !u!114 &404096938623677155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 404096938623677178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7add235fd3dfe124ba14a3c8f83028e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  includeInGeneration: 1
+  gridPrefab: {fileID: 453053874863650869, guid: df5883b613cad5a428882cdb9f2862a9, type: 3}
+  floorPrefab: {fileID: 2007586910254942683, guid: b736de0070c32324d948f6283ac0e3c4, type: 3}
+  wallsPrefab: {fileID: 6158578392386169373, guid: 4dfc18a3e7341cb4195aec8c15baa018, type: 3}
+  tileProvider: {fileID: 404096938623677152}
+--- !u!114 &404096938623677156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 404096938623677178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9172d776884e164daa717bac9cfe394, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  includeInGeneration: 1
+  corridorsBreadth: 4
+  isDebug: 0
+--- !u!114 &404096938623677157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 404096938623677178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4d528028019d664a85c712e2976e596, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  includeInGeneration: 0
+  testRooms:
+  - useInGeneration: 1
+    rectSpace1:
+      rect:
+        x: 50
+        y: 20
+        width: 10
+        height: 10
+    rectSpace2:
+      rect:
+        x: 70
+        y: 0
+        width: 10
+        height: 10
+  - useInGeneration: 1
+    rectSpace1:
+      rect:
+        x: 20
+        y: 20
+        width: 10
+        height: 10
+    rectSpace2:
+      rect:
+        x: 0
+        y: 0
+        width: 10
+        height: 10
+  - useInGeneration: 1
+    rectSpace1:
+      rect:
+        x: 30
+        y: 40
+        width: 10
+        height: 10
+    rectSpace2:
+      rect:
+        x: 0
+        y: 70
+        width: 10
+        height: 10
+  - useInGeneration: 1
+    rectSpace1:
+      rect:
+        x: 50
+        y: 40
+        width: 10
+        height: 10
+    rectSpace2:
+      rect:
+        x: 70
+        y: 70
+        width: 10
+        height: 10
+--- !u!114 &404096938623677158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 404096938623677178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24e08c30a9ea0e042b8f7ec8984f7292, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  includeInGeneration: 1
+--- !u!114 &404096938623677159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 404096938623677178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 271435ba3eb48434b9b19231ded991e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  includeInGeneration: 1
+--- !u!114 &404096938623677162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 404096938623677178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11b79a3a20a250b4fa3531af89d894b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  includeInGeneration: 1
+  showLogMessages: 0
+  addDebugSectorBoundaryMarks: 0
+--- !u!114 &404096938623677164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 404096938623677178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8e3294430b8ef24c874463bd11edc1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  includeInGeneration: 1
+--- !u!114 &404096938623677165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 404096938623677178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5217c8d8fdc5304fa6d5b28d9104672, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  generateOnStart: 1
+  generationRequest:
+    parameters:
+      seed: 0
+      useRandomSeed: 0
+      mazeSize: {x: 185, y: 115}
+      minSectorSize: 32
+      maxSectorSize: 86
+    requestedSectors:
+    - sectorGroupId: 1
+      useIndividualAccessibility: 1
+      individualAccessibility: 3
+      necessity: 2
+    - sectorGroupId: 2
+      useIndividualAccessibility: 1
+      individualAccessibility: 3
+      necessity: 2
+    - sectorGroupId: 3
+      useIndividualAccessibility: 0
+      individualAccessibility: 2
+      necessity: 2
+    sectorGroups:
+    - id: 1
+      alienatedGroupIds: 0200000003000000
+    - id: 2
+      alienatedGroupIds: 0100000003000000
+    - id: 3
+      alienatedGroupIds: 0100000002000000
+--- !u!114 &404096938623677166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 404096938623677178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df8b8179808b7794cbebebbf076d4185, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  includeInGeneration: 1
+  showLogMessages: 0
+  addDebugSectorBoundaryMarks: 0
+--- !u!114 &404096938623677167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 404096938623677178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1441912c14cc92040922540bf452843f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  includeInGeneration: 1
+--- !u!4 &404096938623677176
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 404096938623677178}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -11.9, y: -8.8, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &404096938623677177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 404096938623677178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eab699bffba6d104e971c9aa4c126b04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  includeInGeneration: 0
+  guiSkin: {fileID: 11400000, guid: 78f22dce08e95364f91783819f627dac, type: 2}
+--- !u!1 &404096938623677178
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 404096938623677176}
+  - component: {fileID: 404096938623677152}
+  - component: {fileID: 404096938623677165}
+  - component: {fileID: 404096938623677179}
+  - component: {fileID: 404096938623677159}
+  - component: {fileID: 404096938623677156}
+  - component: {fileID: 404096938623677157}
+  - component: {fileID: 404096938623677158}
+  - component: {fileID: 404096938623677154}
+  - component: {fileID: 404096938623677166}
+  - component: {fileID: 404096938623677167}
+  - component: {fileID: 404096938623677164}
+  - component: {fileID: 404096938623677162}
+  - component: {fileID: 404096938623677155}
+  - component: {fileID: 404096938623677177}
+  m_Layer: 0
+  m_Name: MazeGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &404096938623677179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 404096938623677178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 934cdf1ec8ce2f34cb86343fd9b55ca6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  generationSettings:
+    structureBSPOptions:
+      splitLeafProbability: 0.75
+      splitMinimalLeaves: 0
+      minSplitRatio: 1.25
+      maxRoomOffset: 0
+      minRoomOffset: 0
+      leafAreasOffset: -1
+      useMaxSplitRatio: 0
+      maxSplitRatio: 1.5
+      minLeafSize: 0
+      maxLeafSize: 0
+    sectorBSPOptions:
+      splitLeafProbability: 0.75
+      splitMinimalLeaves: 1
+      minSplitRatio: 1.25
+      maxRoomOffset: 0
+      minRoomOffset: 0
+      leafAreasOffset: 2
+      useMaxSplitRatio: 1
+      maxSplitRatio: 2
+      minLeafSize: 16
+      maxLeafSize: 38
+    maxSubsectorRatio: 1.5
+    subsectorMinSize: 28
+    subsectorBSPOptions:
+      splitLeafProbability: 0.75
+      splitMinimalLeaves: 1
+      minSplitRatio: 1.25
+      maxRoomOffset: 0
+      minRoomOffset: 0
+      leafAreasOffset: 1
+      useMaxSplitRatio: 1
+      maxSplitRatio: 2
+      minLeafSize: 16
+      maxLeafSize: 32
+    roomBlockBSPOptions:
+      splitLeafProbability: 0.5
+      splitMinimalLeaves: 0
+      minSplitRatio: 1.25
+      maxRoomOffset: 0
+      minRoomOffset: 0
+      leafAreasOffset: -1
+      useMaxSplitRatio: 0
+      maxSplitRatio: 1.5
+      minLeafSize: 6
+      maxLeafSize: 16
+  useCustomGenerationStages: 0
+  generationStages: []
+  showLogMessages: 1

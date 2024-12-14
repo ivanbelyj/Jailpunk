@@ -12,12 +12,12 @@ public class SectorPlanning : GenerationStage
         return context;
     }
 
-    private void PlanSector(SectorInfo sector, GenerationContext context) {
+    private void PlanSector(GeneratedSectorInfo sector, GenerationContext context) {
         var strategy = SelectPlanningStrategy(sector);
         strategy.PlanSector(sector, context);
     }
 
-    private ISectorPlanningStrategy SelectPlanningStrategy(SectorInfo sector) {
+    private ISectorPlanningStrategy SelectPlanningStrategy(GeneratedSectorInfo sector) {
         return new SectorRoomPlanningStrategy();
     }
 }

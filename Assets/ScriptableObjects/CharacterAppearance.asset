@@ -194,7 +194,7 @@ MonoBehaviour:
     orderWhenHorizontalAngle: 0
     useStopFrames: 0
     stopFramesSet: 
-  - name: eye_left
+  - name: eye-left
     ignoreState: 1
     ignoreAngle: 0
     useOrigin: 1
@@ -204,7 +204,7 @@ MonoBehaviour:
     orderWhenHorizontalAngle: 0
     useStopFrames: 0
     stopFramesSet: 
-  - name: eye_right
+  - name: eye-right
     ignoreState: 1
     ignoreAngle: 0
     useOrigin: 1
@@ -224,7 +224,7 @@ MonoBehaviour:
     orderWhenHorizontalAngle: 0
     useStopFrames: 0
     stopFramesSet: 
-  - name: lower-wear_left
+  - name: lower-wear-left
     ignoreState: 0
     ignoreAngle: 0
     useOrigin: 0
@@ -244,7 +244,7 @@ MonoBehaviour:
     orderWhenHorizontalAngle: -2
     useStopFrames: 0
     stopFramesSet: tail-walk
-  - name: lower-wear_right
+  - name: lower-wear-right
     ignoreState: 0
     ignoreAngle: 0
     useOrigin: 0
@@ -254,7 +254,7 @@ MonoBehaviour:
     orderWhenHorizontalAngle: -1
     useStopFrames: 1
     stopFramesSet: legs-walk
-  - name: hand_right
+  - name: hand-right
     ignoreState: 0
     ignoreAngle: 0
     useOrigin: 1
@@ -264,7 +264,7 @@ MonoBehaviour:
     orderWhenHorizontalAngle: 2
     useStopFrames: 1
     stopFramesSet: hands-walk
-  - name: hand_left
+  - name: hand-left
     ignoreState: 0
     ignoreAngle: 0
     useOrigin: 1
