@@ -5,38 +5,52 @@ using UnityEngine;
 public class RoomBlocksGenerator
 {
     private readonly GenerationSettings settings;
-    private readonly IdGenerator idGenerator;
 
-    public RoomBlocksGenerator(
-        GenerationSettings settings,
-        IdGenerator idGenerator)
+    public RoomBlocksGenerator(GenerationSettings settings)
     {
         this.settings = settings;
-        this.idGenerator = idGenerator;
     }
 
-    public void GenerateAndApply(
+    public List<BSPNode> GenerateBSPNodes(
         MazeScheme scheme,
         RectInt rect,
         BSPGenerationOptions roomBlockBSPOptions)
     {
-        var sectorPlanningOptions = GetSectorBSPGenerationOptions(rect, roomBlockBSPOptions);
-        var sectorNodes = ApplyPlanning(scheme, sectorPlanningOptions);
-
-        var (subsectors, roomBlocks) = SegregateNodes(sectorNodes);
-
-        var subsectorNodes = ApplySubsectors(scheme, subsectors.Select(x => x.rectArea.Rect));
-        var subsectorRoomBlocks = GetLeaves(subsectorNodes).ToList();
-
-        ApplyRooms(
-            scheme,
-            roomBlocks.Concat(subsectorRoomBlocks).Select(x => x.rectArea.Rect));
+        return GenerateBSPNodes(rect, roomBlockBSPOptions);
     }
 
-    private void ApplyRooms(MazeScheme scheme, IEnumerable<RectInt> roomBlocks) {
+    private List<BSPNode> GenerateBSPNodes(
+        RectInt rect,
+        BSPGenerationOptions roomBlockBSPOptions)
+    {
+        // Divide initial sector nodes (subsectors, roomblocks, "wide" corridors)
+        var sectorPlanningOptions = GetSectorBSPGenerationOptions(rect, roomBlockBSPOptions);
+        var sectorNodes = CreatePlanning(sectorPlanningOptions);
+
+        // Segregate generated initial sector nodes which we can divide further
+        var (subsectors, roomBlocks) = SegregateNotSplittedNodes(sectorNodes);
+
+        // Divide subsector nodes (roomblocks, "narrow" corridors)
+        var subsectorNodes = CreateSubsectors(subsectors.Select(x => x.rectArea.Rect));
+
+        // Get subsector room blocks to divide them only
+        var subsectorRoomBlocks = GetNotSplitted(subsectorNodes).ToList();
+
+        // Divide room blocks to rooms
+        var roomBlockNodes = CreateRooms(roomBlocks.Concat(subsectorRoomBlocks).Select(x => x.rectArea.Rect));
+
+        return sectorNodes // To apply "wide" corridors"
+            .Concat(subsectorNodes) // To apply "narrow" corridors
+            .Concat(roomBlockNodes) // To apply rooms
+            .ToList();
+    }
+
+    private List<BSPNode> CreateRooms(IEnumerable<RectInt> roomBlocks) {
+        var result = new List<BSPNode>();
         foreach (var roomBlockRect in roomBlocks) {
-            ApplyPlanning(scheme, GetRoomBSPOptions(roomBlockRect));
+            result.AddRange(CreatePlanning(GetRoomBSPOptions(roomBlockRect)));
         }
+        return result;
     }
 
     private BSPGenerationOptions GetRoomBSPOptions(RectInt roomBlockRect) {
@@ -46,30 +60,29 @@ public class RoomBlocksGenerator
         return options;
     }
 
-    private List<BSPNode> ApplySubsectors(
-        MazeScheme scheme,
+    private List<BSPNode> CreateSubsectors(
         IEnumerable<RectInt> rects)
     {
         var nodes = new List<BSPNode>();
         foreach (var subsectorRect in rects) {
             var options = GetSectorBSPGenerationOptions(subsectorRect, settings.subsectorBSPOptions);
-            nodes.AddRange(ApplyPlanning(scheme, options));
+            nodes.AddRange(CreatePlanning(options));
         }
         return nodes;
     }
 
-    private (List<BSPNode> subsectors, List<BSPNode> roomBlocks) SegregateNodes(
+    private (List<BSPNode> subsectors, List<BSPNode> roomBlocks) SegregateNotSplittedNodes(
         IEnumerable<BSPNode> bspNodes)
     {
         var subsectors = new List<BSPNode>();
         var roomBlocks = new List<BSPNode>();
-        foreach (var node in GetLeaves(bspNodes)) {
+        foreach (var node in GetNotSplitted(bspNodes)) {
             (IsSubsector(node) ? subsectors : roomBlocks).Add(node);
         }
         return (subsectors, roomBlocks);
     }
 
-    private IEnumerable<BSPNode> GetLeaves(IEnumerable<BSPNode> bspNodes)
+    private IEnumerable<BSPNode> GetNotSplitted(IEnumerable<BSPNode> bspNodes)
         => bspNodes.Where(x => !x.IsSplit());
 
     /// <summary>
@@ -80,68 +93,12 @@ public class RoomBlocksGenerator
             && Mathf.RoundToInt(Mathf.Sqrt(bspLeaf.rectArea.Rect.width * bspLeaf.rectArea.Rect.height))
                 >= settings.subsectorMinSize;
 
-    private List<BSPNode> ApplyPlanning(
-        MazeScheme scheme,
+    private List<BSPNode> CreatePlanning(
         BSPGenerationOptions options)
     {
         var bspGenerator = new BSPGenerator();
         var (nodes, graph) = bspGenerator.GenerateBSPNodes(options);
-        ApplyNodesAsSchemeAreas(scheme, nodes);
         return nodes;
-    }
-
-    private void ApplyNodesAsSchemeAreas(
-        MazeScheme scheme,
-        List<BSPNode> nodes)
-    {
-        foreach (var node in nodes) {
-            if (node.rectArea != null) {
-                ApplyNewSchemeArea(
-                    scheme,
-                    node.rectArea.Rect,
-                    SchemeAreaType.Room,
-                    addWallsOnBorder: true);
-            }
-            if (node.intermediateArea != null) {
-                ApplyNewSchemeArea(
-                    scheme,
-                    node.intermediateArea.Rect,
-                    SchemeAreaType.Room,
-                    addWallsOnBorder: false);
-            }
-        }
-    }
-
-    private void ApplyNewSchemeArea(
-        MazeScheme scheme,
-        RectInt rect,
-        SchemeAreaType type,
-        bool addWallsOnBorder)
-    {
-        var newArea = new SchemeArea() {
-            Id = idGenerator.NewAreaId(),
-            Type = type
-        };
-        scheme.Areas.Add(newArea);
-        ApplyAsSchemeArea(scheme, rect, newArea.Id, addWallsOnBorder);
-    }
-
-    private void ApplyAsSchemeArea(
-        MazeScheme scheme,
-        RectInt rect,
-        int areaId,
-        bool addWallsOnBorder)
-    {
-        StructureUtils.TraverseRect(rect, (x, y, isBorder) => {
-            SchemeTile tile = scheme.GetTileByPos(x, y);
-            tile.AreaId = areaId;
-            if (addWallsOnBorder
-                && isBorder
-                && tile.TileType != TileType.LoadBearingWall)
-            {
-                tile.TileType = TileType.Wall;
-            }
-        });
     }
 
     private BSPGenerationOptions GetSectorBSPGenerationOptions(

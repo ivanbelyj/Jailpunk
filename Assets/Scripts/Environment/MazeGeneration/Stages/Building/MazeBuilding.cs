@@ -16,12 +16,12 @@ public class MazeBuilding : GenerationStage
     [SerializeField]
     private TileProvider tileProvider;
 
-    public override GenerationContext ProcessMaze(GenerationContext context)
+    public override void ProcessMaze()
     {
         if (!ValidatePrefabs())
         {
             Debug.LogError("Prefabs are not assigned properly.");
-            return context;
+            return;
         }
 
         MazeScheme mazeScheme = context.MazeData.Scheme;
@@ -31,8 +31,6 @@ public class MazeBuilding : GenerationStage
         Tilemap wallTilemap = CreateTilemap(gridObject, wallsPrefab, "Walls");
 
         PopulateTilemaps(mazeScheme, floorTilemap, wallTilemap);
-
-        return context;
     }
 
     private bool ValidatePrefabs()

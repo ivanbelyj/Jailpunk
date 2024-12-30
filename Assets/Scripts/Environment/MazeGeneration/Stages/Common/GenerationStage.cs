@@ -19,6 +19,12 @@ public abstract class GenerationStage : MonoBehaviour, IGenerationStage
             return stageName;
         }
     }
+
+    protected GenerationContext context;
+
+    public void SetContext(GenerationContext context) {
+        this.context = context;
+    }
     
-    public abstract GenerationContext ProcessMaze(GenerationContext context);
+    public abstract void ProcessMaze();
 }

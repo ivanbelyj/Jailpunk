@@ -8,7 +8,7 @@ using UnityEngine;
 /// </summary>
 public class BSPGeneration : GenerationStage
 {
-    public override GenerationContext ProcessMaze(GenerationContext context)
+    public override void ProcessMaze()
     {
         var options = InitOptions(context);
 
@@ -28,8 +28,6 @@ public class BSPGeneration : GenerationStage
         //     }
         // };
         // genContext.Corridors = corridorsAll;
-
-        return context;
     }
 
     private List<RectArea> GetSectorRects(IEnumerable<BSPNode> bspNodes) =>

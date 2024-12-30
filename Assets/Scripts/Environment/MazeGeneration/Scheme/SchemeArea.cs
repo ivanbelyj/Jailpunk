@@ -6,4 +6,5 @@ public class SchemeArea
 {
     public int Id { get; set; }
     public SchemeAreaType Type { get; set; }
+    public RectInt Rect { get; set; }
 }

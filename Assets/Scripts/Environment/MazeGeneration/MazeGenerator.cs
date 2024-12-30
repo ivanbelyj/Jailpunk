@@ -42,7 +42,7 @@ public class MazeGenerator : MonoBehaviour
 
         var context = CreateInitialGenerationContext(rootGameObjectName, request);
         InitSeed(request.Parameters);
-        context = RunGenerationStages(context);
+        RunGenerationStages(context);
 
         float elapsedMs = GetMsSinceStartup() - totalStartTime;
         if (showLogMessages)   {
@@ -77,6 +77,14 @@ public class MazeGenerator : MonoBehaviour
         }
         mazeScheme.AddDebugSectorColor(sectorId, color);
     }
+
+    public static void AddDebugAreaColor(int areaId, Color color) {
+        if (mazeScheme == null) {
+            Debug.LogWarning("There is no maze scheme to add a debug sector color");
+            return;
+        }
+        mazeScheme.AddDebugAreaColor(areaId, color);
+    }
     #endregion
 
     private void Awake() {
@@ -98,6 +106,7 @@ public class MazeGenerator : MonoBehaviour
             GetComponent<RequestedSectorsAllocation>(),
             GetComponent<SectorPlanning>(),
             GetComponent<PassagesPlanning>(),
+            GetComponent<ZoneAllocation>(),
 
             GetComponent<MazeBuilding>(),
             
@@ -142,13 +151,13 @@ public class MazeGenerator : MonoBehaviour
         }
     }
 
-    private GenerationContext RunGenerationStages(GenerationContext context) {
+    private void RunGenerationStages(GenerationContext context) {
         foreach (var stage in generationStages) {
             if (stage.IncludeInGeneration) {
-                context = stage.ProcessMaze(context);
+                stage.SetContext(context);
+                stage.ProcessMaze();
             }
         }
-        return context;
     }
 
     private float GetMsSinceStartup() {

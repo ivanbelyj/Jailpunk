@@ -714,7 +714,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   appearanceLibraryItems:
   - arrangementType: 1
-    objectName: 
+    appearanceName: 
     spriteLibraryAsset: {fileID: 7108339969198208228, guid: 692ed91d59f51d241baf933d95c128c1, type: 3}
 --- !u!4 &492496644
 Transform:
@@ -24219,14 +24219,17 @@ MonoBehaviour:
       useIndividualAccessibility: 1
       individualAccessibility: 3
       necessity: 2
+      zoneGroups: []
     - sectorGroupId: 2
       useIndividualAccessibility: 1
       individualAccessibility: 3
       necessity: 2
+      zoneGroups: []
     - sectorGroupId: 3
       useIndividualAccessibility: 0
       individualAccessibility: 2
       necessity: 2
+      zoneGroups: []
     sectorGroups:
     - id: 1
       alienatedGroupIds: 0200000003000000

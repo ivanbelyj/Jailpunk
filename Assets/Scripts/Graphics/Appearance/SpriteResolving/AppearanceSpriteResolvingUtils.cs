@@ -4,8 +4,8 @@ using UnityEngine;
 
 public static class AppearanceSpriteResolvingUtils 
 {
-    public static string GetCategoryName(string objectName, string state, int? angle) =>
-        $"{objectName}" +
+    public static string GetCategoryName(string name, string state, int? angle) =>
+        $"{name}" +
         $"{(state != null ? $"_{state}" : "")}" +
         $"{(angle != null ? $"_{angle.Value:D3}" : "")}";
 }

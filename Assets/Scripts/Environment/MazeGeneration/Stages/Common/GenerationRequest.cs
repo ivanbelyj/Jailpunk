@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,7 +10,7 @@ public class GenerationRequest {
     private List<SectorInfo> requestedSectors;
 
     [SerializeField]
-    private List<SectorGroup> sectorGroups;
+    private List<AllocatableAreaGroup> sectorGroups;
 
     public GenerationParameters Parameters => parameters;
 
@@ -20,5 +19,5 @@ public class GenerationRequest {
     /// </summary>
     public List<SectorInfo> RequestedSectors => requestedSectors;
 
-    public List<SectorGroup> SectorGroups => sectorGroups;
+    public List<AllocatableAreaGroup> SectorGroups => sectorGroups;
 }

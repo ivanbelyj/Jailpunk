@@ -118,10 +118,10 @@ public class AppearanceElementRenderer
         AppearanceAnimationData animationData)
     {
         var spriteData = new AppearanceSpriteData() {
-            ObjectName = appearanceElementSchema.name,
+            Name = appearanceElementSchema.name,
             State = appearanceElementSchema.ignoreState ? null : animationData.State,
             Angle = appearanceElementSchema.ignoreAngle ? null : animationData.Angle,
-            Frame = animationData.Frame
+            Index = animationData.Frame
         };
 
         ApplyStopFrame(ref spriteData, animationData);
@@ -142,7 +142,7 @@ public class AppearanceElementRenderer
             && animationData.LastWalkFrame != null)
         {
             spriteData.State = StateWalk;
-            spriteData.Frame = GetClosestStopFrame(
+            spriteData.Index = GetClosestStopFrame(
                 animationData.LastWalkFrame.Value,
                 GetFramesCount(animationData.State));
         }

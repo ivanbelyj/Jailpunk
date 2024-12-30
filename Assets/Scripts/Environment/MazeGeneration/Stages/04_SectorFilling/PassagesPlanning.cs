@@ -12,37 +12,24 @@ public class PassagesPlanning : GenerationStage
     [SerializeField]
     private bool addDebugSectorBoundaryMarks = true;
 
-    public override GenerationContext ProcessMaze(GenerationContext context)
+    public override void ProcessMaze()
     {
-        var connectivityResult = GetAreasConnectivity(context);
-
         if (addDebugSectorBoundaryMarks) {
-            AddBoundariesDebugMarks(connectivityResult.Boundaries);
+            AddBoundariesDebugMarks(context.FullAreaBoundaries);
         }
 
         ApplyPassagesBetweenAreas(
             context.MazeData.Scheme,
             context.MazeData.Scheme.Areas,
-            connectivityResult);
-
-        return context;
-    }
-
-    private ConnectivityResult GetAreasConnectivity(GenerationContext context) {
-        var connectivityProcessor = new ConnectivityProcessor();
-        return connectivityProcessor.ProcessConnectivity(
-            (x, y) => {
-                return context.MazeData.Scheme.GetTileByPos(x, y).AreaId;
-            },
-            context.MazeData.Scheme.MapSize);
+            context.FullAreaBoundaries);
     }
 
     private void ApplyPassagesBetweenAreas(
         MazeScheme scheme,
         List<SchemeArea> areas,
-        ConnectivityResult connectivityResult)
+        List<AreasBoundary> boundaries)
     {
-        foreach (var boundary in connectivityResult.Boundaries) {
+        foreach (var boundary in boundaries) {
             var pairs = boundary.GetNeighboringBoundaryPairs();
             var (tileA, tileB) = pairs[Random.Range(0, pairs.Count)];
             scheme.GetTileByPos(tileA.x, tileA.y).TileType = TileType.Floor;

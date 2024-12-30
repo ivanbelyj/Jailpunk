@@ -6,13 +6,13 @@ using UnityEngine.U2D.Animation;
 
 public enum AppearanceLibraryItemArrangementType {
     OneObjectWithName,
-    ObjectNameInCategory
+    NameInCategory
 }
 
 [Serializable]
 public class AppearanceLibraryItem {
     public AppearanceLibraryItemArrangementType arrangementType;
-    public string objectName;
+    public string appearanceName;
     public SpriteLibraryAsset spriteLibraryAsset;
 }
 
@@ -26,9 +26,9 @@ public class AppearanceSpriteResolver : MonoBehaviour
     // regardless of the count of element renderers
     private static readonly HashSet<string> loggedWarningCategories = new();
 
-    private Dictionary<string, SpriteLibraryDecorator> spriteLibrariesByObjectName;
+    private Dictionary<string, SpriteLibraryDecorator> spriteLibrariesByName;
 
-    private List<SpriteLibraryAsset> spriteLibrariesWithObjectNameInCategory;
+    private List<SpriteLibraryAsset> spriteLibrariesWithNameInCategory;
 
     private void Awake() {
         SetInitiallySegregatedSpriteLibraryCollections();
@@ -54,53 +54,53 @@ public class AppearanceSpriteResolver : MonoBehaviour
     }
 
     private void SetInitiallySegregatedSpriteLibraryCollections() {
-        spriteLibrariesByObjectName = appearanceLibraryItems
+        spriteLibrariesByName = appearanceLibraryItems
             .Where(x => x.arrangementType == AppearanceLibraryItemArrangementType.OneObjectWithName)
             .ToDictionary(
-                x => x.objectName,
+                x => x.appearanceName,
                 x => new SpriteLibraryDecorator(x.spriteLibraryAsset));
 
-        spriteLibrariesWithObjectNameInCategory = appearanceLibraryItems
-            .Where(x => x.arrangementType == AppearanceLibraryItemArrangementType.ObjectNameInCategory)
+        spriteLibrariesWithNameInCategory = appearanceLibraryItems
+            .Where(x => x.arrangementType == AppearanceLibraryItemArrangementType.NameInCategory)
             .Select(x => x.spriteLibraryAsset)
             .ToList();
     }
 
     private SpriteLibraryDecorator GetSpriteLibrary(AppearanceSpriteData data) {
         SpriteLibraryDecorator spriteLibrary;
-        if (!spriteLibrariesByObjectName.TryGetValue(
-            data.ObjectName,
+        if (!spriteLibrariesByName.TryGetValue(
+            data.Name,
             out spriteLibrary))
         {
-            return GetAndCacheSpriteLibraryWithObjectNameInCategory(data);
+            return GetAndCacheSpriteLibraryWithNameInCategory(data);
         }
         return spriteLibrary;
     }
 
-    private SpriteLibraryDecorator GetAndCacheSpriteLibraryWithObjectNameInCategory(
+    private SpriteLibraryDecorator GetAndCacheSpriteLibraryWithNameInCategory(
         AppearanceSpriteData data)
     {
-        var spriteLibraryAsset = FindSpriteLibraryWithObject(data.ObjectName);
+        var spriteLibraryAsset = FindSpriteLibraryWithAppearance(data.Name);
         if (spriteLibraryAsset == null) {
             return null;
         }
         var spriteLibrary = new SpriteLibraryDecorator(spriteLibraryAsset);
-        spriteLibrariesByObjectName.Add(data.ObjectName, spriteLibrary);
+        spriteLibrariesByName.Add(data.Name, spriteLibrary);
 
         return spriteLibrary;
     }
 
-    private SpriteLibraryAsset FindSpriteLibraryWithObject(string objectName) {
-        return spriteLibrariesWithObjectNameInCategory
+    private SpriteLibraryAsset FindSpriteLibraryWithAppearance(string name) {
+        return spriteLibrariesWithNameInCategory
             .FirstOrDefault(x => 
-                x.GetCategoryNames().Any(x => x.StartsWith(objectName)));
+                x.GetCategoryNames().Any(x => x.StartsWith(name)));
     }
 
     private (string category, string label)? TryGetCurrentCategoryAndLabel(
         SpriteLibraryDecorator spriteLibraryDecorator,
         AppearanceSpriteData data)
     {
-        var frame = data.Frame ?? 0;
+        var frame = data.Index ?? 0;
 
         if (frame < 0) {
             return null;

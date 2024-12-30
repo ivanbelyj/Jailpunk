@@ -6,7 +6,7 @@ public class CorridorsToScheme : GenerationStage
 {
     [Header("Debug")]
     public bool applyOverScheme = false;
-    public override GenerationContext ProcessMaze(GenerationContext context)
+    public override void ProcessMaze()
     {
         MazeScheme scheme = context.MazeData.Scheme;
         int mapXMax = scheme.MapSize.x - 1;
@@ -28,6 +28,5 @@ public class CorridorsToScheme : GenerationStage
                 }
             });
         }
-        return context;
     }
 }

@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Appearance Schema",
-    menuName = "Customizable Appearance 2D/Appearance Schema", order = 52)]
+[CreateAssetMenu(
+    fileName = "New Appearance Schema",
+    menuName = "Customizable Appearance 2D/Appearance Schema",
+    order = 52)]
 public class AppearanceSchema : ScriptableObject
 {
     public bool useFlipped90For270 = true;

@@ -18,6 +18,7 @@ public class GenerationContext
     public GenerationSettings Settings { get; set; }
     public GenerationRequest Request { get; set; }
 
+    // Todo: don't pass in GenerationContext?
     public IdGenerator IdGenerator { get; set; } = new();
     #endregion
     
@@ -39,12 +40,18 @@ public class GenerationContext
     public List<CorridorArea> Corridors { get; set; }
     #endregion
 
+    #region Connectivity
     /// <summary>
     /// Sector ids that could be connected
     /// </summary>
     public Graph<int> SectorPossibleConnectivity { get; set; }
-
     public List<AreasBoundary> SectorBoundaries { get; set; } = new List<AreasBoundary>();
+
+    public Graph<int> FullAreaPossibleConnectivity { get; set; }
+    public List<AreasBoundary> FullAreaBoundaries { get; set; } = new List<AreasBoundary>();
+
+    public Dictionary<int, Graph<int>> AreaPossibleConnectivityBySectorId { get; set; }
+    #endregion
 
     /// <summary>
     /// Actually generated sectors info, including <see cref="RequestedSectors"/>

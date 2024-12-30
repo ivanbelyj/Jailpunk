@@ -17,7 +17,7 @@ public class TestStructureStage : GenerationStage
 {
     [Header("Debug")]
     public List<RectSpacePair> testRooms;
-    public override GenerationContext ProcessMaze(GenerationContext context)
+    public override void ProcessMaze()
     {
         var sectors = new List<RectArea>();
         testRooms.ForEach(pair => {
@@ -46,7 +46,5 @@ public class TestStructureStage : GenerationStage
             corridors.AddRange(generatedCorridors);
         }
         context.Corridors = corridors;
-
-        return context;
     }
 }

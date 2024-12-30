@@ -10,10 +10,9 @@ public class DebugGUI : GenerationStage
     private MazeScheme scheme;
     private int generationNumber = 0;
     
-    public override GenerationContext ProcessMaze(GenerationContext mazeData)
+    public override void ProcessMaze()
     {
-        scheme = mazeData.MazeData.Scheme;
-        return mazeData;
+        scheme = context.MazeData.Scheme;
     }
 
     // For debug

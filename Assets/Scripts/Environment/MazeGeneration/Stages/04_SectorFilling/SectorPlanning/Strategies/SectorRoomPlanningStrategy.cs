@@ -5,15 +5,18 @@ using UnityEngine.Tilemaps;
 
 public class SectorRoomPlanningStrategy : ISectorPlanningStrategy
 {
-    public void PlanSector(GeneratedSectorInfo sector, GenerationContext context)
+    public List<SchemeArea> PlanSector(
+        GeneratedSectorInfo sector,
+        GenerationContext context)
     {
-        var roomBlocksGenerator = new RoomBlocksGenerator(
-            context.Settings,
-            context.IdGenerator);
+        var roomBlocksGenerator = new RoomBlocksGenerator(context.Settings);
         
-        roomBlocksGenerator.GenerateAndApply(
+        var bspNodes = roomBlocksGenerator.GenerateBSPNodes(
             context.MazeData.Scheme,
             sector.RectArea.Rect,
             context.Settings.sectorBSPOptions);
+        
+        var applyAreaHelper = new ApplyAreaHelper(context.IdGenerator);
+        return applyAreaHelper.ToSchemeAreas(bspNodes);
     }
 }

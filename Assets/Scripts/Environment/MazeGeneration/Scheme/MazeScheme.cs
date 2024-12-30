@@ -14,9 +14,11 @@ public class MazeScheme
     /// <summary>
     /// Maze scheme positions marked for debug
     /// </summary>
-    private Dictionary<Vector2Int, Color> ColorsByMarkedPosition = new();
+    private Dictionary<Vector2Int, Color> colorsByMarkedPosition = new();
 
-    private Dictionary<int, Color> ColorsBySectorId = new();
+    private Dictionary<int, Color> colorsBySectorId = new();
+
+    private Dictionary<int, Color> colorsByAreaId = new();
 
     public MazeScheme(Vector2Int mapSize) {
         Map = new SchemeTile[mapSize.y, mapSize.x];
@@ -50,26 +52,36 @@ public class MazeScheme
         if (color == null) {
             color = Color.red;
         }
-        if (!ColorsByMarkedPosition.ContainsKey(pos)) {
-            ColorsByMarkedPosition.Add(pos, color.Value);
+        if (!colorsByMarkedPosition.ContainsKey(pos)) {
+            colorsByMarkedPosition.Add(pos, color.Value);
         } else {
             Debug.LogWarning($"Override debug color mark (position: {pos})");
-            ColorsByMarkedPosition[pos] = color.Value;
+            colorsByMarkedPosition[pos] = color.Value;
         }
     }
 
     public void AddDebugSectorColor(int sectorId, Color color) {
-        if (!ColorsBySectorId.ContainsKey(sectorId)) {
-            ColorsBySectorId.Add(sectorId, color);
+        if (!colorsBySectorId.ContainsKey(sectorId)) {
+            colorsBySectorId.Add(sectorId, color);
         } else {
-            Debug.LogWarning($"Override sector debug color (sector: {sectorId})");
-            ColorsBySectorId[sectorId] = color;
+            Debug.LogWarning($"Override sector debug color (sector id: {sectorId})");
+            colorsBySectorId[sectorId] = color;
+        }
+    }
+
+    public void AddDebugAreaColor(int areaId, Color color) {
+        if (!colorsByAreaId.ContainsKey(areaId)) {
+            colorsByAreaId.Add(areaId, color);
+        } else {
+            Debug.LogWarning($"Override area debug color (area id: {areaId})");
+            colorsByAreaId[areaId] = color;
         }
     }
 
     public void ClearDebugMarks() {
-        ColorsByMarkedPosition = new();
-        ColorsBySectorId = new();
+        colorsByMarkedPosition = new();
+        colorsBySectorId = new();
+        colorsByMarkedPosition = new();
     }
 
     // Todo: Refactor
@@ -84,16 +96,23 @@ public class MazeScheme
             {
                 SchemeTile tile = GetTileByPos(x, y);
                 string colorCode = null;
-                var posVector = new Vector2Int(x, y);
-                if (ColorsByMarkedPosition.ContainsKey(posVector)) {
-                    colorCode = ColorUtility
-                        .ToHtmlStringRGB(ColorsByMarkedPosition[posVector]);
-                }
+                
                 if (tile.SectorId != null
-                    && ColorsBySectorId.ContainsKey(tile.SectorId.Value)) {
+                    && colorsBySectorId.ContainsKey(tile.SectorId.Value)) {
                     colorCode = ColorUtility
-                        .ToHtmlStringRGB(ColorsBySectorId[tile.SectorId.Value]);
+                        .ToHtmlStringRGB(colorsBySectorId[tile.SectorId.Value]);
                 }
+                if (tile.AreaId != null
+                    && colorsByAreaId.ContainsKey(tile.AreaId.Value)) {
+                    colorCode = ColorUtility
+                        .ToHtmlStringRGB(colorsByAreaId[tile.AreaId.Value]);
+                }
+                var posVector = new Vector2Int(x, y);
+                if (colorsByMarkedPosition.ContainsKey(posVector)) {
+                    colorCode = ColorUtility
+                        .ToHtmlStringRGB(colorsByMarkedPosition[posVector]);
+                }
+
                 if (colorCode != null) {
                     strBuilder.Append($"<b><color=#{colorCode}>");
                 }

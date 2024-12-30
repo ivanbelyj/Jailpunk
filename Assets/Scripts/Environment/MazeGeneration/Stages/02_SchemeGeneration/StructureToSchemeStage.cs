@@ -9,7 +9,7 @@ using UnityEngine;
 /// </summary>
 public class StructureToSchemeStage : GenerationStage
 {
-    public override GenerationContext ProcessMaze(GenerationContext context)
+    public override void ProcessMaze()
     {
         var generatedSectors = CreateAndApplySectors(context);
         context.GeneratedSectors = generatedSectors;
@@ -19,8 +19,6 @@ public class StructureToSchemeStage : GenerationStage
         //         StructureUtils.ApplyCorridor(scheme, corridor);
         //     }
         // }
-        
-        return context;
     }
 
     private List<GeneratedSectorInfo> CreateAndApplySectors(GenerationContext context) {

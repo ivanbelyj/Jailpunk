@@ -62,7 +62,7 @@ public class AppearanceElementOffsetHelper
             ?.GetOffset(
                 originItem.state == StateIdle
                 ? animationData.LastWalkFrame.Value
-                : data.SpriteData.Frame.Value)
+                : data.SpriteData.Index.Value)
             ?? Vector2Int.zero;
             
         return result;

@@ -12,7 +12,7 @@ public class CorridorsStructureGeneration : GenerationStage
     [Header("Debug")]
     [SerializeField]
     private bool isDebug = false;
-    public override GenerationContext ProcessMaze(GenerationContext context)
+    public override void ProcessMaze()
     {
         var generator = new CorridorsGenerator(isDebug);
         var corridors = new List<CorridorArea>();
@@ -31,7 +31,5 @@ public class CorridorsStructureGeneration : GenerationStage
 
         // Todo:
         // traverse corridors and map to maze scheme as new sectors
-        
-        return context;
     }
 }

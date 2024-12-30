@@ -7,11 +7,11 @@ using UnityEngine;
 /// </summary>
 public struct AppearanceSpriteData
 {
-    public string ObjectName { get; set; }
+    public string Name { get; set; }
     public string State { get; set; }
     public int? Angle { get; set; }
-    public int? Frame { get; set; }
+    public int? Index { get; set; }
 
     public string GetCategoryName() =>
-        AppearanceSpriteResolvingUtils.GetCategoryName(ObjectName, State, Angle);
+        AppearanceSpriteResolvingUtils.GetCategoryName(Name, State, Angle);
 }

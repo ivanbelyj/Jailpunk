@@ -13,15 +13,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Library:
-  - m_Name: wall
-    m_Hash: 334884854
+  - m_Name: closet
+    m_Hash: 426794368
     m_CategoryList: []
     m_OverrideEntries:
-    - m_Name: wall
-      m_Hash: 334884854
-      m_Sprite: {fileID: 0}
+    - m_Name: TileSet v1.0_34
+      m_Hash: 735424041
+      m_Sprite: {fileID: 461048497, guid: caa095dc2c75ef94c8b9fc143beb567c, type: 3}
       m_FromMain: 0
-      m_SpriteOverride: {fileID: 0}
+      m_SpriteOverride: {fileID: 461048497, guid: caa095dc2c75ef94c8b9fc143beb567c, type: 3}
+    - m_Name: TileSet v1.0_35
+      m_Hash: 1557307071
+      m_Sprite: {fileID: -794021187, guid: caa095dc2c75ef94c8b9fc143beb567c, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -794021187, guid: caa095dc2c75ef94c8b9fc143beb567c, type: 3}
+    - m_Name: TileSet v1.0_36
+      m_Hash: -975450363
+      m_Sprite: {fileID: 1310174546, guid: caa095dc2c75ef94c8b9fc143beb567c, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 1310174546, guid: caa095dc2c75ef94c8b9fc143beb567c, type: 3}
+    - m_Name: TileSet v1.0_37
+      m_Hash: -1294139501
+      m_Sprite: {fileID: -139995709, guid: caa095dc2c75ef94c8b9fc143beb567c, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -139995709, guid: caa095dc2c75ef94c8b9fc143beb567c, type: 3}
     m_FromMain: 0
-    m_EntryOverrideCount: 1
+    m_EntryOverrideCount: 4
   m_PrimaryLibraryGUID: 

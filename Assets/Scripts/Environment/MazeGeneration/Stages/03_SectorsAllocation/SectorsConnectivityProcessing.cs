@@ -11,15 +11,13 @@ public class SectorsConnectivityProcessing : GenerationStage
     [SerializeField]
     private bool addDebugSectorBoundaryMarks = true;
 
-    public override GenerationContext ProcessMaze(GenerationContext context)
+    public override void ProcessMaze()
     {
         var connectivityResult = GetSectorsConnectivity(context);
         context.SectorPossibleConnectivity = connectivityResult.ConnectivityGraph;
         context.SectorBoundaries = connectivityResult.Boundaries;
         
         HandleDebug(context);
-
-        return context;
     }
 
     private ConnectivityResult GetSectorsConnectivity(GenerationContext context) {

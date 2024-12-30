@@ -123,6 +123,54 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &1900415386
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1900415388}
+  - component: {fileID: 1900415387}
+  m_Layer: 0
+  m_Name: AppearanceSpriteResolver
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1900415387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1900415386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed108f0cda4d5c04dafdbff6091aa1af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  appearanceLibraryItems:
+  - arrangementType: 1
+    appearanceName: 
+    spriteLibraryAsset: {fileID: 7108339969198208228, guid: 0c7c226d4eea18f4aaacfb9aaf4c83c5, type: 3}
+--- !u!4 &1900415388
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1900415386}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 95.30408, y: 95.12034, z: -0.5297518}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1922095979
 GameObject:
   m_ObjectHideFlags: 0
@@ -262,6 +310,7 @@ GameObject:
   - component: {fileID: 2144129017}
   - component: {fileID: 2144129018}
   - component: {fileID: 2144129020}
+  - component: {fileID: 2144129021}
   - component: {fileID: 2144129013}
   - component: {fileID: 2144129007}
   m_Layer: 0
@@ -304,31 +353,31 @@ MonoBehaviour:
       leafAreasOffset: 2
       useMaxSplitRatio: 1
       maxSplitRatio: 2
-      minLeafSize: 16
-      maxLeafSize: 38
-    maxSubsectorRatio: 3
-    subsectorMinSize: 12
+      minLeafSize: 12
+      maxLeafSize: 34
+    maxSubsectorRatio: 1.5
+    subsectorMinSize: 16
     subsectorBSPOptions:
-      splitLeafProbability: 0.75
+      splitLeafProbability: 0
       splitMinimalLeaves: 0
       minSplitRatio: 1.25
       maxRoomOffset: 0
       minRoomOffset: 0
       leafAreasOffset: 1
-      useMaxSplitRatio: 1
-      maxSplitRatio: 2
-      minLeafSize: 14
-      maxLeafSize: 32
+      useMaxSplitRatio: 0
+      maxSplitRatio: 1.5
+      minLeafSize: 10
+      maxLeafSize: 22
     roomBlockBSPOptions:
       splitLeafProbability: 0.2
-      splitMinimalLeaves: 1
+      splitMinimalLeaves: 0
       minSplitRatio: 1.25
       maxRoomOffset: 0
       minRoomOffset: 0
       leafAreasOffset: -1
       useMaxSplitRatio: 0
       maxSplitRatio: 1.5
-      minLeafSize: 7
+      minLeafSize: 6
       maxLeafSize: 16
   useCustomGenerationStages: 0
   generationStages: []
@@ -542,6 +591,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   includeInGeneration: 1
+  addAllocatedSectorColorMarks: 1
+  allocatedSectorDebugMarkColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &2144129018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -580,14 +631,56 @@ MonoBehaviour:
       useIndividualAccessibility: 1
       individualAccessibility: 3
       necessity: 2
+      zoneGroups:
+      - id: 1
+        alienatedGroupIds: 
+      - id: 2
+        alienatedGroupIds: 
+      - id: 3
+        alienatedGroupIds: 
+      zones:
+      - zoneGroupId: 1
+        useIndividualAccessibility: 0
+        individualAccessibility: 2
+        necessity: 2
+      - zoneGroupId: 2
+        useIndividualAccessibility: 0
+        individualAccessibility: 2
+        necessity: 1
+      - zoneGroupId: 3
+        useIndividualAccessibility: 0
+        individualAccessibility: 3
+        necessity: 1
     - sectorGroupId: 2
       useIndividualAccessibility: 1
       individualAccessibility: 3
       necessity: 2
+      zoneGroups:
+      - id: 1
+        alienatedGroupIds: 
+      - id: 2
+        alienatedGroupIds: 
+      - id: 3
+        alienatedGroupIds: 
+      zones:
+      - zoneGroupId: 1
+        useIndividualAccessibility: 0
+        individualAccessibility: 0
+        necessity: 2
+      - zoneGroupId: 2
+        useIndividualAccessibility: 0
+        individualAccessibility: 0
+        necessity: 1
+      - zoneGroupId: 3
+        useIndividualAccessibility: 0
+        individualAccessibility: 0
+        necessity: 1
     - sectorGroupId: 3
       useIndividualAccessibility: 0
       individualAccessibility: 2
       necessity: 2
+      zoneGroups: []
+      zones: []
     sectorGroups:
     - id: 1
       alienatedGroupIds: 0200000003000000
@@ -610,3 +703,16 @@ MonoBehaviour:
   includeInGeneration: 0
   showLogMessages: 0
   addDebugSectorBoundaryMarks: 0
+--- !u!114 &2144129021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2144129004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fa3b6a25f0f064419bbb19cbbcc14b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  includeInGeneration: 1

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface IGenerationStage
 {
-    GenerationContext ProcessMaze(GenerationContext mazeData);
+    void ProcessMaze();
     string StageName { get; }
     bool IncludeInGeneration { get; }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Graph<T>
@@ -15,7 +16,10 @@ public class Graph<T>
     }
 
     public void AddLink(T val1, T val2) {
-        AddLink(new Node<T>(val1), new Node<T>(val2));
+        // Todo: eliminate duplication
+        var node1 = Nodes.FirstOrDefault(x => x.Value.Equals(val1));
+        var node2 = Nodes.FirstOrDefault(x => x.Value.Equals(val1));
+        AddLink(node1 ?? new Node<T>(val1), node2 ?? new Node<T>(val2));
     }
 
     public HashSet<(Node<T>, Node<T>)> ConnectedPairsUnique() {
