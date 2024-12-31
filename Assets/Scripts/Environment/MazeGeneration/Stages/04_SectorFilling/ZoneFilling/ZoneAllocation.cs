@@ -17,7 +17,7 @@ public class ZoneAllocation : GenerationStage
         }
         foreach (var generatedSector in context.GeneratedSectors) {
             if (!context.AreaPossibleConnectivityBySectorId.ContainsKey(generatedSector.Id)) {
-                break;
+                continue;
             }
 
             SetRequestedZones(generatedSector);
@@ -77,6 +77,9 @@ public class ZoneAllocation : GenerationStage
 
     private void AddDebugColorForGeneratedZones(GeneratedSectorInfo generatedSector) {
         foreach (var zone in generatedSector.Zones) {
+            if (zone.GeneratedZoneId == null) {
+                continue;
+            }
             Debug.Log("Add debug area color to " + zone.GeneratedZoneId);
             MazeGenerator.AddDebugAreaColor(
                 zone.GeneratedZoneId.Value,

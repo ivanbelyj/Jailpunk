@@ -9,37 +9,19 @@ public class SectorPlanning : GenerationStage
 
         PlanAndApply(context, applyAreaHelper);
 
-        var areaConnectivity = GetAreaConnectivity(context.MazeData.Scheme);
-        context.FullAreaBoundaries = areaConnectivity.Boundaries;
-        context.FullAreaPossibleConnectivity = areaConnectivity.ConnectivityGraph;
-
-        context.AreaPossibleConnectivityBySectorId = GetSectorAreaConnectivitiesBySectorId(
-            context.GeneratedSectors,
-            areaConnectivity.ConnectivityGraph);
+        HandleConnectivityAndBoundaries();
     }
 
-    private Dictionary<int, Graph<int>> GetSectorAreaConnectivitiesBySectorId(
-        List<GeneratedSectorInfo> generatedSectors,
-        Graph<int> commonAreaConnectivity)
-    {
-        // TODO: Refactor and optimize
-        var result = new Dictionary<int, Graph<int>>();
-        foreach (var areaNode in commonAreaConnectivity.Nodes) {
-            var nodeSector = generatedSectors.First(
-                sector => sector.SchemeAreas.Any(area => areaNode.Value == area.Id));
-            if (!result.TryGetValue(nodeSector.Id, out var sectorAreaConnectivity))
-            {
-                sectorAreaConnectivity = new Graph<int>();
-                result.Add(nodeSector.Id, sectorAreaConnectivity);
-            }
-            foreach (var connectedNode in areaNode.ConnectedNodes) {
-                var connectedNodeSector = generatedSectors.First(x => x.SchemeAreas.Any(x => x.Id == areaNode.Value));
-                if (connectedNodeSector.Id == nodeSector.Id) {
-                    sectorAreaConnectivity.AddLink(areaNode.Value, connectedNode.Value);
-                }
-            }
-        }
-        return result;
+    private void HandleConnectivityAndBoundaries() {
+        var helper = new SectorPlanConnectivityHelper();
+
+        var areaConnectivity = helper.GetAreaConnectivity(context.MazeData.Scheme);
+        context.AreaBoundariesAllSectors = areaConnectivity.Boundaries;
+        context.AreaPossibleConnectivityAllSectors = areaConnectivity.ConnectivityGraph;
+
+        context.AreaPossibleConnectivityBySectorId = helper.GetSectorAreaConnectivitiesBySectorId(
+            context.GeneratedSectors,
+            areaConnectivity.ConnectivityGraph);
     }
 
     private void PlanAndApply(
@@ -51,15 +33,6 @@ public class SectorPlanning : GenerationStage
                 applyAreaHelper.ApplyToScheme(context.MazeData.Scheme, schemeArea);
             }
         }
-    }
-
-    private ConnectivityResult GetAreaConnectivity(MazeScheme mazeScheme) {
-        var connectivityProcessor = new ConnectivityProcessor();
-        return connectivityProcessor.ProcessConnectivity(
-            (x, y) => {
-                return mazeScheme.GetTileByPos(x, y).AreaId;
-            },
-            mazeScheme.MapSize);
     }
 
     private List<SchemeArea> PlanAndAdd(

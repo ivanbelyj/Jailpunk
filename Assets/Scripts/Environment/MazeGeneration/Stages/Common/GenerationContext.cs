@@ -47,8 +47,8 @@ public class GenerationContext
     public Graph<int> SectorPossibleConnectivity { get; set; }
     public List<AreasBoundary> SectorBoundaries { get; set; } = new List<AreasBoundary>();
 
-    public Graph<int> FullAreaPossibleConnectivity { get; set; }
-    public List<AreasBoundary> FullAreaBoundaries { get; set; } = new List<AreasBoundary>();
+    public Graph<int> AreaPossibleConnectivityAllSectors { get; set; }
+    public List<AreasBoundary> AreaBoundariesAllSectors { get; set; } = new List<AreasBoundary>();
 
     public Dictionary<int, Graph<int>> AreaPossibleConnectivityBySectorId { get; set; }
     #endregion

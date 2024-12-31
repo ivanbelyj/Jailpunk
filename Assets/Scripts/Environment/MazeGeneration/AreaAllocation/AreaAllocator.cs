@@ -169,8 +169,9 @@ public class AreaAllocator
                         AreaConnectivity,
                         generatedAreaId,
                         alienatedId)
-                        ?? throw new System.NotSupportedException(
-                            "Isolated Areas are not fully supported."))
+                        ?? -1)
+                        // ?? throw new System.NotSupportedException(
+                        //     "Isolated Areas are not fully supported."))
                     .Min());
     }
     #endregion

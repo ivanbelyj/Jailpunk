@@ -4,7 +4,7 @@ public static class DebugColorMarkUtils
 {
     private static Color[] colorsToMarkSectorZones = new[]
     {
-        Color.red, Color.green, Color.blue, Color.yellow, 
+        Color.green, Color.blue, Color.yellow, 
         Color.magenta, Color.cyan, Color.white
     };
     private static int currentSectorColor = -1;

@@ -621,7 +621,7 @@ MonoBehaviour:
   generateOnStart: 1
   generationRequest:
     parameters:
-      seed: 0
+      seed: 1548906091
       useRandomSeed: 0
       mazeSize: {x: 185, y: 115}
       minSectorSize: 24
@@ -633,48 +633,34 @@ MonoBehaviour:
       necessity: 2
       zoneGroups:
       - id: 1
-        alienatedGroupIds: 
+        alienatedGroupIds: 03000000
       - id: 2
-        alienatedGroupIds: 
+        alienatedGroupIds: 03000000
       - id: 3
-        alienatedGroupIds: 
+        alienatedGroupIds: 0100000002000000
       zones:
       - zoneGroupId: 1
         useIndividualAccessibility: 0
-        individualAccessibility: 2
+        individualAccessibility: 3
         necessity: 2
       - zoneGroupId: 2
-        useIndividualAccessibility: 0
+        useIndividualAccessibility: 1
         individualAccessibility: 2
-        necessity: 1
+        necessity: 2
       - zoneGroupId: 3
+        useIndividualAccessibility: 1
+        individualAccessibility: 1
+        necessity: 2
+      - zoneGroupId: 1
         useIndividualAccessibility: 0
-        individualAccessibility: 3
+        individualAccessibility: 1
         necessity: 1
     - sectorGroupId: 2
       useIndividualAccessibility: 1
       individualAccessibility: 3
       necessity: 2
-      zoneGroups:
-      - id: 1
-        alienatedGroupIds: 
-      - id: 2
-        alienatedGroupIds: 
-      - id: 3
-        alienatedGroupIds: 
-      zones:
-      - zoneGroupId: 1
-        useIndividualAccessibility: 0
-        individualAccessibility: 0
-        necessity: 2
-      - zoneGroupId: 2
-        useIndividualAccessibility: 0
-        individualAccessibility: 0
-        necessity: 1
-      - zoneGroupId: 3
-        useIndividualAccessibility: 0
-        individualAccessibility: 0
-        necessity: 1
+      zoneGroups: []
+      zones: []
     - sectorGroupId: 3
       useIndividualAccessibility: 0
       individualAccessibility: 2
@@ -716,3 +702,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   includeInGeneration: 1
+  showDebugMessages: 1
