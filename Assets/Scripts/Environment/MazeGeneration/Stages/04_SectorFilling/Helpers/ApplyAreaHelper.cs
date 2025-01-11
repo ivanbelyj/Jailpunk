@@ -33,7 +33,11 @@ public class ApplyAreaHelper
     }
 
     public void ApplyToScheme(MazeScheme scheme, SchemeArea area) {
-        StructureUtils.TraverseRect(area.Rect, (x, y, isBorder) => {
+        TraverseRectUtils.TraverseRect(area.Rect, (data) => {
+            bool isBorder = data.isBorder;
+            int x = data.x;
+            int y = data.y;
+            
             var tile = scheme.GetTileByPos(x, y);
             tile.AreaId = area.Id;
             if (area.Type == SchemeAreaType.Room

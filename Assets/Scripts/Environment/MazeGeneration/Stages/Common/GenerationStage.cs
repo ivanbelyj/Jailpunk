@@ -21,9 +21,15 @@ public abstract class GenerationStage : MonoBehaviour, IGenerationStage
     }
 
     protected GenerationContext context;
+    protected GenerationData GenerationData => context.GenerationData;
+    protected IdGenerator idGenerator;
 
-    public void SetContext(GenerationContext context) {
+    public void Initialize(
+        GenerationContext context,
+        IdGenerator idGenerator)
+    {
         this.context = context;
+        this.idGenerator = idGenerator;
     }
     
     public abstract void ProcessMaze();

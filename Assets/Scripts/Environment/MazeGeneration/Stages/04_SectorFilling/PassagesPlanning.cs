@@ -15,13 +15,13 @@ public class PassagesPlanning : GenerationStage
     public override void ProcessMaze()
     {
         if (addDebugSectorBoundaryMarks) {
-            AddBoundariesDebugMarks(context.AreaBoundariesAllSectors);
+            AddBoundariesDebugMarks(GenerationData.AreaBoundariesAllSectors);
         }
 
         ApplyPassagesBetweenAreas(
             context.MazeData.Scheme,
             context.MazeData.Scheme.Areas,
-            context.AreaBoundariesAllSectors);
+            GenerationData.AreaBoundariesAllSectors);
     }
 
     private void ApplyPassagesBetweenAreas(

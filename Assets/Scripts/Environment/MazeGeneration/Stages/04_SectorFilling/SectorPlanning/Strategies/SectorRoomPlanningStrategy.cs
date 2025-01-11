@@ -5,6 +5,13 @@ using UnityEngine.Tilemaps;
 
 public class SectorRoomPlanningStrategy : ISectorPlanningStrategy
 {
+    private readonly IdGenerator idGenerator;
+
+    public SectorRoomPlanningStrategy(IdGenerator idGenerator)
+    {
+        this.idGenerator = idGenerator;
+    }
+    
     public List<SchemeArea> PlanSector(
         GeneratedSectorInfo sector,
         GenerationContext context)
@@ -16,7 +23,7 @@ public class SectorRoomPlanningStrategy : ISectorPlanningStrategy
             sector.RectArea.Rect,
             context.Settings.sectorBSPOptions);
         
-        var applyAreaHelper = new ApplyAreaHelper(context.IdGenerator);
+        var applyAreaHelper = new ApplyAreaHelper(idGenerator);
         return applyAreaHelper.ToSchemeAreas(bspNodes);
     }
 }

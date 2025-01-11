@@ -48,7 +48,7 @@ public class Log : ActivatableObject
 
     private void Update() {
         if (State == ActivationState.Activating) {
-            if (rb.velocity.sqrMagnitude < Mathf.Epsilon) {
+            if (rb.linearVelocity.sqrMagnitude < Mathf.Epsilon) {
                 State = ActivationState.UnableToActivate;
             }
         }

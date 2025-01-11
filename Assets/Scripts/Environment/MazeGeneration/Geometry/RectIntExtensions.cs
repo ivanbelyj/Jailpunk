@@ -21,5 +21,4 @@ public static class RectIntExtensions
             && (!constraints.useMinGeometricMean || geometricMean >= constraints.minGeometricMean)
             && (!constraints.useMaxGeometricMean || aspectRatio <= constraints.maxGeometricMean);
     }
-        
 }

@@ -20,6 +20,8 @@ public class MazeGenerator : MonoBehaviour
 
     [SerializeField]
     private bool showLogMessages = false;
+
+    private readonly IdGenerator idGenerator = new();
     
     /// <summary>
     /// Static for debug marking
@@ -34,7 +36,8 @@ public class MazeGenerator : MonoBehaviour
     /// </summary>
     public GenerationContext CreateMaze(
         GenerationRequest request,
-        string rootGameObjectName = "MazeGrid") {
+        string rootGameObjectName = "MazeGrid")
+    {
         float totalStartTime = GetMsSinceStartup();
 
         lastGenerationRequest = request;
@@ -42,7 +45,7 @@ public class MazeGenerator : MonoBehaviour
 
         var context = CreateInitialGenerationContext(rootGameObjectName, request);
         InitSeed(request.Parameters);
-        RunGenerationStages(context);
+        RunGenerationStages(context, idGenerator);
 
         float elapsedMs = GetMsSinceStartup() - totalStartTime;
         if (showLogMessages)   {
@@ -52,7 +55,8 @@ public class MazeGenerator : MonoBehaviour
         return context;
     }
 
-    public void Regenerate(string rootGameObjectName) {
+    public void Regenerate(string rootGameObjectName)
+    {
         if (lastGenerationRequest == null) {
             Debug.LogError($"Cannot regenerate: no previous generation request defined");
             return;
@@ -62,7 +66,8 @@ public class MazeGenerator : MonoBehaviour
     }
 
     #region Debug
-    public static void AddDebugMarkToScheme(Vector2Int pos, Color? color = null) {
+    public static void AddDebugMarkToScheme(Vector2Int pos, Color? color = null)
+    {
         if (mazeScheme == null) {
             Debug.LogWarning("There is no maze scheme to add a debug mark");
             return;
@@ -70,7 +75,8 @@ public class MazeGenerator : MonoBehaviour
         mazeScheme.AddDebugMark(pos, color);
     }
 
-    public static void AddDebugSectorColor(int sectorId, Color color) {
+    public static void AddDebugSectorColor(int sectorId, Color color)
+    {
         if (mazeScheme == null) {
             Debug.LogWarning("There is no maze scheme to add a debug sector color");
             return;
@@ -78,7 +84,8 @@ public class MazeGenerator : MonoBehaviour
         mazeScheme.AddDebugSectorColor(sectorId, color);
     }
 
-    public static void AddDebugAreaColor(int areaId, Color color) {
+    public static void AddDebugAreaColor(int areaId, Color color)
+    {
         if (mazeScheme == null) {
             Debug.LogWarning("There is no maze scheme to add a debug sector color");
             return;
@@ -87,13 +94,15 @@ public class MazeGenerator : MonoBehaviour
     }
     #endregion
 
-    private void Awake() {
+    private void Awake()
+    {
         SetGenerationStages();
     }
 
-    private List<GenerationStage> GetDefaultAttachedGenerationStages() {
+    private List<GenerationStage> GetDefaultAttachedGenerationStages()
+    {
         return new List<GenerationStage>() {
-            GetComponent<BSPGeneration>(),
+            GetComponent<SectorSeparation>(),
             GetComponent<CorridorsStructureGeneration>(),
 
             GetComponent<TestStructureStage>(),
@@ -107,6 +116,7 @@ public class MazeGenerator : MonoBehaviour
             GetComponent<SectorPlanning>(),
             GetComponent<PassagesPlanning>(),
             GetComponent<ZoneAllocation>(),
+            GetComponent<ZoneFilling>(),
 
             GetComponent<MazeBuilding>(),
             
@@ -114,7 +124,8 @@ public class MazeGenerator : MonoBehaviour
         };
     }
 
-    private void SetGenerationStages() {
+    private void SetGenerationStages()
+    {
         if (!useCustomGenerationStages) {
             generationStages = GetDefaultAttachedGenerationStages();
         }
@@ -140,7 +151,8 @@ public class MazeGenerator : MonoBehaviour
         };
     }
 
-    private void InitSeed(GenerationParameters parameters) {
+    private void InitSeed(GenerationParameters parameters)
+    {
         int seedToInitState = parameters.UseRandomSeed ?
             new System.Random().Next() :
             parameters.Seed;
@@ -151,16 +163,20 @@ public class MazeGenerator : MonoBehaviour
         }
     }
 
-    private void RunGenerationStages(GenerationContext context) {
+    private void RunGenerationStages(
+        GenerationContext context,
+        IdGenerator idGenerator)
+    {
         foreach (var stage in generationStages) {
             if (stage.IncludeInGeneration) {
-                stage.SetContext(context);
+                stage.Initialize(context, idGenerator);
                 stage.ProcessMaze();
             }
         }
     }
 
-    private float GetMsSinceStartup() {
+    private float GetMsSinceStartup()
+    {
         return Time.realtimeSinceStartup * 100;
     }
 }

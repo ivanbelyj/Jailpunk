@@ -1056,7 +1056,7 @@ namespace Console
             {
                 base.Logic();
 
-                Rigidbody.drag = drag;
+                Rigidbody.linearDamping = drag;
 
                 return new ConsoleOutput("", ConsoleOutput.OutputType.Log, false);
 

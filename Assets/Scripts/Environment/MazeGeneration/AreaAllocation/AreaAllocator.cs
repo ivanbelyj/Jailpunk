@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class AreaAllocator
 {
+    private readonly IEnumerable<IAreaAllocatorAreaFilter> areaFilters;
+
     // Initial
     private IEnumerable<IAllocatableArea> requestedAreas;
     private IEnumerable<AllocatableAreaGroup> areaGroups;
@@ -16,6 +18,11 @@ public class AreaAllocator
 
     private HashSet<IAllocatableArea> allocatedRequestedAreas;
     private HashSet<int> occupiedGeneratedAreaIds;
+
+    public AreaAllocator(params IAreaAllocatorAreaFilter[] areaFilters)
+    {
+        this.areaFilters = areaFilters;
+    }
     
     public void AllocateAreas(
         IEnumerable<IAllocatableArea> requestedAreas,
@@ -116,8 +123,6 @@ public class AreaAllocator
         AllocatableAreaGroup areaGroup) 
     {
         var allocatedAlienatedCenterIds = GetAllocatedAlienatedAreaIds(areaGroup);
-        // Debug message
-        // Debug.Log("alienated Area ids (allocated): " + string.Join(", ", allocatedAlienatedCenterIds));
 
         var groupCenter = centersByGroupId[areaGroup.Id];
         var generatedAreaIdsByMaxDistance = OrderAreaIdsByMaxDistance(
@@ -128,15 +133,6 @@ public class AreaAllocator
                 false),
             AreasConnectivity,
             allocatedAlienatedCenterIds);
-        
-        // Debug message
-        // if (allocatedAlienatedCenterIds.Any())
-        //     Debug.Log(string.Join(", ",
-        //         generatedAreaIdsByMaxDistance.Select(
-        //             x => GetDistance(AreasConnectivity,
-        //                 allocatedAlienatedCenterIds.First(), x))));
-        // else
-        //     Debug.LogWarning("NO ALLOCATED REQESTED AreaS");
 
         GetFirstAndOccupy(
             requestedArea,
@@ -225,7 +221,8 @@ public class AreaAllocator
 
     private void Occupy(
         IAllocatableArea requestedArea,
-        int areaId) {
+        int areaId)
+    {
         if (occupiedGeneratedAreaIds.Contains(areaId)) {
             throw new MazeGenerationException(
                 "Cannot assign the same generated Area to multiple requested Areas");
@@ -244,12 +241,12 @@ public class AreaAllocator
         IAllocatableArea requestedArea,
         IEnumerable<int> areaIds,
         Graph<int> areaConnectivity,
-        bool includeNotMatching = true
-    ) {
+        bool includeNotMatching = true)
+    {
         return areaIds
             .Select(AreaId =>
                 new {
-                    AreaId = AreaId,
+                    AreaId,
                     Match = requestedArea.UseIndividualAccessibility ?
                         EstimateIndividualAccessibilityMatching(
                             requestedArea,
@@ -257,6 +254,7 @@ public class AreaAllocator
                         : Random.Range(-1, 2)
                 }
             )
+            .Where(x => areaFilters.All(filter => filter.ShouldAllocate(x.AreaId)))
             .Where(x => includeNotMatching || x.Match >= 0)
             .Where(x => !occupiedGeneratedAreaIds.Contains(x.AreaId))
             .OrderBy(x => x.Match)

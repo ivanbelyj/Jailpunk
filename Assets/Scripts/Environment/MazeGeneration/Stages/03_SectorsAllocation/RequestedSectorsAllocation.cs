@@ -17,7 +17,7 @@ public class RequestedSectorsAllocation : GenerationStage
         areaAllocator.AllocateAreas(
             context.Request.RequestedSectors,
             context.Request.SectorGroups,
-            context.SectorPossibleConnectivity
+            GenerationData.SectorPossibleConnectivity
         );
         HandleDebug(context, areaAllocator);
     }

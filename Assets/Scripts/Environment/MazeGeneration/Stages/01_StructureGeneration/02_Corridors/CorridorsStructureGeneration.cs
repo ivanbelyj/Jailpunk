@@ -16,7 +16,7 @@ public class CorridorsStructureGeneration : GenerationStage
     {
         var generator = new CorridorsGenerator(isDebug);
         var corridors = new List<CorridorArea>();
-        foreach (var (node1, node2) in context.RawCorridorsConnectivity
+        foreach (var (node1, node2) in context.GenerationData.RawCorridorsConnectivity
             .ConnectedPairsUnique()) {
             var generatedCorridors = generator
                 .CreateCorridors(node1.Value, node2.Value,
@@ -27,7 +27,7 @@ public class CorridorsStructureGeneration : GenerationStage
         
         }
 
-        context.Corridors = corridors;
+        context.GenerationData.Corridors = corridors;
 
         // Todo:
         // traverse corridors and map to maze scheme as new sectors

@@ -4,11 +4,18 @@ using UnityEngine;
 
 public class GladePlanningStrategy : ISectorPlanningStrategy
 {
+    private readonly IdGenerator idGenerator;
+
+    public GladePlanningStrategy(IdGenerator idGenerator)
+    {
+        this.idGenerator = idGenerator;
+    }
+
     public List<SchemeArea> PlanSector(GeneratedSectorInfo sector, GenerationContext context)
     {
         return new List<SchemeArea> {
             new() {
-                Id = context.IdGenerator.NewAreaId(),
+                Id = idGenerator.NewAreaId(),
                 Rect = sector.RectArea.Rect,
                 Type = SchemeAreaType.Room
             }

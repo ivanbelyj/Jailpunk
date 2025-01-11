@@ -14,8 +14,8 @@ public class SectorsConnectivityProcessing : GenerationStage
     public override void ProcessMaze()
     {
         var connectivityResult = GetSectorsConnectivity(context);
-        context.SectorPossibleConnectivity = connectivityResult.ConnectivityGraph;
-        context.SectorBoundaries = connectivityResult.Boundaries;
+        GenerationData.SectorPossibleConnectivity = connectivityResult.ConnectivityGraph;
+        GenerationData.SectorBoundaries = connectivityResult.Boundaries;
         
         HandleDebug(context);
     }
@@ -32,12 +32,12 @@ public class SectorsConnectivityProcessing : GenerationStage
     #region Debug
     private void HandleDebug(GenerationContext context) {
         if (showLogMessages) {
-            PrintGraphToConsole(context.SectorPossibleConnectivity);
-            PrintBoundariesToConsole(context.SectorBoundaries);
+            PrintGraphToConsole(GenerationData.SectorPossibleConnectivity);
+            PrintBoundariesToConsole(GenerationData.SectorBoundaries);
         }
         
         if (addDebugSectorBoundaryMarks) {
-            AddBoundariesDebugMarks(context.SectorBoundaries);
+            AddBoundariesDebugMarks(GenerationData.SectorBoundaries);
         }
     }
     #endregion

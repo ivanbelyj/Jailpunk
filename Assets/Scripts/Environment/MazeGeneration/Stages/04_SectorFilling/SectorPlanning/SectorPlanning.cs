@@ -1,34 +1,44 @@
 using System.Collections.Generic;
-using System.Linq;
+using UnityEngine;
 
 public class SectorPlanning : GenerationStage
 {
+    private ISectorPlanningStrategy[] planningStrategies;
+    private ApplyAreaHelper applyAreaHelper;
+
     public override void ProcessMaze()
     {
-        var applyAreaHelper = new ApplyAreaHelper(context.IdGenerator);
+        InitializeStage();
 
-        PlanAndApply(context, applyAreaHelper);
+        PlanAndApply(context);
 
         HandleConnectivityAndBoundaries();
+    }
+
+    private void InitializeStage() {
+        planningStrategies =  new ISectorPlanningStrategy[] {
+            new SectorRoomPlanningStrategy(idGenerator),
+            // new GladePlanningStrategy(idGenerator)
+        };
+
+        applyAreaHelper = new ApplyAreaHelper(idGenerator);
     }
 
     private void HandleConnectivityAndBoundaries() {
         var helper = new SectorPlanConnectivityHelper();
 
         var areaConnectivity = helper.GetAreaConnectivity(context.MazeData.Scheme);
-        context.AreaBoundariesAllSectors = areaConnectivity.Boundaries;
-        context.AreaPossibleConnectivityAllSectors = areaConnectivity.ConnectivityGraph;
+        GenerationData.AreaBoundariesAllSectors = areaConnectivity.Boundaries;
+        GenerationData.AreaPossibleConnectivityAllSectors = areaConnectivity.ConnectivityGraph;
 
-        context.AreaPossibleConnectivityBySectorId = helper.GetSectorAreaConnectivitiesBySectorId(
-            context.GeneratedSectors,
+        GenerationData.AreaPossibleConnectivityBySectorId = helper.GetSectorAreaConnectivitiesBySectorId(
+            GenerationData.GeneratedSectors,
             areaConnectivity.ConnectivityGraph);
     }
 
-    private void PlanAndApply(
-        GenerationContext context,
-        ApplyAreaHelper applyAreaHelper)
+    private void PlanAndApply(GenerationContext context)
     {
-        foreach (var sector in context.GeneratedSectors) {
+        foreach (var sector in GenerationData.GeneratedSectors) {
             foreach (var schemeArea in PlanAndAdd(context, sector)) {
                 applyAreaHelper.ApplyToScheme(context.MazeData.Scheme, schemeArea);
             }
@@ -53,6 +63,6 @@ public class SectorPlanning : GenerationStage
 
     private ISectorPlanningStrategy SelectPlanningStrategy(GeneratedSectorInfo sector)
     {
-        return new SectorRoomPlanningStrategy();
+        return planningStrategies[Random.Range(0, planningStrategies.Length)];
     }
 }

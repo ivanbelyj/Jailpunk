@@ -89,8 +89,11 @@ public class CorridorArea : ITraversableArea
             var part = Parts[i];
             var nextPart = (i + 1) < Parts.Count ? Parts[i + 1] : null;
             var prevPart = (i - 1) >= 0 ? Parts[i - 1] : null;
-            StructureUtils.TraverseRect(part.RectWithPositiveSize,
-                (x, y, isBorder) => {
+            TraverseRectUtils.TraverseRect(part.RectWithPositiveSize, (data) => {
+                bool isBorder = data.isBorder;
+                int x = data.x;
+                int y = data.y;
+
                 bool isWall = GeometryUtils.IsOnRectBorder(part.Rect, x, y);
                 
                 // The task is to determine the free passage
@@ -103,12 +106,11 @@ public class CorridorArea : ITraversableArea
                 // 
                 //     ^
                 //     |
-                if (
-                    
-                    // There can be the end passage of the
+                if (// There can be the end passage of the
                     // previous corridor
-                    prevPart != null && prevPart.IsOnStraightPassage(x, y)
-                    ) {
+                    prevPart != null && prevPart.IsOnStraightPassage(x, y))
+                {
+                    
                     isWall = false;
                 }
                     

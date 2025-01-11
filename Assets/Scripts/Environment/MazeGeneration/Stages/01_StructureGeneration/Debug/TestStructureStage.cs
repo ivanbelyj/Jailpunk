@@ -27,7 +27,7 @@ public class TestStructureStage : GenerationStage
             sectors.Add(pair.rectSpace2);
         });
 
-        context.SectorRects = sectors;
+        GenerationData.SectorRects = sectors;
 
         var generator = new CorridorsGenerator(true);
         var corridors = new List<CorridorArea>();
@@ -45,6 +45,6 @@ public class TestStructureStage : GenerationStage
             }
             corridors.AddRange(generatedCorridors);
         }
-        context.Corridors = corridors;
+        GenerationData.Corridors = corridors;
     }
 }
