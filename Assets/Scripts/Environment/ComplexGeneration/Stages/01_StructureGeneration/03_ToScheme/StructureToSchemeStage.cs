@@ -42,10 +42,10 @@ public class StructureToSchemeStage : GenerationStage
             bool isBorder = data.isBorder;
             int x = data.x;
             int y = data.y;
-            SchemeTile tile = scheme.GetTileByPos(x, y);
+            SchemePosition tile = scheme.GetTileByPos(x, y);
             tile.SectorId = sectorId;
-            tile.TileType = isBorder ?
-                TileType.LoadBearingWall : TileType.Floor;
+            tile.Type = isBorder ?
+                SchemePositionType.LoadBearingWall : SchemePositionType.Floor;
         });
     }
 }

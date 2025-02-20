@@ -71,10 +71,10 @@ public class MazeWithRoomsFillingStrategy : IZoneFillingStrategy
         }
     }
 
-    private void PlaceWall(SchemeTile tile, int x, int y)
+    private void PlaceWall(SchemePosition tile, int x, int y)
     {
-        if (tile.TileType == TileType.Floor) {
-            tile.TileType = TileType.Wall;
+        if (tile.Type == SchemePositionType.Floor) {
+            tile.Type = SchemePositionType.Wall;
         }
         // MazeGenerator.AddDebugMarkToScheme(new Vector2Int(x, y), Color.black);
     }

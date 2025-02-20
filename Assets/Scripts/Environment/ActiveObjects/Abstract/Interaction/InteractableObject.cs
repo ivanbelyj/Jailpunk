@@ -1,13 +1,19 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(FlashEffect))]
 public abstract class InteractableObject : ActivatableObject, IInteractable
 {
-    private FlashEffect flashEffect;
+    [SerializeField]
+    private bool useFlashEffect = true;
 
+    [SerializeField]
+    private List<FlashEffect> flashEffectComponents;
+    public List<FlashEffect> FlashEffectComponents {
+        get => flashEffectComponents;
+        set => flashEffectComponents = value;
+    }
+    
     [SerializeField]
     private FlashEffectData defaultEffectData;
 
@@ -29,8 +35,12 @@ public abstract class InteractableObject : ActivatableObject, IInteractable
 
     public event Action<IInteractable, bool, bool> ObviousnessChanged;
 
-    private void Awake() {
-        flashEffect = GetComponent<FlashEffect>();
+    protected virtual void Awake() {
+        
+    }
+
+    protected virtual void Start() {
+        
     }
 
     public void SetVisualEffectsForCurrentState()
@@ -41,20 +51,32 @@ public abstract class InteractableObject : ActivatableObject, IInteractable
                 ActivationState.UnableToActivate => unableToActivateEffectData,
                 _ => defaultEffectData
             };
-            Highlight(effectData);
+            if (useFlashEffect) {
+                Highlight(effectData);
+            }
         }
     }
 
     public void ClearVisualEffects()
     {
-        ClearHighlight();
+        if (useFlashEffect) {
+            ClearHighlight();
+        }
     }
 
     private void Highlight(FlashEffectData effectData) {
-        flashEffect.Flash(effectData);
+        if (flashEffectComponents != null) {
+            foreach (var flashEffect in flashEffectComponents) {
+                flashEffect.Flash(effectData);
+            }
+        }
     }
 
     private void ClearHighlight() {
-        flashEffect.FadeOutLastEffect();
+        if (flashEffectComponents != null) {
+            foreach (var flashEffect in flashEffectComponents) {
+                flashEffect.FadeOutLastEffect();
+            }
+        }
     }
 }

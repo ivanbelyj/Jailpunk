@@ -10,29 +10,66 @@ public class ZoneAllocation : GenerationStage
 
     public override void RunStage()
     {
+        LogWarning();
+
+        AllocateZonesForGeneratedSectors();
+    }
+
+    private void LogWarning() {
         if (GenerationData.GeneratedSectors.Count != GenerationData.AreaPossibleConnectivityBySectorId.Count)
         {
             Debug.LogWarning(
                 $"Generated sectors: {GenerationData.GeneratedSectors.Count}. " +
                 $"Connectivity: {GenerationData.AreaPossibleConnectivityBySectorId.Count}");   
         }
+    }
+
+    private void AllocateZonesForGeneratedSectors() {
         foreach (var generatedSector in GenerationData.GeneratedSectors)
         {
-            if (!GenerationData.AreaPossibleConnectivityBySectorId.ContainsKey(generatedSector.Id)) {
+            if (!GenerationData.AreaPossibleConnectivityBySectorId.TryGetValue(
+                generatedSector.Id,
+                out var sectorAreaConnectivity))
+            {
                 continue;
             }
-
-            // SetRequestedZones(generatedSector);
-
-            var requestedSector = FindRequestedSector(generatedSector.Id);
-            if (requestedSector == null) {
-                continue;
+            else
+            {
+                AllocateZonesForGeneratedSector(generatedSector, sectorAreaConnectivity);
             }
-            
-            AllocateZones(
+        }
+    }
+
+    private void AllocateZonesForGeneratedSector(
+        GeneratedSectorInfo generatedSector,
+        Graph<int> sectorAreaConnectivity)
+    {
+        var requestedSector = FindRequestedSector(generatedSector.Id);
+        if (requestedSector != null)
+        {
+            HandleRequestedSector(requestedSector, generatedSector, sectorAreaConnectivity);
+        }
+    }
+
+    private void HandleRequestedSector(
+        SectorInfo requestedSector,
+        GeneratedSectorInfo generatedSector,
+        Graph<int> sectorAreaConnectivity)
+    {
+        if (requestedSector.Zones != null) {
+            Debug.Log(
+                $"Sector {generatedSector.Id} has {generatedSector.SchemeAreas.Count} areas " +
+                $"and {sectorAreaConnectivity.Nodes.Count} connectivity nodes");
+            if (generatedSector.SchemeAreas.Count != sectorAreaConnectivity.Nodes.Count) {
+                Debug.LogWarning("generatedSector.SchemeAreas.Count != sectorAreaConnectivity.Nodes.Count");
+            }
+
+            AllocateRequestedZones(
                 generatedSector,
-                requestedSector,
-                GenerationData.AreaPossibleConnectivityBySectorId[generatedSector.Id]);
+                requestedSector.Zones,
+                requestedSector.SectorRequest.ZoneGroups,
+                sectorAreaConnectivity,
+                requestedSector.SectorRequest.AreaAllocationRequest.Id);
         }
     }
 
@@ -40,40 +77,41 @@ public class ZoneAllocation : GenerationStage
         context
             .Request
             .RequestedSectors
-            .FirstOrDefault(x => x.GeneratedSectorId == generatedSectorId);
+            .FirstOrDefault(x => GenerationData.GetGeneratedSectorId(x) == generatedSectorId);
 
-    private void AllocateZones(
+    private void AllocateRequestedZones(
         GeneratedSectorInfo generatedSector,
-        SectorInfo sectorInfo,
-        Graph<int> sectorAreaConnectivity)
+        List<ZoneInfo> zones,
+        List<AllocatableAreaGroup> zoneGroups,
+        Graph<int> sectorAreaConnectivity,
+        int sectorRequestId)
     {
-        // if (generatedSector.RequestedZones == null || generatedSector.RequestedZones.Count == 0) {
-        //     return;
-        // }
-        Debug.Log(
-            $"Sector {generatedSector.Id} has {generatedSector.SchemeAreas.Count} areas " +
-            $"and {sectorAreaConnectivity.Nodes.Count} connectivity nodes");
-        if (generatedSector.SchemeAreas.Count != sectorAreaConnectivity.Nodes.Count) {
-            Debug.LogWarning("generatedSector.SchemeAreas.Count != sectorAreaConnectivity.Nodes.Count");
-        }
         var areaAllocator = CreateAllocator(generatedSector);
-        
-        areaAllocator.AllocateAreas(
-            sectorInfo.Zones,
-            sectorInfo.ZoneGroups,
+
+        var generatedZoneIdsByAllocationRequestId = areaAllocator.AllocateAreas(
+            zones.Select(x => x.ZoneRequest.AreaAllocationRequest),
+            zoneGroups,
             sectorAreaConnectivity
+        ).GeneratedAreaIdsByAllocationRequestId;
+
+        GenerationData.GeneratedZoneIdsByAllocationRequestIdBySectorRequestId.Add(
+            sectorRequestId,
+            generatedZoneIdsByAllocationRequestId
         );
 
-        // Temporary solution ?
-        // ====================
         generatedSector.Zones = new();
-        foreach (var requestedZone in sectorInfo.Zones.Where(x => x.GeneratedZoneId.HasValue)) {
+
+        // Get requested zones that were allocated and add them to GeneratedSector
+        var allocatedZones = zones.Where(
+            x => GenerationData.GetGeneratedZoneId(x, sectorRequestId).HasValue);
+        foreach (var requestedZone in allocatedZones)
+        {
             generatedSector.Zones.Add(new() {
-                SchemeAreaId = requestedZone.GeneratedZoneId.Value
+                SchemeAreaId = GenerationData
+                    .GetGeneratedZoneId(requestedZone, sectorRequestId)
+                    .Value
             });
         }
-        generatedSector.ZoneGroups = sectorInfo.ZoneGroups.ToList();
-        // =======================
 
         AddDebugColorForGeneratedZones(generatedSector);
     }

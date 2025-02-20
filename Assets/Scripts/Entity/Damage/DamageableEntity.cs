@@ -70,14 +70,14 @@ public class DamageableEntity : NetworkBehaviour, IDamageable
         Destroy(destroyOnDeath);
     }
 
-    // For debug
-    private void Update() {
-        if (Input.GetKeyDown(KeyCode.Y)) {
-            Debug.Log("Key down");
-            Damage(new Damage() {
-                force = 2,
-                damageType = DamageType.Punch
-            });
-        }
-    }
+    // // For debug
+    // private void Update() {
+    //     if (Input.GetKeyDown(KeyCode.Y)) {
+    //         Debug.Log("Key down");
+    //         Damage(new Damage() {
+    //             force = 2,
+    //             damageType = DamageType.Punch
+    //         });
+    //     }
+    // }
 }

@@ -7,7 +7,7 @@ public class TestZoneFillingStrategy : TraverseZoneFillingStrategy
 {
     public override void ApplyPosition(
         SchemeArea area,
-        SchemeTile tile,
+        SchemePosition tile,
         TraverseRectData data)
     {
         

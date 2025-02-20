@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Mirror;
@@ -15,7 +14,7 @@ public class NavBehaviour : MoveBehaviour
     
     public override void Awake() {
         base.Awake();
-        navManager = FindObjectOfType<NavManager>();
+        navManager = FindAnyObjectByType<NavManager>();
         collider2D = GetComponent<Collider2D>();
     }
 

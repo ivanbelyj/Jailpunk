@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 68eb3ddd6deb83644b30858792985eaa
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 147887
+  packageName: Easy Event Manager
+  packageVersion: 2.3
+  assetPath: Assets/TigerForge/EasyEventManager/Demo/GenericEventDemo/DemoEvent.unity
+  uploadId: 354865

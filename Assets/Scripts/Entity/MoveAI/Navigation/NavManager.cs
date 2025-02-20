@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -7,15 +5,24 @@ using UnityEngine.Tilemaps;
 public class NavManager : MonoBehaviour
 {
     [SerializeField]
-    private Tilemap tilemap;
-
-    [SerializeField]
     private float cellSize = 1f;
+    protected GridGraph graph;
 
-    public GridGraph Graph { get; private set; }
+    public GridGraph Graph {
+        get {
+            if (graph == null) {
+                Debug.LogError($"{nameof(Graph)} was not initialized in {nameof(NavManager)} ");
+            }
+            return graph;
+        }
+        protected set {
+            graph = value;
+        }
+    }
 
-    private void Start() {
-        Graph = GetComponent<GridGraphLoader>()
-            .InstantiateFromTilemap(tilemap, cellSize);
+    public void Initialize(Tilemap tilemap) {
+        Graph = GetComponent<GridGraphLoader>().InstantiateFromTilemap(
+            tilemap,
+            tilemap.cellSize.x);
     }
 }

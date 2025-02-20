@@ -14,11 +14,11 @@ public class RequestedSectorsAllocation : GenerationStage
     public override void RunStage()
     {
         var areaAllocator = new AreaAllocator();
-        areaAllocator.AllocateAreas(
-            context.Request.RequestedSectors,
+        GenerationData.GeneratedSectorIdsByAllocationRequestId = areaAllocator.AllocateAreas(
+            context.Request.RequestedSectors.Select(x => x.SectorRequest.AreaAllocationRequest),
             context.Request.SectorGroups,
             GenerationData.SectorPossibleConnectivity
-        );
+        ).GeneratedAreaIdsByAllocationRequestId;
         HandleDebug(context, areaAllocator);
     }
 
@@ -28,9 +28,13 @@ public class RequestedSectorsAllocation : GenerationStage
     {
         areaAllocator.DebugVerifyResult();
         if (addAllocatedSectorColorMarks) {
-            foreach (var generatedSectorId in context.Request.RequestedSectors.Select(x => x.GeneratedSectorId)) {
+            foreach (var generatedSectorId in
+                context.Request.RequestedSectors.Select(x => GenerationData.GetGeneratedSectorId(x)))
+            {
                 if (generatedSectorId != null) {
-                    ComplexGenerator.AddDebugSectorColor(generatedSectorId.Value, allocatedSectorDebugMarkColor);    
+                    ComplexGenerator.AddDebugSectorColor(
+                        generatedSectorId.Value,
+                        allocatedSectorDebugMarkColor);    
                 }
             }
         }

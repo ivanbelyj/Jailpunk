@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using UnityEngine;
 
@@ -19,20 +20,40 @@ public class CustomizableAppearance : MonoBehaviour, IAppearance
 
     public AppearanceSchema Schema => appearanceSchema;
 
+    public event Action<CustomizableAppearance> AppearanceElementsReady;
+
+    public bool IsInitialized { get; private set; }
+
     private void Start() {
         appearanceBuilder = GetComponent<AppearanceBuilder>();
 
+        var appearanceElementNameResolver = new AppearanceElementNameResolver();
         appearanceElements = appearanceBuilder.Build(
             appearanceSchema,
+            appearanceElementNameResolver,
             setElementsActiveInitially);
+        AppearanceElementsReady?.Invoke(this);
 
-        appearanceRenderer = new(appearanceElements);
+        appearanceRenderer = new(appearanceElements, appearanceElementNameResolver);
+
+        // TODO: Fix NullReferenceException in Build
         appearanceRenderer.SetAppearance(initialAppearanceData);
+
+        IsInitialized = true;
     }
 
     public void Render(AppearanceAnimationData appearanceRenderData)
     {
-        appearanceRenderer.Render(appearanceRenderData);
+        if (!IsInitialized) {
+            Debug.LogError(
+                $"{nameof(CustomizableAppearance)} is not initialized. " +
+                $"Please, check {nameof(IsInitialized)} before calling {nameof(Render)}");
+        }
+        // if (appearanceRenderer != null) {
+            appearanceRenderer.Render(appearanceRenderData);
+        // } else {
+        //     Debug.Log("APPEARANCE RENDERER IS NULL");
+        // }
     }
 
     public void SetAppearance(AppearanceData data) {

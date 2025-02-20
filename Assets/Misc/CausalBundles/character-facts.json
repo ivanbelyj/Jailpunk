@@ -1,0 +1,488 @@
+{
+  "causalModels": [
+    {
+      "name": "character-model",
+      "facts": [
+        {
+          "causesExpression": {
+            "$type": "factor",
+            "edge": {
+              "probability": 0.9
+            }
+          },
+          "factValue": "Хобби",
+          "id": "791e79ac-c5c5-488b-838e-236c7f97032a"
+        },
+        {
+          "causesExpression": {
+            "$type": "factor",
+            "edge": {
+              "probability": 0.3,
+              "causeId": "791e79ac-c5c5-488b-838e-236c7f97032a"
+            }
+          },
+          "factValue": "Рисование",
+          "id": "bb75983f-8c0f-49ee-8fbc-ada746227a27"
+        },
+        {
+          "causesExpression": {
+            "$type": "factor",
+            "edge": {
+              "probability": 0.3,
+              "causeId": "791e79ac-c5c5-488b-838e-236c7f97032a"
+            }
+          },
+          "factValue": "Гитара",
+          "id": "5790c491-3851-42b8-8ca5-4f97b7bb570c"
+        },
+        {
+          "causesExpression": {
+            "$type": "factor",
+            "edge": {
+              "probability": 0.3,
+              "causeId": "791e79ac-c5c5-488b-838e-236c7f97032a"
+            }
+          },
+          "factValue": "Программирование",
+          "id": "68aa4adf-665d-4fb4-853a-3554ea3ad160"
+        },
+        {
+          "causesExpression": {
+            "$type": "factor",
+            "edge": {
+              "probability": 0.3,
+              "causeId": "791e79ac-c5c5-488b-838e-236c7f97032a"
+            }
+          },
+          "factValue": "Gamedev",
+          "id": "5a3228f2-1f5b-4bcf-97f6-130e3c85d1ed"
+        },
+        {
+          "causesExpression": {
+            "$type": "factor",
+            "edge": {
+              "probability": 0.3,
+              "causeId": "791e79ac-c5c5-488b-838e-236c7f97032a"
+            }
+          },
+          "factValue": "Писательство",
+          "id": "fe2835b6-73c4-45a4-824e-46d9c2be62d3"
+        },
+        {
+          "causesExpression": {
+            "$type": "factor",
+            "edge": {
+              "probability": 0.3,
+              "causeId": "791e79ac-c5c5-488b-838e-236c7f97032a"
+            }
+          },
+          "factValue": "Спорт",
+          "id": "40ea2422-de51-46c6-b499-5d52fd4d3b39"
+        },
+        {
+          "causesExpression": {
+            "$type": "factor",
+            "edge": {
+              "probability": 0.3,
+              "causeId": "791e79ac-c5c5-488b-838e-236c7f97032a"
+            }
+          },
+          "factValue": "Role play",
+          "id": "b22d3ad2-723e-4279-8472-7dfcc0c009c9"
+        },
+        {
+          "causesExpression": {
+            "$type": "factor",
+            "edge": {
+              "probability": 0.3,
+              "causeId": "791e79ac-c5c5-488b-838e-236c7f97032a"
+            }
+          },
+          "factValue": "3d моделирование",
+          "id": "3d27e24a-afb1-4925-9271-541f6990cd34"
+        },
+        {
+          "causesExpression": {
+            "$type": "factor",
+            "edge": {
+              "probability": 0.1,
+              "causeId": "791e79ac-c5c5-488b-838e-236c7f97032a"
+            }
+          },
+          "factValue": "Worldbuilding",
+          "id": "7ecabf19-b89a-4016-8513-5ddef4e9e38e"
+        },
+        {
+          "causesExpression": {
+            "$type": "factor",
+            "edge": {
+              "probability": 1.0
+            }
+          },
+          "factValue": "Образование",
+          "id": "54b395f2-7c44-4cce-9900-78de6723d641"
+        },
+        {
+          "causesExpression": {
+            "$type": "factor",
+            "edge": {
+              "probability": 1.0
+            }
+          },
+          "factValue": "Компьютерные науки",
+          "abstractFactId": "54b395f2-7c44-4cce-9900-78de6723d641",
+          "weights": [
+            {
+              "weight": 1.0
+            }
+          ],
+          "id": "b2bdc7e9-4225-4f63-9b4c-c598127daaa4"
+        },
+        {
+          "causesExpression": {
+            "$type": "factor",
+            "edge": {
+              "probability": 1.0
+            }
+          },
+          "factValue": "История",
+          "abstractFactId": "54b395f2-7c44-4cce-9900-78de6723d641",
+          "weights": [
+            {
+              "weight": 1.0
+            }
+          ],
+          "id": "de3b456a-9182-44b9-88dc-e632e808dfee"
+        },
+        {
+          "causesExpression": {
+            "$type": "factor",
+            "edge": {
+              "probability": 1.0
+            }
+          },
+          "factValue": "Математика",
+          "abstractFactId": "54b395f2-7c44-4cce-9900-78de6723d641",
+          "weights": [
+            {
+              "weight": 1.0
+            }
+          ],
+          "id": "045d3b8f-22fe-4442-853e-6c211c9f7670"
+        },
+        {
+          "causesExpression": {
+            "$type": "factor",
+            "edge": {
+              "probability": 1.0
+            }
+          },
+          "factValue": "лингвистика",
+          "abstractFactId": "54b395f2-7c44-4cce-9900-78de6723d641",
+          "weights": [
+            {
+              "weight": 20.0
+            }
+          ],
+          "id": "8db77d4b-0023-4b25-bdd9-7e59766c4687"
+        },
+        {
+          "causesExpression": {
+            "$type": "factor",
+            "edge": {
+              "probability": 0.1,
+              "causeId": "791e79ac-c5c5-488b-838e-236c7f97032a"
+            }
+          },
+          "factValue": "Создание языков",
+          "id": "1fb791d4-db29-4b74-882f-58c801a09640"
+        },
+        {
+          "causesExpression": {
+            "$type": "or",
+            "operands": [
+              {
+                "$type": "factor",
+                "edge": {
+                  "probability": 0.9,
+                  "causeId": "8db77d4b-0023-4b25-bdd9-7e59766c4687"
+                }
+              },
+              {
+                "$type": "factor",
+                "edge": {
+                  "probability": 0.3,
+                  "causeId": "1fb791d4-db29-4b74-882f-58c801a09640"
+                }
+              }
+            ]
+          },
+          "factValue": "Понимает несколько языков",
+          "id": "9119c292-2f30-4a9a-a6cc-6b716807e665"
+        },
+        {
+          "causesExpression": {
+            "$type": "or",
+            "operands": [
+              {
+                "$type": "factor",
+                "edge": {
+                  "probability": 0.95,
+                  "causeId": "8db77d4b-0023-4b25-bdd9-7e59766c4687"
+                }
+              },
+              {
+                "$type": "factor",
+                "edge": {
+                  "probability": 0.2,
+                  "causeId": "1fb791d4-db29-4b74-882f-58c801a09640"
+                }
+              }
+            ]
+          },
+          "factValue": "Разбирается в лингвистике",
+          "id": "afedd7cf-4efa-41ff-b37a-b0651ad657af"
+        },
+        {
+          "causesExpression": {
+            "$type": "factor",
+            "edge": {
+              "probability": 1.0
+            }
+          },
+          "factValue": "Раса",
+          "id": "ddad97ba-a5de-4d2a-a59a-64b9b8ee3db9"
+        },
+        {
+          "causesExpression": {
+            "$type": "factor",
+            "edge": {
+              "probability": 1.0
+            }
+          },
+          "factValue": "тшэайская",
+          "abstractFactId": "ddad97ba-a5de-4d2a-a59a-64b9b8ee3db9",
+          "weights": [
+            {
+              "weight": 1.0
+            }
+          ],
+          "id": "f8d1b6ef-e429-4cce-9ec3-ddde8a62f63c"
+        },
+        {
+          "causesExpression": {
+            "$type": "factor",
+            "edge": {
+              "probability": 1.0
+            }
+          },
+          "factValue": "мэрайская",
+          "abstractFactId": "ddad97ba-a5de-4d2a-a59a-64b9b8ee3db9",
+          "weights": [
+            {
+              "weight": 1.0
+            }
+          ],
+          "id": "2dd70dfd-6b74-4334-a5ec-c0787e0ca538"
+        },
+        {
+          "causesExpression": {
+            "$type": "factor",
+            "edge": {
+              "probability": 1.0
+            }
+          },
+          "factValue": "мйеурийская",
+          "abstractFactId": "ddad97ba-a5de-4d2a-a59a-64b9b8ee3db9",
+          "weights": [
+            {
+              "weight": 1.0
+            }
+          ],
+          "id": "f574e77e-37bb-4167-9d10-9f5f4a61373b"
+        },
+        {
+          "causesExpression": {
+            "$type": "factor",
+            "edge": {
+              "probability": 1.0
+            }
+          },
+          "factValue": "эвойская",
+          "abstractFactId": "ddad97ba-a5de-4d2a-a59a-64b9b8ee3db9",
+          "weights": [
+            {
+              "weight": 1.0
+            }
+          ],
+          "id": "22a68bb4-8ee2-4e3f-b5c5-41b7620db965"
+        },
+        {
+          "causesExpression": {
+            "$type": "factor",
+            "edge": {
+              "probability": 1.0
+            }
+          },
+          "factValue": "оанэйская",
+          "abstractFactId": "ddad97ba-a5de-4d2a-a59a-64b9b8ee3db9",
+          "weights": [
+            {
+              "weight": 1.0
+            }
+          ],
+          "id": "4ab3f380-dab2-4b2f-ab45-0cb58f0e49b4"
+        },
+        {
+          "causesExpression": {
+            "$type": "factor",
+            "edge": {
+              "probability": 0.7
+            }
+          },
+          "factValue": "Block cause fact value (1)",
+          "id": "BlockCause1"
+        },
+        {
+          "causesExpression": {
+            "$type": "factor",
+            "edge": {
+              "probability": 0.7
+            }
+          },
+          "factValue": "Block cause fact value (2)",
+          "id": "BlockCause2"
+        },
+        {
+          "causesExpression": {
+            "$type": "factor",
+            "edge": {
+              "probability": 1.0,
+              "causeId": null
+            }
+          },
+          "factValue": "Fact using block consequence (1)",
+          "id": "6361579a-ffbb-465f-9de0-bd12ba40567b"
+        },
+        {
+          "causesExpression": {
+            "$type": "factor",
+            "edge": {
+              "probability": 1.0,
+              "causeId": null
+            }
+          },
+          "factValue": "Fact using block consequence (2)",
+          "id": "598f6249-77ef-487d-a5ee-0bb31e67ccdf"
+        }
+      ],
+      "declaredBlocks": [
+        {
+          "id": "Block1",
+          "convention": "TestConvention",
+          "causesConvention": "TestCausesConvention",
+          "blockCausesMap": {
+            "BlockCause": "BlockCause1"
+          },
+          "blockConsequencesMap": {
+            "BlockConsequence": "BlockConsequence1"
+          }
+        },
+        {
+          "id": "Block2",
+          "convention": "TestConvention",
+          "causesConvention": "TestCausesConvention",
+          "blockCausesMap": {
+            "BlockCause": "BlockCause2"
+          },
+          "blockConsequencesMap": {
+            "BlockConsequence": "BlockConsequence2"
+          }
+        }
+      ]
+    },
+    {
+      "name": "test-model",
+      "facts": [
+        {
+          "causesExpression": {
+            "$type": "factor",
+            "edge": {
+              "probability": 1.0
+            }
+          },
+          "factValue": "Inner fact 1",
+          "id": "92aaa850-b84a-44da-b6e7-18b30da4a514"
+        },
+        {
+          "causesExpression": {
+            "$type": "factor",
+            "edge": {
+              "probability": 1.0,
+              "causeId": "92aaa850-b84a-44da-b6e7-18b30da4a514"
+            }
+          },
+          "factValue": "Inner fact 2",
+          "id": "6c38505c-b23d-4c62-b3bc-b312b1db909c"
+        },
+        {
+          "causesExpression": {
+            "$type": "factor",
+            "edge": {
+              "probability": 1.0
+            }
+          },
+          "factValue": "Inner fact 3",
+          "id": "2fe3a1ca-38c3-42a2-b130-fc65c746b250"
+        },
+        {
+          "causesExpression": {
+            "$type": "factor",
+            "edge": {
+              "probability": 1.0,
+              "causeId": null
+            }
+          },
+          "factValue": "! Fact using external cause",
+          "id": "fact1"
+        },
+        {
+          "causesExpression": {
+            "$type": "factor",
+            "edge": {
+              "probability": 1.0,
+              "causeId": "fact1"
+            }
+          },
+          "factValue": "Block consequence (can be used in the parent model)",
+          "id": "BlockConsequence"
+        }
+      ],
+      "declaredBlocks": []
+    }
+  ],
+  "blockConventions": [
+    {
+      "name": "TestConvention",
+      "consequences": [
+        "BlockConsequence"
+      ]
+    }
+  ],
+  "blockCausesConventions": [
+    {
+      "name": "TestCausesConvention",
+      "causes": [
+        "BlockCause"
+      ]
+    }
+  ],
+  "blockResolvingMap": {
+    "modelNamesByConventionName": {
+      "TestConvention": "test-model"
+    },
+    "modelNamesByDeclaredBlockId": {}
+  },
+  "defaultMainModel": "character-model",
+  "version": 2
+}

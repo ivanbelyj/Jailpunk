@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -11,10 +10,15 @@ public class AppearanceRenderer
     [SerializeField]
     private bool showWarnings = false;
 
-    public AppearanceRenderer(AppearanceElementRenderer[] elements)
+    public AppearanceElementNameResolver AppearanceElementNameResolver { get; }
+
+    public AppearanceRenderer(
+        AppearanceElementRenderer[] elements,
+        AppearanceElementNameResolver appearanceElementNameResolver)
     {
         this.elements = elements;
         elementsByName = elements.ToDictionary(x => x.Name, x => x);
+        AppearanceElementNameResolver = appearanceElementNameResolver;
     }
 
     public void Render(AppearanceAnimationData appearanceRenderData)
@@ -38,6 +42,12 @@ public class AppearanceRenderer
             }
             return;
         }
+
+        AppearanceElementNameResolver.SetAppearanceSprite(
+            elementName,
+            string.IsNullOrWhiteSpace(data.appearanceSpriteName)
+                ? elementName
+                : data.appearanceSpriteName);
         
         element.Apply(data);
     }

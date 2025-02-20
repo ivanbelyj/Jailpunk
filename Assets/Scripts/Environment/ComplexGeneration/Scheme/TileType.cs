@@ -2,11 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum TileType
+public enum SchemePositionType
 {
-    NoSpace,  // Tile out of the maze
-    // Shaft
-    Floor,
-    Wall,
-    LoadBearingWall,
+    // In order of passability
+    Floor = 1,
+    Wall = 2,
+    LoadBearingWall = 3,
 }

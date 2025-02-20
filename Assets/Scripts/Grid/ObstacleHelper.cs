@@ -31,7 +31,7 @@ public class ObstacleHelper
         foreach (Transform child in grid.transform)
         {
             Tilemap tilemap = child.GetComponent<Tilemap>();
-            if (tilemap != null && child.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
+            if (tilemap != null && child.gameObject.layer == LayerMask.NameToLayer("VisionObstacle"))
             {
                 obstacleTilemaps.Add(tilemap);
             }

@@ -1,5 +1,4 @@
 using System;
-using UnityEditorInternal;
 using UnityEngine;
 
 using static AnimationConstants;
@@ -15,6 +14,7 @@ public class AppearanceElementRenderer
     /// </summary>
     private readonly SpriteMask spriteMask;
     private readonly AppearanceSpriteResolver appearanceSpriteResolver;
+    private readonly IAppearanceElementNameResolver appearanceElementNameResolver;
     private readonly AppearanceSortingOrderHelper sortingOrderHelper;
     private readonly AppearanceElementOffsetHelper offsetHelper;
     private bool isActive = true;
@@ -28,14 +28,15 @@ public class AppearanceElementRenderer
         AppearanceElementSchema appearanceElementSchema,
         SpriteRenderer spriteRenderer,
         SpriteMask spriteMask,
-        AppearanceSpriteResolver appearanceSpriteResolver)
+        AppearanceSpriteResolver appearanceSpriteResolver,
+        IAppearanceElementNameResolver appearanceElementNameResolver)
     {
         this.appearanceSchema = appearanceSchema;
         this.appearanceElementSchema = appearanceElementSchema;
         this.spriteRenderer = spriteRenderer;
         this.spriteMask = spriteMask;
         this.appearanceSpriteResolver = appearanceSpriteResolver;
-
+        this.appearanceElementNameResolver = appearanceElementNameResolver;
         sortingOrderHelper = new(appearanceElementSchema);
         offsetHelper = new(appearanceSchema, appearanceElementSchema);
     }
@@ -118,7 +119,8 @@ public class AppearanceElementRenderer
         AppearanceAnimationData animationData)
     {
         var spriteData = new AppearanceSpriteData() {
-            Name = appearanceElementSchema.name,
+            Name = appearanceElementNameResolver.GetAppearanceSpriteName(
+                appearanceElementSchema.name),
             State = appearanceElementSchema.ignoreState ? null : animationData.State,
             Angle = appearanceElementSchema.ignoreAngle ? null : animationData.Angle,
             Index = animationData.Frame

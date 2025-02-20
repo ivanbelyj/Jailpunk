@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 7bca738fbbc765c4ea9cdedf3e880e26
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 147887
+  packageName: Easy Event Manager
+  packageVersion: 2.3
+  assetPath: Assets/TigerForge/EasyEventManager/Demo/GenericEventDemo/EnemyB.cs
+  uploadId: 354865

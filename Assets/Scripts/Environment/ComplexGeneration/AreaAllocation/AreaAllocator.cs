@@ -2,30 +2,36 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+public class AreaAllocationResult {
+    public Dictionary<int, int> GeneratedAreaIdsByAllocationRequestId { get; set; }
+}
+
 public class AreaAllocator
 {
     private readonly IEnumerable<IAreaAllocatorAreaFilter> areaFilters;
 
     // Initial
-    private IEnumerable<IAllocatableArea> requestedAreas;
+    private IEnumerable<AreaAllocationRequest> requestedAreas;
     private IEnumerable<AllocatableAreaGroup> areaGroups;
     private Graph<int> areaPossibleConnectivity;
 
     // Initialized
     private Dictionary<int, AllocatableAreaGroup> areaGroupsById;
-    private Dictionary<int, List<IAllocatableArea>> requestedAreasByGroupId;
-    private Dictionary<int, IAllocatableArea> centersByGroupId;
+    private Dictionary<int, List<AreaAllocationRequest>> requestedAreasByGroupId;
+    private Dictionary<int, AreaAllocationRequest> centersByGroupId;
 
-    private HashSet<IAllocatableArea> allocatedRequestedAreas;
+    private HashSet<AreaAllocationRequest> allocatedRequestedAreas;
     private HashSet<int> occupiedGeneratedAreaIds;
+
+    private Dictionary<int, int> generatedAreaIdsByAllocationRequestId = new();
 
     public AreaAllocator(params IAreaAllocatorAreaFilter[] areaFilters)
     {
         this.areaFilters = areaFilters;
     }
     
-    public void AllocateAreas(
-        IEnumerable<IAllocatableArea> requestedAreas,
+    public AreaAllocationResult AllocateAreas(
+        IEnumerable<AreaAllocationRequest> requestedAreas,
         IEnumerable<AllocatableAreaGroup> areaGroups,
         Graph<int> areaPossibleConnectivity)
     {
@@ -37,14 +43,18 @@ public class AreaAllocator
         
         AllocateCenters();
         AllocateAreasNearCenter();
+
+        return new() {
+            GeneratedAreaIdsByAllocationRequestId = generatedAreaIdsByAllocationRequestId
+        };
     }
 
     #region Debug
     public void DebugVerifyResult() {
         var assignedGeneratedAreaIds = new HashSet<int>();
         foreach (var requestedArea in requestedAreas) {
-            if (requestedArea.GeneratedAreaId != null) {
-                var generatedAreaId = requestedArea.GeneratedAreaId.Value;
+            if (GetGeneratedAreaId(requestedArea) != null) {
+                var generatedAreaId = GetGeneratedAreaId(requestedArea).Value;
 
                 if (assignedGeneratedAreaIds.Contains(generatedAreaId)) {
                     Debug.LogError(
@@ -79,19 +89,30 @@ public class AreaAllocator
         occupiedGeneratedAreaIds = new();
     }
 
-    private Dictionary<int, List<IAllocatableArea>> GetRequestedAreasByGroupId()
+    private Dictionary<int, List<AreaAllocationRequest>> GetRequestedAreasByGroupId()
     {
         return requestedAreas
             .GroupBy(area => area.AreaGroupId)
             .ToDictionary(group => group.Key, group => group.ToList());
     }
 
-    private Dictionary<int, IAllocatableArea> GetCentersByGroupId() {
+    private int? GetGeneratedAreaId(AreaAllocationRequest allocationRequest) {
+        generatedAreaIdsByAllocationRequestId.TryGetValue(
+            allocationRequest.Id,
+            out var result);
+        return result;
+    }
+
+    private void SetGeneratedAreaId(AreaAllocationRequest allocationRequest, int value) {
+        generatedAreaIdsByAllocationRequestId.Add(allocationRequest.Id, value);
+    }
+
+    private Dictionary<int, AreaAllocationRequest> GetCentersByGroupId() {
         return requestedAreasByGroupId
             .ToDictionary(x => x.Key, x => GetGroupCenter(x.Value));
     }
 
-    private IAllocatableArea GetGroupCenter(List<IAllocatableArea> groupAreas) {
+    private AreaAllocationRequest GetGroupCenter(List<AreaAllocationRequest> groupAreas) {
         var maxGroupNecessity = groupAreas.Max(x => x.Necessity);
         return groupAreas
             .Where(x => x.Necessity == maxGroupNecessity)
@@ -119,7 +140,7 @@ public class AreaAllocator
 
     private void AllocateCentralArea(
         Graph<int> AreasConnectivity,
-        IAllocatableArea requestedArea,
+        AreaAllocationRequest requestedArea,
         AllocatableAreaGroup areaGroup) 
     {
         var allocatedAlienatedCenterIds = GetAllocatedAlienatedAreaIds(areaGroup);
@@ -147,7 +168,7 @@ public class AreaAllocator
         areaGroup.AlienatedGroupIds
             .SelectMany(groupId => requestedAreasByGroupId[groupId])
             .Where(requestedArea => allocatedRequestedAreas.Contains(requestedArea))
-            .Select(x => x.GeneratedAreaId.Value);
+            .Select(x => GetGeneratedAreaId(x).Value);
 
     private IEnumerable<int> OrderAreaIdsByMaxDistance(
         IEnumerable<int> AreaIds,
@@ -186,10 +207,9 @@ public class AreaAllocator
 
     private void AllocateNearCenter(
         Graph<int> AreaConnectivity,
-        IAllocatableArea requestedArea)
+        AreaAllocationRequest requestedArea)
     {
-        var centralAreaId = centersByGroupId[requestedArea.AreaGroupId]
-            .GeneratedAreaId
+        var centralAreaId = GetGeneratedAreaId(centersByGroupId[requestedArea.AreaGroupId])
             .Value;
         var neighborAreaIds = GetNodeByValue(AreaConnectivity, centralAreaId)
             .ConnectedNodes
@@ -206,7 +226,7 @@ public class AreaAllocator
 
     #region Common Allocation Logic
     private void GetFirstAndOccupy(
-        IAllocatableArea requestedArea,
+        AreaAllocationRequest requestedArea,
         IEnumerable<int> areaIds) {
         if (!areaIds.Any()) {
             if (requestedArea.Necessity == NecessityDegree.Required) {
@@ -220,14 +240,14 @@ public class AreaAllocator
     }
 
     private void Occupy(
-        IAllocatableArea requestedArea,
+        AreaAllocationRequest requestedArea,
         int areaId)
     {
         if (occupiedGeneratedAreaIds.Contains(areaId)) {
             throw new ComplexGenerationException(
                 "Cannot assign the same generated Area to multiple requested Areas");
         }
-        requestedArea.AssignGeneratedAreaId(areaId);
+        SetGeneratedAreaId(requestedArea, areaId);
         allocatedRequestedAreas.Add(requestedArea);
         occupiedGeneratedAreaIds.Add(areaId);
     }
@@ -238,7 +258,7 @@ public class AreaAllocator
     /// and filters Areas by matching and occupancy
     /// </summary>
     private IEnumerable<int> OrderByRequirementsMatch(
-        IAllocatableArea requestedArea,
+        AreaAllocationRequest requestedArea,
         IEnumerable<int> areaIds,
         Graph<int> areaConnectivity,
         bool includeNotMatching = true)
@@ -263,7 +283,7 @@ public class AreaAllocator
     }
 
     private int EstimateIndividualAccessibilityMatching(
-        IAllocatableArea requestedArea,
+        AreaAllocationRequest requestedArea,
         int neighborsCount)
     {
         return requestedArea.IndividualAccessibility switch

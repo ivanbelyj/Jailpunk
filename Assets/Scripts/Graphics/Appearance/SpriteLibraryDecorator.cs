@@ -8,8 +8,9 @@ public class SpriteLibraryDecorator
 {
     private Dictionary<string, string[]> categoriesAndLabels;
 
-    // TODO: PUBLIC FOR DEBUG
-    public SpriteLibraryAsset spriteLibraryAsset;
+    [Header("Set dynamically")]
+    [SerializeField]
+    private SpriteLibraryAsset spriteLibraryAsset;
 
     public SpriteLibraryDecorator(SpriteLibraryAsset spriteLibraryAsset)
     {

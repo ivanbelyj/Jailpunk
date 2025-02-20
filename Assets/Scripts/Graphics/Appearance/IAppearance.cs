@@ -6,5 +6,6 @@ public interface IAppearance
 {
     AppearanceSchema Schema { get; }
 
+    bool IsInitialized { get; }
     void Render(AppearanceAnimationData appearanceRenderData);
 }

@@ -6,7 +6,6 @@ TagManager:
   tags:
   - Wall
   - DarknessOverlay
-  - GenerateShadowCasters
   - DeathPanel
   layers:
   - Default
@@ -21,7 +20,7 @@ TagManager:
   - 
   - 
   - 
-  - Obstacle
+  - VisionObstacle
   - 
   - 
   - 

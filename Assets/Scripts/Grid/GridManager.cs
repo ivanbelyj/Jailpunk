@@ -5,20 +5,37 @@ using UnityEngine.Tilemaps;
 
 public class GridManager : MonoBehaviour
 {
-    [SerializeField]
-    private Grid grid;
-
     private ObstacleHelper obstacleHelper;
-
-    private void Awake() {
-        obstacleHelper = new(grid);
+    private bool isInitialized = false;
+    
+    private Grid grid;
+    private Grid Grid
+    {
+        get
+        {
+            grid ??= FindAnyObjectByType<Grid>();
+            
+            if (grid == null)
+            {
+                Debug.LogError(
+                    $"{nameof(Grid)} is not found. It is required for " +
+                    $"{nameof(GridManager)}");
+            }
+            return grid;
+        }
     }
+
+    /// <summary>
+    /// A property used, in particular, in OnDrawGizmos, to check is GridManager
+    /// ready to provide calculations based on the grid
+    /// </summary>
+    public bool IsGridSet => grid != null;
 
     public Vector3Int WorldToCell(Vector3 pos) {
-        return grid.WorldToCell(pos);  //  + new Vector3(-0.25f, -0.25f)
+        return Grid.WorldToCell(pos);  //  + new Vector3(-0.25f, -0.25f)
     }
     public Vector3 GetCellCenterWorld(Vector3Int cellPos)
-        => grid.GetCellCenterWorld(cellPos);
+        => Grid.GetCellCenterWorld(cellPos);
         // Isometric: 
         // //  It's not working correctly with Isometric Z as Y
         // // The hardcode float corrects the strange offset of this type of grid
@@ -26,7 +43,7 @@ public class GridManager : MonoBehaviour
         // // => grid.CellToWorld(cellPos) + new Vector3(0, 0.25f);
 
     public Vector3 CellToWorld(Vector3Int cellPos)
-        => grid.CellToWorld(cellPos);
+        => Grid.CellToWorld(cellPos);
 
     /// <summary>
     /// Returns the position of the center of the nearest cell
@@ -65,6 +82,21 @@ public class GridManager : MonoBehaviour
 
     public bool IsObstacle(Vector3Int cellPosition)
     {
+        EnsureInitialized();
         return obstacleHelper.IsObstacle(cellPosition);
+    }
+
+    private void EnsureInitialized()
+    {
+        if (!isInitialized)
+        {
+            Initialize();
+            isInitialized = true;
+        }
+    }
+
+    private void Initialize()
+    {
+        obstacleHelper = new(Grid);
     }
 }

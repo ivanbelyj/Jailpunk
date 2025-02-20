@@ -22,12 +22,15 @@ MonoBehaviour:
       framesCount: 2
       secondsPerFrame: 0.7
     origins: []
+  stopFrameSets: []
   elements:
   - name: body
     ignoreState: 0
     ignoreAngle: 1
     useOrigin: 0
     originName: 
-    sortingOrder: 0
+    orderWhenVerticalAngle: 0
+    ignoreInvertForTopAngle: 0
+    orderWhenHorizontalAngle: 0
     useStopFrames: 0
-    stopFrames: 
+    stopFramesSet: 

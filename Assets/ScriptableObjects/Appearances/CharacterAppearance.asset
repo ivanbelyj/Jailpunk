@@ -18,9 +18,11 @@ MonoBehaviour:
     - state: walk
       framesCount: 8
       secondsPerFrame: 0.18
+      animationType: 1
     - state: idle
       framesCount: 8
       secondsPerFrame: 0.3
+      animationType: 1
     origins:
     - name: head
       ignoreState: 0

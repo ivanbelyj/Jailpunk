@@ -36,7 +36,7 @@ public class MessagesPanelUpdater
         
         messageText += args.SoundData.ToDisplayText();
 
-        messagesPanel.AddMessage(messageText);
+        messagesPanel.AddOrUpdateMessage(args.SoundData.SoundId, messageText);
         messagesPanel.ScrollToBottom();
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -51,6 +52,21 @@ public class PlayerUIManager : NetworkBehaviour
         var choicesProvider = new DemoChoicesProvider(person, speaker);
         communicationUIManager
             .CommunicationPanel
-            .Init(choicesProvider, person, speaker);
+            .Init(choicesProvider, person, speaker, (text, recipientId) => {
+                OnMessageSubmitted(person, speaker, text, recipientId);
+            });
+    }
+
+    private void OnMessageSubmitted(
+        ISubject subject,
+        ISpeaker speaker,
+        string text,
+        CharacterId recipientId)
+    {
+        speaker.Speak(new SpeechSoundData(Guid.NewGuid()) {
+            SpeakerId = subject.GetCharacterId(),
+            Message = text,
+            RecipientId = recipientId
+        });
     }
 }

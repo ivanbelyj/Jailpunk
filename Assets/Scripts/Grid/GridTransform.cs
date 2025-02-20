@@ -9,7 +9,12 @@ using UnityEngine;
 /// </summary>
 public class GridTransform : NetworkBehaviour
 {
+    private const string GridManagerName = "GridManager";
+
+    public EventHandler<GridDirection> FirstOrientationSet;
+
     [SerializeField]
+    [Tooltip("Set on server start")]
     private GridDirection initialOrientation;
 
     [SyncVar]
@@ -31,19 +36,17 @@ public class GridTransform : NetworkBehaviour
     private GridManager gridManager;
     private GridManager GridManager {
         get {
-            const string GridManagerName = "GridManager";
+            
             if (gridManager == null) {
                 gridManager = GameObject
                     .Find(GridManagerName)
                     ?.GetComponent<GridManager>();
-                if (gridManager == null) {
-                    Debug.LogError(
-                    $"{nameof(GridManager)} was not found (name: {GridManagerName})");
-                }
             }
             return gridManager;
         }
     }
+
+    private bool isFirstOrientationSet = false;
 
     public override void OnStartServer()
     {
@@ -67,6 +70,11 @@ public class GridTransform : NetworkBehaviour
     private double orientationSetTime;
 
     private void SetOrientationCore(GridDirection orientation, bool useDelay) {
+        if (!isFirstOrientationSet) {
+            isFirstOrientationSet = true;
+            FirstOrientationSet?.Invoke(this, orientation);
+        }
+
         if (orientation == this.orientation) {
             orientationSetTime = NetworkTime.time;
         }
@@ -77,6 +85,9 @@ public class GridTransform : NetworkBehaviour
 
     public virtual void OnDrawGizmos() {
         if (GridManager == null) {
+            return;
+        }
+        else if (!GridManager.IsGridSet) {
             return;
         }
 

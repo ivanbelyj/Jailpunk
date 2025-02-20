@@ -1,13 +1,17 @@
 using System.Collections.Generic;
-using System.Text;
 using UnityEngine;
 
+public class ComplexSchemeLayer
+{
+
+}
+
 /// <summary>
-/// Represents the design (or plan) of the maze
+/// Represents the design (or plan) of the complex
 /// </summary>
 public class ComplexScheme
 {
-    private readonly SchemeTile[,] map;
+    private readonly SchemePosition[,] map;
     public List<SchemeArea> Areas { get; set; } = new();
 
     private readonly DebugColorManager colorManager = new();
@@ -21,10 +25,12 @@ public class ComplexScheme
 
     public Vector2Int MapSize => new(map.GetLength(1), map.GetLength(0));
 
-    public SchemeTile GetTileByPos(int x, int y)
+    public SchemePosition GetTileByPos(int x, int y)
     {
         return IsValidPosition(x, y) ? map[y, x] : CreateDefaultTile();
     }
+
+    #region Debug
 
     public void AddDebugMark(Vector2Int pos, Color? color = null)
     {
@@ -45,15 +51,16 @@ public class ComplexScheme
     {
         colorManager.ClearAll();
     }
+    #endregion
 
     public override string ToString()
     {
         return schemeStringBuilder.Render();
     }
 
-    private SchemeTile[,] InitializeMap(Vector2Int mapSize)
+    private SchemePosition[,] InitializeMap(Vector2Int mapSize)
     {
-        var newMap = new SchemeTile[mapSize.y, mapSize.x];
+        var newMap = new SchemePosition[mapSize.y, mapSize.x];
         for (int row = 0; row < mapSize.y; row++)
         {
             for (int col = 0; col < mapSize.x; col++)
@@ -64,12 +71,12 @@ public class ComplexScheme
         return newMap;
     }
 
-    private SchemeTile CreateDefaultTile()
+    private SchemePosition CreateDefaultTile()
     {
-        return new SchemeTile
+        return new SchemePosition
         {
             SectorId = null,
-            TileType = TileType.NoSpace
+            Type = null
         };
     }
 

@@ -28,6 +28,6 @@ public abstract class TraverseZoneFillingStrategy : IZoneFillingStrategy
 
     public abstract void ApplyPosition(
         SchemeArea area,
-        SchemeTile tile,
+        SchemePosition tile,
         TraverseRectData traverseData);
 }

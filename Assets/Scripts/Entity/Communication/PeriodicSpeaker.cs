@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,7 +26,7 @@ public class PeriodicSpeaker : MonoBehaviour
     {
         if (Time.time >= timeNextSound) {
             timeNextSound = Time.time + period;
-            speaker.Speak(new SpeechSoundData() {
+            speaker.Speak(new SpeechSoundData(Guid.NewGuid()) {
                 Message =  counter % 2 == 0 ? "Бегемот." : testText
             });
             counter++;

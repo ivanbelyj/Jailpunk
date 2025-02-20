@@ -23,8 +23,9 @@ public class AnimationParametizer
         } else {
             state = StateWalk;
 
+            // Todo: use GridDirectionUtils.VectorToDirection?
             float signedAngle = -1 * Vector2.SignedAngle(Vector2.up, moveInput);
-            lastAngle = AdjustToSupportedAngle(
+            lastAngle = GridDirectionUtils.AdjustToAngleSupportedByAnimation(
                 Mathf.RoundToInt(signedAngle < 0 ? 360 + signedAngle : signedAngle));
         }
 
@@ -51,23 +52,6 @@ public class AnimationParametizer
         }
 
         lastState = state;
-    }
-
-    /// <summary>
-    /// There are only 4 animation angles are supported, so different angles
-    /// should be adjusted
-    /// </summary>
-    private int AdjustToSupportedAngle(int angle) {
-        return angle switch {
-            >= 0 and < 35 => 0, // 45
-            >= 35 and <= 145 => 90,
-            > 145 and < 215 => 180, // 135, 225
-            >= 215 and <= 325 => 270,
-            > 325 and <= 360 => 0, // 315
-            _ => throw new ArgumentOutOfRangeException(
-                $"Invalid {nameof(angle)} value: {angle}. " +
-                "Angle must be in 0 (inclusive), 360 (inclusive)")
-        };
     }
 
     private bool ShouldFlip(AppearanceAnimationData parameters)

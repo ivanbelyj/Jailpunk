@@ -3,6 +3,10 @@ using UnityEngine;
 
 public class AppearanceBuilder : MonoBehaviour
 {
+    const string DisableEditorSpriteRendererTooltip =
+        "It can be convenient to display appearance in the editor using " + nameof(SpriteRenderer) +
+        " and disable it in runtime";
+
     [SerializeField]
     private GameObject appearanceElementPrefab;
 
@@ -12,28 +16,58 @@ public class AppearanceBuilder : MonoBehaviour
     [SerializeField]
     private GameObject spriteMaskRoot;
 
+    [Header("Editor sprite renderer disabling")]
+    [Tooltip(DisableEditorSpriteRendererTooltip)]
+    [SerializeField]
+    private bool disableEditorSpriteRenderer = true;
+
+    [Tooltip(DisableEditorSpriteRendererTooltip)]
+    [SerializeField]
+    private SpriteRenderer editorSpriteRendererToDisable;
+
     private AppearanceSpriteResolver appearanceSpriteResolver;
 
     private void Awake()
     {
-        appearanceSpriteResolver = FindObjectOfType<AppearanceSpriteResolver>();
+        appearanceSpriteResolver = FindAnyObjectByType<AppearanceSpriteResolver>();
+        HandleEditorSpriteRendererDisabling();
     }
 
     public AppearanceElementRenderer[] Build(
         AppearanceSchema schema,
+        IAppearanceElementNameResolver appearanceElementNameResolver,
         bool setElementsActiveInitially)
     {
         var res = new AppearanceElementRenderer[schema.Elements.Length];
         for (int i = 0; i < schema.Elements.Length; i++) {
-            res[i] = InstantiatePart(schema, schema.Elements[i], setElementsActiveInitially);
+            res[i] = InstantiatePart(
+                schema,
+                schema.Elements[i],
+                appearanceElementNameResolver,
+                setElementsActiveInitially);
         }
 
         return res;
     }
 
+    private void HandleEditorSpriteRendererDisabling() {
+        if (disableEditorSpriteRenderer)
+        {
+            if (editorSpriteRendererToDisable == null)
+            {
+                editorSpriteRendererToDisable = GetComponent<SpriteRenderer>();
+            }
+            if (editorSpriteRendererToDisable != null)
+            {
+                editorSpriteRendererToDisable.enabled = false;    
+            }
+        }
+    }
+
     private AppearanceElementRenderer InstantiatePart(
         AppearanceSchema appearanceSchema,
         AppearanceElementSchema elementConfig,
+        IAppearanceElementNameResolver appearanceElementNameResolver,
         bool setElementsActiveInitially)
     {
         var result = new AppearanceElementRenderer(
@@ -41,7 +75,8 @@ public class AppearanceBuilder : MonoBehaviour
             elementConfig,
             InstantiateSpriteRenderer(elementConfig),
             InstantiateSpriteMask(elementConfig),
-            appearanceSpriteResolver);
+            appearanceSpriteResolver,
+            appearanceElementNameResolver);
 
         result.SetActive(setElementsActiveInitially);
         return result;

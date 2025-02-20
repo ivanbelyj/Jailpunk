@@ -1,0 +1,25 @@
+ManifestFileVersion: 0
+UnityVersion: 6000.0.33f1
+CRC: 1570207707
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 3aa7dcd0fc1ee2ebb444e083bf37f5b4
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 051eb5b643b60e8ee318cebb904c2bf4
+  IncrementalBuildHash:
+    serializedVersion: 2
+    Hash: 26e8af506406b1cb6a4b6b17efbbecf6
+HashAppended: 0
+ClassTypes:
+- Class: 114
+  Script: {fileID: 11500000, guid: b17eaf5f54a438c43882f91ea39ac1f3, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/BundledAssets/MapObjectSchema/Closet.asset
+- Assets/BundledAssets/MapObjectSchema/Wall.asset
+- Assets/BundledAssets/MapObjectSchema/Floor.asset
+Dependencies: []

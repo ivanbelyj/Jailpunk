@@ -8,6 +8,8 @@ public class FrameUpdater
     public int CurrentFrame => currentAnimation.Frame;
     private float newFrameStartTime;
     private readonly IAppearance appearance;
+    private AnimationStateSchema lastStateSchema;
+    private bool isSingleFrameRenderedOnce = false;
 
     public FrameUpdater(IAppearance appearance)
     {
@@ -16,10 +18,28 @@ public class FrameUpdater
     }
 
     public void Update() {
-        if (Time.time >= newFrameStartTime) {
-            currentAnimation.Frame++;
+        if (!appearance.IsInitialized) {
+            return;
+        }
 
-            var stateSchema = GetStateSchema(currentAnimation.State);
+        var stateSchema = GetStateSchema(currentAnimation.State);
+        if (stateSchema.framesCount == 1) {
+            if (!isSingleFrameRenderedOnce) {
+                isSingleFrameRenderedOnce = true;
+                currentAnimation.Frame = 0;
+                Debug.Log("FIRST RENDER " + currentAnimation);
+                Render();
+            }
+            return;
+        }
+
+        if (Time.time >= newFrameStartTime) {
+            if (stateSchema.animationType == AnimationType.Loop
+                || stateSchema.animationType == AnimationType.Once
+                && currentAnimation.Frame < stateSchema.framesCount - 1) {
+                currentAnimation.Frame++;
+            }
+            
             if (currentAnimation.Frame >= stateSchema.framesCount) {
                 currentAnimation.Frame = 0;
             }
@@ -29,13 +49,12 @@ public class FrameUpdater
         }
     }
 
-    private AnimationStateSchema GetStateSchema(string state)
-        => appearance.Schema.animationSchema.GetStateSchema(state);
-
     public void SetCurrentAnimation(AppearanceAnimationData newAnimation) {
         AppearanceAnimationData oldAnimation = currentAnimation;
         currentAnimation = newAnimation;
         if (oldAnimation != currentAnimation) {
+            isSingleFrameRenderedOnce = false;
+
             if (currentAnimation.State == AnimationConstants.StateWalk 
                 && currentAnimation.LastWalkFrame.HasValue) {
                 Debug.Log("Last walk frame is not null!" + currentAnimation.LastWalkFrame);
@@ -46,6 +65,13 @@ public class FrameUpdater
             var stateSchema = GetStateSchema(currentAnimation.State);
             newFrameStartTime = Time.time + stateSchema.secondsPerFrame;
         }
+    }
+    
+    private AnimationStateSchema GetStateSchema(string state) {
+        if (lastStateSchema == null || lastStateSchema.state != state) {
+            lastStateSchema = appearance.Schema.animationSchema.GetStateSchema(state);
+        }
+        return lastStateSchema;
     }
 
     private void Render() {

@@ -48,19 +48,19 @@ public class SchemeStringBuilder
         }
     }
 
-    private string TileToString(SchemeTile tile)
+    private string TileToString(SchemePosition tile)
     {
-        return tile.TileType switch
+        return tile.Type switch
         {
-            TileType.NoSpace => "  ",
-            TileType.Floor => DisplayAreaIds ? ToAreaString(tile) : "..",
-            TileType.LoadBearingWall => DisplayAreaIds ? ToAreaString(tile) : "##",
-            TileType.Wall => DisplayAreaIds ? ToAreaString(tile) : "--",
+            null => "  ",
+            SchemePositionType.Floor => DisplayAreaIds ? ToAreaString(tile) : "..",
+            SchemePositionType.LoadBearingWall => DisplayAreaIds ? ToAreaString(tile) : "##",
+            SchemePositionType.Wall => DisplayAreaIds ? ToAreaString(tile) : "--",
             _ => "??"
         };
     }
 
-    private string ToAreaString(SchemeTile tile)
+    private string ToAreaString(SchemePosition tile)
     {
         return tile.AreaId == null ? "??" : $"{tile.AreaId.Value:D2}".Substring(0, 2);
     }

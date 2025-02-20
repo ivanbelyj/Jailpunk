@@ -5,6 +5,11 @@ using UnityEngine;
 
 public static class GridDirectionUtils
 {
+    public const int AngleTopRight = 45;
+    public const int AngleBottomRight = 135;
+    public const int AngleBottomLeft = 225;
+    public const int AngleTopLeft = 315;
+
     private const string UnknownDirectionMessage = "Unknown GridDirection";
 
     public static Vector3 RotateCartesian(Vector3 cartPos) {
@@ -83,5 +88,52 @@ public static class GridDirectionUtils
     public static GridDirection VectorToDirection(Vector2 vector) {
         var angle = (-Vector2.SignedAngle(Vector2.up, vector) + 360) % 360;
         return AngleToGridDirection(angle);
+    }
+
+    /// <summary>
+    /// There are only 4 animation angles are supported, so different angles
+    /// should be adjusted
+    /// </summary>
+    public static int AdjustToAngleSupportedByAnimation(int angle) {
+        return angle switch {
+            >= 0 and < 35 => 0, // 45
+            >= 35 and <= 145 => 90,
+            > 145 and < 215 => 180, // 135, 225
+            >= 215 and <= 325 => 270,
+            > 325 and <= 360 => 0, // 315
+            _ => throw new ArgumentOutOfRangeException(
+                $"Invalid {nameof(angle)} value: {angle}. " +
+                "Angle must be in 0 (inclusive), 360 (inclusive)")
+        };
+    }
+
+
+    public static int GridDirectionToAngle(GridDirection dir) {
+        return dir switch {
+            GridDirection.North => 000,
+            GridDirection.East => 090,
+            GridDirection.South => 180,
+            GridDirection.West => 270,
+
+            GridDirection.NorthEast => AngleTopRight,
+            GridDirection.NorthWest => AngleTopLeft,
+            GridDirection.SouthEast => AngleBottomRight,
+            GridDirection.SouthWest => AngleBottomLeft,
+            _ => throw new ArgumentException("")
+        };
+    }
+
+    /// <summary>
+    /// Only 4 animation angles are supported, but there are 8 grid directions
+    /// </summary>
+    public static int GridDirectionToAnimationAngle(GridDirection dir) {
+        return AdjustToAngleSupportedByAnimation(GridDirectionToAngle(dir));
+    }
+
+    public static bool IsVertical(GridDirection gridDirection) {
+        var angle = GridDirectionToAngle(gridDirection);
+        return angle > AngleTopLeft
+            || angle < AngleTopRight
+            || angle > AngleBottomRight && angle < AngleBottomLeft;
     }
 }

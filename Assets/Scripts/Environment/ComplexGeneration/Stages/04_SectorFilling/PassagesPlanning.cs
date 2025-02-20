@@ -32,8 +32,8 @@ public class PassagesPlanning : GenerationStage
         foreach (var boundary in boundaries) {
             var pairs = boundary.GetNeighboringBoundaryPairs();
             var (tileA, tileB) = pairs[Random.Range(0, pairs.Count)];
-            scheme.GetTileByPos(tileA.x, tileA.y).TileType = TileType.Floor;
-            scheme.GetTileByPos(tileB.x, tileB.y).TileType = TileType.Floor;
+            scheme.GetTileByPos(tileA.x, tileA.y).Type = SchemePositionType.Floor;
+            scheme.GetTileByPos(tileB.x, tileB.y).Type = SchemePositionType.Floor;
         }
     }
 }

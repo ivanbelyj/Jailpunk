@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -8,39 +6,35 @@ using UnityEngine;
 /// on the level, higher than generation stages
 /// </summary>
 [System.Serializable]
-public class ZoneInfo : IAllocatableArea
+public class ZoneRequest
 {
+    [SerializeField]
+    private AreaAllocationRequest areaAllocationRequest;
+
     [SerializeField]
     private int zoneGroupId;
 
-    [SerializeField]
-    private bool useIndividualAccessibility = true;
-
-    [SerializeField]
-    private AreaIndividualAccessibility individualAccessibility = AreaIndividualAccessibility.High;
-
-    [SerializeField]
-    private NecessityDegree necessity = NecessityDegree.Required;
-
-    public int ZoneGroupId => zoneGroupId;
-    public bool UseIndividualAccessibility => useIndividualAccessibility;
-    public AreaIndividualAccessibility IndividualAccessibility => individualAccessibility;
-    public NecessityDegree Necessity => necessity;
-
-    /// <summary>
-    /// May be set during the generation
-    /// </summary>
-    public int? GeneratedZoneId { get; private set; }
-
-    int IAllocatableArea.AreaGroupId => ZoneGroupId;
-    int? IAllocatableArea.GeneratedAreaId => GeneratedZoneId;
-
-    public void AssignGeneratedSectorId(int generatedZoneId) {
-        GeneratedZoneId = generatedZoneId;
-    }
-
-    void IAllocatableArea.AssignGeneratedAreaId(int generatedZoneId)
+    public AreaAllocationRequest AreaAllocationRequest 
     {
-        AssignGeneratedSectorId(generatedZoneId);
+        get => areaAllocationRequest;
+        set => areaAllocationRequest = value;
+    }
+    public int ZoneGroupId
+    {
+        get => zoneGroupId;
+        set => zoneGroupId = value;
+    }
+}
+
+[System.Serializable]
+public class ZoneInfo
+{
+    [SerializeField]
+    private ZoneRequest zoneRequest;
+
+    public ZoneRequest ZoneRequest
+    {
+        get => zoneRequest;
+        set => zoneRequest = value;
     }
 }

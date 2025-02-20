@@ -5,6 +5,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3074480863793260129, guid: 8d216b88117043a4abed9e42b44407e7, type: 3}
@@ -60,6 +61,33 @@ PrefabInstance:
       value: NPC
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8339425911264471527, guid: 8d216b88117043a4abed9e42b44407e7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 333643790565334134}
+    - targetCorrespondingSourceObject: {fileID: 8339425911264471527, guid: 8d216b88117043a4abed9e42b44407e7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 978727502743079026}
+    - targetCorrespondingSourceObject: {fileID: 8339425911264471527, guid: 8d216b88117043a4abed9e42b44407e7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1065546652489265915}
+    - targetCorrespondingSourceObject: {fileID: 8339425911264471527, guid: 8d216b88117043a4abed9e42b44407e7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3988734747825779267}
+    - targetCorrespondingSourceObject: {fileID: 8339425911264471527, guid: 8d216b88117043a4abed9e42b44407e7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7162835796607939598}
+    - targetCorrespondingSourceObject: {fileID: 8339425911264471527, guid: 8d216b88117043a4abed9e42b44407e7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7874329997059876823}
+    - targetCorrespondingSourceObject: {fileID: 8339425911264471527, guid: 8d216b88117043a4abed9e42b44407e7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4147492771521261134}
+    - targetCorrespondingSourceObject: {fileID: 8339425911264471527, guid: 8d216b88117043a4abed9e42b44407e7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7228601172438649929}
   m_SourcePrefab: {fileID: 100100000, guid: 8d216b88117043a4abed9e42b44407e7, type: 3}
 --- !u!1 &2880784901619237072 stripped
 GameObject:
@@ -92,7 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dded26710b345019aab86d8a949c232, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UtilityAIAgent: {fileID: 0}
+  m_UtilityAIAgent: {fileID: 7874329997059876823}
 --- !u!114 &1065546652489265915
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117,6 +145,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9953e406dc75d6445b75325d1eae0275, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
 --- !u!114 &7162835796607939598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,6 +160,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cf956551d00e9f49be50ef4a8f53a7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   target: {fileID: 0}
 --- !u!114 &7874329997059876823
 MonoBehaviour:
@@ -142,5 +176,74 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 222762550b224328ba08fc91733022d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SerializedBrain: {fileID: 11400000, guid: bf80031085f1e9148b279753fd44e8ce, type: 2}
+  m_SerializedBrain: {fileID: 11400000, guid: 09462d67695c37948a0deaa28d6637d3, type: 2}
   m_BlackboardContainer: {fileID: 333643790565334134}
+--- !u!114 &4147492771521261134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2880784901619237072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f6c87a428fd5d0be9bbc686bdc8c3c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  advancedOptions: 0
+  remote: 0
+  _llm: {fileID: 0}
+  APIKey: 
+  host: localhost
+  port: 13333
+  numRetries: 10
+  save: 
+  saveCache: 0
+  debugPrompt: 0
+  numPredict: 128
+  slot: -1
+  grammar: 
+  cachePrompt: 1
+  seed: -1
+  temperature: 0.2
+  topK: 40
+  topP: 0.9
+  minP: 0.05
+  repeatPenalty: 1.1
+  presencePenalty: 0
+  frequencyPenalty: 0
+  tfsZ: 1
+  typicalP: 1
+  repeatLastN: 64
+  penalizeNl: 1
+  penaltyPrompt: 
+  mirostat: 0
+  mirostatTau: 5
+  mirostatEta: 0.1
+  nProbs: 0
+  ignoreEos: 0
+  nKeep: -1
+  stop: []
+  stream: 1
+  playerName: user
+  AIName: assistant
+  prompt: A chat between a stranger and a character who lost memory, both are furry
+    anthro characters (avrians).
+  setNKeepToPrompt: 1
+  chat: []
+  grammarString: 
+--- !u!114 &7228601172438649929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2880784901619237072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0978e5e010bd04a49b4d7cd25d4a1a46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  llm: {fileID: 0}
+  llmCharacter: {fileID: 4147492771521261134}
+  answerOnSpeechReceived: 1

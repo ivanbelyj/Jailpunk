@@ -31,6 +31,13 @@ public class PlayerControls : MonoBehaviour
 
     private CommunicationUIManager communicationUIManager;
 
+    /// <summary>
+    /// If true, some controls will be blocked due to input performing
+    /// (in particular, keyboard input in a text input field)
+    /// </summary>
+    public bool IsTextInputMode { get; set; }
+
+    public bool IsMouseInputDisabled { get; set; }
 
     // private GridManager gridManager;
     // private GridManager GridManager {
@@ -44,12 +51,16 @@ public class PlayerControls : MonoBehaviour
 
     public void OnToggleCommunicationUI(InputAction.CallbackContext context)
     {
+        if (IsTextInputMode) return;
+
         if (context.phase == InputActionPhase.Performed) {
             communicationUIManager.ToggleUI();
         }
     }
 
     public void OnSelectNumber(InputAction.CallbackContext context) {
+        if (IsTextInputMode) return;
+
         if (context.phase == InputActionPhase.Performed) {
             int.TryParse(context.control.name, out int num);
             communicationUIManager.CommunicationPanel.MakeChoiceByNumber(num);
@@ -58,12 +69,20 @@ public class PlayerControls : MonoBehaviour
 
     public void OnAttack(InputAction.CallbackContext context)
     {
+        if (IsTextInputMode
+            || IsMouseInputDisabled && context.control.device is Mouse) 
+        {
+            return;
+        }
+
         if (context.phase == InputActionPhase.Performed) {
             closeCombat.Attack();
         }
     }
 
     public void OnToggleConsole(InputAction.CallbackContext context) {
+        if (IsTextInputMode) return;
+
         if (context.phase == InputActionPhase.Performed) {
             consoleManager.ToggleConsole();
         }
@@ -76,20 +95,28 @@ public class PlayerControls : MonoBehaviour
     }
 
     private void Update() {
+        if (IsTextInputMode) return;
+
         Vector2 moveInput = playerInput.actions["Move"].ReadValue<Vector2>();
         moveControls.Move(moveInput);
 
-        Mouse mouse = Mouse.current;
-        if (mouse.leftButton.wasPressedThisFrame)
-        {
-           Vector3 mousePosition = mouse.position.ReadValue();
-           TryToInteract(mousePosition);
+        if (!IsMouseInputDisabled) {
+            HandleMouseInput();
         }
 
         // int choiceNumber = playerInput.actions["Choice"].ReadValue<int>();
         // if (choiceNumber > 0) {
         //     Debug.Log("choice number: " + choiceNumber);
         // }
+    }
+
+    private void HandleMouseInput() {
+        Mouse mouse = Mouse.current;
+        if (mouse.leftButton.wasPressedThisFrame)
+        {
+           Vector3 mousePosition = mouse.position.ReadValue();
+           TryToInteract(mousePosition);
+        }
     }
 
     private void TryToInteract(Vector3 mousePosition) {

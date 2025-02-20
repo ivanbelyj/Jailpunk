@@ -21,9 +21,10 @@ public class GridGraphLoader : MonoBehaviour
     private GridManager gridManager;
 
     private void Awake() {
-        gridManager = FindObjectOfType<GridManager>();
+        gridManager = FindAnyObjectByType<GridManager>();
     }
 
+    // Todo: use not a single tilemap
     public GridGraph InstantiateFromTilemap(Tilemap tilemap, float cellSize)
     {
         BoundsInt bounds = tilemap.cellBounds;
@@ -87,6 +88,7 @@ public class GridGraphLoader : MonoBehaviour
     }
 
     private Vector3 GetTilemapOrigin(Tilemap tilemap) {
-        return gridManager.CellToWorld(tilemap.cellBounds.min);
+        var result = gridManager.CellToWorld(tilemap.cellBounds.min);
+        return result;
     }
 }

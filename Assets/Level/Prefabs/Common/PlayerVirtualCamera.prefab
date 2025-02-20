@@ -25,6 +25,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7889121345724333589}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -32,7 +33,6 @@ Transform:
   m_Children:
   - {fileID: 7889121346618826766}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7889121345724333590
 MonoBehaviour:
@@ -63,6 +63,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
+    FocusDistance: 10
     m_SensorSize: {x: 1, y: 1}
   m_Transitions:
     m_BlendHint: 0
@@ -84,8 +85,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d7d2e8911a97a340ac0c9293069d6d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollZoomSpeed: 2
-  minScrollOrthographicSize: 1
+  scrollZoomSpeed: 25
+  minScrollOrthographicSize: 2
   maxScrollOrthographicSize: 10
   defaultOrthographicSize: 5
   scrollLerpSpeed: 0.1
@@ -116,13 +117,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7889121346618826767}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 3.503065, y: -2.4876456, z: 4.837784}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7889121345724333591}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7889121346618826763
 MonoBehaviour:

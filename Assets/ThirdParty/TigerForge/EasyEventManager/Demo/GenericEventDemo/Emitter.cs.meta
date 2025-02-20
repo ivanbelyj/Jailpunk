@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: d28e453f341c6af4a9fc0c3cc9472da4
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 147887
+  packageName: Easy Event Manager
+  packageVersion: 2.3
+  assetPath: Assets/TigerForge/EasyEventManager/Demo/GenericEventDemo/Emitter.cs
+  uploadId: 354865

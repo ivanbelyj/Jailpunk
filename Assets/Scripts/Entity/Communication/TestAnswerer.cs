@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -31,15 +32,17 @@ public class TestAnswerer : MonoBehaviour
         };
     }
 
-    private IEnumerator DelayedSpeakCoroutine(CharacterId speakerId,
-        string message, float delayInSeconds = 0.6f)
+    private IEnumerator DelayedSpeakCoroutine(
+        CharacterId speakerId,
+        string message,
+        float delayInSeconds = 0.6f)
     {
         yield return new WaitForSeconds(delayInSeconds);
-        speaker.Speak(GetAnswer(speakerId, message));
+        speaker.Speak(GetAnswer(Guid.NewGuid(), speakerId, message));
     }
 
-    private SpeechSoundData GetAnswer(CharacterId characterId, string message) {
-        return new SpeechSoundData() {
+    private SpeechSoundData GetAnswer(Guid messageId, CharacterId characterId, string message) {
+        return new SpeechSoundData(messageId) {
             SpeakerId = subject.GetCharacterId(),
             RecipientId = characterId,
             Message = message

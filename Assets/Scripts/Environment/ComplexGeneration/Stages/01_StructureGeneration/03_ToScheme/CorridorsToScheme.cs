@@ -19,11 +19,11 @@ public class CorridorsToScheme : GenerationStage
                     return;
                 }
 
-                SchemeTile tile = scheme.GetTileByPos(x, y);
-                if (applyOverScheme || tile.TileType == TileType.NoSpace) {
-                    tile.TileType = isWall
-                        ? TileType.LoadBearingWall
-                        : TileType.Floor;
+                SchemePosition tile = scheme.GetTileByPos(x, y);
+                if (applyOverScheme || tile.Type == null) {
+                    tile.Type = isWall
+                        ? SchemePositionType.LoadBearingWall
+                        : SchemePositionType.Floor;
                     tile.SectorId = corridorSectorId;
                 }
             });

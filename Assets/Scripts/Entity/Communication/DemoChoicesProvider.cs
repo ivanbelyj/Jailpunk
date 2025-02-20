@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,10 +31,12 @@ public class DemoChoicesProvider : IChoicesProvider
                 "Loushea neraa laa?"
             };
         }
-        return commands.Select(str => new SpeechCommand(Speaker, new SpeechSoundData() {
-            SpeakerId = Subject.GetCharacterId(),
-            Message = str,
-            RecipientId = recipientId
-        }));
+        
+        return commands.Select(str =>
+            new SpeechCommand(Speaker, new SpeechSoundData(Guid.NewGuid()) {
+                SpeakerId = Subject.GetCharacterId(),
+                Message = str,
+                RecipientId = recipientId
+            }));
     }
 }

@@ -10,7 +10,7 @@ using UnityEngine;
 public class MoveControls : MonoBehaviour, IMoveControls
 {
     [SerializeField]
-    private SpriteSwapAnimator animator;
+    private WalkingAppearanceAnimator animator;
 
     [SerializeField]
     [Tooltip(

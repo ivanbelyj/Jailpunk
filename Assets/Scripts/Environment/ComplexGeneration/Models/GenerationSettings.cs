@@ -10,17 +10,17 @@ using UnityEngine;
 public class GenerationSettings
 {
     [Header("Common")]
+    public Vector3 complexPosition;
+
     [Tooltip(
         "Options used for BSP maze structure generation. " +
         "Some options will be overriden in the generation")]
-    [SerializeField]
     public BSPGenerationOptions structureBSPOptions;
 
     [Header("Sector planning")]
     [Tooltip(
         "Options used for planning sectors that use SectorRoomPlanningStrategy. " +
         "Some options will be overriden in the generation")]
-    [SerializeField]
     public BSPGenerationOptions sectorBSPOptions;
 
     [Header("Subsectors")]

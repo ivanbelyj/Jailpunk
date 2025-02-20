@@ -14,7 +14,7 @@ public class DebugColorManager
     {
         if (!markedPositions.TryAdd(position, color))
         {
-            Debug.LogWarning($"Override debug color mark (position: {position})");
+            // Debug.LogWarning($"Override debug color mark (position: {position})");
             markedPositions[position] = color;
         }
     }
@@ -37,7 +37,7 @@ public class DebugColorManager
         }
     }
 
-    public string GetTileColorCode(SchemeTile tile, Vector2Int position)
+    public string GetTileColorCode(SchemePosition tile, Vector2Int position)
     {
         if (markedPositions.TryGetValue(position, out var markColor))
         {

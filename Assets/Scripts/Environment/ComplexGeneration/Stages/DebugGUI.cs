@@ -9,6 +9,9 @@ public class DebugGUI : GenerationStage
     private GUISkin guiSkin;
     private ComplexScheme scheme;
     private int generationNumber = 0;
+
+    public int offsetX;
+    public int offsetY;
     
     public override void RunStage()
     {
@@ -28,7 +31,7 @@ public class DebugGUI : GenerationStage
 
     private void OnGUI()
     {
-        if (GUI.Button(new Rect(25, 25, 200, 60), "Regenerate")) 
+        if (GUI.Button(new Rect(10, 125, 250, 60), "Regenerate")) 
         {
             Regenerate();
         }

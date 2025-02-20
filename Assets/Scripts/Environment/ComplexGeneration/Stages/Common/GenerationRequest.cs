@@ -6,18 +6,25 @@ public class GenerationRequest {
     [SerializeField]
     private GenerationParameters parameters;
 
-    [SerializeField]
     private List<SectorInfo> requestedSectors;
 
-    [SerializeField]
     private List<AllocatableAreaGroup> sectorGroups;
 
-    public GenerationParameters Parameters => parameters;
+    public GenerationParameters Parameters {
+        get => parameters;
+        set => parameters = value;
+    }
 
     /// <summary>
     /// Sectors defined by high-level logic, such as plot necessity
     /// </summary>
-    public List<SectorInfo> RequestedSectors => requestedSectors;
-
-    public List<AllocatableAreaGroup> SectorGroups => sectorGroups;
+    public List<SectorInfo> RequestedSectors {
+        get => requestedSectors;
+        set => requestedSectors = value;
+    }
+    
+    public List<AllocatableAreaGroup> SectorGroups {
+        get => sectorGroups;
+        set => sectorGroups = value;
+    }
 }

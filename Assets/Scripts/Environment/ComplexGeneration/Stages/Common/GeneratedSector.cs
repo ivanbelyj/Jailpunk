@@ -13,6 +13,6 @@ public class GeneratedSectorInfo
     /// </summary>
     // public SectorInfo RequestedSector { get; set; }
     
-    public List<AllocatableAreaGroup> ZoneGroups { get; set; } = new();
+    // public List<AllocatableAreaGroup> ZoneGroups { get; set; } = new();
     public List<GeneratedZone> Zones { get; set; } = new();
 }

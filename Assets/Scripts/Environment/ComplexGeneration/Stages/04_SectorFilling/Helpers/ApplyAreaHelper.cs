@@ -42,9 +42,9 @@ public class ApplyAreaHelper
             tile.AreaId = area.Id;
             if (area.Type == SchemeAreaType.Room
                 && isBorder
-                && tile.TileType != TileType.LoadBearingWall)
+                && tile.Type != SchemePositionType.LoadBearingWall)
             {
-                tile.TileType = TileType.Wall;
+                tile.Type = SchemePositionType.Wall;
             }
         });
     }

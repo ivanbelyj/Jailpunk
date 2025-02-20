@@ -1,41 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-4000408624032066097
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 024ee627dda443e44827da4d424e7889, type: 3}
-  m_Name: TestAction
-  m_EditorClassIdentifier: 
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: efe0a61152754c4c83ec83fe422fee4c, type: 3}
-  m_Name: CharacterBrain
-  m_EditorClassIdentifier: 
-  m_SerializedActions:
-  - {fileID: -4000408624032066097}
-  - {fileID: 5192978743225280304}
-  m_SerializedConsiderations:
-  - {fileID: 6859615474184423256}
-  - {fileID: 228314695169557779}
-  m_ConsiderationIndices:
-  - m_Considerations: 01000000
-  - m_Considerations: 00000000
-  m_BrainSettings:
-    minimalUtilityDifference: 0
---- !u!114 &228314695169557779
+--- !u!114 &-7340881593318979598
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -51,7 +16,7 @@ MonoBehaviour:
   m_Arg1: 1
   m_Arg2: 1
   m_Arg3: testValue
---- !u!114 &5192978743225280304
+--- !u!114 &-5769508268986264047
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -63,7 +28,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ca6ee614dc5495db93e54653aaffc5e, type: 3}
   m_Name: DoNothingAction
   m_EditorClassIdentifier: 
---- !u!114 &6859615474184423256
+--- !u!114 &-4954479537490425076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 024ee627dda443e44827da4d424e7889, type: 3}
+  m_Name: TestAction
+  m_EditorClassIdentifier: 
+--- !u!114 &-2272161887365408474
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -76,3 +53,26 @@ MonoBehaviour:
   m_Name: Consideration1
   m_EditorClassIdentifier: 
   m_Arg: 1
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efe0a61152754c4c83ec83fe422fee4c, type: 3}
+  m_Name: CharacterBrain
+  m_EditorClassIdentifier: 
+  m_SerializedActions:
+  - {fileID: -5769508268986264047}
+  - {fileID: -4954479537490425076}
+  m_SerializedConsiderations:
+  - {fileID: -2272161887365408474}
+  - {fileID: -7340881593318979598}
+  m_ConsiderationIndices:
+  - m_Considerations: 
+  - m_Considerations: 
+  m_BrainSettings:
+    minimalUtilityDifference: 0
