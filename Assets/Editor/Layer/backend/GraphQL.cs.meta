@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: ad81a3834c60f44a5a26d50ec9fa958d
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 257854
+  packageName: Layer AI
+  packageVersion: 1.2.0
+  assetPath: Assets/Editor/Layer/backend/GraphQL.cs
+  uploadId: 650316

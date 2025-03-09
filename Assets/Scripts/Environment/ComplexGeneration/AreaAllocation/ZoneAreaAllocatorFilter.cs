@@ -14,6 +14,6 @@ public class ZoneAreaAllocatorFilter : IAreaAllocatorAreaFilter
 
     public bool ShouldAllocate(int areaId)
     {
-        return sectorAreas.First(x => x.Id == areaId).Type == SchemeAreaType.Room;
+        return sectorAreas.First(x => x.Id == areaId).Type == SchemeAreaType.CoreArea;
     }
 }

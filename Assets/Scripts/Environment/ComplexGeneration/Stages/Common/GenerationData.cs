@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 /// <summary>
@@ -40,28 +41,29 @@ public class GenerationData
     #endregion
 
     /// <summary>
-    /// Actually generated sectors info, including at least required requested sectors
+    /// Actually generated sectors info
     /// </summary>
     public List<GeneratedSectorInfo> GeneratedSectors { get; set; }
 
     public Dictionary<int, int> GeneratedSectorIdsByAllocationRequestId { get; set; }
 
-    public Dictionary<int, Dictionary<int, int>> GeneratedZoneIdsByAllocationRequestIdBySectorRequestId { get; set; } = new();
+    public Dictionary<int, Dictionary<int, int>> GeneratedAreaIdsByAllocationRequestIdBySectorRequestId { get; set; } = new();
 
     #region Scene
     public InstantiatedComplexData InstantiatedComplexData { get; set; }
     #endregion
 
     // Todo: move to extension class
-    public int? GetGeneratedSectorId(SectorInfo sectorInfo) {
-        var key = sectorInfo.SectorRequest.AreaAllocationRequest.Id;
+    public int? GetGeneratedSectorId(SectorRequest sectorRequest) {
+        var key = sectorRequest.AreaAllocationRequest.Id;
         GeneratedSectorIdsByAllocationRequestId.TryGetValue(key, out var result);
         return result;
     }
-    public int? GetGeneratedZoneId(ZoneInfo zoneInfo, int sectorRequestId) {
-        var key = zoneInfo.ZoneRequest.AreaAllocationRequest.Id;
+    
+    public int? GetGeneratedZoneId(ZoneRequest zoneRequest, int sectorRequestId) {
+        var key = zoneRequest.AreaAllocationRequest.Id;
         var generatedZoneIdsByAllocationRequestId =
-            GeneratedZoneIdsByAllocationRequestIdBySectorRequestId[sectorRequestId];
+            GeneratedAreaIdsByAllocationRequestIdBySectorRequestId[sectorRequestId];
         generatedZoneIdsByAllocationRequestId.TryGetValue(key, out var result);
         return result;
     }

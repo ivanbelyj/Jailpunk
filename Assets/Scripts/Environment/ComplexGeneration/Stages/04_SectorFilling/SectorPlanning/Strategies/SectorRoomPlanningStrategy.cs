@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class SectorRoomPlanningStrategy : ISectorPlanningStrategy
+public class SectorRoomPlanningStrategy : SectorPlanningStrategyBase
 {
     private readonly IdGenerator idGenerator;
 
@@ -12,7 +12,7 @@ public class SectorRoomPlanningStrategy : ISectorPlanningStrategy
         this.idGenerator = idGenerator;
     }
     
-    public List<SchemeArea> PlanSector(
+    public override List<SchemeArea> PlanSector(
         GeneratedSectorInfo sector,
         GenerationContext context)
     {

@@ -21,7 +21,7 @@ public class ComplexGenerator : MonoBehaviour
     [SerializeField]
     private bool showLogMessages = false;
 
-    private readonly IdGenerator idGenerator = new();
+    private readonly IdGenerator idGenerator = IdGenerator.Instance;
     
     /// <summary>
     /// Static for debug marking

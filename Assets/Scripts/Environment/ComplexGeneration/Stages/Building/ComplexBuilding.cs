@@ -21,7 +21,7 @@ public class ComplexBuilding : GenerationStage
     private TileProvider tileProvider;
 
     #region Set on run stage
-    private MapObjectSchemaManager mapObjectSchemaManager;
+    private AssetManager assetManager;
     
     private GameObject gridObject;
     private Tilemap floorTilemap;
@@ -45,7 +45,7 @@ public class ComplexBuilding : GenerationStage
     }
 
     private void Initialize() {
-        mapObjectSchemaManager = FindAnyObjectByType<MapObjectSchemaManager>();
+        assetManager = FindAnyObjectByType<AssetManager>();
 
         gridObject = CreateGrid(context.RootGameObjectName);
         floorTilemap = CreateTilemap(gridObject, floorTilemapPrefab, "Floor");
@@ -144,7 +144,7 @@ public class ComplexBuilding : GenerationStage
 
     private MapObjectSchema GetMapObjectSchema(string mapObjectName)
     {
-        return mapObjectSchemaManager.GetAssetById(mapObjectName);
+        return assetManager.MapObjectSchemas.GetAssetById(mapObjectName);
     }
 
     private Tile GetTile(SchemeTile schemeTile) {

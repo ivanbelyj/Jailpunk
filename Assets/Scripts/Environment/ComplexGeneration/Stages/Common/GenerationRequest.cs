@@ -6,7 +6,10 @@ public class GenerationRequest {
     [SerializeField]
     private GenerationParameters parameters;
 
-    private List<SectorInfo> requestedSectors;
+    [SerializeField]
+    private ComplexGenerationSchema complexGenerationSchema;
+
+    private List<SectorRequest> requestedSectors;
 
     private List<AllocatableAreaGroup> sectorGroups;
 
@@ -15,10 +18,15 @@ public class GenerationRequest {
         set => parameters = value;
     }
 
+    public ComplexGenerationSchema ComplexGenerationSchema {
+        get => complexGenerationSchema;
+        set => complexGenerationSchema = value;
+    }
+
     /// <summary>
     /// Sectors defined by high-level logic, such as plot necessity
     /// </summary>
-    public List<SectorInfo> RequestedSectors {
+    public List<SectorRequest> RequestedSectors {
         get => requestedSectors;
         set => requestedSectors = value;
     }

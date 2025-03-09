@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEngine;
 using static MazeWithRoomsGenerator;
 
-public class MazeWithRoomsFillingStrategy : IZoneFillingStrategy
+public class MazeWithRoomsFillingStrategy : ZoneFillingStrategyBase
 {
     private readonly MazeWithRoomsGenerator mazeGenerator;
     private readonly Func<GeneratedZone, TraverseRectFilter> traverseRectFilterFactory;
@@ -16,7 +16,7 @@ public class MazeWithRoomsFillingStrategy : IZoneFillingStrategy
         this.traverseRectFilterFactory = traverseRectFilterFactory;
     }
 
-    public void Apply(GeneratedZone generatedZone, GenerationContext context)
+    public override void Apply(GeneratedZone generatedZone, GenerationContext context)
     {
         GenerateMaze(generatedZone, context);
     }

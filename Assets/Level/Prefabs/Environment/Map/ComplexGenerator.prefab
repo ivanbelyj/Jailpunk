@@ -12,6 +12,9 @@ GameObject:
   - component: {fileID: 7399174594458851214}
   - component: {fileID: 488611472590598355}
   - component: {fileID: 3995084589399603651}
+  - component: {fileID: 4557086547633007383}
+  - component: {fileID: 5621937574556972466}
+  - component: {fileID: 6640617265816368310}
   - component: {fileID: 6854095094363600884}
   - component: {fileID: 4622152807576159323}
   - component: {fileID: 7749297001716742018}
@@ -71,7 +74,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5217c8d8fdc5304fa6d5b28d9104672, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  generateOnStart: 1
+  behaviourOnStart: 0
   generationRequest:
     parameters:
       seed: 405601535
@@ -79,6 +82,10 @@ MonoBehaviour:
       mazeSize: {x: 184, y: 114}
       minSectorSize: 24
       maxSectorSize: 64
+    complexGenerationSchema: {fileID: 11400000, guid: 588f92e0f1986ce4b88dbb7f31bc3245, type: 2}
+  gridGameObject: {fileID: 0}
+  visionObstacleTilemap: {fileID: 0}
+  obstacleTilemap: {fileID: 0}
 --- !u!114 &3995084589399603651
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,6 +149,45 @@ MonoBehaviour:
   useCustomGenerationStages: 0
   generationStages: []
   showLogMessages: 1
+--- !u!114 &4557086547633007383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7881512783001491901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12e6497d853267b468a8b45d1cc15df0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5621937574556972466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7881512783001491901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64cd89df17bb5b941b6e8ae0a43557e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sectorSelectionType: 0
+--- !u!114 &6640617265816368310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7881512783001491901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa75dcea8919b9347b89b89b8d39fff0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zoneSelectionType: 0
+  testZoneGenerationSchemaId: EmptyZone
 --- !u!114 &6854095094363600884
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -335,6 +381,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   includeInGeneration: 1
   showDebugMessages: 1
+  addDebugColorForGeneratedZones: 1
 --- !u!114 &3742454278164570003
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -348,15 +395,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   includeInGeneration: 1
-  traverseRectFilter:
-    useMinDistanceToEdge: 0
-    minDistanceToEdge: 3
-    useMaxDistanceToEdge: 0
-    maxDistanceToEdge: 5
-    useMinDistanceToCenter: 0
-    minDistanceToCenter: 3
-    useMaxDistanceToCenter: 0
-    maxDistanceToCenter: 5
 --- !u!114 &1737865139082327443
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -389,3 +427,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   includeInGeneration: 0
   guiSkin: {fileID: 11400000, guid: 78f22dce08e95364f91783819f627dac, type: 2}
+  offsetX: 0
+  offsetY: 0

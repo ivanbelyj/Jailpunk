@@ -24,34 +24,39 @@ internal class SectorPlanConnectivityHelper
     {
         var result = new Dictionary<int, Graph<int>>();
         foreach (var areaNode in commonAreaConnectivity.Nodes) {
-            AddLinksForGivenSectorOnly(areaNode, generatedSectors, result);
+            var sectorId = FindSectorByAreaId(areaNode.Value, generatedSectors).Id;
+            var sectorAreaConnectivity = AddEmptyIfNecessaryAndGet(result, sectorId);
+            var pairs = GetPairsFromTheSameSector(
+                areaNode.Value,
+                areaNode.ConnectedNodes.Select(x => x.Value),
+                generatedSectors);
+            foreach (var (areaId1, areaId2) in pairs) {
+                sectorAreaConnectivity.AddLink(areaId1, areaId2);
+            }
         }
         return result;
     }
 
-    private void AddLinksForGivenSectorOnly(
-        Node<int> areaNode,
-        IEnumerable<GeneratedSectorInfo> generatedSectors,
-        Dictionary<int, Graph<int>> result
-    ) {
-        var sectorByArea = FindSectorByAreaId(
-            generatedSectors,
-            areaNode.Value);
+    private List<(int, int)> GetPairsFromTheSameSector(
+        int areaId,
+        IEnumerable<int> connectedAreaIds,
+        IEnumerable<GeneratedSectorInfo> generatedSectors)
+    {
+        var sectorByArea = FindSectorByAreaId(areaId, generatedSectors);
 
-        var sectorAreaConnectivity = AddEmptyIfNecessaryAndGet(
-            result,
-            sectorByArea.Id
-        );
+        return connectedAreaIds
+            .Select(connectedAreaId => {
+                var connectedNodeSector = FindSectorByAreaId(
+                    connectedAreaId,
+                    generatedSectors);
 
-        foreach (var connectedNode in areaNode.ConnectedNodes) {
-            var connectedNodeSector = FindSectorByAreaId(
-                generatedSectors,
-                connectedNode.Value);
-
-            if (connectedNodeSector.Id == sectorByArea.Id) {
-                sectorAreaConnectivity.AddLink(areaNode.Value, connectedNode.Value);
-            }
-        }
+                return connectedNodeSector.Id == sectorByArea.Id
+                    ? (areaId, connectedAreaId)
+                    : ((int, int)?)null;
+            })
+            .Where(pair => pair != null)
+            .ToList()
+            .ConvertAll(x => x.Value);
     }
 
     private Graph<int> AddEmptyIfNecessaryAndGet(
@@ -69,7 +74,7 @@ internal class SectorPlanConnectivityHelper
     }
 
     private GeneratedSectorInfo FindSectorByAreaId(
-        IEnumerable<GeneratedSectorInfo> generatedSectors,
-        int areaId) =>
-        generatedSectors.First(x => x.SchemeAreas.Any(x => x.Id == areaId));
+        int areaId,
+        IEnumerable<GeneratedSectorInfo> generatedSectors)
+        => generatedSectors.First(x => x.SchemeAreas.Any(x => x.Id == areaId));
 }

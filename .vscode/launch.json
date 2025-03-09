@@ -3,32 +3,32 @@
     "configurations": [
         {
             "name": "Unity Editor",
-            "type": "unity",
+            "type": "vstuc",
             "request": "launch"
         },
         {
             "name": "Windows Player",
-            "type": "unity",
+            "type": "vstuc",
             "request": "launch"
         },
         {
             "name": "OSX Player",
-            "type": "unity",
+            "type": "vstuc",
             "request": "launch"
         },
         {
             "name": "Linux Player",
-            "type": "unity",
+            "type": "vstuc",
             "request": "launch"
         },
         {
             "name": "iOS Player",
-            "type": "unity",
+            "type": "vstuc",
             "request": "launch"
         },
         {
             "name": "Android Player",
-            "type": "unity",
+            "type": "vstuc",
             "request": "launch"
         },
         {

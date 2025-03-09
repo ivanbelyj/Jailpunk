@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public abstract class TraverseZoneFillingStrategy : IZoneFillingStrategy
+public abstract class TraverseZoneFillingStrategy : ZoneFillingStrategyBase
 {
-    public void Apply(GeneratedZone generatedZone, GenerationContext context)
+    public override void Apply(GeneratedZone generatedZone, GenerationContext context)
     {
         var area = context.ComplexData.Scheme.Areas
             .FirstOrDefault(x => x.Id == generatedZone.SchemeAreaId);

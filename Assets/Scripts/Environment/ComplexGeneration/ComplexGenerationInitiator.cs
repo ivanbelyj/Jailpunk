@@ -5,7 +5,7 @@ using UnityEngine.Tilemaps;
 public class ComplexGenerationInitiator : MonoBehaviour
 {
     public enum GenerationInitiatorBehaviourOnStart {
-        GenerateOnStart,
+        GenerateWhenReady,
         [Tooltip("Allows to use manually created grid without performing generation")]
         EmitGridReadyEventOnStart,
         DoNothingOnStart
@@ -13,7 +13,7 @@ public class ComplexGenerationInitiator : MonoBehaviour
 
     [SerializeField]
     private GenerationInitiatorBehaviourOnStart behaviourOnStart
-        = GenerationInitiatorBehaviourOnStart.GenerateOnStart;
+        = GenerationInitiatorBehaviourOnStart.GenerateWhenReady;
 
     [SerializeField]
     private GenerationRequest generationRequest;
@@ -41,11 +41,16 @@ public class ComplexGenerationInitiator : MonoBehaviour
     private void Start()
     {
         switch (behaviourOnStart) {
-            case GenerationInitiatorBehaviourOnStart.GenerateOnStart:
-                Generate();
+            case GenerationInitiatorBehaviourOnStart.GenerateWhenReady:
+                EventManager.StartListening(
+                    EventConstants.ComplexGenerationAssetsLoaded,
+                    () => Generate());
                 break;
             case GenerationInitiatorBehaviourOnStart.EmitGridReadyEventOnStart:
                 EmitGridReadyEventForManualGridData();
+                break;
+            case GenerationInitiatorBehaviourOnStart.DoNothingOnStart:
+                // Do nothing
                 break;
         }
     }
@@ -78,14 +83,28 @@ public class ComplexGenerationInitiator : MonoBehaviour
     private void SetRequestedSectors(GenerationRequest generationRequest) {
         var sectorRequestsBuilder = new ComplexSectorRequestsBuilder();
         var (sectors, groups) = sectorRequestsBuilder
-            .AddGroup()
+            .AddSectorGroup()
+                .AddSector()
+                    .AddZoneGroup()
+                        .AddZones(5)
+                    .AddZoneGroup()
+                        .AddZones(5)
+                    .AddZoneGroup()
+                        .AddZones(5)
+                    .AddZoneGroup()
+                        .AddZones(5)
+                    .AddZoneGroup(alienateAll: true)
+                        .AddZones(5)
+                .AddSector()
+                    .AddZoneGroup()
+                        .AddZones(3)
+                    .AddZoneGroup()
+                        .AddZones(3)
+                .AddSector()
+                    .AddZones(2)
+            .AddSectorGroup(alienateAll: true)
                 .AddSector()
                     .AddZones(3)
-                .AddSector()
-                .AddSector()
-            .AddGroup(alienateAll: true)
-                .AddSector()
-                    .AddZones(1)
             .Build();
         
         generationRequest.SectorGroups = groups;

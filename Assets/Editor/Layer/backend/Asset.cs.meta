@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 8183d5393ead24561bcacda072763821
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 257854
+  packageName: Layer AI
+  packageVersion: 1.2.0
+  assetPath: Assets/Editor/Layer/backend/Asset.cs
+  uploadId: 650316

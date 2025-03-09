@@ -8,11 +8,11 @@ public class TileProvider : MonoBehaviour
 {
     private readonly Dictionary<string, Tile> tilesById = new();
 
-    private MapObjectSchemaManager mapObjectSchemaManager;
+    private AssetManager assetManager;
     private AppearanceSpriteResolver appearanceSpriteResolver;
 
     private void Awake() {
-        mapObjectSchemaManager = FindAnyObjectByType<MapObjectSchemaManager>();
+        assetManager = FindAnyObjectByType<AssetManager>();
         appearanceSpriteResolver = FindAnyObjectByType<AppearanceSpriteResolver>();
     }
 
@@ -44,6 +44,6 @@ public class TileProvider : MonoBehaviour
 
     private MapObjectSchema GetMapObjectSchema(string mapObjectName)
     {
-        return mapObjectSchemaManager.GetAssetById(mapObjectName);
+        return assetManager.MapObjectSchemas.GetAssetById(mapObjectName);
     }
 }

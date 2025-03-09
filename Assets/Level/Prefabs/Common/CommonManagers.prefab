@@ -128,9 +128,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2696561441791579829}
-  - component: {fileID: 8147677083503798127}
+  - component: {fileID: 7303761161391182734}
   m_Layer: 0
-  m_Name: AssetManager
+  m_Name: AssetManagement
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -151,7 +151,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8909071020763756921}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8147677083503798127
+--- !u!114 &7303761161391182734
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -160,10 +160,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1138128397462966414}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c07d6a7905068b4db9792187d1cb6f1, type: 3}
+  m_Script: {fileID: 11500000, guid: b1e487a1cf42c8c4e82f28ac00a48dc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bundleName: mapobjectschema
+  assetBundleNames:
+  - complexgenerationschema
+  - mapobjectschema
+  - sectorgenerationschema
+  - sectorzonegenerationschema
 --- !u!1 &1697748218350092199
 GameObject:
   m_ObjectHideFlags: 0

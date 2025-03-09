@@ -1,10 +1,18 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
+[RequireComponent(typeof(ISectorPlanningStrategyProvider))]
 public class SectorPlanning : GenerationStage
 {
-    private ISectorPlanningStrategy[] planningStrategies;
+    [SerializeField]
+    private ISectorPlanningStrategyProvider sectorPlanningStrategyProvider;
+
     private ApplyAreaHelper applyAreaHelper;
+
+    private void Awake() {
+        sectorPlanningStrategyProvider = GetComponent<ISectorPlanningStrategyProvider>();
+    }
 
     public override void RunStage()
     {
@@ -16,11 +24,6 @@ public class SectorPlanning : GenerationStage
     }
 
     private void InitializeStage() {
-        planningStrategies =  new ISectorPlanningStrategy[] {
-            new SectorRoomPlanningStrategy(idGenerator),
-            // new GladePlanningStrategy(idGenerator)
-        };
-
         applyAreaHelper = new ApplyAreaHelper(idGenerator);
     }
 
@@ -57,12 +60,7 @@ public class SectorPlanning : GenerationStage
 
     private List<SchemeArea> PlanSector(GeneratedSectorInfo sector, GenerationContext context)
     {
-        var strategy = SelectPlanningStrategy(sector);
+        var strategy = sectorPlanningStrategyProvider.GetSectorPlanningStrategy(sector);
         return strategy.PlanSector(sector, context);
-    }
-
-    private ISectorPlanningStrategy SelectPlanningStrategy(GeneratedSectorInfo sector)
-    {
-        return planningStrategies[Random.Range(0, planningStrategies.Length)];
     }
 }

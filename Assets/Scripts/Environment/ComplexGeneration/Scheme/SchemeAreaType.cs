@@ -5,6 +5,6 @@ using UnityEngine;
 public enum SchemeAreaType
 {
     Unknown,
-    Room,
-    Corridor
+    CoreArea, // Typically room
+    Intermediate // Typically corridor
 }

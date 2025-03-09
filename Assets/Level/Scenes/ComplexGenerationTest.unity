@@ -131,6 +131,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CommonManagers
       objectReference: {fileID: 0}
+    - target: {fileID: 7303761161391182734, guid: 99583b5e926703048aa55d90d530ce13, type: 3}
+      propertyPath: assetBundleNames.Array.size
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 8909071020763756921, guid: 99583b5e926703048aa55d90d530ce13, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6.1600237
@@ -193,7 +197,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3682676961666197038, guid: e33d5d30626776048b85e668017311e0, type: 3}
       propertyPath: addDebugSectorBoundaryMarks
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3742454278164570003, guid: e33d5d30626776048b85e668017311e0, type: 3}
+      propertyPath: includeInGeneration
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4384608620825096210, guid: e33d5d30626776048b85e668017311e0, type: 3}
+      propertyPath: includeInGeneration
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4384608620825096210, guid: e33d5d30626776048b85e668017311e0, type: 3}
+      propertyPath: addDebugColorForGeneratedZones
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5935784454163555725, guid: e33d5d30626776048b85e668017311e0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -235,12 +251,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6640617265816368310, guid: e33d5d30626776048b85e668017311e0, type: 3}
+      propertyPath: testZoneGenerationSchemaId
+      value: EmptyZone
+      objectReference: {fileID: 0}
     - target: {fileID: 7881512783001491901, guid: e33d5d30626776048b85e668017311e0, type: 3}
       propertyPath: m_Name
       value: ComplexGenerator
       objectReference: {fileID: 0}
     - target: {fileID: 7881512783001491901, guid: e33d5d30626776048b85e668017311e0, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8020785484923872703, guid: e33d5d30626776048b85e668017311e0, type: 3}
+      propertyPath: addAllocatedSectorColorMarks
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

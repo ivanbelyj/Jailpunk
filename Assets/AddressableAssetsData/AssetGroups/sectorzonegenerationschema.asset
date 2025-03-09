@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: sectorzonegenerationschema
+  m_EditorClassIdentifier: 
+  m_GroupName: sectorzonegenerationschema
+  m_GUID: 0bf459bc914aa164e9868ddfa9241880
+  m_SerializeEntries:
+  - m_GUID: 3c0eeceeff1b3fe4ca49001bc21934eb
+    m_Address: TestZone
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - sector-zone-generation-schema
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6e26c6c3a9d71bc49b90fd8ee6deb579
+    m_Address: MazeWithRoomsZone
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - sector-zone-generation-schema
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8aa2da77d0480fe48838cc87e9d2220b
+    m_Address: EmptyZone
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - sector-zone-generation-schema
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: acd96a76c264e55419b1f9297de4f5c5
+    m_Address: CircleMazeZone
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - sector-zone-generation-schema
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: a9a441b5a8f049b4e9f4d94c172869e1, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 90122780799e15b4cb4d2d324865c3fd, type: 2}
+    - {fileID: 11400000, guid: 55238a30f9c4d8644ab105ff30324d87, type: 2}

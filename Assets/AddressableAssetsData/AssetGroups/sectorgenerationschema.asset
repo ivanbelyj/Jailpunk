@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: sectorgenerationschema
+  m_EditorClassIdentifier: 
+  m_GroupName: sectorgenerationschema
+  m_GUID: 6ce621ab418b1cc43ab31940411e8454
+  m_SerializeEntries:
+  - m_GUID: 0bfeebe2b0382b64db842fa9022adbab
+    m_Address: GladeSector
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - sector-generation-schema
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5f383fe61cdd82949ac5d261eae0cb0f
+    m_Address: RoomsAndCorridorsSector
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - sector-generation-schema
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: a9a441b5a8f049b4e9f4d94c172869e1, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 45acd040fd9ff8249bcd0ba3817ffb44, type: 2}
+    - {fileID: 11400000, guid: c5719397877a03644a5d2ea9bfe2de49, type: 2}

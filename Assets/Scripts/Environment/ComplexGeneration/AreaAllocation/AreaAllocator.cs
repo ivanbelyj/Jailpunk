@@ -73,9 +73,9 @@ public class AreaAllocator
             }
         }
 
-        Debug.Log(
-            $"Assigned generated Area ids: "
-            + string.Join(", ", assignedGeneratedAreaIds));
+        // Debug.Log(
+        //     $"Assigned generated Area ids: "
+        //     + string.Join(", ", assignedGeneratedAreaIds));
     }
     #endregion
 
@@ -267,8 +267,8 @@ public class AreaAllocator
             .Select(AreaId =>
                 new {
                     AreaId,
-                    Match = requestedArea.UseIndividualAccessibility ?
-                        EstimateIndividualAccessibilityMatching(
+                    Match = requestedArea.UseIndividualAccessibility
+                        ? EstimateIndividualAccessibilityMatching(
                             requestedArea,
                             GetNodeByValue(areaConnectivity, AreaId).ConnectedNodes.Count)
                         : Random.Range(-1, 2)

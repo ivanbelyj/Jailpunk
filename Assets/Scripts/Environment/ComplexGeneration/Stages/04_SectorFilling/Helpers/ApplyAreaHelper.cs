@@ -27,8 +27,8 @@ public class ApplyAreaHelper
         (SchemeAreaType, RectInt) GetAreaTypeAndRect(BSPNode node) {
             bool hasIntermediateArea = node.intermediateArea != null;
             return hasIntermediateArea
-                ? (SchemeAreaType.Corridor, node.intermediateArea.Rect)
-                : (SchemeAreaType.Room, node.rectArea.Rect);
+                ? (SchemeAreaType.Intermediate, node.intermediateArea.Rect)
+                : (SchemeAreaType.CoreArea, node.rectArea.Rect);
         }
     }
 
@@ -40,7 +40,7 @@ public class ApplyAreaHelper
             
             var tile = scheme.GetTileByPos(x, y);
             tile.AreaId = area.Id;
-            if (area.Type == SchemeAreaType.Room
+            if (area.Type == SchemeAreaType.CoreArea
                 && isBorder
                 && tile.Type != SchemePositionType.LoadBearingWall)
             {

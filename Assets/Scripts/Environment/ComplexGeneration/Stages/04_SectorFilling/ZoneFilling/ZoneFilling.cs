@@ -2,11 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(IZoneFillingStrategyProvider))]
 public class ZoneFilling : GenerationStage
 {
-    // Todo: for test it's here now
     [SerializeField]
-    private TraverseRectFilter traverseRectFilter;
+    private IZoneFillingStrategyProvider zoneFillingStrategyProvider;
+
+    private void Awake() {
+        zoneFillingStrategyProvider = GetComponent<IZoneFillingStrategyProvider>();
+    }
 
     public override void RunStage()
     {
@@ -22,7 +26,7 @@ public class ZoneFilling : GenerationStage
     private void FillZones(GeneratedSectorInfo generatedSector)
     {
         foreach (var generatedZone in generatedSector.Zones) {
-            var strategies = SelectStrategies(generatedZone);
+            var strategies = zoneFillingStrategyProvider.GetZoneFillingStrategies(generatedZone);
             ApplyStrategies(generatedZone, strategies);
         }
     }
@@ -34,12 +38,5 @@ public class ZoneFilling : GenerationStage
         foreach (var strategy in strategies) {
             strategy.Apply(generatedZone, context);
         }
-    }
-
-    private List<IZoneFillingStrategy> SelectStrategies(GeneratedZone generatedZone) {
-        return new List<IZoneFillingStrategy> {
-            // new TestZoneFillingStrategy()
-            new MazeWithRoomsFillingStrategy((zone) => traverseRectFilter)
-        };
     }
 }

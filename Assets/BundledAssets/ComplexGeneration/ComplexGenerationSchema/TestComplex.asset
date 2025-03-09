@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e5b3c1f6af73344a9a8fc89ee08942d, type: 3}
+  m_Name: TestComplex
+  m_EditorClassIdentifier: 
+  complexGenerationSchemaId: TestComplex
+  sectorVariants:
+  - sectorGenerationSchema: {fileID: 11400000, guid: 0bfeebe2b0382b64db842fa9022adbab, type: 2}
+    weight: 1
+  - sectorGenerationSchema: {fileID: 11400000, guid: 5f383fe61cdd82949ac5d261eae0cb0f, type: 2}
+    weight: 1

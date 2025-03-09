@@ -11,23 +11,19 @@ public class ComplexSectorRequestsBuilder
     }
 
     class SectorBuildingConfig {
-        public SectorInfo sectorInfo;
+        public SectorRequest sectorRequest;
+        public List<GroupBuildingConfig> zoneGroups = new();
     }
 
-    private List<GroupBuildingConfig> groups = new();
+    private List<GroupBuildingConfig> sectorGroups = new();
     private List<SectorBuildingConfig> sectors = new();
 
     private int lastGroupId = 0;
     private int lastSectorId = 0;
     private int lastZoneId = 0;
 
-    public ComplexSectorRequestsBuilder AddGroup(bool alienateAll = false) {
-        groups.Add(new() {
-            alienateAll = alienateAll,
-            allocatableAreaGroup = new() {
-                Id = ++lastGroupId
-            }
-        });
+    public ComplexSectorRequestsBuilder AddSectorGroup(bool alienateAll = false) {
+        AddGroup(sectorGroups, alienateAll);
 
         return this;
     }
@@ -36,62 +32,94 @@ public class ComplexSectorRequestsBuilder
         AreaIndividualAccessibility? individualAccessibility = null,
         NecessityDegree necessityDegree = NecessityDegree.Desirable)
     {
-        var areaGroupId = groups.Last().allocatableAreaGroup.Id;
+        if (sectorGroups.Count == 0) {
+            AddSectorGroup();
+        }
+        var areaGroupId = sectorGroups.Last().allocatableAreaGroup.Id;
         sectors.Add(new() {
-            sectorInfo = new() {
-                SectorRequest = new() {
-                    AreaAllocationRequest = new(++lastSectorId, areaGroupId) {
-                        UseIndividualAccessibility = individualAccessibility.HasValue,
-                        IndividualAccessibility = individualAccessibility ?? default,
-                        Necessity = necessityDegree
-                    }
+            sectorRequest = new() {
+                // TODO: implement
+                SectorPlanningInfo = new() {
+                    SectorGenerationSchemaId = "RoomsAndCorridorsSector"
+                },
+                AreaAllocationRequest = new(++lastSectorId, areaGroupId) {
+                    UseIndividualAccessibility = individualAccessibility.HasValue,
+                    IndividualAccessibility = individualAccessibility ?? default,
+                    Necessity = necessityDegree
                 }
             }
         });
         return this;
     }
 
-    public ComplexSectorRequestsBuilder AddZones(int count) {
-        const int SingleZoneGroupId = 1;
-
-        var sector = sectors.Last();
-
-        sector.sectorInfo.SectorRequest.ZoneGroups.Add(new() {
-            Id = SingleZoneGroupId
-        });
-        sector.sectorInfo.Zones.AddRange(CreateZones(count, SingleZoneGroupId));
+    public ComplexSectorRequestsBuilder AddZoneGroup(bool alienateAll = false) {
+        var lastSector = sectors.Last();
+        AddGroup(lastSector.zoneGroups, alienateAll);
 
         return this;
     }
 
-    public (List<SectorInfo>, List<AllocatableAreaGroup>) Build() {
-        return (BuildSectors(), BuildGroups());
+    public ComplexSectorRequestsBuilder AddZones(int count) {
+        var lastSector = sectors.Last();
+
+        if (lastSector.zoneGroups.Count == 0) {
+            AddZoneGroup(false);
+        }
+
+        var areaGroupId = lastSector.zoneGroups.Last().allocatableAreaGroup.Id;
+
+        lastSector.sectorRequest.Zones.AddRange(CreateZones(count, areaGroupId));
+
+        return this;
     }
 
-    private List<ZoneInfo> CreateZones(int count, int areaGroupId) {
-        var result = new List<ZoneInfo>();
+    public (List<SectorRequest>, List<AllocatableAreaGroup>) Build() {
+        return (BuildSectors(), BuildGroups(sectorGroups));
+    }
+
+    private void AddGroup(
+        List<GroupBuildingConfig> sectorGroups,
+        bool alienateAll = false)
+    {
+        sectorGroups.Add(new() {
+            alienateAll = alienateAll,
+            allocatableAreaGroup = new() {
+                Id = ++lastGroupId
+            }
+        });
+    }
+
+    private List<ZoneRequest> CreateZones(int count, int areaGroupId) {
+        var result = new List<ZoneRequest>();
         for (int i = 0; i < count; i++) {
             result.Add(CreateZoneInfo(areaGroupId));
         }
         return result;
     }
 
-    private ZoneInfo CreateZoneInfo(int areaGroupId) {
-        return new ZoneInfo() {
-            ZoneRequest = new() {
-                AreaAllocationRequest = new(++lastZoneId, areaGroupId) {
-                    UseIndividualAccessibility = false,
-                    Necessity = NecessityDegree.Desirable,
-                }
+    private ZoneRequest CreateZoneInfo(int areaGroupId) {
+        return new() {
+            AreaAllocationRequest = new(++lastZoneId, areaGroupId) {
+                UseIndividualAccessibility = false,
+                Necessity = NecessityDegree.Desirable,
+            },
+            // TODO: implement
+            ZoneFillingInfo = new() {
+                ZoneGenerationSchemaId = "EmptyZone"
             }
         };
     }
 
-    private List<SectorInfo> BuildSectors() {
-        return sectors.Select(x => x.sectorInfo).ToList();
+    private List<SectorRequest> BuildSectors() {
+        return sectors
+            .Select(x => {
+                x.sectorRequest.ZoneGroups = BuildGroups(x.zoneGroups);
+                return x.sectorRequest;
+            })
+            .ToList();
     }
 
-    private List<AllocatableAreaGroup> BuildGroups() {
+    private List<AllocatableAreaGroup> BuildGroups(List<GroupBuildingConfig> groups) {
         return groups.Select(x => {
             if (x.alienateAll) {
                 x.allocatableAreaGroup.AlienatedGroupIds =
