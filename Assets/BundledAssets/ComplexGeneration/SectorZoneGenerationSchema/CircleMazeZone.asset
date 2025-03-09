@@ -14,7 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sectorZoneGenerationSchemaId: CircleMazeZone
   zoneFillingSchemas:
-  - fillingType: 0
+  - order: 0
+    fillingType: 3
+    targetPositionType: 1
+    targetLayerName: Wall
+    mapObjectSchemaAddress: Wall
     traverseRectFilter:
       useMinDistanceToEdge: 0
       minDistanceToEdge: 0

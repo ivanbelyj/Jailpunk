@@ -1,19 +1,25 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
+
 using static MazeWithRoomsGenerator;
 
+// TODO: code is duplicating now
 public class MazeWithRoomsFillingStrategy : ZoneFillingStrategyBase
 {
     private readonly MazeWithRoomsGenerator mazeGenerator;
     private readonly Func<GeneratedZone, TraverseRectFilter> traverseRectFilterFactory;
+    private readonly string targetLayerName;
+    private readonly string mapObjectSchemaAddress;
 
-    public MazeWithRoomsFillingStrategy(Func<GeneratedZone, TraverseRectFilter> traverseRectFilterFactory)
+    public MazeWithRoomsFillingStrategy(
+        string targetLayerName,
+        string mapObjectSchemaAddress,
+        Func<GeneratedZone, TraverseRectFilter> traverseRectFilterFactory)
     {
         mazeGenerator = new MazeWithRoomsGenerator();
         this.traverseRectFilterFactory = traverseRectFilterFactory;
+        this.targetLayerName = targetLayerName;
+        this.mapObjectSchemaAddress = mapObjectSchemaAddress;
     }
 
     public override void Apply(GeneratedZone generatedZone, GenerationContext context)
@@ -59,38 +65,26 @@ public class MazeWithRoomsFillingStrategy : ZoneFillingStrategyBase
             case CellType.Wall:
                 PlaceWall(tile, x, y);
                 break;
-            // case CellType.Path:
-            //     PlacePath(tile, x, y);
-            //     break;
-            // case CellType.Room:
-            //     PlaceRoom(context, x, y);
-            //     break;
-            // case CellType.RoomEntrance:
-            //     PlaceRoomEntrance(context, x, y);
-            //     break;
         }
     }
 
-    private void PlaceWall(SchemePosition tile, int x, int y)
+    private void PlaceWall(SchemePosition position, int x, int y)
     {
-        if (tile.Type == SchemePositionType.Floor) {
-            tile.Type = SchemePositionType.Wall;
+        if (position.Type == SchemePositionType.Floor)
+        {
+            position.Type = SchemePositionType.Wall;
+
+            var layer = string.IsNullOrWhiteSpace(targetLayerName)
+                ? position.GetLayerByName(targetLayerName)
+                : null;
+            if (layer == null) {
+                layer = new SchemeTile();
+                if (!string.IsNullOrWhiteSpace(targetLayerName)) {
+                    layer.LayerName = targetLayerName;
+                }
+                position.Layers.Add(layer);
+            }
+            layer.MapObjectAddress = mapObjectSchemaAddress;
         }
-        // MazeGenerator.AddDebugMarkToScheme(new Vector2Int(x, y), Color.black);
     }
-
-    // private void PlacePath(SchemeTile tile, int x, int y)
-    // {
-    //     MazeGenerator.AddDebugMarkToScheme(new Vector2Int(x, y), Color.white);
-    // }
-
-    // private void PlaceRoom(GenerationContext context, int x, int y)
-    // {
-    //     MazeGenerator.AddDebugMarkToScheme(new Vector2Int(x, y), Color.blue);
-    // }
-
-    // private void PlaceRoomEntrance(GenerationContext context, int x, int y)
-    // {
-    //     MazeGenerator.AddDebugMarkToScheme(new Vector2Int(x, y), Color.yellow);
-    // }
 }

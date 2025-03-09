@@ -5,16 +5,31 @@ using UnityEngine;
 
 public class ZoneFillingStrategyBuilder
 {
-    public List<IZoneFillingStrategy> BuildStrategiesFromSchema(SectorZoneGenerationSchema sectorZoneGenerationSchema) {
-        return sectorZoneGenerationSchema.zoneFillingSchemas.Select(BuildStrategy).ToList();
+    public List<IZoneFillingStrategy> BuildStrategiesFromSchema(
+        SectorZoneGenerationSchema sectorZoneGenerationSchema,
+        SectorGenerationSchema sectorGenerationSchema) {
+        return sectorZoneGenerationSchema
+            .zoneFillingSchemas
+            .Concat(sectorGenerationSchema.commonSectorZoneFillingSchemas)
+            .OrderBy(x => x.order)
+            .Select(BuildStrategy)
+            .ToList();
     }
 
     private IZoneFillingStrategy BuildStrategy(ZoneFillingLayerSchema zoneFillingSchema) {
         return zoneFillingSchema.fillingType switch {
             ZoneFillingType.Empty => new EmptyZoneFillingStrategy(),
+            ZoneFillingType.Solid => new SolidZoneFillingStrategy(
+                (zone) => zoneFillingSchema.traverseRectFilter,
+                zoneFillingSchema.targetLayerName,
+                zoneFillingSchema.targetPositionType,
+                zoneFillingSchema.mapObjectSchemaAddress
+            ),
             ZoneFillingType.MazeWithRooms => new MazeWithRoomsFillingStrategy(
+                zoneFillingSchema.targetLayerName,
+                zoneFillingSchema.mapObjectSchemaAddress,
                 (zone) => zoneFillingSchema.traverseRectFilter),
-            ZoneFillingType.Test => new TestZoneFillingStrategy(),
+            ZoneFillingType.Test => new TestZoneFillingStrategy((zone) => zoneFillingSchema.traverseRectFilter),
             _ => throw new NotImplementedException()
         };
     }

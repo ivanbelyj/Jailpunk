@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -19,6 +20,14 @@ public class ComplexBuilding : GenerationStage
 
     [SerializeField]
     private TileProvider tileProvider;
+
+    [Header("Defaults")]
+
+    [SerializeField]
+    private string floorDefaultMapObjectAddress = "Floor";
+
+    [SerializeField]
+    private string wallDefaultMapObjectAddress = "Wall";
 
     #region Set on run stage
     private AssetManager assetManager;
@@ -110,26 +119,33 @@ public class ComplexBuilding : GenerationStage
         SchemePosition schemePosition,
         Vector2Int position)
     {
-        // TODO: uncomment later
-        // for (int i = 0; i < schemePosition.Layers.Count; i++) {
-        //     var layer = schemePosition.Layers[i];
-            // TODO: temporary hardcoded
-            var layer = new SchemeTile() {
-                MapObjectName = schemePosition.Type switch {
-                    SchemePositionType.Floor => "floor",
-                    SchemePositionType.Wall or SchemePositionType.LoadBearingWall => "wall",
-                    _ => null
-                }
-            };
-
-            var mapObjectSchema = GetMapObjectSchema(layer.MapObjectName);
-
+        if (schemePosition.Layers.Count == 0)
+        {
+            schemePosition.Layers.Add(GetDefaultSchemeTile(schemePosition));
+        }
+        foreach (var (mapObjectSchema, layer) in schemePosition
+            .Layers
+            .Select(layer => (
+                mapObjectSchema: GetMapObjectSchema(layer.MapObjectAddress),
+                schemeTile: layer
+            )))
+        {
             var tile = GetTile(layer);
             var tilemap = SelectTilemap(mapObjectSchema);
 
-            var layeredPosition = new Vector3Int(position.x, position.y, 0);
+            var layeredPosition = new Vector3Int(position.x, position.y, mapObjectSchema.sortingOrder);
             tilemap.SetTile(layeredPosition, tile);
-        // }
+        }
+    }
+
+    private SchemeTile GetDefaultSchemeTile(SchemePosition schemePosition) {
+        return new SchemeTile() {
+            MapObjectAddress = schemePosition.Type switch {
+                SchemePositionType.Floor => floorDefaultMapObjectAddress,
+                SchemePositionType.Wall or SchemePositionType.LoadBearingWall => wallDefaultMapObjectAddress,
+                _ => null
+            }
+        };
     }
 
     private Tilemap SelectTilemap(MapObjectSchema mapObjectSchema)
@@ -142,9 +158,9 @@ public class ComplexBuilding : GenerationStage
         };
     }
 
-    private MapObjectSchema GetMapObjectSchema(string mapObjectName)
+    private MapObjectSchema GetMapObjectSchema(string mapObjectAddress)
     {
-        return assetManager.MapObjectSchemas.GetAssetById(mapObjectName);
+        return assetManager.MapObjectSchemas.GetAssetById(mapObjectAddress);
     }
 
     private Tile GetTile(SchemeTile schemeTile) {

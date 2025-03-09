@@ -1,11 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ComplexSchemeLayer
-{
-
-}
-
 /// <summary>
 /// Represents the design (or plan) of the complex
 /// </summary>
@@ -29,29 +24,6 @@ public class ComplexScheme
     {
         return IsValidPosition(x, y) ? map[y, x] : CreateDefaultTile();
     }
-
-    #region Debug
-
-    public void AddDebugMark(Vector2Int pos, Color? color = null)
-    {
-        colorManager.AddMark(pos, color ?? Color.red);
-    }
-
-    public void AddDebugSectorColor(int sectorId, Color color)
-    {
-        colorManager.AddSectorColor(sectorId, color);
-    }
-
-    public void AddDebugAreaColor(int areaId, Color color)
-    {
-        colorManager.AddAreaColor(areaId, color);
-    }
-
-    public void ClearDebugMarks()
-    {
-        colorManager.ClearAll();
-    }
-    #endregion
 
     public override string ToString()
     {
@@ -84,4 +56,27 @@ public class ComplexScheme
     {
         return x >= 0 && x < MapSize.x && y >= 0 && y < MapSize.y;
     }
+
+    #region Debug
+
+    public void AddDebugMark(Vector2Int pos, Color? color = null)
+    {
+        colorManager.AddMark(pos, color ?? Color.red);
+    }
+
+    public void AddDebugSectorColor(int sectorId, Color color)
+    {
+        colorManager.AddSectorColor(sectorId, color);
+    }
+
+    public void AddDebugAreaColor(int areaId, Color color)
+    {
+        colorManager.AddAreaColor(areaId, color);
+    }
+
+    public void ClearDebugMarks()
+    {
+        colorManager.ClearAll();
+    }
+    #endregion
 }

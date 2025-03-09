@@ -14,6 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sectorGenerationSchemaId: GladeSector
   planningType: 1
+  commonSectorZoneFillingSchemas:
+  - order: 0
+    fillingType: 2
+    targetPositionType: 1
+    targetLayerName: Ground
+    mapObjectSchemaAddress: Ground
+    traverseRectFilter:
+      useMinDistanceToEdge: 0
+      minDistanceToEdge: 0
+      useMaxDistanceToEdge: 0
+      maxDistanceToEdge: 0
+      useMinDistanceToCenter: 0
+      minDistanceToCenter: 0
+      useMaxDistanceToCenter: 0
+      maxDistanceToCenter: 0
   zoneVariants:
   - sectorZoneGenerationSchema: {fileID: 11400000, guid: 8aa2da77d0480fe48838cc87e9d2220b, type: 2}
     weight: 1

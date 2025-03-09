@@ -45,7 +45,7 @@ public class SpriteLibraryDecorator
         return categoriesAndLabels[category];
     }
 
-    public int LabelsCount(string categoryName) {
+    public int GetLabelsCount(string categoryName) {
         return categoriesAndLabels[categoryName].Length;
     }
 

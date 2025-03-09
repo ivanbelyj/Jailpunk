@@ -14,7 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sectorZoneGenerationSchemaId: EmptyZone
   zoneFillingSchemas:
-  - fillingType: 1
+  - order: 0
+    fillingType: 1
+    targetPositionType: 1
+    targetLayerName: 
+    mapObjectSchemaAddress: 
     traverseRectFilter:
       useMinDistanceToEdge: 0
       minDistanceToEdge: 0

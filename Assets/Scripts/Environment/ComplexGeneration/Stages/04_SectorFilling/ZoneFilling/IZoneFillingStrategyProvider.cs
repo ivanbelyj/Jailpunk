@@ -3,5 +3,7 @@ using UnityEngine;
 
 public interface IZoneFillingStrategyProvider
 {
-    List<IZoneFillingStrategy> GetZoneFillingStrategies(GeneratedZone generatedZone);
+    List<IZoneFillingStrategy> GetZoneFillingStrategies(
+        GeneratedZone generatedZone,
+        GeneratedSectorInfo generatedSector);
 }

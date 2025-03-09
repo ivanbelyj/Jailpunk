@@ -14,7 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sectorZoneGenerationSchemaId: TestZone
   zoneFillingSchemas:
-  - fillingType: 2
+  - fillingType: 4
+    targetPositionType: 1
+    targetLayerName: 
+    mapObjectSchemaAddress: 
     traverseRectFilter:
       useMinDistanceToEdge: 0
       minDistanceToEdge: 0

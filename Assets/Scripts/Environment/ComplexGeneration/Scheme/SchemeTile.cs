@@ -4,5 +4,6 @@ using UnityEngine;
 
 public class SchemeTile
 {
-    public string MapObjectName { get; set; }
+    public string LayerName { get; set; }
+    public string MapObjectAddress { get; set; }
 }

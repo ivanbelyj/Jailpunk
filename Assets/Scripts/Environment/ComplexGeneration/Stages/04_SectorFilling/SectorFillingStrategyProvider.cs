@@ -20,17 +20,24 @@ public class SectorFillingStrategyProvider :
 
     public ISectorPlanningStrategy GetSectorPlanningStrategy(GeneratedSectorInfo sector)
     {
-        var schema = assetManager.SectorGenerationSchemas.GetAssetById(
-            sector.SectorPlanningInfo.SectorGenerationSchemaId
-        );
+        var schema = GetSectorGenerationSchema(sector);
         return sectorPlanningStrategyBuilder.BuildStrategyFromSchema(schema);
     }
 
-    public List<IZoneFillingStrategy> GetZoneFillingStrategies(GeneratedZone generatedZone)
+    public List<IZoneFillingStrategy> GetZoneFillingStrategies(
+        GeneratedZone generatedZone,
+        GeneratedSectorInfo generatedSector)
     {
         var schema = assetManager.SectorZoneGenerationSchemas.GetAssetById(
             generatedZone.ZoneFillingInfo.ZoneGenerationSchemaId
         );
-        return zoneFillingStrategyBuilder.BuildStrategiesFromSchema(schema);
+        var sectorGenerationSchema = GetSectorGenerationSchema(generatedSector);
+        return zoneFillingStrategyBuilder.BuildStrategiesFromSchema(schema, sectorGenerationSchema);
+    }
+
+    private SectorGenerationSchema GetSectorGenerationSchema(GeneratedSectorInfo generatedSector) {
+        return assetManager.SectorGenerationSchemas.GetAssetById(
+            generatedSector.SectorPlanningInfo.SectorGenerationSchemaId
+        );
     }
 }

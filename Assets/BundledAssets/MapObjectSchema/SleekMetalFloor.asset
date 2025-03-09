@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b17eaf5f54a438c43882f91ea39ac1f3, type: 3}
-  m_Name: Closet
+  m_Name: SleekMetalFloor
   m_EditorClassIdentifier: 
   instantiationType: 0
-  obstacleType: 1
+  obstacleType: 0
   mapObjectAppearanceResolvingType: 0
   appearanceSpriteData:
-    name: closet
+    name: metal
     state: 
     useAngle: 0
     angle: 0

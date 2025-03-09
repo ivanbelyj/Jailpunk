@@ -2,15 +2,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum ZoneFillingType {
-    MazeWithRooms,
-    Empty,
-    Test
-}
-
-[System.Serializable]
-public class ZoneFillingLayerSchema {
-    public ZoneFillingType fillingType;
-    public TraverseRectFilter traverseRectFilter;
+    Empty = 1,
+    Solid = 2,
+    MazeWithRooms = 3,
+    Test = 4
 }
 
 [CreateAssetMenu(

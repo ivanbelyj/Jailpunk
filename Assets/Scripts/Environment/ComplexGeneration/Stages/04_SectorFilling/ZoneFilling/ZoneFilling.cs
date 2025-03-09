@@ -26,7 +26,9 @@ public class ZoneFilling : GenerationStage
     private void FillZones(GeneratedSectorInfo generatedSector)
     {
         foreach (var generatedZone in generatedSector.Zones) {
-            var strategies = zoneFillingStrategyProvider.GetZoneFillingStrategies(generatedZone);
+            var strategies = zoneFillingStrategyProvider.GetZoneFillingStrategies(
+                generatedZone,
+                generatedSector);
             ApplyStrategies(generatedZone, strategies);
         }
     }

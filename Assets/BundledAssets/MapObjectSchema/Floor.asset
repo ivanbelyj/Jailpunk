@@ -12,7 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b17eaf5f54a438c43882f91ea39ac1f3, type: 3}
   m_Name: Floor
   m_EditorClassIdentifier: 
-  mapObjectName: floor
   instantiationType: 0
-  appearanceName: floor
   obstacleType: 0
+  mapObjectAppearanceResolvingType: 0
+  appearanceSpriteData:
+    name: floor
+    state: 
+    useAngle: 0
+    angle: 0
+    useIndex: 0
+    index: 0
+  sortingOrder: 0

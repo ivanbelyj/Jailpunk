@@ -53,6 +53,11 @@ public class AppearanceSpriteResolver : MonoBehaviour
             categoryAndLabel.Value.label);
     }
 
+    public int GetLabelsCount(AppearanceSpriteData appearanceSpriteData) {
+        var spriteLibraryDecorator = GetSpriteLibrary(appearanceSpriteData);
+        return spriteLibraryDecorator.GetLabelsCount(appearanceSpriteData.GetCategoryName());
+    }
+
     private void SetInitiallySegregatedSpriteLibraryCollections() {
         spriteLibrariesByName = appearanceLibraryItems
             .Where(x => x.arrangementType == AppearanceLibraryItemArrangementType.OneObjectWithName)

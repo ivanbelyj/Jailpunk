@@ -19,6 +19,9 @@ public class SectorGenerationSchema : ScriptableObject
     public string sectorGenerationSchemaId;
     public SectorPlanningType planningType;
 
+    [Tooltip("Used in addition to the layers defined at the zone schema level")]
+    public List<ZoneFillingLayerSchema> commonSectorZoneFillingSchemas;
+
     public List<SectorZoneVariant> zoneVariants;
 }
 
