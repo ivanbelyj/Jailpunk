@@ -1,0 +1,137 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Content Update
+  m_EditorClassIdentifier: 
+  m_GroupName: Content Update
+  m_GUID: 16aaeb3c9ba436745b8579207b84fc99
+  m_SerializeEntries:
+  - m_GUID: 08d58ba63ad862d428c8c58bce33d193
+    m_Address: WallStrong
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - map-object-schema
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0bfeebe2b0382b64db842fa9022adbab
+    m_Address: GladeSector
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - sector-generation-schema
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0c68fefe5c4a1bc45945fd8ed13b66de
+    m_Address: WallDamaged
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - map-object-schema
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1d6bacc4f7ebfcc448a0d812e85e1af5
+    m_Address: WallOld
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - map-object-schema
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2bf6ef9e7ad6e6f409a5bfe4b931fac8
+    m_Address: WallBrick
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - map-object-schema
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3c0eeceeff1b3fe4ca49001bc21934eb
+    m_Address: TestZone
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - sector-zone-generation-schema
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 43d55139a1c051944ab948d2feaee9cb
+    m_Address: FloorMetalRibbed
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - map-object-schema
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 588f92e0f1986ce4b88dbb7f31bc3245
+    m_Address: TestComplex
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - complex-generation-schema
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5f383fe61cdd82949ac5d261eae0cb0f
+    m_Address: RoomsAndCorridorsSector
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - sector-generation-schema
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6e26c6c3a9d71bc49b90fd8ee6deb579
+    m_Address: MazeWithRoomsZone
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - sector-zone-generation-schema
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 75903f7f08d699e44bcb7e6a74545ed6
+    m_Address: Ground
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - map-object-schema
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7a3745749fa91fc47befc6ca1387e2a4
+    m_Address: TableSimple
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - map-object-schema
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7df1802dcfc496444b438d237aaef791
+    m_Address: FloorMetalSleek
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - map-object-schema
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8aa2da77d0480fe48838cc87e9d2220b
+    m_Address: EmptyZone
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - sector-zone-generation-schema
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9a9651f7ffd7aa54fbe5c654707b0ba6
+    m_Address: Closet
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - map-object-schema
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: acd96a76c264e55419b1f9297de4f5c5
+    m_Address: CircleMazeZone
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - sector-zone-generation-schema
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b78850f2f09de4f4fa55dfde4ff349ae
+    m_Address: Wall
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - map-object-schema
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f24337d9c4a95a549bdf92c2c8ec59df
+    m_Address: FloorMetal
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - map-object-schema
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fd4d80c7c73e4df4a96a0b90b44a6c80
+    m_Address: Floor
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - map-object-schema
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: a9a441b5a8f049b4e9f4d94c172869e1, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: f52e95a8cc0e7fb4fab798b06b42e027, type: 2}
+    - {fileID: 11400000, guid: 4ab734d929d86ff4696c20c7fa195544, type: 2}

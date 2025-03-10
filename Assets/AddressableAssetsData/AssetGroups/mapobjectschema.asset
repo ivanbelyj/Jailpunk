@@ -14,49 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_GroupName: mapobjectschema
   m_GUID: 79025d1c07034cc45a26ccb3a744bee6
-  m_SerializeEntries:
-  - m_GUID: 2bf6ef9e7ad6e6f409a5bfe4b931fac8
-    m_Address: BrickWall
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - map-object-schema
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 75903f7f08d699e44bcb7e6a74545ed6
-    m_Address: Ground
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - map-object-schema
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 7df1802dcfc496444b438d237aaef791
-    m_Address: SleekMetalFloor
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - map-object-schema
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 9a9651f7ffd7aa54fbe5c654707b0ba6
-    m_Address: Closet
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - map-object-schema
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: b78850f2f09de4f4fa55dfde4ff349ae
-    m_Address: Wall
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - map-object-schema
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: f24337d9c4a95a549bdf92c2c8ec59df
-    m_Address: MetalFloor
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - map-object-schema
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: fd4d80c7c73e4df4a96a0b90b44a6c80
-    m_Address: Floor
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - map-object-schema
-    FlaggedDuringContentUpdateRestriction: 0
+  m_SerializeEntries: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: a9a441b5a8f049b4e9f4d94c172869e1, type: 2}
   m_SchemaSet:

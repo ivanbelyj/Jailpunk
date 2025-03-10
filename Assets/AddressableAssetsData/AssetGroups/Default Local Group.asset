@@ -14,7 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_GroupName: Default Local Group
   m_GUID: 42d7fd94ecfb6114bb80d3253b669c3d
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 72925bbb754dde94e94821a7d255254c
+    m_Address: JailZone
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - sector-zone-generation-schema
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: a9a441b5a8f049b4e9f4d94c172869e1, type: 2}
   m_SchemaSet:

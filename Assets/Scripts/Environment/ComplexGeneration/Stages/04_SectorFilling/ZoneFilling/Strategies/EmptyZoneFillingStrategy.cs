@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class EmptyZoneFillingStrategy : ZoneFillingStrategyBase
+public class EmptyZoneFillingStrategy : IZoneFillingStrategy
 {
-    public override void Apply(GeneratedZone generatedZone, GenerationContext context)
+    public void Apply(GeneratedZone generatedZone, GenerationContext context)
     {
         // Do nothing
     }

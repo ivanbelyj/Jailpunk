@@ -14,13 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_GroupName: complexgenerationschema
   m_GUID: c31b6418cc7390740b2fadf15083d28c
-  m_SerializeEntries:
-  - m_GUID: 588f92e0f1986ce4b88dbb7f31bc3245
-    m_Address: TestComplex
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - complex-generation-schema
-    FlaggedDuringContentUpdateRestriction: 0
+  m_SerializeEntries: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: a9a441b5a8f049b4e9f4d94c172869e1, type: 2}
   m_SchemaSet:

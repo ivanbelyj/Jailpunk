@@ -14,31 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_GroupName: sectorzonegenerationschema
   m_GUID: 0bf459bc914aa164e9868ddfa9241880
-  m_SerializeEntries:
-  - m_GUID: 3c0eeceeff1b3fe4ca49001bc21934eb
-    m_Address: TestZone
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - sector-zone-generation-schema
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 6e26c6c3a9d71bc49b90fd8ee6deb579
-    m_Address: MazeWithRoomsZone
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - sector-zone-generation-schema
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 8aa2da77d0480fe48838cc87e9d2220b
-    m_Address: EmptyZone
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - sector-zone-generation-schema
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: acd96a76c264e55419b1f9297de4f5c5
-    m_Address: CircleMazeZone
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - sector-zone-generation-schema
-    FlaggedDuringContentUpdateRestriction: 0
+  m_SerializeEntries: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: a9a441b5a8f049b4e9f4d94c172869e1, type: 2}
   m_SchemaSet:

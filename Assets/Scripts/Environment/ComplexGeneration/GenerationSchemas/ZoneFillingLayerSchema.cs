@@ -7,11 +7,8 @@ public class ZoneFillingLayerSchema {
 
     public ZoneFillingType fillingType;
 
-    public SchemePositionType targetPositionType;
-
-    [Tooltip(
-        "Allows to use existing layer (or add it otherwise). Leave empty to add new layer anyway")]
-    public string targetLayerName;
-    public string mapObjectSchemaAddress;
     public TraverseRectFilter traverseRectFilter;
+
+    public LayerTargetedZoneFillingStrategyOptions layerTargetOptions;
+    public string mapObjectSchemaAddress;
 }

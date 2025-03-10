@@ -4,50 +4,72 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+[Serializable]
+public class TraverseZoneFillingStrategyOptions
+{
+
+}
+
 public abstract class TraverseZoneFillingStrategy : ZoneFillingStrategyBase
 {
-    protected readonly Func<GeneratedZone, TraverseRectFilter> traverseRectFilterFactory;
+    #region Context Types
+    public class TraverseZoneFillingStrategyContext : ZoneFillingStrategyContext {
+        public TraverseRectFilter TraverseFilter { get; set; }
 
+        public TraverseZoneFillingStrategyContext(
+            ZoneFillingStrategyContext context,
+            TraverseRectFilter traverseRectFilter)
+            : base(context.GenerationContext, context.GeneratedZone, context.Area)
+        {
+            TraverseFilter = traverseRectFilter;
+        }
+    }
+
+    public class TraverseZoneFillingStrategyPositionContext : TraverseZoneFillingStrategyContext {
+        public SchemePosition Position { get; set; }
+        public TraverseRectData TraverseData { get; set; }
+
+        public TraverseZoneFillingStrategyPositionContext(
+            TraverseZoneFillingStrategyContext context,
+            SchemePosition position,
+            TraverseRectData traverseRectData)
+            : base(context, context.TraverseFilter)
+        {
+            Position = position;
+            TraverseData = traverseRectData;
+        }
+    }
+    #endregion
+
+    protected readonly Func<GeneratedZone, TraverseRectFilter> traverseRectFilterFactory;
+    
     public TraverseZoneFillingStrategy(Func<GeneratedZone, TraverseRectFilter> traverseRectFilterFactory)
     {
         this.traverseRectFilterFactory = traverseRectFilterFactory;
     }
 
-    public override void Apply(GeneratedZone generatedZone, GenerationContext context)
+    public sealed override void Apply(ZoneFillingStrategyContext context)
     {
-        var area = context.ComplexData.Scheme.Areas
-            .FirstOrDefault(x => x.Id == generatedZone.SchemeAreaId);
-            
-        if (area == null) {
-            // Todo: is it okay?
-            return;
-        }
-
-        var traverseFilter = traverseRectFilterFactory?.Invoke(generatedZone);
-        
-        ApplyToScheme(context.ComplexData.Scheme, area, traverseFilter);
+        var traverseRectFilter = traverseRectFilterFactory?.Invoke(context.GeneratedZone);
+        var newContext = new TraverseZoneFillingStrategyContext(context, traverseRectFilter);
+        Apply(newContext);
     }
 
-    public virtual void ApplyToScheme(
-        ComplexScheme scheme,
-        SchemeArea area,
-        TraverseRectFilter traverseFilter)
+    public virtual void Apply(TraverseZoneFillingStrategyContext context)
     {
-        TraverseRectUtils.TraverseRect(area.Rect, (data) => {
-            var tile = scheme.GetTileByPos(data.x, data.y);
+        TraverseRectUtils.TraverseRect(context.Area.Rect, (data) => {
+            var tile = context.GenerationContext.ComplexData.Scheme.GetTileByPos(data.x, data.y);
 
-            if (traverseFilter != null) {
-                if (!data.IsFilterSatisfied(traverseFilter)) {
+            if (context.TraverseFilter != null) {
+                if (!data.IsFilterSatisfied(context.TraverseFilter)) {
                     return;
                 }
             }
             
-            ApplyPosition(area, tile, data);
+            ApplyPosition(
+                new TraverseZoneFillingStrategyPositionContext(context, tile, data));
         });
     }
 
-    public abstract void ApplyPosition(
-        SchemeArea area,
-        SchemePosition tile,
-        TraverseRectData traverseData);
+    public abstract void ApplyPosition(TraverseZoneFillingStrategyPositionContext context);
 }

@@ -14,19 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_GroupName: sectorgenerationschema
   m_GUID: 6ce621ab418b1cc43ab31940411e8454
-  m_SerializeEntries:
-  - m_GUID: 0bfeebe2b0382b64db842fa9022adbab
-    m_Address: GladeSector
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - sector-generation-schema
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 5f383fe61cdd82949ac5d261eae0cb0f
-    m_Address: RoomsAndCorridorsSector
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - sector-generation-schema
-    FlaggedDuringContentUpdateRestriction: 0
+  m_SerializeEntries: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: a9a441b5a8f049b4e9f4d94c172869e1, type: 2}
   m_SchemaSet:

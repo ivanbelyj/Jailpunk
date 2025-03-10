@@ -125,6 +125,7 @@ public class ComplexBuilding : GenerationStage
         }
         foreach (var (mapObjectSchema, layer) in schemePosition
             .Layers
+            .Where(layer => layer.MapObjectAddress != null)
             .Select(layer => (
                 mapObjectSchema: GetMapObjectSchema(layer.MapObjectAddress),
                 schemeTile: layer

@@ -21,14 +21,13 @@ public class ZoneFillingStrategyBuilder
             ZoneFillingType.Empty => new EmptyZoneFillingStrategy(),
             ZoneFillingType.Solid => new SolidZoneFillingStrategy(
                 (zone) => zoneFillingSchema.traverseRectFilter,
-                zoneFillingSchema.targetLayerName,
-                zoneFillingSchema.targetPositionType,
+                zoneFillingSchema.layerTargetOptions,
                 zoneFillingSchema.mapObjectSchemaAddress
             ),
             ZoneFillingType.MazeWithRooms => new MazeWithRoomsFillingStrategy(
-                zoneFillingSchema.targetLayerName,
-                zoneFillingSchema.mapObjectSchemaAddress,
-                (zone) => zoneFillingSchema.traverseRectFilter),
+                (zone) => zoneFillingSchema.traverseRectFilter,
+                zoneFillingSchema.layerTargetOptions,
+                zoneFillingSchema.mapObjectSchemaAddress),
             ZoneFillingType.Test => new TestZoneFillingStrategy((zone) => zoneFillingSchema.traverseRectFilter),
             _ => throw new NotImplementedException()
         };
