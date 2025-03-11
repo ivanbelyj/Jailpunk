@@ -4,49 +4,34 @@ using Mirror;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
-public class NavBehaviour : MoveBehaviour
+public class NavBehaviour : NavBehaviourCore
 {
-    public Vector3 CurrentDest { get; set; }
-    private NavManager navManager;
     new private Collider2D collider2D;
 
     private float ColliderDiameter => collider2D.bounds.extents.magnitude * 2;
     
-    public override void Awake() {
+    protected override void Awake() {
         base.Awake();
-        navManager = FindAnyObjectByType<NavManager>();
         collider2D = GetComponent<Collider2D>();
     }
 
-    [Server]
-    protected override AISteering GetSteering()
-    {
-        Target = GetTargetGameObject();
-
-        AISteering steering = new AISteering();
-        steering.Linear = Target.transform.position - transform.position;
-        steering.Linear.Normalize();
-        // steering.Linear *= agent.MaxAcceleration;
-        return steering;
-    }
-
-    private GameObject GetTargetGameObject() {
+    protected override Vector3 GetTargetPosition() {
         // Debug.Log($"AStar between: {gameObject.transform.position} and {CurrentDest}");
         List<Vertex> path = GetCurrentPath();
         // Debug.Log("Path: " + string.Join(", ", path.Select(x => x.transform.position).ToList()));
 
         if (path.Count <= 1)
-            return gameObject;
+            return gameObject.transform.position;
 
         if (PathUtils.IsPathClear(
             gameObject.transform.position,
             path[1].transform.position,
             ColliderDiameter)) {
-            return path[1].gameObject;
+            return path[1].gameObject.transform.position;
         } else {
             // If we cannot go to the next point, we should go to the center
             // of our origin
-            return path[0].gameObject;
+            return path[0].gameObject.transform.position;
         }
     }
 
@@ -65,7 +50,7 @@ public class NavBehaviour : MoveBehaviour
         return GraphUtils.SmoothPath(
             navManager.Graph.GetPathAstar(
                 gameObject.transform.position,
-                CurrentDest),
+                CurrentDestination),
             ColliderDiameter);
     }
 

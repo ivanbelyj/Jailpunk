@@ -385,6 +385,12 @@
         "com.zor.simple-blackboard": "https://github.com/ZorPastaman/Simple-Blackboard.git"
       }
     },
+    "ivanbelyj.ai-movement-core": {
+      "version": "file:ivanbelyj.ai-movement-core",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
     "ivanbelyj.causal-model-unity": {
       "version": "file:ivanbelyj.causal-model-unity",
       "depth": 0,
@@ -397,14 +403,14 @@
       "source": "embedded",
       "dependencies": {}
     },
-    "ivanbelyj.personality": {
-      "version": "file:ivanbelyj.personality",
+    "ivanbelyj.perception-core": {
+      "version": "file:ivanbelyj.perception-core",
       "depth": 0,
       "source": "embedded",
       "dependencies": {}
     },
-    "ivanbelyj.sound-perception": {
-      "version": "file:ivanbelyj.sound-perception",
+    "ivanbelyj.personality": {
+      "version": "file:ivanbelyj.personality",
       "depth": 0,
       "source": "embedded",
       "dependencies": {}

@@ -18,7 +18,7 @@ public class PlayerSeekBehaviour : NavBehaviour
             else if ((int)NetworkTime.time != lastUpdateNetworkTimeSec) {
                 lastUpdateNetworkTimeSec = (int)NetworkTime.time;
 
-                CurrentDest = player.transform.position;
+                CurrentDestination = player.transform.position;
                 base.Update();
             }
         }

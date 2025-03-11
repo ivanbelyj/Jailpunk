@@ -4,9 +4,6 @@
 [submodule "Packages/ivanbelyj.personality"]
 	path = Packages/ivanbelyj.personality
 	url = https://github.com/ivanbelyj/Personality
-[submodule "Packages/ivanbelyj.sound-perception"]
-	path = Packages/ivanbelyj.sound-perception
-	url = git@github.com:ivanbelyj/SoundPerception.git
 [submodule "Packages/ivanbelyj.lifecycle-parameters"]
 	path = Packages/ivanbelyj.lifecycle-parameters
 	url = https://github.com/ivanbelyj/LifecycleParameters
@@ -19,3 +16,9 @@
 [submodule "Assets/ThirdParty/RTree"]
 	path = Assets/ThirdParty/RTree
 	url = git@github.com:deadlyfingers/RTree.git
+[submodule "Packages/ivanbelyj.ai-movement-core"]
+	path = Packages/ivanbelyj.ai-movement-core
+	url = git@github.com:ivanbelyj/AIMovement.git
+[submodule "Packages/ivanbelyj.perception-core"]
+	path = Packages/ivanbelyj.perception-core
+	url = git@github.com:ivanbelyj/PerceptionCore.git
